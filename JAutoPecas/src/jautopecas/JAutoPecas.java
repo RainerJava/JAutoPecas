@@ -29,6 +29,7 @@ public class JAutoPecas {
             ex.printStackTrace();
         }
 
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
