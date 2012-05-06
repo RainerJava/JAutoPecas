@@ -17,8 +17,9 @@ public class CadItemMenu {
     private String idItemMenu;
     private String nomeItem;
     private Integer tipoItem;
-    private String caminho;
+    private String classeFormulario;
     private String imagem;
+    private String classePesquisa;
 
     public String getIdItemMenu() {
         return idItemMenu;
@@ -44,12 +45,20 @@ public class CadItemMenu {
         this.tipoItem = tipoItem;
     }
 
-    public String getCaminho() {
-        return caminho;
+    public String getClasseFormulario() {
+        return classeFormulario;
     }
 
-    public void setCaminho(String caminho) {
-        this.caminho = caminho;
+    public void setClasseFormulario(String classeFormulario) {
+        this.classeFormulario = classeFormulario;
+    }
+
+    public String getClassePesquisa() {
+        return classePesquisa;
+    }
+
+    public void setClassePesquisa(String classePesquisa) {
+        this.classePesquisa = classePesquisa;
     }
 
     public String getImagem() {

@@ -18,19 +18,19 @@ public class JAutoPecasMenuActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            Class classe;
-            classe = Class.forName(cadItemMenu.getCaminho());
-            WindowCrud crud = new WindowCrud();
+            Class classeFormulario = Class.forName(cadItemMenu.getClasseFormulario());
+            Class classePesquisa = Class.forName(cadItemMenu.getClassePesquisa());
+            Object objetoFormulario = classePesquisa.newInstance();
+            WindowCrud crud = new WindowCrud(objetoFormulario, "pesquisar", ((JPanel) classeFormulario.newInstance()));
             if (cadItemMenu.getImagem() != null) {
                 crud.setIconImage(new ImageIcon(getClass().getResource(cadItemMenu.getImagem())).getImage());
             }
             crud.setTitle(cadItemMenu.getNomeItem());
-            crud.setFormulario((JPanel) classe.newInstance());
             crud.setLocationRelativeTo(null);
             crud.setVisible(true);
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            
+            ex.printStackTrace();
         }
     }
 }

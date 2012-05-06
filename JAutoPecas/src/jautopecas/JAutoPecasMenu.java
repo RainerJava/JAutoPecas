@@ -35,9 +35,10 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
 
         CadItemMenu itemCadastroEmpresas = new CadItemMenu();
         itemCadastroEmpresas.setIdItemMenu("1.1");
-        itemCadastroEmpresas.setNomeItem("Empresas");
+        itemCadastroEmpresas.setNomeItem("Grupos");
         itemCadastroEmpresas.setImagem("/jautopecas/imagens/icones/iconeEmpresa16.png");
-        itemCadastroEmpresas.setCaminho("jautopecas.crud.FormularioEmpresa");
+        itemCadastroEmpresas.setClasseFormulario("jautopecas.crud.FormularioGrupo");
+        itemCadastroEmpresas.setClassePesquisa("jautopecas.entidades.Grupo");
         itemCadastroEmpresas.setTipoItem(CadItemMenu.JANELA);
 
         itensMenu.add(itemCadastroEmpresas);
