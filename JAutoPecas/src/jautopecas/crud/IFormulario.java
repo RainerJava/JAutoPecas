@@ -17,13 +17,13 @@ public interface IFormulario {
 
     public Object getObjetoFormulario();
 
-    public void salvar();
+    public void salvar() throws Exception;
 
     public void alterar();
 
     public void excluir();
 
     public JLabel getJlInformacao();
-    
-    public List pesquisar(String camposFiltro, String strPesquisa);
+
+    public List pesquisar(String strPesquisa);
 }

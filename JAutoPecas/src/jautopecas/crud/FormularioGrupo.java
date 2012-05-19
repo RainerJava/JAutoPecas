@@ -10,6 +10,7 @@ import jautopecas.entidades.Grupo;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import org.eclipse.persistence.exceptions.DatabaseException;
 
 /**
  *
@@ -38,7 +39,10 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(600, 250));
+
         jFTextField1.setEditable(false);
+        jFTextField1.setEnabled(false);
 
         jLabel1.setText("ID Grupo");
 
@@ -56,7 +60,7 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jFTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jFTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(350, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,7 +73,7 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jFTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         jFTextField1.setMensagemAjuda("Codigo do Grupo (Gerado pelo sistema)");
@@ -92,16 +96,22 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
     }
 
     @Override
-    public void salvar() {
+    public void salvar() throws Exception {
         try {
             grupo = new Grupo();
             new GrupoDao().salvar(getObjetoFormulario());
+            setObjetoFormulario(grupo);
 
             JOptionPane.showMessageDialog(this, "Grupo Salvo com Sucesso!");
-            //getJlInformacao().setText("Grupo incluido com sucesso!!");
         } catch (Exception ex) {
+            if (ex.getCause() instanceof DatabaseException) {
+                if (((DatabaseException) ex.getCause()).getDatabaseErrorCode() == 1062) {
+                    throw new Exception("Já existe um registro com estas informações!", ex);
+                }
+            } else {
+                throw new Exception("Erro ao salvar a Grupo!!", ex);
+            }
             ex.printStackTrace();
-            getJlInformacao().setText("Erro ao salvar a Grupo!!");
         }
     }
 
@@ -109,11 +119,12 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
     public void alterar() {
         try {
             new GrupoDao().alterar(getObjetoFormulario());
+            setObjetoFormulario(grupo);
 
-            getJlInformacao().setText("Grupo alterado com sucesso!!");
+            JOptionPane.showMessageDialog(this, "Grupo alterado com sucesso!!");
         } catch (Exception ex) {
             ex.printStackTrace();
-            getJlInformacao().setText("Erro ao alterar o Grupo!!");
+            JOptionPane.showMessageDialog(this, "Erro ao alterar o Grupo!!");
         }
     }
 
@@ -122,16 +133,16 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
         try {
             new GrupoDao().excluir(grupo);
 
-            getJlInformacao().setText("Grupo excluido com sucesso!!");
+            JOptionPane.showMessageDialog(this, "Grupo excluido com sucesso!!");
         } catch (Exception ex) {
             ex.printStackTrace();
-            getJlInformacao().setText("Erro ao excluir o Grupo!!");
+            JOptionPane.showMessageDialog(this, "Erro ao excluir o Grupo!!");
         }
     }
 
     @Override
     public Grupo getObjetoFormulario() {
-        grupo.setIdGrupo(null);
+        grupo.setIdGrupo(Integer.valueOf(jFTextField1.getText().length() == 0 ? "0" : jFTextField1.getText()));
         grupo.setNome(jFTextField2.getText());
         return grupo;
     }
@@ -142,7 +153,7 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
     }
 
     @Override
-    public List pesquisar(String camposFiltro, String strPesquisa) {
+    public List pesquisar(String strPesquisa) {
         return new GrupoDao().listarTodos();
     }
 }

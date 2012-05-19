@@ -1,7 +1,9 @@
 package jautopecas.components;
 
+import jautopecas.components.anotacao.AnotacaoNomeColuna;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class DynamicTableModel extends AbstractTableModel {
 
+    private String[] columnFields = null;
     private String[] columnNames = null;
     private List data = null;
 
@@ -22,6 +25,7 @@ public class DynamicTableModel extends AbstractTableModel {
     public void setData(List dataset) throws IntrospectionException {
         this.data = dataset;
         //initModel(dataset);
+        fireTableDataChanged();
     }
     private Class c = null;
 
@@ -45,19 +49,31 @@ public class DynamicTableModel extends AbstractTableModel {
             //System.out.println(c.getName());
 
             PropertyDescriptor[] p = java.beans.Introspector.getBeanInfo(c, Object.class).getPropertyDescriptors();
+            columnFields = new String[p.length];
             columnNames = new String[p.length];
-            //System.out.println("p.length = " + p.length);
             for (int i = 0; i < p.length; i++) {
-                // coloca o nome na coluna
-                //String s = p[i].getName();
-                //s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
                 String s = p[i].getReadMethod().getName();
                 s = s.substring(3);
-                //System.out.println("s = " + s);
-                columnNames[i] = s;
+                columnFields[i] = s;
+                columnNames[i] = getNomeColuna(c, s);
             }
             this.data = dataset;
         }
+    }
+
+    private String getNomeColuna(Class c, String fieldName) {
+        Field field = null;
+        try {
+            String nomeField = fieldName.substring(0, 1).toLowerCase() + fieldName.substring(1);
+            field = c.getDeclaredField(nomeField);
+            AnotacaoNomeColuna anotacao = field.getAnnotation(AnotacaoNomeColuna.class);
+            if (anotacao != null) {
+                return anotacao.nome();
+            }
+        } catch (NoSuchFieldException | SecurityException ex) {
+            Logger.getLogger(DynamicTableModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return fieldName;
     }
 
     @Override
@@ -116,7 +132,7 @@ public class DynamicTableModel extends AbstractTableModel {
         if (data.size() > 0 && row < data.size()) {
             try {
                 Object oRow = data.get(row);
-                Method method = c.getMethod("get" + columnNames[col], new Class[]{});
+                Method method = c.getMethod("get" + columnFields[col], new Class[]{});
                 Class t = method.getReturnType();
                 if (t.isPrimitive()) {
                     Object objResult;

@@ -66,7 +66,8 @@ public abstract class AbstractDao<T> {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.remove(entity);
+            //em.remove(entity);
+            em.remove(em.contains(entity) ? entity : em.merge(entity));
             em.getTransaction().commit();
 
         } catch (Exception ex) {

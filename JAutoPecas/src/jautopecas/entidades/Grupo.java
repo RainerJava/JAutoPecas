@@ -4,6 +4,7 @@
  */
 package jautopecas.entidades;
 
+import jautopecas.components.anotacao.AnotacaoNomeColuna;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -16,9 +17,11 @@ import javax.persistence.*;
 public class Grupo implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_grupo")
+    @AnotacaoNomeColuna(nome="ID Grupo",descricao="Identificador do Grupo")
     private Integer idGrupo;
+    @AnotacaoNomeColuna(nome="Nome",descricao="Nome do Grupo")
     private String nome;
 
     public Integer getIdGrupo() {
