@@ -21,7 +21,7 @@ public class JAutoPecasMenuActionListener implements ActionListener {
             Class classeFormulario = Class.forName(cadItemMenu.getClasseFormulario());
             Class classePesquisa = Class.forName(cadItemMenu.getClassePesquisa());
             Object objetoFormulario = classePesquisa.newInstance();
-            WindowCrud crud = new WindowCrud(objetoFormulario, "pesquisar", ((JPanel) classeFormulario.newInstance()));
+            WindowCrud crud = new WindowCrud(objetoFormulario, "pesquisaSimples", ((JPanel) classeFormulario.newInstance()));
             if (cadItemMenu.getImagem() != null) {
                 crud.setIconImage(new ImageIcon(getClass().getResource(cadItemMenu.getImagem())).getImage());
             }

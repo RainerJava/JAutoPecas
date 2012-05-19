@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -104,5 +105,26 @@ public abstract class AbstractDao<T> {
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
+    }
+
+    public List<T> pesquisaSimples(String camposPesquisa, String strPesquisa) {
+        StringBuilder strBuilder = new StringBuilder();
+        strBuilder.append("SELECT a FROM ").append(entityClass.getSimpleName()).append(" a");
+
+        String[] v = strPesquisa.split("\\+");
+        for (int i = 0; i < v.length; i++) {
+            if (i == 0) {
+                strBuilder.append(" WHERE CONCAT(").append(camposPesquisa).append(") LIKE :parm").append(i);
+            } else {
+                strBuilder.append(" AND CONCAT(").append(camposPesquisa).append(") LIKE :parm").append(i);
+            }
+        }
+
+        TypedQuery<T> typedQuery = getEntityManager().createQuery(strBuilder.toString(), entityClass);
+
+        for (int i = 0; i < v.length; i++) {
+            typedQuery.setParameter(("parm" + i), "%" + v[i] + "%");
+        }
+        return typedQuery.getResultList();
     }
 }

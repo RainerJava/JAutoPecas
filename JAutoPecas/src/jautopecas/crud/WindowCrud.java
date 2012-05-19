@@ -460,12 +460,12 @@ public class WindowCrud extends javax.swing.JFrame {
 
 
             }
-            Method m = formulario.getClass().getMethod(metodoPesquisa, new Class[]{String.class
+            Method m = formulario.getClass().getMethod(metodoPesquisa, new Class[]{String.class, String.class
                     });
             resultadoPesquisa.clear();
 
             resultadoPesquisa.addAll(
-                    (List) m.invoke(formulario, new Object[]{jtfFiltroPesquisa.getText()}));
+                    (List) m.invoke(formulario, new Object[]{"a.idGrupo,a.nome", jtfFiltroPesquisa.getText()}));
             if (tableModel == null) {
                 tableModel = new DynamicTableModel(resultadoPesquisa);
                 jtablePesquisa.setModel(tableModel);

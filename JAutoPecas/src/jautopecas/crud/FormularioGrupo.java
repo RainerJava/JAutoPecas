@@ -87,21 +87,21 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
     private Grupo grupo;
-
+    
     @Override
     public void setObjetoFormulario(Object objetoFormulario) {
         grupo = (Grupo) objetoFormulario;
         jFTextField1.setText(String.valueOf(grupo.getIdGrupo()));
         jFTextField2.setText(grupo.getNome());
     }
-
+    
     @Override
     public void salvar() throws Exception {
         try {
             grupo = new Grupo();
             new GrupoDao().salvar(getObjetoFormulario());
             setObjetoFormulario(grupo);
-
+            
             JOptionPane.showMessageDialog(this, "Grupo Salvo com Sucesso!");
         } catch (Exception ex) {
             if (ex.getCause() instanceof DatabaseException) {
@@ -114,46 +114,50 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
             ex.printStackTrace();
         }
     }
-
+    
     @Override
     public void alterar() {
         try {
             new GrupoDao().alterar(getObjetoFormulario());
             setObjetoFormulario(grupo);
-
+            
             JOptionPane.showMessageDialog(this, "Grupo alterado com sucesso!!");
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Erro ao alterar o Grupo!!");
         }
     }
-
+    
     @Override
     public void excluir() {
         try {
             new GrupoDao().excluir(grupo);
-
+            
             JOptionPane.showMessageDialog(this, "Grupo excluido com sucesso!!");
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Erro ao excluir o Grupo!!");
         }
     }
-
+    
     @Override
     public Grupo getObjetoFormulario() {
         grupo.setIdGrupo(Integer.valueOf(jFTextField1.getText().length() == 0 ? "0" : jFTextField1.getText()));
         grupo.setNome(jFTextField2.getText());
         return grupo;
     }
-
+    
     @Override
     public JLabel getJlInformacao() {
         return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
     }
-
+    
     @Override
     public List pesquisar(String strPesquisa) {
         return new GrupoDao().listarTodos();
+    }
+    
+    public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
+        return new GrupoDao().pesquisaSimples(strCamposPesqisa, strPesquisa);
     }
 }

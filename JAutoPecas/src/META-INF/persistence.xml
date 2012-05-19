@@ -3,18 +3,12 @@
   <persistence-unit name="JAutoPecasPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>jautopecas.entidades.Grupo</class>
-    <class>jautopecas.entidades.Fornecedor</class>
-    <class>jautopecas.entidades.NfEntrada</class>
-    <class>jautopecas.entidades.Contabil</class>
-    <class>jautopecas.entidades.NfSaida</class>
-    <class>jautopecas.entidades.Cliente</class>
-    <class>jautopecas.entidades.Pagamento</class>
-    <class>jautopecas.entidades.Recebimento</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dbautopecas"/>
       <property name="javax.persistence.jdbc.password" value="line@njo"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="eclipselink.logging.level" value="FINE"/>
     </properties>
   </persistence-unit>
 </persistence>
