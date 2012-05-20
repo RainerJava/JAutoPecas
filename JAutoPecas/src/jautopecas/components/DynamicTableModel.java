@@ -16,6 +16,7 @@ public class DynamicTableModel extends AbstractTableModel {
 
     private String[] columnFields = null;
     private String[] columnNames = null;
+    private Class[] classeFields = null;
     private List data = null;
 
     public List getData() {
@@ -27,12 +28,11 @@ public class DynamicTableModel extends AbstractTableModel {
         //initModel(dataset);
         fireTableDataChanged();
     }
-    private Class c = null;
+    //private Class c = null;
 
-    public Class getC() {
-        return c;
-    }
-
+//    public Class getC() {
+//        return c;
+//    }
     public String[] getColumnNames() {
         return columnNames;
     }
@@ -45,27 +45,28 @@ public class DynamicTableModel extends AbstractTableModel {
     private void initModel(List dataset) throws IntrospectionException {
         //System.out.println("dataset.size() = " + dataset.size());
         if (dataset.size() > 0) {
-            c = dataset.get(0).getClass();
+            Class c = dataset.get(0).getClass();
             //System.out.println(c.getName());
 
             PropertyDescriptor[] p = java.beans.Introspector.getBeanInfo(c, Object.class).getPropertyDescriptors();
             columnFields = new String[p.length];
             columnNames = new String[p.length];
+            classeFields = new Class[p.length];
             for (int i = 0; i < p.length; i++) {
                 String s = p[i].getReadMethod().getName();
                 s = s.substring(3);
                 columnFields[i] = s;
-                columnNames[i] = getNomeColuna(c, s);
+                classeFields[i] = p[i].getReadMethod().getDeclaringClass();
+                columnNames[i] = getNomeColuna(classeFields[i], s);
             }
             this.data = dataset;
         }
     }
 
     private String getNomeColuna(Class c, String fieldName) {
-        Field field = null;
         try {
             String nomeField = fieldName.substring(0, 1).toLowerCase() + fieldName.substring(1);
-            field = c.getDeclaredField(nomeField);
+            Field field = c.getDeclaredField(nomeField);
             AnotacaoNomeColuna anotacao = field.getAnnotation(AnotacaoNomeColuna.class);
             if (anotacao != null) {
                 return anotacao.nome();
@@ -132,7 +133,7 @@ public class DynamicTableModel extends AbstractTableModel {
         if (data.size() > 0 && row < data.size()) {
             try {
                 Object oRow = data.get(row);
-                Method method = c.getMethod("get" + columnFields[col], new Class[]{});
+                Method method = classeFields[col].getMethod("get" + columnFields[col], new Class[]{});
                 Class t = method.getReturnType();
                 if (t.isPrimitive()) {
                     Object objResult;
@@ -162,6 +163,16 @@ public class DynamicTableModel extends AbstractTableModel {
                         case "java.lang.Integer":
                             objResult = method.invoke(oRow, new Object[]{});
                             o = Integer.valueOf(objResult != null ? objResult.toString() : "0");
+                            break;
+
+                        case "java.lang.Long":
+                            objResult = method.invoke(oRow, new Object[]{});
+                            o = Long.valueOf(objResult != null ? objResult.toString() : "0");
+                            break;
+
+                        case "java.lang.Double":
+                            objResult = method.invoke(oRow, new Object[]{});
+                            o = Double.valueOf(objResult != null ? objResult.toString() : "0.000");
                             break;
                         default:
                             o = oRow;

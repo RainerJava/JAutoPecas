@@ -4,7 +4,8 @@
  */
 package jautopecas;
 
-import jautopecas.entidades.CadItemMenu;
+import jautopecas.dao.menu.ItemMenuDao;
+import jautopecas.entidades.menu.ItemMenu;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -21,127 +22,49 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     /**
      * Creates new form JAutoPecasMenu
      */
-    private static List<CadItemMenu> itensMenu = new ArrayList<>();
+    private static List<ItemMenu> itensMenu = new ArrayList<>();
+
     public JAutoPecasMenu() {
         initComponents();
-
-        CadItemMenu itemCadastro = new CadItemMenu();
-        itemCadastro.setIdItemMenu("1");
-        itemCadastro.setNomeItem("Cadastro");
-        itemCadastro.setImagem("/jautopecas/imagens/icones/iconeCadastro16.png");
-        itemCadastro.setTipoItem(CadItemMenu.PRINCIPAL);
-
-        itensMenu.add(itemCadastro);
-
-        CadItemMenu itemCadastroEmpresas = new CadItemMenu();
-        itemCadastroEmpresas.setIdItemMenu("1.1");
-        itemCadastroEmpresas.setNomeItem("Grupos");
-        itemCadastroEmpresas.setImagem("/jautopecas/imagens/icones/iconeEmpresa16.png");
-        itemCadastroEmpresas.setClasseFormulario("jautopecas.crud.FormularioGrupo");
-        itemCadastroEmpresas.setClassePesquisa("jautopecas.entidades.Grupo");
-        itemCadastroEmpresas.setTipoItem(CadItemMenu.JANELA);
-
-        itensMenu.add(itemCadastroEmpresas);
-
-        CadItemMenu itemCadastroClientes = new CadItemMenu();
-        itemCadastroClientes.setIdItemMenu("1.2");
-        itemCadastroClientes.setNomeItem("Clientes");
-        itemCadastroClientes.setTipoItem(CadItemMenu.JANELA);
-
-        itensMenu.add(itemCadastroClientes);
-
-        CadItemMenu itemCompras = new CadItemMenu();
-        itemCompras.setIdItemMenu("2");
-        itemCompras.setNomeItem("Compras");
-        itemCompras.setTipoItem(CadItemMenu.PRINCIPAL);
-
-        itensMenu.add(itemCompras);
-
-        CadItemMenu itemComprasIndicacao = new CadItemMenu();
-        itemComprasIndicacao.setIdItemMenu("2.1");
-        itemComprasIndicacao.setNomeItem("Indicacao");
-        itemComprasIndicacao.setTipoItem(CadItemMenu.JANELA);
-
-        itensMenu.add(itemComprasIndicacao);
-
-        CadItemMenu itemComprasRelatorios = new CadItemMenu();
-        itemComprasRelatorios.setIdItemMenu("2.2");
-        itemComprasRelatorios.setNomeItem("Relatorios");
-        itemComprasRelatorios.setTipoItem(CadItemMenu.SUBMENU);
-
-        itensMenu.add(itemComprasRelatorios);
-
-        CadItemMenu itemComprasRelatorio1 = new CadItemMenu();
-        itemComprasRelatorio1.setIdItemMenu("2.2.1");
-        itemComprasRelatorio1.setNomeItem("Relatorio 01");
-        itemComprasRelatorio1.setTipoItem(CadItemMenu.JANELA);
-
-        itensMenu.add(itemComprasRelatorio1);
-
-        CadItemMenu itemComprasRelatorio2 = new CadItemMenu();
-        itemComprasRelatorio2.setIdItemMenu("2.2.2");
-        itemComprasRelatorio2.setNomeItem("Relatorio 02");
-        itemComprasRelatorio2.setTipoItem(CadItemMenu.JANELA);
-
-        itensMenu.add(itemComprasRelatorio2);
-
-        CadItemMenu itemComprasCompradores = new CadItemMenu();
-        itemComprasCompradores.setIdItemMenu("2.3");
-        itemComprasCompradores.setNomeItem("Compradores");
-        itemComprasCompradores.setTipoItem(CadItemMenu.JANELA);
-
-        itensMenu.add(itemComprasCompradores);
-
-        CadItemMenu itemVendas = new CadItemMenu();
-        itemVendas.setIdItemMenu("3");
-        itemVendas.setNomeItem("Vendas");
-        itemVendas.setTipoItem(CadItemMenu.PRINCIPAL);
-
-        itensMenu.add(itemVendas);
-
-        CadItemMenu itemVendasPedidos = new CadItemMenu();
-        itemVendasPedidos.setIdItemMenu("3.1");
-        itemVendasPedidos.setNomeItem("Pedido de Venda");
-        itemVendasPedidos.setTipoItem(CadItemMenu.JANELA);
-
-        itensMenu.add(itemVendasPedidos);
-
         criaItensMenu();
     }
 
     private void criaItensMenu() {
+        itensMenu.clear();
+        itensMenu.addAll(new ItemMenuDao().listarTodos());
+
         String idItemMenuPai = null;
         String idItemSubMenu = null;
         JMenu jMenuPrincipal = null;
         JMenu jMenuSubMenu = null;
         JMenuItem jMenuItem;
         for (int i = 0; i < itensMenu.size(); i++) {
-            if (itensMenu.get(i).getTipoItem().equals(CadItemMenu.PRINCIPAL)) {
+            if (itensMenu.get(i).getTipoItem().equals(ItemMenu.MENU)) {
                 jMenuPrincipal = new JMenu();
-                jMenuPrincipal.setText(itensMenu.get(i).getNomeItem());
-                if (itensMenu.get(i).getImagem() != null) {
-                    jMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(itensMenu.get(i).getImagem())));
+                jMenuPrincipal.setText(itensMenu.get(i).getNome());
+                if (itensMenu.get(i).getCaminhoImagem() != null) {
+                    jMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(itensMenu.get(i).getCaminhoImagem())));
                 }
                 jMenuBar2.add(jMenuPrincipal);
                 idItemMenuPai = itensMenu.get(i).getIdItemMenu();
-            } else if (itensMenu.get(i).getTipoItem().equals(CadItemMenu.SUBMENU)) {
+            } else if (itensMenu.get(i).getTipoItem().equals(ItemMenu.SUBMENU)) {
                 if (itensMenu.get(i).getIdItemMenu().startsWith(idItemMenuPai)) {
                     jMenuSubMenu = new JMenu();
-                    jMenuSubMenu.setText(itensMenu.get(i).getNomeItem());
-                    if (itensMenu.get(i).getImagem() != null) {
-                        jMenuSubMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource(itensMenu.get(i).getImagem())));
+                    jMenuSubMenu.setText(itensMenu.get(i).getNome());
+                    if (itensMenu.get(i).getCaminhoImagem() != null) {
+                        jMenuSubMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource(itensMenu.get(i).getCaminhoImagem())));
                     }
                     jMenuPrincipal.add(jMenuSubMenu);
                     idItemSubMenu = itensMenu.get(i).getIdItemMenu();
                 } else {
                     jMenuSubMenu = null;
                 }
-            } else if (itensMenu.get(i).getTipoItem().equals(CadItemMenu.JANELA)) {
+            } else if (itensMenu.get(i).getTipoItem().equals(ItemMenu.JANELA)) {
                 jMenuItem = new JMenuItem();
-                jMenuItem.setText(itensMenu.get(i).getNomeItem());
+                jMenuItem.setText(itensMenu.get(i).getNome());
                 jMenuItem.addActionListener(new JAutoPecasMenuActionListener(itensMenu.get(i)));
-                if (itensMenu.get(i).getImagem() != null) {
-                    jMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource(itensMenu.get(i).getImagem())));
+                if (itensMenu.get(i).getCaminhoImagem() != null) {
+                    jMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource(itensMenu.get(i).getCaminhoImagem())));
                 }
                 if (idItemSubMenu != null && itensMenu.get(i).getIdItemMenu().startsWith(idItemSubMenu)) {
                     jMenuSubMenu.add(jMenuItem);
@@ -233,7 +156,6 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
             System.out.println("UHUU");
         }
     }//GEN-LAST:event_jMenuBar2PropertyChange
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

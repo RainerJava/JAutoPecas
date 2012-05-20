@@ -6,6 +6,7 @@ package jautopecas.crud;
 
 import jautopecas.components.DynamicTableModel;
 import jautopecas.components.JFTextField;
+import jautopecas.entidades.menu.ItemMenu;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.KeyEvent;
@@ -32,6 +33,7 @@ public class WindowCrud extends javax.swing.JFrame {
     private JPanel formulario;
     private Object objetoFormulario;
     private String metodoPesquisa;
+    private String camposPesquisa;
     private int countErrosFormulario;
 
     /**
@@ -41,22 +43,28 @@ public class WindowCrud extends javax.swing.JFrame {
         initComponents();
     }
 
-    public WindowCrud(Object objetoFormulario, String metodoPesquisa, JPanel formulario) {
-        initComponents();
-        this.objetoFormulario = objetoFormulario;
-        this.metodoPesquisa = metodoPesquisa;
-        this.formulario = formulario;
-        jpFormulario.add(this.formulario);
-        this.pack();
+    public WindowCrud(ItemMenu itemMenu) {
+        try {
+            initComponents();
+            Class classeFormulario = Class.forName(itemMenu.getClasseFormulario());
+            Class classeEntidade = Class.forName(itemMenu.getClasseEntidade());
+            this.objetoFormulario = classeEntidade.newInstance();
+            this.formulario = (JPanel) classeFormulario.newInstance();
+            this.metodoPesquisa = itemMenu.getMetodoPesquisa();
+            this.camposPesquisa = itemMenu.getCamposPesquisa();
+            jpFormulario.add(this.formulario);
+            this.pack();
 
-        jtpFormPesquisa.setEnabledAt(0, false);
-        jtpFormPesquisa.setEnabledAt(1, true);
-        jtpFormPesquisa.setSelectedIndex(1);
-        jbNovo.setEnabled(true);
-        jbSalvar.setEnabled(false);
-        jbLimpar.setEnabled(false);
-        jbEditar.setEnabled(false);
-        jbExcluir.setEnabled(false);
+            jtpFormPesquisa.setEnabledAt(0, false);
+            jtpFormPesquisa.setEnabledAt(1, true);
+            jtpFormPesquisa.setSelectedIndex(1);
+            jbNovo.setEnabled(true);
+            jbSalvar.setEnabled(false);
+            jbLimpar.setEnabled(false);
+            jbEditar.setEnabled(false);
+            jbExcluir.setEnabled(false);
+        } catch (Exception ex) {
+        }
     }
 
     //public void initComponentsExternal() {
@@ -385,7 +393,6 @@ public class WindowCrud extends javax.swing.JFrame {
         } else {
             jlInformacao.setText("Os campos em vermelho contem erros, favor corrigi-los!!");
         }
-
     }//GEN-LAST:event_jbSalvarActionPerformed
 
     private void jbLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparActionPerformed
@@ -465,7 +472,7 @@ public class WindowCrud extends javax.swing.JFrame {
             resultadoPesquisa.clear();
 
             resultadoPesquisa.addAll(
-                    (List) m.invoke(formulario, new Object[]{"a.idGrupo,a.nome", jtfFiltroPesquisa.getText()}));
+                    (List) m.invoke(formulario, new Object[]{camposPesquisa, jtfFiltroPesquisa.getText()}));
             if (tableModel == null) {
                 tableModel = new DynamicTableModel(resultadoPesquisa);
                 jtablePesquisa.setModel(tableModel);

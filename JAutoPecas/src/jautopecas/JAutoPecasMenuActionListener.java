@@ -1,7 +1,7 @@
 package jautopecas;
 
 import jautopecas.crud.WindowCrud;
-import jautopecas.entidades.CadItemMenu;
+import jautopecas.entidades.menu.ItemMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -9,28 +9,20 @@ import javax.swing.JPanel;
 
 public class JAutoPecasMenuActionListener implements ActionListener {
 
-    private CadItemMenu cadItemMenu;
+    private ItemMenu itemMenu;
 
-    public JAutoPecasMenuActionListener(CadItemMenu cadItemMenu) {
-        this.cadItemMenu = cadItemMenu;
+    public JAutoPecasMenuActionListener(ItemMenu itemMenu) {
+        this.itemMenu = itemMenu;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            Class classeFormulario = Class.forName(cadItemMenu.getClasseFormulario());
-            Class classePesquisa = Class.forName(cadItemMenu.getClassePesquisa());
-            Object objetoFormulario = classePesquisa.newInstance();
-            WindowCrud crud = new WindowCrud(objetoFormulario, "pesquisaSimples", ((JPanel) classeFormulario.newInstance()));
-            if (cadItemMenu.getImagem() != null) {
-                crud.setIconImage(new ImageIcon(getClass().getResource(cadItemMenu.getImagem())).getImage());
-            }
-            crud.setTitle(cadItemMenu.getNomeItem());
-            crud.setLocationRelativeTo(null);
-            crud.setVisible(true);
-
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            ex.printStackTrace();
+        WindowCrud crud = new WindowCrud(itemMenu);
+        if (itemMenu.getCaminhoImagem() != null) {
+            crud.setIconImage(new ImageIcon(getClass().getResource(itemMenu.getCaminhoImagem())).getImage());
         }
+        crud.setTitle(itemMenu.getNome());
+        crud.setLocationRelativeTo(null);
+        crud.setVisible(true);
     }
 }

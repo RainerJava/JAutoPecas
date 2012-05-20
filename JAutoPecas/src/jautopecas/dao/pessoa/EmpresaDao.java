@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jautopecas.dao;
+package jautopecas.dao.pessoa;
 
-import jautopecas.entidades.ParametrosPesquisa;
+import jautopecas.dao.AbstractDao;
+import jautopecas.entidades.pessoa.Empresa;
 import java.io.Serializable;
 import javax.persistence.EntityManager;
 
@@ -12,10 +13,10 @@ import javax.persistence.EntityManager;
  *
  * @author Daniel
  */
-public class ParametrosPesquisaDao extends AbstractDao<ParametrosPesquisa> implements Serializable {
+public class EmpresaDao extends AbstractDao<Empresa> implements Serializable {
 
-    public ParametrosPesquisaDao() {
-        super(ParametrosPesquisa.class);
+    public EmpresaDao() {
+        super(Empresa.class);
     }
 
     @Override
