@@ -44,71 +44,33 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         jlCnpj = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(600, 250));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtfIdEmpresa.setEditable(false);
         jtfIdEmpresa.setEnabled(false);
         jtfIdEmpresa.setMensagemAjuda("ID Empresa (Gerado pelo sistema)");
+        add(jtfIdEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 60, -1));
 
         jtfRazaoSocial.setMensagemAjuda("Razão Social da empresa");
+        add(jtfRazaoSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 77, 332, -1));
 
         jlIdEmpresa.setText("ID Empresa");
+        add(jlIdEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jlRazaoSocial.setText("Razão Social");
+        add(jlRazaoSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 57, 333, -1));
 
         jtfNomeFantasia.setMensagemAjuda("Nome Fantasia da empresa");
+        add(jtfNomeFantasia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 123, 333, -1));
 
         jlNomeFantasia.setText("Nome Fantasia");
+        add(jlNomeFantasia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 103, 333, -1));
 
         jtfCnpj.setMensagemAjuda("CNPJ da empresa");
+        add(jtfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 31, 267, -1));
 
         jlCnpj.setText("CNPJ");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlIdEmpresa)
-                            .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jtfCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jtfNomeFantasia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlNomeFantasia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlRazaoSocial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
-                        .addComponent(jtfRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(257, 257, 257))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlIdEmpresa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlCnpj)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlRazaoSocial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlNomeFantasia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
-        );
+        add(jlCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 11, 267, -1));
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jlCnpj;
