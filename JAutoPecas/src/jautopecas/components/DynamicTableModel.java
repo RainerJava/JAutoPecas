@@ -14,9 +14,9 @@ import javax.swing.table.AbstractTableModel;
 
 public class DynamicTableModel extends AbstractTableModel {
 
-    private String[] columnFields = null;
-    private String[] columnNames = null;
-    private Class[] classeFields = null;
+    private List<String> columnFields = new ArrayList<>();
+    private List<String> columnNames = new ArrayList<>();
+    private List<Class> classeFields = new ArrayList<>();
     private List data = null;
 
     public List getData() {
@@ -33,7 +33,7 @@ public class DynamicTableModel extends AbstractTableModel {
 //    public Class getC() {
 //        return c;
 //    }
-    public String[] getColumnNames() {
+    public List<String> getColumnNames() {
         return columnNames;
     }
 
@@ -49,15 +49,18 @@ public class DynamicTableModel extends AbstractTableModel {
             //System.out.println(c.getName());
 
             PropertyDescriptor[] p = java.beans.Introspector.getBeanInfo(c, Object.class).getPropertyDescriptors();
-            columnFields = new String[p.length];
-            columnNames = new String[p.length];
-            classeFields = new Class[p.length];
+            columnFields.clear();
+            columnNames.clear();
+            classeFields.clear();
             for (int i = 0; i < p.length; i++) {
+                if (p[i].getReadMethod().getReturnType().toString().contains("entidades")) {
+                    continue;
+                }
                 String s = p[i].getReadMethod().getName();
                 s = s.substring(3);
-                columnFields[i] = s;
-                classeFields[i] = p[i].getReadMethod().getDeclaringClass();
-                columnNames[i] = getNomeColuna(classeFields[i], s);
+                columnFields.add(s);
+                classeFields.add(p[i].getReadMethod().getDeclaringClass());
+                columnNames.add(getNomeColuna(classeFields.get(classeFields.size() - 1), s));
             }
             this.data = dataset;
         }
@@ -89,7 +92,7 @@ public class DynamicTableModel extends AbstractTableModel {
             return 0;
         } else {
             //System.out.println("getColumnCount = " + columnNames.length);
-            return columnNames.length;
+            return columnNames.size();
         }
     }
 
@@ -104,7 +107,7 @@ public class DynamicTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int col) {
-        return columnNames[col];
+        return columnNames.get(col);
     }
 
     public Object getObjectAtRow(int row) {
@@ -133,7 +136,7 @@ public class DynamicTableModel extends AbstractTableModel {
         if (data.size() > 0 && row < data.size()) {
             try {
                 Object oRow = data.get(row);
-                Method method = classeFields[col].getMethod("get" + columnFields[col], new Class[]{});
+                Method method = classeFields.get(col).getMethod("get" + columnFields.get(col), new Class[]{});
                 Class t = method.getReturnType();
                 if (t.isPrimitive()) {
                     Object objResult;
@@ -183,7 +186,6 @@ public class DynamicTableModel extends AbstractTableModel {
                 //System.out.println("ex = " + ex);
                 Logger.getLogger(DynamicTableModel.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
         return o;
     }
