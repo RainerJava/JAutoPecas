@@ -5,9 +5,14 @@
 package jautopecas.crud;
 
 import jautopecas.dao.GrupoDao;
+import jautopecas.dao.menu.ItemMenuDao;
 import jautopecas.dao.pessoa.EmpresaDao;
+import jautopecas.entidades.Grupo;
+import jautopecas.entidades.menu.ItemMenu;
 import jautopecas.entidades.pessoa.Empresa;
+import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import org.eclipse.persistence.exceptions.DatabaseException;
@@ -42,8 +47,10 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         jlNomeFantasia = new javax.swing.JLabel();
         jtfCnpj = new jautopecas.components.JFTextField();
         jlCnpj = new javax.swing.JLabel();
+        jtfRazaoSocial1 = new jautopecas.components.JFTextField();
 
-        setPreferredSize(new java.awt.Dimension(600, 250));
+        setMinimumSize(new java.awt.Dimension(587, 153));
+        setPreferredSize(new java.awt.Dimension(581, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtfIdEmpresa.setEditable(false);
@@ -52,7 +59,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         add(jtfIdEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 60, -1));
 
         jtfRazaoSocial.setMensagemAjuda("Razão Social da empresa");
-        add(jtfRazaoSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 77, 332, -1));
+        add(jtfRazaoSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 220, -1));
 
         jlIdEmpresa.setText("ID Empresa");
         add(jlIdEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
@@ -60,6 +67,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         jlRazaoSocial.setText("Razão Social");
         add(jlRazaoSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 57, 333, -1));
 
+        jtfNomeFantasia.setClasseFormulario("jautopecas.crud.FormularioGrupo");
         jtfNomeFantasia.setMensagemAjuda("Nome Fantasia da empresa");
         add(jtfNomeFantasia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 123, 333, -1));
 
@@ -71,7 +79,11 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
 
         jlCnpj.setText("CNPJ");
         add(jlCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 11, 267, -1));
+
+        jtfRazaoSocial1.setMensagemAjuda("Razão Social da empresa");
+        add(jtfRazaoSocial1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 77, 332, -1));
     }// </editor-fold>//GEN-END:initComponents
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jlCnpj;
     private javax.swing.JLabel jlIdEmpresa;
@@ -81,6 +93,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
     private jautopecas.components.JFTextField jtfIdEmpresa;
     private jautopecas.components.JFTextField jtfNomeFantasia;
     private jautopecas.components.JFTextField jtfRazaoSocial;
+    private jautopecas.components.JFTextField jtfRazaoSocial1;
     // End of variables declaration//GEN-END:variables
     private Empresa empresa;
 

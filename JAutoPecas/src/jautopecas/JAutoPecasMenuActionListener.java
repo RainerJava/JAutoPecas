@@ -4,8 +4,6 @@ import jautopecas.crud.WindowCrud;
 import jautopecas.entidades.menu.ItemMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 
 public class JAutoPecasMenuActionListener implements ActionListener {
 
@@ -17,12 +15,12 @@ public class JAutoPecasMenuActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        WindowCrud crud = new WindowCrud(itemMenu);
-        if (itemMenu.getCaminhoImagem() != null) {
-            crud.setIconImage(new ImageIcon(getClass().getResource(itemMenu.getCaminhoImagem())).getImage());
-        }
-        crud.setTitle(itemMenu.getNome());
-        crud.setLocationRelativeTo(null);
+        WindowCrud crud = new WindowCrud(itemMenu, false, null);
+//        if (itemMenu.getCaminhoImagem() != null) {
+//            crud.setIconImage(new ImageIcon(getClass().getResource(itemMenu.getCaminhoImagem())).getImage());
+//        }
+//        crud.setTitle(itemMenu.getNome());
+//        crud.setLocationRelativeTo(null);
         crud.setVisible(true);
     }
 }

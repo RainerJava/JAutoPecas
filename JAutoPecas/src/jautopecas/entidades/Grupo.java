@@ -5,7 +5,9 @@
 package jautopecas.entidades;
 
 import jautopecas.components.anotacao.AnotacaoNomeColuna;
+import jautopecas.dao.GrupoDao;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 /**

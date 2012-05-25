@@ -9,6 +9,7 @@ import jautopecas.entidades.menu.ItemMenu;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -73,6 +74,24 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
                 }
             }
         }
+    }
+
+    /*
+     * Getter's and Setter's
+     */
+    public static List<ItemMenu> getItensMenu() {
+        return itensMenu;
+    }
+
+    public static ItemMenu getItemMenu(String classeFormulario) {
+        ItemMenu itemMenu = null;
+        for (Iterator<ItemMenu> it = itensMenu.iterator(); it.hasNext();) {
+            itemMenu = it.next();
+            if (itemMenu.getClasseFormulario() != null && itemMenu.getClasseFormulario().equals(classeFormulario)) {
+                break;
+            }
+        }
+        return itemMenu;
     }
 
     /**
@@ -140,22 +159,11 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
         jPanel2.add(jLabel7);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
-
-        jMenuBar2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jMenuBar2PropertyChange(evt);
-            }
-        });
         setJMenuBar(jMenuBar2);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuBar2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jMenuBar2PropertyChange
-        if (evt.getSource().equals("OI")) {
-            System.out.println("UHUU");
-        }
-    }//GEN-LAST:event_jMenuBar2PropertyChange
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

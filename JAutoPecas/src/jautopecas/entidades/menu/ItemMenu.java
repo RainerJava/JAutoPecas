@@ -46,6 +46,9 @@ public class ItemMenu implements Serializable {
     @Column(name = "campos_pesquisa")
     @AnotacaoNomeColuna(nome = "Campos Pesquisa", descricao = "Campos utilizados na pesquisa")
     private String camposPesquisa;
+    @Column(name = "campos_jftextfield")
+    @AnotacaoNomeColuna(nome = "Campos JFTextField", descricao = "Campos apresentados no Field (modo pesquisa)")
+    private String camposJFTextField;
 
     /*
      * Getter's and Setter's
@@ -112,5 +115,13 @@ public class ItemMenu implements Serializable {
 
     public void setMetodoPesquisa(String metodoPesquisa) {
         this.metodoPesquisa = metodoPesquisa;
+    }
+
+    public String getCamposJFTextField() {
+        return camposJFTextField;
+    }
+
+    public void setCamposJFTextField(String camposJFTextField) {
+        this.camposJFTextField = camposJFTextField;
     }
 }
