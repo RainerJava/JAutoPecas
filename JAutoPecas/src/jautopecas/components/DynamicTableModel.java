@@ -18,21 +18,16 @@ public class DynamicTableModel extends AbstractTableModel {
     private List<String> columnNames = new ArrayList<>();
     private List<Class> classeFields = new ArrayList<>();
     private List data = null;
+    private boolean inicializado = false;
 
     public List getData() {
         return data;
     }
 
     public void setData(List dataset) throws IntrospectionException {
-        this.data = dataset;
-        //initModel(dataset);
         fireTableDataChanged();
     }
-    //private Class c = null;
 
-//    public Class getC() {
-//        return c;
-//    }
     public List<String> getColumnNames() {
         return columnNames;
     }
@@ -53,7 +48,8 @@ public class DynamicTableModel extends AbstractTableModel {
             columnNames.clear();
             classeFields.clear();
             for (int i = 0; i < p.length; i++) {
-                if (p[i].getReadMethod().getReturnType().toString().contains("entidades")) {
+                if (p[i].getReadMethod().getReturnType().toString().contains("entidades")
+                        || p[i].getReadMethod().getReturnType().toString().contains("List")) {
                     continue;
                 }
                 String s = p[i].getReadMethod().getName();
@@ -62,7 +58,10 @@ public class DynamicTableModel extends AbstractTableModel {
                 classeFields.add(p[i].getReadMethod().getDeclaringClass());
                 columnNames.add(getNomeColuna(classeFields.get(classeFields.size() - 1), s));
             }
-            this.data = dataset;
+            data = dataset;
+            inicializado = true;
+        }else{
+            inicializado = false;
         }
     }
 
@@ -188,5 +187,9 @@ public class DynamicTableModel extends AbstractTableModel {
             }
         }
         return o;
+    }
+
+    public boolean isInicializado() {
+        return inicializado;
     }
 }

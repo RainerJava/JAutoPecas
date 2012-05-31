@@ -8,43 +8,25 @@ import jautopecas.JAutoPecasMenu;
 import jautopecas.components.validadores.Validador;
 import jautopecas.crud.WindowCrud;
 import jautopecas.entidades.menu.ItemMenu;
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.Field;
-import javax.swing.BorderFactory;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
 
 /**
  *
  * @author JFFiorotto
  */
-public class JFTextField extends JTextField {
+public class JFFormattedTextField extends JFormattedTextField {
 
-    public JFTextField() {
+    public JFFormattedTextField() {
         super();
 
         this.addKeyListener(new KeyListener() {
 
             @Override
             public void keyTyped(final KeyEvent e) {
-                if (upperCase) {
-                    SwingUtilities.invokeLater(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            JTextField campo = (JTextField) e.getSource();
-                            int posicaoCursor = campo.getCaretPosition();
-                            campo.setText(campo.getText().toUpperCase());
-                            if (posicaoCursor != campo.getCaretPosition()) {
-                                campo.setCaretPosition(posicaoCursor);
-                            }
-                        }
-                    });
-                }
             }
 
             @Override
@@ -53,24 +35,14 @@ public class JFTextField extends JTextField {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if (isEditable()) {
-                    if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F1) {
-                        JFTextField jfTextField = ((JFTextField) e.getComponent());
-                        WindowCrud crud = new WindowCrud(itemMenu, true, jfTextField);
-                        crud.setVisible(true);
-                        crud.setPesquisa(jfTextField.getText());
-                    } else if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F2) {
-                        WindowCrud crud = new WindowCrud(itemMenu, false, ((JFTextField) e.getComponent()));
-                        if (objeto != null) {
-                            crud.setObjetoFormulario(objeto);
-                        }
-                        crud.setVisible(true);
-                    } else if (classeFormulario != null && (e.getKeyCode() == KeyEvent.VK_BACK_SPACE || e.getKeyCode() == KeyEvent.VK_DELETE)) {
-                        if (objeto != null) {
-                            objeto = null;
-                            setText("");
-                        }
-                    }
+                if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F1) {
+                    JFFormattedTextField jfTextField = ((JFFormattedTextField) e.getComponent());
+                    WindowCrud crud = new WindowCrud(itemMenu, true, jfTextField);
+                    crud.setVisible(true);
+                    crud.setPesquisa(jfTextField.getText());
+                } else if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F2) {
+                    WindowCrud crud = new WindowCrud(itemMenu, false, ((JFFormattedTextField) e.getComponent()));
+                    crud.setVisible(true);
                 }
             }
         });
@@ -87,44 +59,27 @@ public class JFTextField extends JTextField {
                 jfTextFieldMouseExited(evt);
             }
         });
-
-        bordaDefault = this.getBorder();
     }
     /*
      * Variaveis Privadas
      */
     private String mensagemAjuda;
     private JLabel jlInformacao;
-    private boolean upperCase = true;
     private Validador validador;
     private Object objeto;
     private String classeFormulario;
     private ItemMenu itemMenu;
-    private boolean requerido = false;
-    private Border bordaDefault;
-    private Border bordaErro = BorderFactory.createLineBorder(Color.RED);
 
     public boolean validaCampo() {
-        boolean result = true;
-        if (requerido && validador != null) {
-            result = validador.validaCampo();
-        } else if (requerido && classeFormulario != null) {
-            if (objeto == null) {
-                result = false;
-            }
-        }
-        if (result) {
-            setBorder(bordaDefault);
+        if (validador != null) {
+            return validador.validaCampo();
         } else {
-            setBorder(bordaErro);
+            return true;
         }
-        return result;
     }
 
     public void limpaCampo() {
         setText("");
-        setBorder(bordaDefault);
-        objeto = null;
         if (validador != null) {
             validador.setValido(true);
         }
@@ -189,10 +144,6 @@ public class JFTextField extends JTextField {
         this.mensagemAjuda = mensagemAjuda;
     }
 
-    public void setUpperCase(boolean upperCase) {
-        this.upperCase = upperCase;
-    }
-
     public void setValidador(Validador validador) {
         this.validador = validador;
     }
@@ -209,9 +160,5 @@ public class JFTextField extends JTextField {
     public void setClasseFormulario(String classeFormulario) {
         this.classeFormulario = classeFormulario;
         this.itemMenu = JAutoPecasMenu.getItemMenu(classeFormulario);
-    }
-
-    public void setRequerido(boolean requerido) {
-        this.requerido = requerido;
     }
 }

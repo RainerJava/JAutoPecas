@@ -87,76 +87,49 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
     private Grupo grupo;
-    
+
     @Override
-    public void setObjetoFormulario(Object objetoFormulario) {
+    public void setObjetoFormulario(Object objetoFormulario) throws Exception {
         grupo = (Grupo) objetoFormulario;
         jFTextField1.setText(String.valueOf(grupo.getIdGrupo()));
         jFTextField2.setText(grupo.getNome());
     }
-    
+
     @Override
     public void salvar() throws Exception {
-        try {
-            grupo = new Grupo();
-            new GrupoDao().salvar(getObjetoFormulario());
-            setObjetoFormulario(grupo);
-            
-            JOptionPane.showMessageDialog(this, "Grupo Salvo com Sucesso!");
-        } catch (Exception ex) {
-            if (ex.getCause() instanceof DatabaseException) {
-                if (((DatabaseException) ex.getCause()).getDatabaseErrorCode() == 1062) {
-                    throw new Exception("Já existe um registro com estas informações!", ex);
-                }
-            } else {
-                throw new Exception("Erro ao salvar a Grupo!!", ex);
-            }
-            ex.printStackTrace();
-        }
+        grupo = new Grupo();
+        new GrupoDao().salvar(getObjetoFormulario());
+        setObjetoFormulario(grupo);
     }
-    
+
     @Override
-    public void alterar() {
-        try {
-            new GrupoDao().alterar(getObjetoFormulario());
-            setObjetoFormulario(grupo);
-            
-            JOptionPane.showMessageDialog(this, "Grupo alterado com sucesso!!");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erro ao alterar o Grupo!!");
-        }
+    public void alterar() throws Exception {
+        new GrupoDao().alterar(getObjetoFormulario());
+        setObjetoFormulario(grupo);
     }
-    
+
     @Override
-    public void excluir() {
-        try {
-            new GrupoDao().excluir(grupo);
-            
-            JOptionPane.showMessageDialog(this, "Grupo excluido com sucesso!!");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erro ao excluir o Grupo!!");
-        }
+    public void excluir() throws Exception {
+        new GrupoDao().excluir(grupo);
     }
-    
+
     @Override
-    public Grupo getObjetoFormulario() {
+    public Grupo getObjetoFormulario() throws Exception {
         grupo.setIdGrupo(Integer.valueOf(jFTextField1.getText().length() == 0 ? "0" : jFTextField1.getText()));
         grupo.setNome(jFTextField2.getText());
         return grupo;
     }
-    
+
     @Override
     public JLabel getJlInformacao() {
         return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
     }
-    
+
     @Override
-    public List pesquisar(String strPesquisa) {
+    public List pesquisar(String strPesquisa) throws Exception {
         return new GrupoDao().listarTodos();
     }
-    
+
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
         return new GrupoDao().pesquisaSimples(strCamposPesqisa, strPesquisa);
     }

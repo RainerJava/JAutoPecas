@@ -4,18 +4,10 @@
  */
 package jautopecas.crud;
 
-import jautopecas.dao.GrupoDao;
-import jautopecas.dao.menu.ItemMenuDao;
 import jautopecas.dao.pessoa.EmpresaDao;
-import jautopecas.entidades.Grupo;
-import jautopecas.entidades.menu.ItemMenu;
 import jautopecas.entidades.pessoa.Empresa;
-import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import org.eclipse.persistence.exceptions.DatabaseException;
 
 /**
  *
@@ -40,26 +32,25 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
     private void initComponents() {
 
         jtfIdEmpresa = new jautopecas.components.JFTextField();
-        jtfRazaoSocial = new jautopecas.components.JFTextField();
         jlIdEmpresa = new javax.swing.JLabel();
         jlRazaoSocial = new javax.swing.JLabel();
         jtfNomeFantasia = new jautopecas.components.JFTextField();
         jlNomeFantasia = new javax.swing.JLabel();
         jtfCnpj = new jautopecas.components.JFTextField();
         jlCnpj = new javax.swing.JLabel();
-        jtfRazaoSocial1 = new jautopecas.components.JFTextField();
+        jtfRazaoSocial = new jautopecas.components.JFTextField();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        cadEnderecoGUI1 = new jautopecas.crud.pessoa.endereco.CadEnderecoGUI();
 
         setMinimumSize(new java.awt.Dimension(587, 153));
-        setPreferredSize(new java.awt.Dimension(581, 153));
+        setPreferredSize(new java.awt.Dimension(648, 477));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtfIdEmpresa.setEditable(false);
         jtfIdEmpresa.setEnabled(false);
         jtfIdEmpresa.setMensagemAjuda("ID Empresa (Gerado pelo sistema)");
         add(jtfIdEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 60, -1));
-
-        jtfRazaoSocial.setMensagemAjuda("Razão Social da empresa");
-        add(jtfRazaoSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 220, -1));
 
         jlIdEmpresa.setText("ID Empresa");
         add(jlIdEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
@@ -80,11 +71,19 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         jlCnpj.setText("CNPJ");
         add(jlCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 11, 267, -1));
 
-        jtfRazaoSocial1.setMensagemAjuda("Razão Social da empresa");
-        add(jtfRazaoSocial1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 77, 332, -1));
-    }// </editor-fold>//GEN-END:initComponents
+        jtfRazaoSocial.setMensagemAjuda("Razão Social da empresa");
+        add(jtfRazaoSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 77, 332, -1));
 
+        jPanel1.add(cadEnderecoGUI1);
+
+        jTabbedPane1.addTab("Endereços", jPanel1);
+
+        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 630, 320));
+    }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private jautopecas.crud.pessoa.endereco.CadEnderecoGUI cadEnderecoGUI1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel jlCnpj;
     private javax.swing.JLabel jlIdEmpresa;
     private javax.swing.JLabel jlNomeFantasia;
@@ -93,63 +92,41 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
     private jautopecas.components.JFTextField jtfIdEmpresa;
     private jautopecas.components.JFTextField jtfNomeFantasia;
     private jautopecas.components.JFTextField jtfRazaoSocial;
-    private jautopecas.components.JFTextField jtfRazaoSocial1;
     // End of variables declaration//GEN-END:variables
     private Empresa empresa;
 
     @Override
-    public void setObjetoFormulario(Object objetoFormulario) {
+    public void setObjetoFormulario(Object objetoFormulario) throws Exception {
         empresa = (Empresa) objetoFormulario;
         jtfIdEmpresa.setText(String.valueOf(empresa.getIdPessoa()));
         jtfCnpj.setText(empresa.getCnpj());
         jtfRazaoSocial.setText(empresa.getRazaoSocial());
         jtfNomeFantasia.setText(empresa.getNomeFantasia());
+
+        cadEnderecoGUI1.setListaEnderecos(empresa.getEnderecos());
+        cadEnderecoGUI1.setPessoa(empresa);
     }
 
     @Override
     public void salvar() throws Exception {
-        try {
-            empresa = new Empresa();
-            new EmpresaDao().salvar(getObjetoFormulario());
-            setObjetoFormulario(empresa);
-
-            JOptionPane.showMessageDialog(this, "Empresa Salvo com Sucesso!");
-        } catch (Exception ex) {
-            if (ex.getCause() instanceof DatabaseException) {
-                if (((DatabaseException) ex.getCause()).getDatabaseErrorCode() == 1062) {
-                    throw new Exception("Já existe um registro com estas informações!", ex);
-                }
-            } else {
-                throw new Exception("Erro ao salvar a Empresa!!", ex);
-            }
-        }
+        empresa = new Empresa();
+        new EmpresaDao().salvar(getObjetoFormulario());
+        setObjetoFormulario(empresa);
     }
 
     @Override
-    public void alterar() {
-        try {
-            new EmpresaDao().alterar(getObjetoFormulario());
-            setObjetoFormulario(empresa);
-
-            JOptionPane.showMessageDialog(this, "Empresa alterada com sucesso!!");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao alterar a Empresa!!");
-        }
+    public void alterar() throws Exception {
+        new EmpresaDao().alterar(getObjetoFormulario());
+        setObjetoFormulario(empresa);
     }
 
     @Override
-    public void excluir() {
-        try {
-            new EmpresaDao().excluir(empresa);
-
-            JOptionPane.showMessageDialog(this, "Grupo excluido com sucesso!!");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao excluir o Grupo!!");
-        }
+    public void excluir() throws Exception {
+        new EmpresaDao().excluir(empresa);
     }
 
     @Override
-    public Empresa getObjetoFormulario() {
+    public Empresa getObjetoFormulario() throws Exception {
         empresa.setIdPessoa(Long.valueOf(jtfIdEmpresa.getText().length() == 0 ? "0" : jtfIdEmpresa.getText()));
         empresa.setRazaoSocial(jtfRazaoSocial.getText());
         empresa.setNomeFantasia(jtfNomeFantasia.getText());
@@ -163,8 +140,8 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
     }
 
     @Override
-    public List pesquisar(String strPesquisa) {
-        return new GrupoDao().listarTodos();
+    public List pesquisar(String strPesquisa) throws Exception {
+        return new EmpresaDao().listarTodos();
     }
 
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {

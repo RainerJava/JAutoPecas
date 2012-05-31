@@ -5,9 +5,6 @@
 package jautopecas.components.validadores;
 
 import jautopecas.components.JFTextField;
-import java.awt.Color;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 
 /**
  *
@@ -17,12 +14,9 @@ public class ValidadorCPF implements Validador {
 
     private boolean valido = true;
     private JFTextField jfTextField;
-    private Border bordaDefault;
-    private Border bordaErro = BorderFactory.createLineBorder(Color.RED);
 
     public ValidadorCPF(JFTextField jfTextField) {
         this.jfTextField = jfTextField;
-        bordaDefault = jfTextField.getBorder();
     }
 
     @Override
@@ -44,11 +38,6 @@ public class ValidadorCPF implements Validador {
     @Override
     public void setValido(boolean valido) {
         this.valido = valido;
-        if (valido) {
-            jfTextField.setBorder(bordaDefault);
-        } else {
-            jfTextField.setBorder(bordaErro);
-        }
     }
 
     public boolean validaCPF() {
