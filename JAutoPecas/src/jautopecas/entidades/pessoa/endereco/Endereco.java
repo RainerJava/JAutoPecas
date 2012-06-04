@@ -15,8 +15,9 @@ public class Endereco implements Serializable {
     @Column(name = "ID_ENDERECO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEndereco;
-    @Column(name = "TIPO_LOGRADOURO")
-    private String tipoLogradouro;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "ID_TIPO_LOGRADOURO", referencedColumnName = "ID_TIPO_LOGRADOURO")
+    private TipoLogradouro tipoLogradouro;
     @Column(name = "LOGRADOURO")
     private String logradouro;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -53,11 +54,11 @@ public class Endereco implements Serializable {
         this.logradouro = logradouro;
     }
 
-    public String getTipoLogradouro() {
+    public TipoLogradouro getTipoLogradouro() {
         return tipoLogradouro;
     }
 
-    public void setTipoLogradouro(String tipoLogradouro) {
+    public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
         this.tipoLogradouro = tipoLogradouro;
     }
 

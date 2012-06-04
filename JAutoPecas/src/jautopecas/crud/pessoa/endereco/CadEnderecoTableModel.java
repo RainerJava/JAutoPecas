@@ -71,12 +71,6 @@ public class CadEnderecoTableModel extends AbstractTableModel {
     @Override
     public void setValueAt(Object value, int row, int col) {
         Endereco vo = dados.get(row);
-        if (col == 0) {
-            vo.setTipoLogradouro((String) value);
-        }
-        if (col == 1) {
-            vo.setLogradouro((String) value);
-        }
         fireTableCellUpdated(row, col);
     }
 

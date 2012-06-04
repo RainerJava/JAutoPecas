@@ -13,30 +13,33 @@ import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 public class DynamicTableModel extends AbstractTableModel {
-
+    
     private List<String> columnFields = new ArrayList<>();
     private List<String> columnNames = new ArrayList<>();
     private List<Class> classeFields = new ArrayList<>();
     private List data = null;
     private boolean inicializado = false;
-
+    
     public List getData() {
         return data;
     }
-
+    
     public void setData(List dataset) throws IntrospectionException {
-        fireTableDataChanged();
+        data = dataset;
+        if (data != null && data.size() > 0) {
+            fireTableDataChanged();
+        }
     }
-
+    
     public List<String> getColumnNames() {
         return columnNames;
     }
-
+    
     public DynamicTableModel(List dataset) throws IntrospectionException {
         super();
         initModel(dataset);
     }
-
+    
     private void initModel(List dataset) throws IntrospectionException {
         //System.out.println("dataset.size() = " + dataset.size());
         if (dataset.size() > 0) {
@@ -60,11 +63,11 @@ public class DynamicTableModel extends AbstractTableModel {
             }
             data = dataset;
             inicializado = true;
-        }else{
+        } else {
             inicializado = false;
         }
     }
-
+    
     private String getNomeColuna(Class c, String fieldName) {
         try {
             String nomeField = fieldName.substring(0, 1).toLowerCase() + fieldName.substring(1);
@@ -78,13 +81,13 @@ public class DynamicTableModel extends AbstractTableModel {
         }
         return fieldName;
     }
-
+    
     @Override
     public Class getColumnClass(int c) {
         //System.out.println("getColumnClass(int c) = " + c);
         return getValueAt(0, c).getClass();
     }
-
+    
     @Override
     public int getColumnCount() {
         if (columnNames == null) {
@@ -94,7 +97,7 @@ public class DynamicTableModel extends AbstractTableModel {
             return columnNames.size();
         }
     }
-
+    
     @Override
     public int getRowCount() {
         if (data == null) {
@@ -103,20 +106,20 @@ public class DynamicTableModel extends AbstractTableModel {
             return data.size();
         }
     }
-
+    
     @Override
     public String getColumnName(int col) {
         return columnNames.get(col);
     }
-
+    
     public Object getObjectAtRow(int row) {
         Object o = null;
-        if (data.size() > 0 && row < data.size()) {
+        if (data != null && data.size() > 0 && row < data.size()) {
             o = data.get(row);
         }
         return o;
     }
-
+    
     public List<Object> getObjectAtRows(int[] rows) {
         ArrayList<Object> os = new ArrayList<>();
         if (data.size() > 0) {
@@ -128,7 +131,7 @@ public class DynamicTableModel extends AbstractTableModel {
         }
         return os;
     }
-
+    
     @Override
     public Object getValueAt(int row, int col) {
         Object o = null;
@@ -166,12 +169,12 @@ public class DynamicTableModel extends AbstractTableModel {
                             objResult = method.invoke(oRow, new Object[]{});
                             o = Integer.valueOf(objResult != null ? objResult.toString() : "0");
                             break;
-
+                        
                         case "java.lang.Long":
                             objResult = method.invoke(oRow, new Object[]{});
                             o = Long.valueOf(objResult != null ? objResult.toString() : "0");
                             break;
-
+                        
                         case "java.lang.Double":
                             objResult = method.invoke(oRow, new Object[]{});
                             o = Double.valueOf(objResult != null ? objResult.toString() : "0.000");
@@ -188,7 +191,7 @@ public class DynamicTableModel extends AbstractTableModel {
         }
         return o;
     }
-
+    
     public boolean isInicializado() {
         return inicializado;
     }

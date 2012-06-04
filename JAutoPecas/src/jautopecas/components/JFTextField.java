@@ -9,6 +9,8 @@ import jautopecas.components.validadores.Validador;
 import jautopecas.crud.WindowCrud;
 import jautopecas.entidades.menu.ItemMenu;
 import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.Field;
@@ -56,11 +58,11 @@ public class JFTextField extends JTextField {
                 if (isEditable()) {
                     if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F1) {
                         JFTextField jfTextField = ((JFTextField) e.getComponent());
-                        WindowCrud crud = new WindowCrud(itemMenu, true, jfTextField);
+                        WindowCrud crud = new WindowCrud(itemMenu, "F1", jfTextField);
                         crud.setVisible(true);
                         crud.setPesquisa(jfTextField.getText());
                     } else if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F2) {
-                        WindowCrud crud = new WindowCrud(itemMenu, false, ((JFTextField) e.getComponent()));
+                        WindowCrud crud = new WindowCrud(itemMenu, "F2", ((JFTextField) e.getComponent()));
                         if (objeto != null) {
                             crud.setObjetoFormulario(objeto);
                         }
@@ -75,19 +77,40 @@ public class JFTextField extends JTextField {
             }
         });
 
-        this.addMouseListener(new java.awt.event.MouseAdapter() {
+        this.addFocusListener(new FocusAdapter() {
 
             @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jfTextFieldMouseEntered(evt);
+            public void focusGained(FocusEvent evt) {
+                if (jlInformacao == null) {
+                    jlInformacao = getJlInformacao();
+                }
+                if (jlInformacao != null) {
+                    jlInformacao.setText(mensagemAjuda);
+                    if (validador != null) {
+                        if (!validador.isValido()) {
+                            jlInformacao.setText(validador.getMensagemErro());
+                        }
+                    }
+                }
             }
 
             @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jfTextFieldMouseExited(evt);
+            public void focusLost(FocusEvent evt) {
+                if (jlInformacao == null) {
+                    jlInformacao = getJlInformacao();
+                }
+                if (jlInformacao != null) {
+                    jlInformacao.setText("");
+                }
             }
         });
 
+        /*
+         * ENTER funcionar como TAB para pular de campo
+         */
+//        HashSet conj = new HashSet(this.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
+//        conj.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));
+//        this.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, conj);
         bordaDefault = this.getBorder();
     }
     /*
@@ -106,9 +129,9 @@ public class JFTextField extends JTextField {
 
     public boolean validaCampo() {
         boolean result = true;
-        if (requerido && validador != null) {
+        if (validador != null) {
             result = validador.validaCampo();
-        } else if (requerido && classeFormulario != null) {
+        } else if (classeFormulario != null) {
             if (objeto == null) {
                 result = false;
             }
@@ -132,29 +155,6 @@ public class JFTextField extends JTextField {
 
     private JLabel getJlInformacao() {
         return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
-    }
-
-    private void jfTextFieldMouseEntered(java.awt.event.MouseEvent evt) {
-        if (jlInformacao == null) {
-            jlInformacao = getJlInformacao();
-        }
-        if (jlInformacao != null) {
-            jlInformacao.setText(mensagemAjuda);
-            if (validador != null) {
-                if (!validador.isValido()) {
-                    jlInformacao.setText(validador.getMensagemErro());
-                }
-            }
-        }
-    }
-
-    private void jfTextFieldMouseExited(java.awt.event.MouseEvent evt) {
-        if (jlInformacao == null) {
-            jlInformacao = getJlInformacao();
-        }
-        if (jlInformacao != null) {
-            jlInformacao.setText("");
-        }
     }
 
     private String getFieldValue() throws Exception {
@@ -203,12 +203,19 @@ public class JFTextField extends JTextField {
 
     public void setObjeto(Object objeto) throws Exception {
         this.objeto = objeto;
-        this.setText(getFieldValue());
+        if (objeto != null) {
+            this.setText(getFieldValue());
+        } else {
+            this.setText("");
+        }
     }
 
     public void setClasseFormulario(String classeFormulario) {
-        this.classeFormulario = classeFormulario;
-        this.itemMenu = JAutoPecasMenu.getItemMenu(classeFormulario);
+        if (classeFormulario != null && classeFormulario.length() > 0) {
+            this.classeFormulario = classeFormulario;
+            this.itemMenu = JAutoPecasMenu.getItemMenu(classeFormulario);
+            this.setBackground(Color.LIGHT_GRAY);
+        }
     }
 
     public void setRequerido(boolean requerido) {

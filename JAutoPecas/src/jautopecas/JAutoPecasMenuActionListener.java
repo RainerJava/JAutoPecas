@@ -15,7 +15,7 @@ public class JAutoPecasMenuActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        WindowCrud crud = new WindowCrud(itemMenu, false, null);
+        WindowCrud crud = new WindowCrud(itemMenu, null, null);
 //        if (itemMenu.getCaminhoImagem() != null) {
 //            crud.setIconImage(new ImageIcon(getClass().getResource(itemMenu.getCaminhoImagem())).getImage());
 //        }

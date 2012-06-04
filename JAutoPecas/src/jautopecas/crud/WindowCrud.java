@@ -5,11 +5,12 @@
 package jautopecas.crud;
 
 import jautopecas.components.DynamicTableModel;
+import jautopecas.components.JFComboBox;
 import jautopecas.components.JFFormattedTextField;
 import jautopecas.components.JFTextField;
 import jautopecas.entidades.menu.ItemMenu;
-import java.awt.Component;
-import java.awt.Container;
+import jautopecas.exceptions.UtilFormularioException;
+import jautopecas.util.UtilFormulario;
 import java.awt.event.KeyEvent;
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
@@ -35,10 +36,11 @@ public class WindowCrud extends javax.swing.JFrame {
     private Object objetoFormulario;
     private String metodoPesquisa;
     private String camposPesquisa;
-    private boolean modoPesquisa;
-    private JTextField jTextField;
+    private String modoF1F2;
+    private JComponent jComponent;
     private int countErrosFormulario;
     private boolean pesquisando;
+    private UtilFormulario utilFormulario = new UtilFormulario();
 
     /**
      * Creates new form WindowCrud
@@ -47,7 +49,7 @@ public class WindowCrud extends javax.swing.JFrame {
         initComponents();
     }
 
-    public WindowCrud(ItemMenu itemMenu, boolean modoPesquisa, JTextField jTextField) {
+    public WindowCrud(ItemMenu itemMenu, String modoF1F2, JComponent jComponent) {
         try {
             initComponents();
             Class classeFormulario = Class.forName(itemMenu.getClasseFormulario());
@@ -56,8 +58,8 @@ public class WindowCrud extends javax.swing.JFrame {
             this.formulario = (JPanel) classeFormulario.newInstance();
             this.metodoPesquisa = itemMenu.getMetodoPesquisa();
             this.camposPesquisa = itemMenu.getCamposPesquisa();
-            this.modoPesquisa = modoPesquisa;
-            this.jTextField = jTextField;
+            this.modoF1F2 = modoF1F2;
+            this.jComponent = jComponent;
             jpFormulario.add(this.formulario);
             this.pack();
 
@@ -71,7 +73,7 @@ public class WindowCrud extends javax.swing.JFrame {
             jtpFormPesquisa.setEnabledAt(1, true);
             jtpFormPesquisa.setSelectedIndex(1);
 
-            if (this.modoPesquisa) {
+            if (modoF1F2 != null && modoF1F2.equals("F1")) {
                 jToolBar2.setVisible(false);
             } else {
                 jbNovo.setEnabled(true);
@@ -80,117 +82,11 @@ public class WindowCrud extends javax.swing.JFrame {
                 jbEditar.setEnabled(false);
                 jbExcluir.setEnabled(false);
             }
-
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao iniciar o CRUD");
         }
     }
 
-    //public void initComponentsExternal() {
-    //    initComponents();
-    //}
-    /**
-     * Receber como parametro um container e limpa todos os campos.
-     *
-     * @param container
-     */
-    private void limpaFormulario(Container container) {
-        try {
-            Component components[] = container.getComponents();
-            for (Component component : components) {
-                if (component instanceof JFormattedTextField) {
-                    JFormattedTextField field = (JFormattedTextField) component;
-                    field.setValue(null);
-                } else if (component instanceof JFTextField) {
-                    JFTextField jfField = (JFTextField) component;
-                    jfField.limpaCampo();
-                } else if (component instanceof JTextField) {
-                    JTextField field = (JTextField) component;
-                    field.setText("");
-                } else if (component instanceof JTextArea) {
-                    JTextArea area = (JTextArea) component;
-                    area.setText("");
-                } else if (component instanceof JComboBox) {
-                    JComboBox comboBox = (JComboBox) component;
-                    comboBox.setSelectedIndex(-1);
-                } else if (component instanceof JTable) {
-                    JTable jtable = ((JTable) component);
-                    jtable.clearSelection();
-                    if (jtable.getModel() instanceof DynamicTableModel) {
-                        ((DynamicTableModel) jtable.getModel()).setData(null);
-                    }
-                } else if (component instanceof Container) {
-                    limpaFormulario((Container) component);
-                }
-            }
-        } catch (IntrospectionException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao limpar o formulario");
-        }
-    }
-
-    private void bloquearFormulario(Boolean bloqueia, Container container) {
-        try {
-            Component components[] = container.getComponents();
-            for (Component component : components) {
-                if (component instanceof JFormattedTextField) {
-                    JFormattedTextField field = (JFormattedTextField) component;
-                    field.setEditable(!bloqueia);
-                } else if (component instanceof JFTextField) {
-                    JFTextField jfField = (JFTextField) component;
-                    jfField.setEditable(!bloqueia);
-                } else if (component instanceof JTextArea) {
-                    JTextArea area = (JTextArea) component;
-                    area.setEditable(!bloqueia);
-                } else if (component instanceof JComboBox) {
-                    JComboBox comboBox = (JComboBox) component;
-                    comboBox.setEditable(!bloqueia);
-                } else if (component instanceof Container) {
-                    bloquearFormulario(bloqueia, (Container) component);
-                }
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao bloquear o formulario");
-        }
-    }
-
-    /**
-     * Receber como parametro um container e valida todos os campos.
-     *
-     * @param container
-     */
-    private boolean validarFormulario(Container container, boolean recursive) {
-        if (recursive) {
-            countErrosFormulario = 0;
-        }
-        try {
-            Component components[] = container.getComponents();
-            for (Component component : components) {
-                if (component instanceof JFormattedTextField) {
-                    JFormattedTextField field = (JFormattedTextField) component;
-                    field.setValue(null);
-                } else if (component instanceof JFTextField) {
-                    JFTextField field = (JFTextField) component;
-                    if (!field.validaCampo()) {
-                        countErrosFormulario++;
-                    }
-                } else if (component instanceof JTextArea) {
-                    JTextArea area = (JTextArea) component;
-                    area.setText("");
-                } else if (component instanceof Container) {
-                    validarFormulario((Container) component, false);
-                }
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao validar o formulario");
-        }
-        return countErrosFormulario > 0 ? false : true;
-    }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -405,15 +301,19 @@ public class WindowCrud extends javax.swing.JFrame {
     }//GEN-LAST:event_jbNovoMouseExited
 
     private void jbNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNovoActionPerformed
-        limpaFormulario(this);
-        bloquearFormulario(false, jpFormulario);
-        jtpFormPesquisa.setEnabledAt(0, true);
-        jtpFormPesquisa.setEnabledAt(1, false);
-        jtpFormPesquisa.setSelectedIndex(0);
-        jbNovo.setEnabled(false);
-        jbSalvar.setEnabled(true);
-        jbLimpar.setEnabled(true);
-        jbExcluir.setEnabled(false);
+        try {
+            utilFormulario.limpaFormulario(formulario);
+            utilFormulario.bloquearFormulario(false, formulario);
+            jtpFormPesquisa.setEnabledAt(0, true);
+            jtpFormPesquisa.setEnabledAt(1, false);
+            jtpFormPesquisa.setSelectedIndex(0);
+            jbNovo.setEnabled(false);
+            jbSalvar.setEnabled(true);
+            jbLimpar.setEnabled(true);
+            jbExcluir.setEnabled(false);
+        } catch (UtilFormularioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_jbNovoActionPerformed
 
     private void jbSalvarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSalvarMouseEntered
@@ -425,17 +325,21 @@ public class WindowCrud extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSalvarMouseExited
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
-        if (validarFormulario(this, true)) {
-            try {
+        try {
+            if (utilFormulario.validarFormulario(formulario, true, countErrosFormulario) <= 0) {
+
                 Method m;
-                if (jtablePesquisa.getSelectedRow() > -1) {
+                if (objetoFormulario != null) {
                     m = formulario.getClass().getMethod("alterar");
                 } else {
                     m = formulario.getClass().getMethod("salvar");
                 }
                 m.invoke(formulario);
-
-                limpaFormulario(this);
+                try {
+                    utilFormulario.limpaFormulario(formulario);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
                 jtpFormPesquisa.setEnabledAt(0, false);
                 jtpFormPesquisa.setEnabledAt(1, true);
                 jtpFormPesquisa.setSelectedIndex(1);
@@ -444,16 +348,19 @@ public class WindowCrud extends javax.swing.JFrame {
                 jbLimpar.setEnabled(false);
                 jbExcluir.setEnabled(false);
 
-                if (jtablePesquisa.getSelectedRow() > -1) {
+                if (objetoFormulario != null) {
                     JOptionPane.showMessageDialog(this, "Registro Alterado com Sucesso!!");
                 } else {
                     JOptionPane.showMessageDialog(this, "Registro Salvo com Sucesso!!");
                 }
-            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
+
+                refreshJComponent();
+
+            } else {
+                jlInformacao.setText("Os campos em vermelho contem erros, favor corrigi-los!!");
             }
-        } else {
-            jlInformacao.setText("Os campos em vermelho contem erros, favor corrigi-los!!");
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | UtilFormularioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
 
@@ -466,16 +373,21 @@ public class WindowCrud extends javax.swing.JFrame {
     }//GEN-LAST:event_jbLimparMouseExited
 
     private void jbLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparActionPerformed
-        limpaFormulario(this);
-        bloquearFormulario(false, jpFormulario);
-        jtpFormPesquisa.setEnabledAt(0, false);
-        jtpFormPesquisa.setEnabledAt(1, true);
-        jtpFormPesquisa.setSelectedIndex(1);
-        jbNovo.setEnabled(true);
-        jbSalvar.setEnabled(false);
-        jbLimpar.setEnabled(false);
-        jbEditar.setEnabled(false);
-        jbExcluir.setEnabled(false);
+        try {
+            utilFormulario.limpaFormulario(formulario);
+            utilFormulario.bloquearFormulario(false, formulario);
+            jtpFormPesquisa.setEnabledAt(0, false);
+            jtpFormPesquisa.setEnabledAt(1, true);
+            jtpFormPesquisa.setSelectedIndex(1);
+            jbNovo.setEnabled(true);
+            jbSalvar.setEnabled(false);
+            jbLimpar.setEnabled(false);
+            jbEditar.setEnabled(false);
+            jbExcluir.setEnabled(false);
+            objetoFormulario = null;
+        } catch (UtilFormularioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_jbLimparActionPerformed
 
     private void jbEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseEntered
@@ -487,15 +399,19 @@ public class WindowCrud extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEditarMouseExited
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
-        bloquearFormulario(false, jpFormulario);
-        jtpFormPesquisa.setEnabledAt(0, true);
-        jtpFormPesquisa.setEnabledAt(1, false);
-        jtpFormPesquisa.setSelectedIndex(0);
-        jbNovo.setEnabled(false);
-        jbSalvar.setEnabled(true);
-        jbLimpar.setEnabled(true);
-        jbEditar.setEnabled(false);
-        jbExcluir.setEnabled(false);
+        try {
+            utilFormulario.bloquearFormulario(false, formulario);
+            jtpFormPesquisa.setEnabledAt(0, true);
+            jtpFormPesquisa.setEnabledAt(1, false);
+            jtpFormPesquisa.setSelectedIndex(0);
+            jbNovo.setEnabled(false);
+            jbSalvar.setEnabled(true);
+            jbLimpar.setEnabled(true);
+            jbEditar.setEnabled(false);
+            jbExcluir.setEnabled(false);
+        } catch (UtilFormularioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbExcluirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbExcluirMouseEntered
@@ -511,7 +427,7 @@ public class WindowCrud extends javax.swing.JFrame {
             Method m = formulario.getClass().getMethod("excluir");
             m.invoke(formulario);
 
-            limpaFormulario(this);
+            utilFormulario.limpaFormulario(formulario);
             jtpFormPesquisa.setEnabledAt(0, false);
             jtpFormPesquisa.setEnabledAt(1, true);
             jtpFormPesquisa.setSelectedIndex(1);
@@ -522,7 +438,9 @@ public class WindowCrud extends javax.swing.JFrame {
             jbExcluir.setEnabled(false);
 
             JOptionPane.showMessageDialog(this, "Registro Excluido com Sucesso!!");
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+
+            refreshJComponent();
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | UtilFormularioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_jbExcluirActionPerformed
@@ -576,9 +494,10 @@ public class WindowCrud extends javax.swing.JFrame {
                             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | IntrospectionException ex) {
                                 JOptionPane.showMessageDialog(null, "Erro ao Pesquisa");
                             }
+                            jtablePesquisa.revalidate();
                         }
                     };
-                    worker.start(); // So we don't hold up the dispatch thread.
+                    worker.start();
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao Pesquisa");
@@ -588,29 +507,39 @@ public class WindowCrud extends javax.swing.JFrame {
 
     private void jtablePesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablePesquisaMouseClicked
         if (evt.getClickCount() == 2) {
-            onVisualizar();
+            onVisualizar(0);
         }
     }//GEN-LAST:event_jtablePesquisaMouseClicked
 
     private void jtablePesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtablePesquisaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            onVisualizar();
+            onVisualizar(evt.getKeyCode());
         }
     }//GEN-LAST:event_jtablePesquisaKeyPressed
 
-    private void onVisualizar() {
+    private void onVisualizar(int keyCode) {
+        objetoFormulario = ((DynamicTableModel) jtablePesquisa.getModel()).getObjectAtRow(jtablePesquisa.getSelectedRow());
         try {
-            if (modoPesquisa) {
-                if (jTextField instanceof JFTextField) {
-                    JFTextField jfTextField = (JFTextField) jTextField;
-                    jfTextField.setObjeto(((DynamicTableModel) jtablePesquisa.getModel()).getObjectAtRow(jtablePesquisa.getSelectedRow()));
-                } else if (jTextField instanceof JFFormattedTextField) {
-                    JFFormattedTextField jfFormattedTextField = (JFFormattedTextField) jTextField;
-                    jfFormattedTextField.setObjeto(((DynamicTableModel) jtablePesquisa.getModel()).getObjectAtRow(jtablePesquisa.getSelectedRow()));
+            if ((keyCode == KeyEvent.VK_ENTER || keyCode == 0) && modoF1F2 != null) {
+                if (modoF1F2.equals("F1")) {
+                    if (jComponent instanceof JFTextField) {
+                        JFTextField jfTextField = (JFTextField) jComponent;
+                        jfTextField.setObjeto(objetoFormulario);
+                    } else if (jComponent instanceof JFFormattedTextField) {
+                        JFFormattedTextField jfFormattedTextField = (JFFormattedTextField) jComponent;
+                        jfFormattedTextField.setObjeto(objetoFormulario);
+                    } else if (jComponent instanceof JFComboBox) {
+                        JFComboBox jfComboBox = (JFComboBox) jComponent;
+                        jfComboBox.refreshDataSet();
+                        jfComboBox.setSelectedItem(objetoFormulario);
+                    }
+                    jComponent.getTopLevelAncestor().requestFocus();
+                    dispose();
+                } else {
+                    setObjetoFormulario(objetoFormulario);
                 }
-                dispose();
             } else {
-                setObjetoFormulario(((DynamicTableModel) jtablePesquisa.getModel()).getObjectAtRow(jtablePesquisa.getSelectedRow()));
+                setObjetoFormulario(objetoFormulario);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao executar onVisualizar");
@@ -636,9 +565,9 @@ public class WindowCrud extends javax.swing.JFrame {
             jbLimpar.setEnabled(true);
             jbEditar.setEnabled(true);
             jbExcluir.setEnabled(true);
-            bloquearFormulario(true, jpFormulario);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao executar setObjetoFormulario");
+            utilFormulario.bloquearFormulario(true, formulario);
+        } catch (UtilFormularioException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
 
@@ -646,13 +575,33 @@ public class WindowCrud extends javax.swing.JFrame {
         String str = "";
         for (StringTokenizer stringTokenizer = new StringTokenizer(pesquisa); stringTokenizer.hasMoreTokens();) {
             String token = stringTokenizer.nextToken();
-            if (token.equals("-")) {
+            if (token.equals("-") || token.equals(" ")) {
                 continue;
             }
             str += (str.length() > 0 ? "+" : "") + token;
         }
         jtfFiltroPesquisa.setText(str);
         jtfFiltroPesquisaKeyPressed(null);
+    }
+
+    private void refreshJComponent() {
+        try {
+            if (modoF1F2 != null && modoF1F2.equals("F2")) {
+                if (jComponent instanceof JFTextField) {
+                    JFTextField jfTextField = (JFTextField) jComponent;
+                    jfTextField.setObjeto(objetoFormulario);
+                } else if (jComponent instanceof JFFormattedTextField) {
+                    JFFormattedTextField jfFormattedTextField = (JFFormattedTextField) jComponent;
+                    jfFormattedTextField.setObjeto(objetoFormulario);
+                } else if (jComponent instanceof JFComboBox) {
+                    JFComboBox jfComboBox = (JFComboBox) jComponent;
+                    jfComboBox.refreshDataSet();
+                    jfComboBox.setSelectedItem(objetoFormulario);
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao executar refreshJComponent");
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

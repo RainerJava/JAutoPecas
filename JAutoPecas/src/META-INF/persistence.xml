@@ -10,6 +10,8 @@
     <class>jautopecas.entidades.pessoa.endereco.Estado</class>
     <class>jautopecas.entidades.pessoa.endereco.Bairro</class>
     <class>jautopecas.entidades.pessoa.endereco.Cidade</class>
+    <class>jautopecas.components.CadEndereco</class>
+    <class>jautopecas.entidades.pessoa.endereco.TipoLogradouro</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dbautopecas"/>
       <property name="javax.persistence.jdbc.password" value="line@njo"/>

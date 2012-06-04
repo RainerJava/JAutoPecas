@@ -37,11 +37,11 @@ public class JFFormattedTextField extends JFormattedTextField {
             public void keyPressed(KeyEvent e) {
                 if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F1) {
                     JFFormattedTextField jfTextField = ((JFFormattedTextField) e.getComponent());
-                    WindowCrud crud = new WindowCrud(itemMenu, true, jfTextField);
+                    WindowCrud crud = new WindowCrud(itemMenu, "F1", jfTextField);
                     crud.setVisible(true);
                     crud.setPesquisa(jfTextField.getText());
                 } else if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F2) {
-                    WindowCrud crud = new WindowCrud(itemMenu, false, ((JFFormattedTextField) e.getComponent()));
+                    WindowCrud crud = new WindowCrud(itemMenu, "F2", ((JFFormattedTextField) e.getComponent()));
                     crud.setVisible(true);
                 }
             }
