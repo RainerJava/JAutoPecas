@@ -1,8 +1,9 @@
 package jautopecas.crud;
 
-import jautopecas.components.validadores.ValidadorCPF;
+import jautopecas.components.validadores.ValidadorCnpj;
 import jautopecas.dao.pessoa.EmpresaDao;
 import jautopecas.entidades.pessoa.Empresa;
+import jautopecas.entidades.pessoa.endereco.Endereco;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -25,56 +26,105 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         jlRazaoSocial = new javax.swing.JLabel();
         jtfNomeFantasia = new jautopecas.components.JFTextField();
         jlNomeFantasia = new javax.swing.JLabel();
-        jtfCnpj = new jautopecas.components.JFTextField();
         jlCnpj = new javax.swing.JLabel();
         jtfRazaoSocial = new jautopecas.components.JFTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        cadEnderecoGUI1 = new jautopecas.crud.pessoa.endereco.FormularioEndereco();
+        formularioEndereco = new jautopecas.crud.pessoa.endereco.FormularioEndereco();
+        jtfCnpj = new jautopecas.components.JFTextField();
 
-        setMinimumSize(new java.awt.Dimension(587, 153));
-        setPreferredSize(new java.awt.Dimension(639, 547));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setPreferredSize(new java.awt.Dimension(639, 473));
 
         jtfIdEmpresa.setEditable(false);
         jtfIdEmpresa.setEnabled(false);
         jtfIdEmpresa.setMensagemAjuda("ID Empresa (Gerado pelo sistema)");
-        add(jtfIdEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 60, -1));
 
         jlIdEmpresa.setText("ID Empresa");
-        add(jlIdEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jlRazaoSocial.setText("Razão Social");
-        add(jlRazaoSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 57, 333, -1));
 
         jtfNomeFantasia.setClasseFormulario("");
         jtfNomeFantasia.setMensagemAjuda("Nome Fantasia da empresa");
         jtfNomeFantasia.setRequerido(false);
-        add(jtfNomeFantasia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 123, 333, -1));
 
         jlNomeFantasia.setText("Nome Fantasia");
-        add(jlNomeFantasia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 103, 333, -1));
-
-        jtfCnpj.setMensagemAjuda("CNPJ da empresa");
-        jtfCnpj.setRequerido(false);
-        jtfCnpj.setValidador(new ValidadorCPF(jtfCnpj));
-        add(jtfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 31, 267, -1));
 
         jlCnpj.setText("CNPJ");
-        add(jlCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 11, 267, -1));
 
         jtfRazaoSocial.setMensagemAjuda("Razão Social da empresa");
         jtfRazaoSocial.setRequerido(false);
-        add(jtfRazaoSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 77, 332, -1));
 
-        jPanel1.add(cadEnderecoGUI1);
+        formularioEndereco.carregaCombos();
+        jPanel1.add(formularioEndereco);
 
         jTabbedPane1.addTab("Endereços", jPanel1);
 
-        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 620, 390));
+        try {
+            jtfCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jtfCnpj.setValidador(new ValidadorCnpj(jtfCnpj));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jlIdEmpresa)
+                        .addGap(11, 11, 11)
+                        .addComponent(jlCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jtfRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jlNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jtfNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(9, 9, 9))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlIdEmpresa)
+                    .addComponent(jlCnpj))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addComponent(jlRazaoSocial)
+                .addGap(6, 6, 6)
+                .addComponent(jtfRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jlNomeFantasia)
+                .addGap(6, 6, 6)
+                .addComponent(jtfNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private jautopecas.crud.pessoa.endereco.FormularioEndereco cadEnderecoGUI1;
+    private jautopecas.crud.pessoa.endereco.FormularioEndereco formularioEndereco;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel jlCnpj;
@@ -95,14 +145,11 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         jtfCnpj.setText(empresa.getCnpj());
         jtfRazaoSocial.setText(empresa.getRazaoSocial());
         jtfNomeFantasia.setText(empresa.getNomeFantasia());
-
-        cadEnderecoGUI1.setListaEnderecos(empresa.getEnderecos());
-        cadEnderecoGUI1.setPessoa(empresa);
+        formularioEndereco.setListaEnderecos(empresa.getEnderecos());
     }
 
     @Override
     public void salvar() throws Exception {
-        empresa = new Empresa();
         new EmpresaDao().salvar(getObjetoFormulario());
         setObjetoFormulario(empresa);
     }
@@ -120,10 +167,17 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
 
     @Override
     public Empresa getObjetoFormulario() throws Exception {
+        if (empresa == null) {
+            empresa = new Empresa();
+        }
         empresa.setIdPessoa(Long.valueOf(jtfIdEmpresa.getText().length() == 0 ? "0" : jtfIdEmpresa.getText()));
         empresa.setRazaoSocial(jtfRazaoSocial.getText());
         empresa.setNomeFantasia(jtfNomeFantasia.getText());
         empresa.setCnpj(jtfCnpj.getText());
+        empresa.setEnderecos(formularioEndereco.getEnderecos());
+        for (Endereco endereco : empresa.getEnderecos()) {
+            endereco.setPessoa(empresa);
+        }
         return empresa;
     }
 

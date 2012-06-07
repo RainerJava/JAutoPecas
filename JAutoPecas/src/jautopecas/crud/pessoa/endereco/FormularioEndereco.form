@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.6" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -26,16 +26,9 @@
                               <EmptySpace min="90" pref="90" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="349" pref="349" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="jScrollPane1" min="-2" pref="606" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="122" pref="122" max="-2" attributes="0"/>
@@ -44,11 +37,11 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jtfBairro" min="-2" pref="140" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                      <Component id="jtfCidade" min="-2" pref="350" max="-2" attributes="0"/>
+                                      <Component id="jtfCidade" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jFComboBox1" pref="99" max="32767" attributes="0"/>
+                                          <Component id="jcbTipoLogradpuro" pref="99" max="32767" attributes="0"/>
                                           <Component id="jtfCep" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -62,21 +55,27 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Component id="jlUf" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jtfNumero" min="-2" pref="94" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jtfUf" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jlUf" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jtfUf" alignment="0" pref="96" max="32767" attributes="0"/>
+                                  <Component id="jtfNumero" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jbSalvar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Component id="jbLimpar" min="-2" max="-2" attributes="0"/>
@@ -84,7 +83,7 @@
                       <Component id="jbExcluir" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -104,14 +103,16 @@
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jtfLogradouro" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jFComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcbTipoLogradpuro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jtfNumero" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -127,14 +128,14 @@
                   <Component id="jtfCidade" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfUf" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jbSalvar" min="-2" max="-2" attributes="0"/>
                   <Component id="jbLimpar" min="-2" max="-2" attributes="0"/>
                   <Component id="jbExcluir" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="164" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="83" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -183,13 +184,16 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="jtEnderecos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="0" rowCount="0"/>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0"/>
+            </Property>
+            <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+              <JTableSelectionModel selectionMode="0"/>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -218,7 +222,7 @@
     <Component class="javax.swing.JButton" name="jbSalvar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/jautopecas/imagens/icones/iconeConfirmar24.png"/>
+          <Image iconType="3" name="/jautopecas/imagens/icones/iconeConfirmar16.png"/>
         </Property>
       </Properties>
       <Events>
@@ -228,7 +232,7 @@
     <Component class="javax.swing.JButton" name="jbLimpar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/jautopecas/imagens/icones/iconeLimpar24.png"/>
+          <Image iconType="3" name="/jautopecas/imagens/icones/iconeEditar16.png"/>
         </Property>
       </Properties>
       <Events>
@@ -238,7 +242,7 @@
     <Component class="javax.swing.JButton" name="jbExcluir">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/jautopecas/imagens/icones/iconeDeletar24.png"/>
+          <Image iconType="3" name="/jautopecas/imagens/icones/iconeDeletar16.png"/>
         </Property>
       </Properties>
       <Events>
@@ -265,35 +269,29 @@
       <Properties>
         <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioEstado"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Codigo de endere&#xe7;amento postal"/>
-        <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new ValidadorStringLength(jtfCep, 8, 8)" type="code"/>
-        </Property>
       </Properties>
     </Component>
     <Component class="jautopecas.components.JFTextField" name="jtfCidade">
       <Properties>
         <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioCidade"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Codigo de endere&#xe7;amento postal"/>
-        <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new ValidadorStringLength(jtfCep, 8, 8)" type="code"/>
-        </Property>
       </Properties>
     </Component>
     <Component class="jautopecas.components.JFTextField" name="jtfBairro">
       <Properties>
         <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioBairro"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Codigo de endere&#xe7;amento postal"/>
-        <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new ValidadorStringLength(jtfCep, 8, 8)" type="code"/>
-        </Property>
       </Properties>
     </Component>
-    <Component class="jautopecas.components.JFComboBox" name="jFComboBox1">
+    <Component class="jautopecas.components.JFComboBox" name="jcbTipoLogradpuro">
       <Properties>
         <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioTipoLogradouro"/>
       </Properties>
     </Component>
     <Component class="jautopecas.components.JFTextField" name="jtfCep">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfCepFocusLost"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

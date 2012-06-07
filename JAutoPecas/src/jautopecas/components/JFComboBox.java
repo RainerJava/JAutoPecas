@@ -1,19 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jautopecas.components;
 
 import jautopecas.JAutoPecasMenu;
 import jautopecas.crud.WindowCrud;
 import jautopecas.entidades.menu.ItemMenu;
-import java.awt.AWTKeyStroke;
-import java.awt.KeyboardFocusManager;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -41,62 +36,53 @@ public class JFComboBox extends JComboBox {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                JFComboBox jfComboBox = ((JFComboBox) e.getComponent());
-                if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F1) {
-                    WindowCrud crud = new WindowCrud(itemMenu, "F1", jfComboBox);
-                    crud.setVisible(true);
-                    if (jfComboBox.getSelectedItem() != null) {
-                        crud.setPesquisa(jfComboBox.getSelectedItem().toString());
-                    } else {
-                        crud.setPesquisa("");
+                if (isEnabled()) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        transferFocus();
+                        return;
                     }
-                } else if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F2) {
-                    WindowCrud crud = new WindowCrud(itemMenu, "F2", jfComboBox);
-                    crud.setVisible(true);
-                    if (getSelectedItem() != null) {
-                        crud.setObjetoFormulario(getSelectedItem());
+                    JFComboBox jfComboBox = ((JFComboBox) e.getComponent());
+                    if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F1) {
+                        WindowCrud crud = new WindowCrud(itemMenu, "F1", jfComboBox);
+                        crud.setVisible(true);
+                        if (jfComboBox.getSelectedItem() != null) {
+                            crud.setPesquisa(jfComboBox.getSelectedItem().toString());
+                        } else {
+                            crud.setPesquisa("");
+                        }
+                    } else if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F2) {
+                        WindowCrud crud = new WindowCrud(itemMenu, "F2", jfComboBox);
+                        crud.setVisible(true);
+                        if (getSelectedItem() != null) {
+                            crud.setObjetoFormulario(getSelectedItem());
+                        }
                     }
                 }
             }
         });
 
-        this.addMouseListener(new java.awt.event.MouseAdapter() {
+        this.addFocusListener(new FocusAdapter() {
 
             @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jfTextFieldMouseEntered(evt);
+            public void focusGained(FocusEvent evt) {
+                if (jlInformacao == null) {
+                    jlInformacao = getJlInformacao();
+                }
+                if (jlInformacao != null && isEditable()) {
+                    jlInformacao.setText(mensagemAjuda);
+                }
             }
 
             @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jfTextFieldMouseExited(evt);
+            public void focusLost(FocusEvent evt) {
+                if (jlInformacao == null) {
+                    jlInformacao = getJlInformacao();
+                }
+                if (jlInformacao != null) {
+                    jlInformacao.setText("");
+                }
             }
         });
-
-        /*
-         * ENTER funcionar como TAB para pular de campo
-         */
-//        HashSet conj = new HashSet(this.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
-//        conj.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));
-//        this.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, conj);
-    }
-
-    private void jfTextFieldMouseEntered(java.awt.event.MouseEvent evt) {
-        if (jlInformacao == null) {
-            jlInformacao = getJlInformacao();
-        }
-        if (jlInformacao != null) {
-            jlInformacao.setText(mensagemAjuda);
-        }
-    }
-
-    private void jfTextFieldMouseExited(java.awt.event.MouseEvent evt) {
-        if (jlInformacao == null) {
-            jlInformacao = getJlInformacao();
-        }
-        if (jlInformacao != null) {
-            jlInformacao.setText("");
-        }
     }
 
     private JLabel getJlInformacao() {

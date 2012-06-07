@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "cad_empresa")
 @PrimaryKeyJoinColumn(name = "id_pessoa")
-@DiscriminatorValue("E") 
+@DiscriminatorValue("EM") 
 public class Empresa extends Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;

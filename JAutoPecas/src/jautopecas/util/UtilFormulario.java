@@ -2,12 +2,15 @@ package jautopecas.util;
 
 import jautopecas.components.DynamicTableModel;
 import jautopecas.components.JFTextField;
+import jautopecas.crud.pessoa.endereco.CadEnderecoTableModel;
 import jautopecas.crud.pessoa.endereco.FormularioEndereco;
 import jautopecas.exceptions.UtilFormularioException;
 import java.awt.Component;
 import java.awt.Container;
 import java.beans.IntrospectionException;
-import javax.swing.*;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -24,15 +27,9 @@ public class UtilFormulario {
         try {
             Component components[] = container.getComponents();
             for (Component component : components) {
-                if (component instanceof JFormattedTextField) {
-                    JFormattedTextField field = (JFormattedTextField) component;
-                    field.setValue(null);
-                } else if (component instanceof JFTextField) {
+                if (component instanceof JFTextField) {
                     JFTextField jfField = (JFTextField) component;
                     jfField.limpaCampo();
-                } else if (component instanceof JTextField) {
-                    JTextField field = (JTextField) component;
-                    field.setText("");
                 } else if (component instanceof JTextArea) {
                     JTextArea area = (JTextArea) component;
                     area.setText("");
@@ -49,6 +46,8 @@ public class UtilFormulario {
                 } else if (component instanceof FormularioEndereco) {
                     FormularioEndereco formularioEndereco = (FormularioEndereco) component;
                     formularioEndereco.onLimpar();
+                    ((CadEnderecoTableModel) formularioEndereco.getJtEnderecos().getModel()).removeResultado();
+                    formularioEndereco.setEnderecos(null);
                 } else if (component instanceof Container) {
                     limpaFormulario((Container) component);
                 }
@@ -58,27 +57,24 @@ public class UtilFormulario {
         }
     }
 
-    public void bloquearFormulario(Boolean bloqueia, Container container) throws UtilFormularioException {
+    public void bloquearFormulario(Boolean formularioBloqueado, Container container) throws UtilFormularioException {
         try {
             Component components[] = container.getComponents();
             for (Component component : components) {
-                if (component instanceof JFormattedTextField) {
-                    JFormattedTextField field = (JFormattedTextField) component;
-                    field.setEditable(!bloqueia);
-                } else if (component instanceof JFTextField) {
+                if (component instanceof JFTextField) {
                     JFTextField jfField = (JFTextField) component;
-                    jfField.setEditable(!bloqueia);
+                    jfField.setEditable(!formularioBloqueado);
                 } else if (component instanceof JTextArea) {
                     JTextArea area = (JTextArea) component;
-                    area.setEditable(!bloqueia);
+                    area.setEditable(!formularioBloqueado);
                 } else if (component instanceof JComboBox) {
                     JComboBox comboBox = (JComboBox) component;
-                    comboBox.setEnabled(!bloqueia);
+                    comboBox.setEnabled(!formularioBloqueado);
                 } else if (component instanceof FormularioEndereco) {
                     FormularioEndereco formularioEndereco = (FormularioEndereco) component;
-                    formularioEndereco.onBloquear(!bloqueia);
+                    formularioEndereco.onBloquear(formularioBloqueado);
                 } else if (component instanceof Container) {
-                    bloquearFormulario(bloqueia, (Container) component);
+                    bloquearFormulario(formularioBloqueado, (Container) component);
                 }
             }
         } catch (Exception ex) {
@@ -98,17 +94,11 @@ public class UtilFormulario {
         try {
             Component components[] = container.getComponents();
             for (Component component : components) {
-                if (component instanceof JFormattedTextField) {
-                    JFormattedTextField field = (JFormattedTextField) component;
-                    field.setValue(null);
-                } else if (component instanceof JFTextField) {
+                if (component instanceof JFTextField) {
                     JFTextField field = (JFTextField) component;
                     if (!field.validaCampo()) {
                         countErrosFormulario++;
                     }
-                } else if (component instanceof JTextArea) {
-                    JTextArea area = (JTextArea) component;
-                    area.setText("");
                 } else if (component instanceof FormularioEndereco) {
                     FormularioEndereco formularioEndereco = (FormularioEndereco) component;
                     if (formularioEndereco.getEnderecos() == null || formularioEndereco.getEnderecos().size() <= 0) {

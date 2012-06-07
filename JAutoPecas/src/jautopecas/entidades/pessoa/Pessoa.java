@@ -17,15 +17,15 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "cad_pessoa")
 @PersistenceContext(type = PersistenceContextType.EXTENDED)
-@DiscriminatorColumn(name = "pj", discriminatorType = DiscriminatorType.STRING, length = 1)
-@DiscriminatorValue("O")
+@DiscriminatorColumn(name = "tipo_pessoa", discriminatorType = DiscriminatorType.STRING, length = 2)
+@DiscriminatorValue("ND")
 public class Pessoa implements Serializable {
 
     @Id
     @Column(name = "id_pessoa")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPessoa;
-    @OneToOne(optional = true, fetch = FetchType.EAGER)
+    @OneToOne(optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
     @PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
     private Empresa empresa;
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jautopecas.components;
 
 import jautopecas.JAutoPecasMenu;
@@ -15,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.Field;
 import javax.swing.BorderFactory;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -24,7 +21,7 @@ import javax.swing.border.Border;
  *
  * @author JFFiorotto
  */
-public class JFTextField extends JTextField {
+public class JFTextField extends JFormattedTextField {
 
     public JFTextField() {
         super();
@@ -56,13 +53,17 @@ public class JFTextField extends JTextField {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (isEditable()) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        transferFocus();
+                        return;
+                    }
+                    JFTextField jfTextField = ((JFTextField) e.getComponent());
                     if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F1) {
-                        JFTextField jfTextField = ((JFTextField) e.getComponent());
                         WindowCrud crud = new WindowCrud(itemMenu, "F1", jfTextField);
                         crud.setVisible(true);
                         crud.setPesquisa(jfTextField.getText());
                     } else if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F2) {
-                        WindowCrud crud = new WindowCrud(itemMenu, "F2", ((JFTextField) e.getComponent()));
+                        WindowCrud crud = new WindowCrud(itemMenu, "F2", jfTextField);
                         if (objeto != null) {
                             crud.setObjetoFormulario(objeto);
                         }
@@ -84,7 +85,7 @@ public class JFTextField extends JTextField {
                 if (jlInformacao == null) {
                     jlInformacao = getJlInformacao();
                 }
-                if (jlInformacao != null) {
+                if (jlInformacao != null && isEditable()) {
                     jlInformacao.setText(mensagemAjuda);
                     if (validador != null) {
                         if (!validador.isValido()) {
@@ -104,14 +105,8 @@ public class JFTextField extends JTextField {
                 }
             }
         });
-
-        /*
-         * ENTER funcionar como TAB para pular de campo
-         */
-//        HashSet conj = new HashSet(this.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
-//        conj.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));
-//        this.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, conj);
         bordaDefault = this.getBorder();
+        colorDefault = this.getBackground();
     }
     /*
      * Variaveis Privadas
@@ -125,13 +120,15 @@ public class JFTextField extends JTextField {
     private ItemMenu itemMenu;
     private boolean requerido = false;
     private Border bordaDefault;
+    private Color colorDefault;
     private Border bordaErro = BorderFactory.createLineBorder(Color.RED);
 
     public boolean validaCampo() {
         boolean result = true;
         if (validador != null) {
             result = validador.validaCampo();
-        } else if (classeFormulario != null) {
+        }
+        if (classeFormulario != null) {
             if (objeto == null) {
                 result = false;
             }
@@ -214,11 +211,20 @@ public class JFTextField extends JTextField {
         if (classeFormulario != null && classeFormulario.length() > 0) {
             this.classeFormulario = classeFormulario;
             this.itemMenu = JAutoPecasMenu.getItemMenu(classeFormulario);
-            this.setBackground(Color.LIGHT_GRAY);
         }
     }
 
     public void setRequerido(boolean requerido) {
         this.requerido = requerido;
+    }
+
+    @Override
+    public void setEditable(boolean b) {
+        super.setEditable(b);
+        if (classeFormulario != null && classeFormulario.length() > 0 && isEditable()) {
+            this.setBackground(new Color(255, 255, 102));
+        } else {
+            this.setBackground(colorDefault);
+        }
     }
 }
