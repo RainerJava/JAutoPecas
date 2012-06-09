@@ -20,30 +20,30 @@ public class ItemMenu implements Serializable {
     public static final Integer JANELA = 2;
     @Id
     @Column(name = "id_item_menu")
-    @AnotacaoNomeColuna(nome = "ID Item Menu", descricao = "Identificador do Item no menu")
+    @AnotacaoNomeColuna(nome = "ID Item Menu")
     private String idItemMenu;
-    @AnotacaoNomeColuna(nome = "Nome Item", descricao = "Nome do item no menu")
+    @AnotacaoNomeColuna(nome = "Nome Item")
     private String nome;
     @Column(name = "caminho_imagem")
-    @AnotacaoNomeColuna(nome = "Imagem", descricao = "Caminho imagem")
+    @AnotacaoNomeColuna(nome = "Imagem")
     private String caminhoImagem;
     @Column(name = "classe_formulario")
-    @AnotacaoNomeColuna(nome = "Formulario", descricao = "Caminho do formulario")
+    @AnotacaoNomeColuna(nome = "Formulario")
     private String classeFormulario;
     @Column(name = "classe_entidade")
-    @AnotacaoNomeColuna(nome = "Entidade", descricao = "Caminho da entidade")
+    @AnotacaoNomeColuna(nome = "Entidade")
     private String classeEntidade;
     @Column(name = "tipo_item")
-    @AnotacaoNomeColuna(nome = "Tipo Item", descricao = "Tipo do item no menu")
+    @AnotacaoNomeColuna(nome = "Tipo Item")
     private Integer tipoItem;
     @Column(name = "metodo_pesquisa")
-    @AnotacaoNomeColuna(nome = "Pesquisa", descricao = "Metodo utilizado para pesquisa")
+    @AnotacaoNomeColuna(nome = "Pesquisa")
     private String metodoPesquisa;
     @Column(name = "campos_pesquisa")
-    @AnotacaoNomeColuna(nome = "Campos Pesquisa", descricao = "Campos utilizados na pesquisa")
+    @AnotacaoNomeColuna(nome = "Campos Pesquisa")
     private String camposPesquisa;
     @Column(name = "campos_jftextfield")
-    @AnotacaoNomeColuna(nome = "Campos JFTextField", descricao = "Campos apresentados no Field (modo pesquisa)")
+    @AnotacaoNomeColuna(nome = "Campos JFTextField")
     private String camposJFTextField;
 
     /*

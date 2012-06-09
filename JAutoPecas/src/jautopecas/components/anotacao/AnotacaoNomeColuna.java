@@ -7,10 +7,8 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-// Declaração da interface
+
 public @interface AnotacaoNomeColuna {
 
     public String nome();
-
-    public String descricao();
 }

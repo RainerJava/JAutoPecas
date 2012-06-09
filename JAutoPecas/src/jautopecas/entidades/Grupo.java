@@ -15,9 +15,9 @@ public class Grupo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_grupo")
-    @AnotacaoNomeColuna(nome="ID Grupo",descricao="Identificador do Grupo")
+    @AnotacaoNomeColuna(nome="ID Grupo")
     private Integer idGrupo;
-    @AnotacaoNomeColuna(nome="Nome",descricao="Nome do Grupo")
+    @AnotacaoNomeColuna(nome="Nome")
     private String nome;
 
     public Integer getIdGrupo() {

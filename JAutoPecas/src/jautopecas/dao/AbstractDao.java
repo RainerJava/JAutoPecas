@@ -110,13 +110,20 @@ public abstract class AbstractDao<T> {
 
             String[] v = strPesquisa.split("\\+");
             for (int i = 0; i < v.length; i++) {
+                String[] campos = camposPesquisa.split(",");
                 if (i == 0) {
-                    strBuilder.append(" WHERE CONCAT(").append(camposPesquisa).append(") LIKE :parm").append(i);
+                    strBuilder.append(" WHERE CONCAT(");
                 } else {
-                    strBuilder.append(" AND CONCAT(").append(camposPesquisa).append(") LIKE :parm").append(i);
+                    strBuilder.append(" AND CONCAT(");
                 }
-            }
 
+                for (String campo : campos) {
+                    strBuilder.append(campo).append(",").append("\'_\'").append(",");
+                }
+                strBuilder.delete(strBuilder.length() - 5, strBuilder.length());
+                strBuilder.append(") LIKE :parm").append(i);
+            }
+            System.out.println(strBuilder.toString());
             TypedQuery<T> typedQuery = getEntityManager().createQuery(strBuilder.toString(), entityClass);
 
             for (int i = 0; i < v.length; i++) {
