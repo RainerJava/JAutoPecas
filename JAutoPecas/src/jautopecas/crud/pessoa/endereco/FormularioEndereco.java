@@ -163,20 +163,22 @@ public class FormularioEndereco extends javax.swing.JPanel {
         jtfLogradouro.setMensagemAjuda("Logradouro");
         jtfLogradouro.setValidador(new ValidadorStringLength(jtfLogradouro, 10, 150));
 
-        jtfNumero.setMensagemAjuda("Numero");
+        jtfNumero.setMensagemAjuda("Numero, Caso seja sem numero informar S/N");
         jtfNumero.setValidador(new ValidadorStringLength(jtfNumero, 1, 10));
 
         jtfUf.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioEstado");
-        jtfUf.setMensagemAjuda("Codigo de endereçamento postal");
+        jtfUf.setMensagemAjuda("Estado");
 
         jtfCidade.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioCidade");
-        jtfCidade.setMensagemAjuda("Codigo de endereçamento postal");
+        jtfCidade.setMensagemAjuda("Cidade");
 
         jtfBairro.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioBairro");
-        jtfBairro.setMensagemAjuda("Codigo de endereçamento postal");
+        jtfBairro.setMensagemAjuda("Bairro");
 
         jcbTipoLogradpuro.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioTipoLogradouro");
+        jcbTipoLogradpuro.setMensagemAjuda("Tipo de logradouro. EX:. Rua, Avenida, Viela, Etc...");
 
+        jtfCep.setMensagemAjuda("Codigo de endereçamento postal");
         jtfCep.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jtfCepFocusLost(evt);
@@ -287,6 +289,9 @@ public class FormularioEndereco extends javax.swing.JPanel {
         try {
             if (utilFormulario.validarFormulario(this, true, countErrosFormulario) <= 0) {
                 if (jtEnderecos.getSelectedRowCount() <= 0) {
+                    if (enderecos == null) {
+                        enderecos = new ArrayList<>();
+                    }
                     enderecos.add(getObjetoFormulario());
                 } else {
                     enderecos.set(jtEnderecos.getSelectedRow(), getObjetoFormulario());

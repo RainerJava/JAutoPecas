@@ -36,6 +36,7 @@ public class JFComboBox extends JComboBox {
 
             @Override
             public void keyPressed(KeyEvent e) {
+                WindowCrud windowCrud;
                 if (isEnabled()) {
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                         transferFocus();
@@ -43,18 +44,16 @@ public class JFComboBox extends JComboBox {
                     }
                     JFComboBox jfComboBox = ((JFComboBox) e.getComponent());
                     if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F1) {
-                        WindowCrud crud = new WindowCrud(itemMenu, "F1", jfComboBox);
-                        crud.setVisible(true);
+                        windowCrud = JAutoPecasMenu.addJanela(itemMenu, "F1", jfComboBox);
                         if (jfComboBox.getSelectedItem() != null) {
-                            crud.setPesquisa(jfComboBox.getSelectedItem().toString());
+                            windowCrud.setPesquisa(jfComboBox.getSelectedItem().toString());
                         } else {
-                            crud.setPesquisa("");
+                            windowCrud.setPesquisa("");
                         }
                     } else if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F2) {
-                        WindowCrud crud = new WindowCrud(itemMenu, "F2", jfComboBox);
-                        crud.setVisible(true);
+                        windowCrud = JAutoPecasMenu.addJanela(itemMenu, "F2", jfComboBox);
                         if (getSelectedItem() != null) {
-                            crud.setObjetoFormulario(getSelectedItem());
+                            windowCrud.setObjetoFormulario(getSelectedItem());
                         }
                     }
                 }
@@ -68,7 +67,7 @@ public class JFComboBox extends JComboBox {
                 if (jlInformacao == null) {
                     jlInformacao = getJlInformacao();
                 }
-                if (jlInformacao != null && isEditable()) {
+                if (jlInformacao != null && isEnabled()) {
                     jlInformacao.setText(mensagemAjuda);
                 }
             }

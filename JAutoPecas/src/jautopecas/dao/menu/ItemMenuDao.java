@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jautopecas.dao.menu;
 
 import jautopecas.dao.AbstractDao;
@@ -11,7 +7,7 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author Daniel
+ * @author JFFiorotto
  */
 public class ItemMenuDao extends AbstractDao<ItemMenu> implements Serializable {
 

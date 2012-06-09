@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jautopecas.entidades.menu;
 
 import jautopecas.components.anotacao.AnotacaoNomeColuna;
@@ -13,7 +9,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Jefferson
+ * @author JFFiorotto
  */
 @Entity
 @Table(name = "CAD_ITEM_MENU")

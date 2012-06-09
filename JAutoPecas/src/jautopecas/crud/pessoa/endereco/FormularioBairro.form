@@ -62,7 +62,7 @@
     <Component class="jautopecas.components.JFTextField" name="jtfId">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
-        <Property name="mensagemAjuda" type="java.lang.String" value="Sigla do Estado"/>
+        <Property name="mensagemAjuda" type="java.lang.String" value="ID (Gerado automaticamente pelo sistema)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlId">
@@ -77,7 +77,7 @@
     </Component>
     <Component class="jautopecas.components.JFTextField" name="jtfNome">
       <Properties>
-        <Property name="mensagemAjuda" type="java.lang.String" value="Nome completo do Estado"/>
+        <Property name="mensagemAjuda" type="java.lang.String" value="Nome completo do Bairro"/>
         <Property name="requerido" type="boolean" value="true"/>
         <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new ValidadorStringLength(jtfNome, 4, 50)" type="code"/>

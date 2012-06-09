@@ -29,7 +29,7 @@ public class CepService {
                 throw new Exception("Erro ao Buscar Endereço pelo CEP");
             }
         } catch (Exception e) {
-            throw new Exception("Erro ao Buscar Endereço pelo CEP", e);
+            throw new Exception(e.getMessage(), e);
         }
         return endereco;
     }

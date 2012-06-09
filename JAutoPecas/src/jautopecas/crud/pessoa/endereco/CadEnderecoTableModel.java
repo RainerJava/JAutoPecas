@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jautopecas.crud.pessoa.endereco;
 
 import jautopecas.entidades.pessoa.endereco.Endereco;
@@ -16,7 +12,7 @@ import javax.swing.table.AbstractTableModel;
 public class CadEnderecoTableModel extends AbstractTableModel {
 
     private String[] colunas = {"Tipo Endereco", "Logradouro"};
-    private List<Endereco> dados = new ArrayList<Endereco>();
+    private List<Endereco> dados = new ArrayList<>();
 
     @Override
     public int getRowCount() {
@@ -53,13 +49,13 @@ public class CadEnderecoTableModel extends AbstractTableModel {
     }
 
     public void mostraResultado(List<Endereco> l) {
-        dados = new ArrayList<Endereco>();
+        dados = new ArrayList<>();
         getProdutos().addAll(l);
         fireTableDataChanged();
     }
 
     public void removeResultado() {
-        dados = new ArrayList<Endereco>();
+        dados = new ArrayList<>();
         fireTableDataChanged();
     }
 

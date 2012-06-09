@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jautopecas.crud;
 
 import jautopecas.components.DynamicTableModel;
@@ -53,7 +49,7 @@ public class WindowCrud extends javax.swing.JFrame {
         initComponents();
     }
 
-    public WindowCrud(ItemMenu itemMenu, String modoF1F2, JComponent jComponent) {
+    public WindowCrud(ItemMenu itemMenu) {
         try {
             initComponents();
             Class classeFormulario = Class.forName(itemMenu.getClasseFormulario());
@@ -62,8 +58,6 @@ public class WindowCrud extends javax.swing.JFrame {
             this.formulario = (JPanel) classeFormulario.newInstance();
             this.metodoPesquisa = itemMenu.getMetodoPesquisa();
             this.camposPesquisa = itemMenu.getCamposPesquisa();
-            this.modoF1F2 = modoF1F2;
-            this.jComponent = jComponent;
             jpFormulario.add(this.formulario);
             this.pack();
 
@@ -72,20 +66,6 @@ public class WindowCrud extends javax.swing.JFrame {
             }
             this.setTitle(itemMenu.getNome());
             this.setLocationRelativeTo(null);
-
-            jtpFormPesquisa.setEnabledAt(0, false);
-            jtpFormPesquisa.setEnabledAt(1, true);
-            jtpFormPesquisa.setSelectedIndex(1);
-
-            if (modoF1F2 != null && modoF1F2.equals("F1")) {
-                jToolBar2.setVisible(false);
-            } else {
-                jbNovo.setEnabled(true);
-                jbSalvar.setEnabled(false);
-                jbLimpar.setEnabled(false);
-                jbEditar.setEnabled(false);
-                jbExcluir.setEnabled(false);
-            }
 
             this.addWindowListener(new WindowAdapter() {
 
@@ -365,14 +345,13 @@ public class WindowCrud extends javax.swing.JFrame {
                 jbLimpar.setEnabled(false);
                 jbExcluir.setEnabled(false);
 
-                if (objetoFormulario != null) {
+                if (jtablePesquisa.getSelectedRowCount() > 0) {
                     JOptionPane.showMessageDialog(this, "Registro Alterado com Sucesso!!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this, "Registro Salvo com Sucesso!!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 }
-
                 refreshJComponent();
-
+                modoOperacao = MODO_OBSERVACAO;
             } else {
                 jlInformacao.setText("Os campos em vermelho contem erros, favor corrigi-los!!");
             }
@@ -463,6 +442,7 @@ public class WindowCrud extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Registro Excluido com Sucesso!!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
                 refreshJComponent();
+                modoOperacao = MODO_OBSERVACAO;
             }
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | UtilFormularioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
@@ -496,9 +476,6 @@ public class WindowCrud extends javax.swing.JFrame {
                                 if (tableModel == null) {
                                     tableModel = new DynamicTableModel(resultadoPesquisa);
                                     jtablePesquisa.setModel(tableModel);
-//                                    TableRowSorter<DynamicTableModel> sorter = new TableRowSorter<>(tableModel);
-//                                    jtablePesquisa.setRowSorter(sorter);
-
                                 } else if (!tableModel.isInicializado()) {
                                     tableModel = null;
                                     tableModel = new DynamicTableModel(resultadoPesquisa);
@@ -575,19 +552,31 @@ public class WindowCrud extends javax.swing.JFrame {
     public void setObjetoFormulario(Object objetoFormulario) {
         try {
             this.objetoFormulario = objetoFormulario;
-            Method m = formulario.getClass().getMethod("setObjetoFormulario", Object.class);
-            m.invoke(formulario,
-                    new Object[]{objetoFormulario});
+            if (objetoFormulario != null) {
+                Method m = formulario.getClass().getMethod("setObjetoFormulario", Object.class);
+                m.invoke(formulario,
+                        new Object[]{objetoFormulario});
 
-            jtpFormPesquisa.setEnabledAt(0, true);
-            jtpFormPesquisa.setEnabledAt(1, false);
-            jtpFormPesquisa.setSelectedIndex(0);
-            jbNovo.setEnabled(false);
-            jbSalvar.setEnabled(false);
-            jbLimpar.setEnabled(true);
-            jbEditar.setEnabled(true);
-            jbExcluir.setEnabled(true);
-            utilFormulario.bloquearFormulario(true, formulario);
+                jtpFormPesquisa.setEnabledAt(0, true);
+                jtpFormPesquisa.setEnabledAt(1, false);
+                jtpFormPesquisa.setSelectedIndex(0);
+                jbNovo.setEnabled(false);
+                jbSalvar.setEnabled(false);
+                jbLimpar.setEnabled(true);
+                jbEditar.setEnabled(true);
+                jbExcluir.setEnabled(true);
+                utilFormulario.bloquearFormulario(true, formulario);
+            } else {
+                jtpFormPesquisa.setEnabledAt(0, false);
+                jtpFormPesquisa.setEnabledAt(1, true);
+                jtpFormPesquisa.setSelectedIndex(1);
+                jbNovo.setEnabled(true);
+                jbSalvar.setEnabled(false);
+                jbLimpar.setEnabled(false);
+                jbEditar.setEnabled(false);
+                jbExcluir.setEnabled(false);
+            }
+
         } catch (UtilFormularioException | NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
         }
@@ -620,6 +609,30 @@ public class WindowCrud extends javax.swing.JFrame {
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao atualizar componente", "OOOPSS!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void setjComponent(JComponent jComponent) {
+        this.jComponent = jComponent;
+    }
+
+    public void setModoF1F2(String modoF1F2) {
+        this.modoF1F2 = modoF1F2;
+        if (modoF1F2 != null && modoF1F2.equals("F1")) {
+            jToolBar2.setVisible(false);
+            jtpFormPesquisa.setEnabledAt(0, false);
+            jtpFormPesquisa.setEnabledAt(1, true);
+            jtpFormPesquisa.setSelectedIndex(1);
+        } else {
+            jToolBar2.setVisible(true);
+            jtpFormPesquisa.setEnabledAt(0, false);
+            jtpFormPesquisa.setEnabledAt(1, true);
+            jtpFormPesquisa.setSelectedIndex(1);
+            jbNovo.setEnabled(true);
+            jbSalvar.setEnabled(false);
+            jbLimpar.setEnabled(false);
+            jbEditar.setEnabled(false);
+            jbExcluir.setEnabled(false);
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

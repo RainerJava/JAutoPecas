@@ -10,11 +10,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.Field;
-import javax.swing.BorderFactory;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.Border;
 
 /**
@@ -22,17 +18,17 @@ import javax.swing.border.Border;
  * @author JFFiorotto
  */
 public class JFTextField extends JFormattedTextField {
-
+    
     public JFTextField() {
         super();
-
+        
         this.addKeyListener(new KeyListener() {
-
+            
             @Override
             public void keyTyped(final KeyEvent e) {
                 if (upperCase) {
                     SwingUtilities.invokeLater(new Runnable() {
-
+                        
                         @Override
                         public void run() {
                             JTextField campo = (JTextField) e.getSource();
@@ -45,13 +41,14 @@ public class JFTextField extends JFormattedTextField {
                     });
                 }
             }
-
+            
             @Override
             public void keyReleased(KeyEvent e) {
             }
-
+            
             @Override
             public void keyPressed(KeyEvent e) {
+                WindowCrud windowCrud;
                 if (isEditable()) {
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                         transferFocus();
@@ -59,15 +56,11 @@ public class JFTextField extends JFormattedTextField {
                     }
                     JFTextField jfTextField = ((JFTextField) e.getComponent());
                     if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F1) {
-                        WindowCrud crud = new WindowCrud(itemMenu, "F1", jfTextField);
-                        crud.setVisible(true);
-                        crud.setPesquisa(jfTextField.getText());
+                        windowCrud = JAutoPecasMenu.addJanela(itemMenu, "F1", jfTextField);
+                        windowCrud.setPesquisa(jfTextField.getText());
                     } else if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F2) {
-                        WindowCrud crud = new WindowCrud(itemMenu, "F2", jfTextField);
-                        if (objeto != null) {
-                            crud.setObjetoFormulario(objeto);
-                        }
-                        crud.setVisible(true);
+                        windowCrud = JAutoPecasMenu.addJanela(itemMenu, "F2", jfTextField);
+                        windowCrud.setObjetoFormulario(objeto);
                     } else if (classeFormulario != null && (e.getKeyCode() == KeyEvent.VK_BACK_SPACE || e.getKeyCode() == KeyEvent.VK_DELETE)) {
                         if (objeto != null) {
                             objeto = null;
@@ -77,9 +70,9 @@ public class JFTextField extends JFormattedTextField {
                 }
             }
         });
-
+        
         this.addFocusListener(new FocusAdapter() {
-
+            
             @Override
             public void focusGained(FocusEvent evt) {
                 if (jlInformacao == null) {
@@ -94,7 +87,7 @@ public class JFTextField extends JFormattedTextField {
                     }
                 }
             }
-
+            
             @Override
             public void focusLost(FocusEvent evt) {
                 if (jlInformacao == null) {
@@ -122,7 +115,7 @@ public class JFTextField extends JFormattedTextField {
     private Border bordaDefault;
     private Color colorDefault;
     private Border bordaErro = BorderFactory.createLineBorder(Color.RED);
-
+    
     public boolean validaCampo() {
         boolean result = true;
         if (validador != null) {
@@ -140,20 +133,21 @@ public class JFTextField extends JFormattedTextField {
         }
         return result;
     }
-
+    
     public void limpaCampo() {
         setText("");
+        setValue(null);
         setBorder(bordaDefault);
         objeto = null;
         if (validador != null) {
             validador.setValido(true);
         }
     }
-
+    
     private JLabel getJlInformacao() {
         return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
     }
-
+    
     private String getFieldValue() throws Exception {
         String str = "";
         try {
@@ -181,23 +175,23 @@ public class JFTextField extends JFormattedTextField {
     /*
      * Geter's and Seter's
      */
-
+    
     public void setMensagemAjuda(String mensagemAjuda) {
         this.mensagemAjuda = mensagemAjuda;
     }
-
+    
     public void setUpperCase(boolean upperCase) {
         this.upperCase = upperCase;
     }
-
+    
     public void setValidador(Validador validador) {
         this.validador = validador;
     }
-
+    
     public Object getObjeto() {
         return objeto;
     }
-
+    
     public void setObjeto(Object objeto) throws Exception {
         this.objeto = objeto;
         if (objeto != null) {
@@ -206,18 +200,18 @@ public class JFTextField extends JFormattedTextField {
             this.setText("");
         }
     }
-
+    
     public void setClasseFormulario(String classeFormulario) {
         if (classeFormulario != null && classeFormulario.length() > 0) {
             this.classeFormulario = classeFormulario;
             this.itemMenu = JAutoPecasMenu.getItemMenu(classeFormulario);
         }
     }
-
+    
     public void setRequerido(boolean requerido) {
         this.requerido = requerido;
     }
-
+    
     @Override
     public void setEditable(boolean b) {
         super.setEditable(b);

@@ -6,13 +6,11 @@ import javax.persistence.*;
 /**
  * @author JFFiorotto
  *
- * This class stores the links e devices to be monitored
- *
  */
 @Entity
 @Table(name = "cad_empresa")
 @PrimaryKeyJoinColumn(name = "id_pessoa")
-@DiscriminatorValue("EM") 
+@DiscriminatorValue("EM")
 public class Empresa extends Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
