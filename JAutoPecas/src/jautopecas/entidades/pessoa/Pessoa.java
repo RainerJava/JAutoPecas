@@ -1,56 +1,110 @@
 package jautopecas.entidades.pessoa;
 
-import jautopecas.entidades.pessoa.endereco.Endereco;
+import jautopecas.entidades.pessoa.endereco.EnderecoPessoa;
+import jautopecas.entidades.pessoa.telefone.TelefonePessoa;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
 /**
- *
  * @author JFFiorotto
+ *
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "cad_pessoa")
-@PersistenceContext(type = PersistenceContextType.EXTENDED)
-@DiscriminatorColumn(name = "tipo_pessoa", discriminatorType = DiscriminatorType.STRING, length = 2)
-@DiscriminatorValue("ND")
+@Table(name = "CAD_PESSOA")
 public class Pessoa implements Serializable {
 
     @Id
-    @Column(name = "id_pessoa")
+    @Column(name = "ID_PESSOA")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPessoa;
-    @OneToOne(optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
-    @PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
-    private Empresa empresa;
+    private Integer idPessoa;
+    private String nome;
+    private String apelido;
+    private String documento;
+    @OneToOne
+    @JoinColumn(name = "ID_MODELO_PESSOA")
+    private ModeloPessoa modeloPessoa;
+    @OneToOne(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private AdicionalPessoa adicionalPessoa;
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Endereco> enderecos;
+    private List<EnderecoPessoa> enderecoPessoa;
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TelefonePessoa> telefonePessoa;
+    @Column(name = "TIPO_PESSOA")
+    private String tipoPessoa;
 
     /*
      * Getter's and Setter's
      */
-    public Empresa getEmpresa() {
-        return empresa;
+    public String getApelido() {
+        return apelido;
     }
 
-    public Long getIdPessoa() {
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public List<EnderecoPessoa> getEnderecoPessoa() {
+        return enderecoPessoa;
+    }
+
+    public void setEnderecoPessoa(List<EnderecoPessoa> enderecoPessoa) {
+        this.enderecoPessoa = enderecoPessoa;
+    }
+
+    public Integer getIdPessoa() {
         return idPessoa;
     }
 
-    public void setIdPessoa(Long idPessoa) {
+    public void setIdPessoa(Integer idPessoa) {
         this.idPessoa = idPessoa;
     }
 
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+    public ModeloPessoa getModeloPessoa() {
+        return modeloPessoa;
     }
 
-    public List<Endereco> getEnderecos() {
-        return enderecos;
+    public void setModeloPessoa(ModeloPessoa modeloPessoa) {
+        this.modeloPessoa = modeloPessoa;
     }
 
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
+    public AdicionalPessoa getAdicionalPessoa() {
+        return adicionalPessoa;
+    }
+
+    public void setAdicionalPessoa(AdicionalPessoa adicionalPessoa) {
+        this.adicionalPessoa = adicionalPessoa;
+    }
+
+    public List<TelefonePessoa> getTelefonePessoa() {
+        return telefonePessoa;
+    }
+
+    public void setTelefonePessoa(List<TelefonePessoa> telefonePessoa) {
+        this.telefonePessoa = telefonePessoa;
+    }
+
+    public String getTipoPessoa() {
+        return tipoPessoa;
+    }
+
+    public void setTipoPessoa(String tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
     }
 }

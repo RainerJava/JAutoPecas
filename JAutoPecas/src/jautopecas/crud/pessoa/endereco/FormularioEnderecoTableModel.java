@@ -1,6 +1,6 @@
 package jautopecas.crud.pessoa.endereco;
 
-import jautopecas.entidades.pessoa.endereco.Endereco;
+import jautopecas.entidades.pessoa.endereco.EnderecoPessoa;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -9,10 +9,10 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author JFFiorotto
  */
-public class CadEnderecoTableModel extends AbstractTableModel {
+public class FormularioEnderecoTableModel extends AbstractTableModel {
 
     private String[] colunas = {"Tipo Endereco", "Logradouro"};
-    private List<Endereco> dados = new ArrayList<>();
+    private List<EnderecoPessoa> dados = new ArrayList<>();
 
     @Override
     public int getRowCount() {
@@ -27,11 +27,11 @@ public class CadEnderecoTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
 
-        Endereco dado = dados.get(rowIndex);
+        EnderecoPessoa dado = dados.get(rowIndex);
         if (columnIndex == 0) {
-            return dado.getTipoLogradouro();
+            return dado.getEndereco().getTipoLogradouro().getNome();
         } else {
-            return dado.getLogradouro();
+            return dado.getEndereco().getLogradouro();
         }
     }
 
@@ -40,17 +40,20 @@ public class CadEnderecoTableModel extends AbstractTableModel {
         return colunas[col];
     }
 
-    public List<Endereco> getProdutos() {
+    public List<EnderecoPessoa> getProdutos() {
         return dados;
     }
 
-    public void setProdutos(List<Endereco> dados) {
+    public void setProdutos(List<EnderecoPessoa> dados) {
         this.dados = dados;
     }
 
-    public void mostraResultado(List<Endereco> l) {
+    public void mostraResultado(List<EnderecoPessoa> l) {
         dados = new ArrayList<>();
-        getProdutos().addAll(l);
+        if (l != null) {
+            getProdutos().addAll(l);
+        }
+
         fireTableDataChanged();
     }
 
@@ -66,12 +69,12 @@ public class CadEnderecoTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object value, int row, int col) {
-        Endereco vo = dados.get(row);
+        EnderecoPessoa vo = dados.get(row);
         fireTableCellUpdated(row, col);
     }
 
-    public Endereco buscaProduto(int row) {
-        Endereco p = dados.get(row);
+    public EnderecoPessoa buscaProduto(int row) {
+        EnderecoPessoa p = dados.get(row);
         return p;
     }
 }

@@ -20,20 +20,20 @@ import javax.swing.JLabel;
  * @author JFFiorotto
  */
 public class JFComboBox extends JComboBox {
-
+    
     public JFComboBox() {
         super();
-
+        
         this.addKeyListener(new KeyListener() {
-
+            
             @Override
             public void keyTyped(final KeyEvent e) {
             }
-
+            
             @Override
             public void keyReleased(KeyEvent e) {
             }
-
+            
             @Override
             public void keyPressed(KeyEvent e) {
                 WindowCrud windowCrud;
@@ -59,9 +59,9 @@ public class JFComboBox extends JComboBox {
                 }
             }
         });
-
+        
         this.addFocusListener(new FocusAdapter() {
-
+            
             @Override
             public void focusGained(FocusEvent evt) {
                 if (jlInformacao == null) {
@@ -71,7 +71,7 @@ public class JFComboBox extends JComboBox {
                     jlInformacao.setText(mensagemAjuda);
                 }
             }
-
+            
             @Override
             public void focusLost(FocusEvent evt) {
                 if (jlInformacao == null) {
@@ -83,7 +83,7 @@ public class JFComboBox extends JComboBox {
             }
         });
     }
-
+    
     private JLabel getJlInformacao() {
         return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
     }
@@ -92,14 +92,15 @@ public class JFComboBox extends JComboBox {
     private ItemMenu itemMenu;
     private String mensagemAjuda;
     private JLabel jlInformacao;
-
+    private boolean sempreBloqueado;
     /*
      * Getter's and Setter's
      */
+    
     public List<Object> getDataSet() {
         return dataSet;
     }
-
+    
     public void refreshDataSet() throws Exception {
         if (dataSet != null && dataSet.size() > 0) {
             try {
@@ -112,7 +113,7 @@ public class JFComboBox extends JComboBox {
             }
         }
     }
-
+    
     public void setDataSet(List dataSet) {
         this.dataSet = dataSet;
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) getModel();
@@ -121,13 +122,24 @@ public class JFComboBox extends JComboBox {
             modelo.addElement(it.next());
         }
     }
-
+    
     public void setClasseFormulario(String classeFormulario) {
         this.classeFormulario = classeFormulario;
         this.itemMenu = JAutoPecasMenu.getItemMenu(classeFormulario);
     }
-
+    
     public void setMensagemAjuda(String mensagemAjuda) {
         this.mensagemAjuda = mensagemAjuda;
+    }
+    
+    public boolean isSempreBloqueado() {
+        return sempreBloqueado;
+    }
+    
+    public void setSempreBloqueado(boolean sempreBloqueado) {
+        this.sempreBloqueado = sempreBloqueado;
+        if (sempreBloqueado) {
+            this.setEnabled(false);
+        }
     }
 }

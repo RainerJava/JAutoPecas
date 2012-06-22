@@ -1,6 +1,5 @@
 package jautopecas.entidades.pessoa.endereco;
 
-import jautopecas.entidades.pessoa.Pessoa;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -18,11 +17,7 @@ public class Endereco implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "ID_TIPO_LOGRADOURO", referencedColumnName = "ID_TIPO_LOGRADOURO")
     private TipoLogradouro tipoLogradouro;
-    @Column(name = "LOGRADOURO")
     private String logradouro;
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID_PESSOA")
-    private Pessoa pessoa;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "UF", referencedColumnName = "UF")
     private Estado uf;
@@ -34,6 +29,9 @@ public class Endereco implements Serializable {
     private Bairro bairro;
     private String cep;
     private String numero;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "ID_TIPO_ENDERECO", referencedColumnName = "ID_TIPO_ENDERECO")
+    private TipoEndereco tipoEndereco;
     /*
      * Getter's and Setter's
      */
@@ -60,14 +58,6 @@ public class Endereco implements Serializable {
 
     public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
         this.tipoLogradouro = tipoLogradouro;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 
     public Estado getUf() {
@@ -108,5 +98,13 @@ public class Endereco implements Serializable {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public TipoEndereco getTipoEndereco() {
+        return tipoEndereco;
+    }
+
+    public void setTipoEndereco(TipoEndereco tipoEndereco) {
+        this.tipoEndereco = tipoEndereco;
     }
 }

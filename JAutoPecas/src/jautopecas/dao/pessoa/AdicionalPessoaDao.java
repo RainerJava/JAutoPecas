@@ -1,7 +1,7 @@
 package jautopecas.dao.pessoa;
 
 import jautopecas.dao.AbstractDao;
-import jautopecas.entidades.pessoa.Pessoa;
+import jautopecas.entidades.pessoa.AdicionalPessoa;
 import java.io.Serializable;
 import javax.persistence.EntityManager;
 
@@ -9,10 +9,10 @@ import javax.persistence.EntityManager;
  *
  * @author JFFiorotto
  */
-public class PessoaDao extends AbstractDao<Pessoa> implements Serializable {
+public class AdicionalPessoaDao extends AbstractDao<AdicionalPessoa> implements Serializable {
 
-    public PessoaDao() {
-        super(Pessoa.class);
+    public AdicionalPessoaDao() {
+        super(AdicionalPessoa.class);
     }
 
     @Override

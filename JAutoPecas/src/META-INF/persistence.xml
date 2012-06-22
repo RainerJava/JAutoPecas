@@ -4,16 +4,23 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>jautopecas.entidades.Grupo</class>
     <class>jautopecas.entidades.menu.ItemMenu</class>
-    <class>jautopecas.entidades.pessoa.Empresa</class>
     <class>jautopecas.entidades.pessoa.Pessoa</class>
-    <class>jautopecas.entidades.pessoa.endereco.Endereco</class>
-    <class>jautopecas.entidades.pessoa.endereco.Estado</class>
     <class>jautopecas.entidades.pessoa.endereco.Bairro</class>
     <class>jautopecas.entidades.pessoa.endereco.Cidade</class>
-    <class>jautopecas.components.CadEndereco</class>
+    <class>jautopecas.entidades.pessoa.endereco.Endereco</class>
+    <class>jautopecas.entidades.pessoa.endereco.EnderecoPessoa</class>
+    <class>jautopecas.entidades.pessoa.endereco.Estado</class>
     <class>jautopecas.entidades.pessoa.endereco.TipoLogradouro</class>
+    <class>jautopecas.entidades.pessoa.endereco.TipoEndereco</class>
+    <class>jautopecas.entidades.pessoa.ModeloPessoa</class>
+    <class>jautopecas.entidades.pessoa.AdicionalPessoa</class>
+    <class>jautopecas.entidades.pessoa.telefone.Telefone</class>
+    <class>jautopecas.entidades.pessoa.telefone.TelefonePessoa</class>
+    <class>jautopecas.entidades.pessoa.telefone.TipoTelefone</class>
+    <class>jautopecas.entidades.pessoa.login.PessoaLoginPermissao</class>
+    <class>jautopecas.entidades.pessoa.login.PessoaLogin</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dbautopecas"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dbautopecasnew"/>
       <property name="javax.persistence.jdbc.password" value="line@njo"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -12,23 +12,24 @@ import java.awt.event.KeyListener;
 import java.lang.reflect.Field;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
  * @author JFFiorotto
  */
 public class JFTextField extends JFormattedTextField {
-    
+
     public JFTextField() {
         super();
-        
+
         this.addKeyListener(new KeyListener() {
-            
+
             @Override
             public void keyTyped(final KeyEvent e) {
                 if (upperCase) {
                     SwingUtilities.invokeLater(new Runnable() {
-                        
+
                         @Override
                         public void run() {
                             JTextField campo = (JTextField) e.getSource();
@@ -41,11 +42,11 @@ public class JFTextField extends JFormattedTextField {
                     });
                 }
             }
-            
+
             @Override
             public void keyReleased(KeyEvent e) {
             }
-            
+
             @Override
             public void keyPressed(KeyEvent e) {
                 WindowCrud windowCrud;
@@ -70,9 +71,9 @@ public class JFTextField extends JFormattedTextField {
                 }
             }
         });
-        
+
         this.addFocusListener(new FocusAdapter() {
-            
+
             @Override
             public void focusGained(FocusEvent evt) {
                 if (jlInformacao == null) {
@@ -87,7 +88,7 @@ public class JFTextField extends JFormattedTextField {
                     }
                 }
             }
-            
+
             @Override
             public void focusLost(FocusEvent evt) {
                 if (jlInformacao == null) {
@@ -115,7 +116,7 @@ public class JFTextField extends JFormattedTextField {
     private Border bordaDefault;
     private Color colorDefault;
     private Border bordaErro = BorderFactory.createLineBorder(Color.RED);
-    
+
     public boolean validaCampo() {
         boolean result = true;
         if (validador != null) {
@@ -126,6 +127,12 @@ public class JFTextField extends JFormattedTextField {
                 result = false;
             }
         }
+        if (this.getFormatter() instanceof MaskFormatter) {
+            if (((MaskFormatter) this.getFormatter()).getMask().length() > 0 & !this.isEditValid()) {
+                result = false;
+            }
+        }
+
         if (result) {
             setBorder(bordaDefault);
         } else {
@@ -133,7 +140,7 @@ public class JFTextField extends JFormattedTextField {
         }
         return result;
     }
-    
+
     public void limpaCampo() {
         setText("");
         setValue(null);
@@ -143,11 +150,11 @@ public class JFTextField extends JFormattedTextField {
             validador.setValido(true);
         }
     }
-    
+
     private JLabel getJlInformacao() {
         return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
     }
-    
+
     private String getFieldValue() throws Exception {
         String str = "";
         try {
@@ -175,23 +182,23 @@ public class JFTextField extends JFormattedTextField {
     /*
      * Geter's and Seter's
      */
-    
+
     public void setMensagemAjuda(String mensagemAjuda) {
         this.mensagemAjuda = mensagemAjuda;
     }
-    
+
     public void setUpperCase(boolean upperCase) {
         this.upperCase = upperCase;
     }
-    
+
     public void setValidador(Validador validador) {
         this.validador = validador;
     }
-    
+
     public Object getObjeto() {
         return objeto;
     }
-    
+
     public void setObjeto(Object objeto) throws Exception {
         this.objeto = objeto;
         if (objeto != null) {
@@ -200,18 +207,18 @@ public class JFTextField extends JFormattedTextField {
             this.setText("");
         }
     }
-    
+
     public void setClasseFormulario(String classeFormulario) {
         if (classeFormulario != null && classeFormulario.length() > 0) {
             this.classeFormulario = classeFormulario;
             this.itemMenu = JAutoPecasMenu.getItemMenu(classeFormulario);
         }
     }
-    
+
     public void setRequerido(boolean requerido) {
         this.requerido = requerido;
     }
-    
+
     @Override
     public void setEditable(boolean b) {
         super.setEditable(b);

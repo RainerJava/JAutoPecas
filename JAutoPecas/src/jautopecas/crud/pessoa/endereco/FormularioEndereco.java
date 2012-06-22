@@ -1,6 +1,7 @@
 package jautopecas.crud.pessoa.endereco;
 
 import jautopecas.components.validadores.ValidadorStringLength;
+import jautopecas.dao.pessoa.endereco.TipoEnderecoDao;
 import jautopecas.dao.pessoa.endereco.TipoLogradouroDao;
 import jautopecas.entidades.pessoa.endereco.*;
 import jautopecas.exceptions.UtilFormularioException;
@@ -17,10 +18,10 @@ import javax.swing.JTable;
  * @author JFFiorotto
  */
 public class FormularioEndereco extends javax.swing.JPanel {
-
-    private CadEnderecoTableModel tableModel;
-    private List<Endereco> enderecos;
-    private Endereco endereco;
+    
+    private FormularioEnderecoTableModel tableModel;
+    private List<EnderecoPessoa> listaEnderecoPessoa;
+    private EnderecoPessoa enderecoPessoa;
     private int countErrosFormulario;
     private UtilFormulario utilFormulario = new UtilFormulario();
     private boolean formularioBloqueado;
@@ -30,11 +31,11 @@ public class FormularioEndereco extends javax.swing.JPanel {
      */
     public FormularioEndereco() {
         initComponents();
-
-        jtEnderecos.setModel(tableModel == null ? new CadEnderecoTableModel() : tableModel);
+        
+        jtEnderecos.setModel(tableModel == null ? new FormularioEnderecoTableModel() : tableModel);
         jtEnderecos.addMouseListener(
                 new MouseAdapter() {
-
+                    
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (e.getClickCount() == 2) {
@@ -47,43 +48,38 @@ public class FormularioEndereco extends javax.swing.JPanel {
                     }
                 });
     }
-
-    private Endereco getObjetoFormulario() {
-        if (endereco == null) {
-            endereco = new Endereco();
+    
+    private EnderecoPessoa getObjetoFormulario() {
+        if (enderecoPessoa == null) {
+            enderecoPessoa = new EnderecoPessoa();
+            enderecoPessoa.setEndereco(new Endereco());
         }
-        endereco.setUf((Estado) jtfUf.getObjeto());
-        endereco.setBairro((Bairro) jtfBairro.getObjeto());
-        endereco.setCidade((Cidade) jtfCidade.getObjeto());
-        endereco.setCep(jtfCep.getText());
-        endereco.setLogradouro(jtfLogradouro.getText());
-        endereco.setTipoLogradouro((TipoLogradouro) jcbTipoLogradpuro.getSelectedItem());
-        endereco.setNumero(jtfNumero.getText());
-        return endereco;
+        enderecoPessoa.getEndereco().setUf((Estado) jtfUf.getObjeto());
+        enderecoPessoa.getEndereco().setBairro((Bairro) jtfBairro.getObjeto());
+        enderecoPessoa.getEndereco().setCidade((Cidade) jtfCidade.getObjeto());
+        enderecoPessoa.getEndereco().setCep(jtfCep.getText());
+        enderecoPessoa.getEndereco().setLogradouro(jtfLogradouro.getText());
+        enderecoPessoa.getEndereco().setTipoLogradouro((TipoLogradouro) jcbTipoLogradpuro.getSelectedItem());
+        enderecoPessoa.getEndereco().setNumero(jtfNumero.getText());
+        enderecoPessoa.getEndereco().setTipoEndereco((TipoEndereco) jcbTipoEndereco.getSelectedItem());
+        return enderecoPessoa;
     }
-
-    private void setObjetoFormulario(Endereco objetoFormulario) throws Exception {
+    
+    private void setObjetoFormulario(EnderecoPessoa objetoFormulario) throws Exception {
         try {
-            jtfLogradouro.setText(objetoFormulario.getLogradouro());
-            jtfUf.setObjeto(objetoFormulario.getUf());
-            jtfCidade.setObjeto(objetoFormulario.getCidade());
-            jtfBairro.setObjeto(objetoFormulario.getBairro());
-            jtfNumero.setText(objetoFormulario.getNumero());
-            jtfCep.setText(objetoFormulario.getCep());
-            jcbTipoLogradpuro.setSelectedItem(objetoFormulario.getTipoLogradouro());
+            jtfLogradouro.setText(objetoFormulario.getEndereco().getLogradouro());
+            jtfUf.setObjeto(objetoFormulario.getEndereco().getUf());
+            jtfCidade.setObjeto(objetoFormulario.getEndereco().getCidade());
+            jtfBairro.setObjeto(objetoFormulario.getEndereco().getBairro());
+            jtfNumero.setText(objetoFormulario.getEndereco().getNumero());
+            jtfCep.setText(objetoFormulario.getEndereco().getCep());
+            jcbTipoLogradpuro.setSelectedItem(objetoFormulario.getEndereco().getTipoLogradouro());
+            jcbTipoEndereco.setSelectedItem(objetoFormulario.getEndereco().getTipoEndereco());
         } catch (Exception ex) {
             throw new Exception("Erro ao carregar os dados do formulario", ex);
         }
     }
-
-    /*
-     * Geter's and Seter's
-     */
-    public void setListaEnderecos(List<Endereco> listaEnderecos) {
-        this.enderecos = listaEnderecos;
-        populaListaEnderecos();
-    }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -97,7 +93,6 @@ public class FormularioEndereco extends javax.swing.JPanel {
         jlUf = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtEnderecos = new javax.swing.JTable();
-        jcbTipoEndereco = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         jbSalvar = new javax.swing.JButton();
         jbLimpar = new javax.swing.JButton();
@@ -109,6 +104,7 @@ public class FormularioEndereco extends javax.swing.JPanel {
         jtfBairro = new jautopecas.components.JFTextField();
         jcbTipoLogradpuro = new jautopecas.components.JFComboBox();
         jtfCep = new jautopecas.components.JFTextField();
+        jcbTipoEndereco = new jautopecas.components.JFComboBox();
 
         jLabel1.setText("Tipo Logradouro");
 
@@ -134,8 +130,6 @@ public class FormularioEndereco extends javax.swing.JPanel {
         ));
         jtEnderecos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jtEnderecos);
-
-        jcbTipoEndereco.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Comercial", "Residencial", "Faturamento", "Entrega" }));
 
         jLabel8.setText("Tipo Endereço");
 
@@ -185,6 +179,9 @@ public class FormularioEndereco extends javax.swing.JPanel {
             }
         });
 
+        jcbTipoEndereco.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioTipoEndereco");
+        jcbTipoEndereco.setMensagemAjuda("Tipo de endereço. EX:. Comercial,Residencial,Faturamento,Etc...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,11 +212,11 @@ public class FormularioEndereco extends javax.swing.JPanel {
                                             .addComponent(jtfCep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jcbTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addGap(10, 10, 10)
-                                                .addComponent(jtfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(jtfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jcbTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addGap(31, 31, 31)
@@ -250,8 +247,8 @@ public class FormularioEndereco extends javax.swing.JPanel {
                     .addComponent(jLabel8))
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -289,12 +286,12 @@ public class FormularioEndereco extends javax.swing.JPanel {
         try {
             if (utilFormulario.validarFormulario(this, true, countErrosFormulario) <= 0) {
                 if (jtEnderecos.getSelectedRowCount() <= 0) {
-                    if (enderecos == null) {
-                        enderecos = new ArrayList<>();
+                    if (listaEnderecoPessoa == null) {
+                        listaEnderecoPessoa = new ArrayList<>();
                     }
-                    enderecos.add(getObjetoFormulario());
+                    listaEnderecoPessoa.add(getObjetoFormulario());
                 } else {
-                    enderecos.set(jtEnderecos.getSelectedRow(), getObjetoFormulario());
+                    listaEnderecoPessoa.set(jtEnderecos.getSelectedRow(), getObjetoFormulario());
                 }
                 populaListaEnderecos();
             }
@@ -302,35 +299,36 @@ public class FormularioEndereco extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
-
+    
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
         Object[] options = {"Sim", "Não"};
         if (JOptionPane.showOptionDialog(null, "Deseja Excluir o endereço selecionado?", "Atenção",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
                 null, options, options[0]) == 0) {
-            enderecos.remove(jtEnderecos.getSelectedRow());
+            listaEnderecoPessoa.remove(jtEnderecos.getSelectedRow());
             populaListaEnderecos();
         }
     }//GEN-LAST:event_jbExcluirActionPerformed
-
+    
     private void jbLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparActionPerformed
         onLimpar();
     }//GEN-LAST:event_jbLimparActionPerformed
-
+    
     private void jtfCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfCepFocusLost
         try {
             Object[] options = {"Sim", "Não"};
             if (JOptionPane.showOptionDialog(null, "Deseja buscar o CEP automaticamente?", "Informação",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
                     null, options, options[0]) == 0) {
-                endereco = null;
-                endereco = CepService.getEndereco(jtfCep.getText());
-                if (endereco != null) {
-                    jtfBairro.setObjeto(endereco.getBairro());
-                    jtfCidade.setObjeto(endereco.getCidade());
-                    jtfUf.setObjeto(endereco.getUf());
-                    jtfLogradouro.setText(endereco.getLogradouro());
-                    jcbTipoLogradpuro.setSelectedItem(endereco.getTipoLogradouro());
+                enderecoPessoa = null;
+                enderecoPessoa = new EnderecoPessoa();
+                enderecoPessoa.setEndereco(CepService.getEndereco(jtfCep.getText()));
+                if (enderecoPessoa.getEndereco() != null) {
+                    jtfBairro.setObjeto(enderecoPessoa.getEndereco().getBairro());
+                    jtfCidade.setObjeto(enderecoPessoa.getEndereco().getCidade());
+                    jtfUf.setObjeto(enderecoPessoa.getEndereco().getUf());
+                    jtfLogradouro.setText(enderecoPessoa.getEndereco().getLogradouro());
+                    jcbTipoLogradpuro.setSelectedItem(enderecoPessoa.getEndereco().getTipoLogradouro());
                     jtfNumero.requestFocus();
                 }
             }
@@ -338,9 +336,9 @@ public class FormularioEndereco extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jtfCepFocusLost
-
+    
     public void onLimpar() {
-        endereco = null;
+        enderecoPessoa = null;
         jtfCep.limpaCampo();
         jtfLogradouro.limpaCampo();
         jtfNumero.limpaCampo();
@@ -358,7 +356,7 @@ public class FormularioEndereco extends javax.swing.JPanel {
             jbExcluir.setEnabled(false);
         }
     }
-
+    
     public void onBloquear(boolean formularioBloqueado) {
         try {
             this.formularioBloqueado = formularioBloqueado;
@@ -377,11 +375,11 @@ public class FormularioEndereco extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
     private void onVisualizar() throws Exception {
-
-        endereco = ((CadEnderecoTableModel) jtEnderecos.getModel()).buscaProduto(jtEnderecos.getSelectedRow());
-        setObjetoFormulario(endereco);
+        
+        enderecoPessoa = ((FormularioEnderecoTableModel) jtEnderecos.getModel()).buscaProduto(jtEnderecos.getSelectedRow());
+        setObjetoFormulario(enderecoPessoa);
         if (formularioBloqueado) {
             jbSalvar.setEnabled(false);
             jbLimpar.setEnabled(true);
@@ -392,25 +390,27 @@ public class FormularioEndereco extends javax.swing.JPanel {
             jbExcluir.setEnabled(true);
         }
     }
-
+    
     private void populaListaEnderecos() {
-        ((CadEnderecoTableModel) jtEnderecos.getModel()).removeResultado();
-        ((CadEnderecoTableModel) jtEnderecos.getModel()).mostraResultado(enderecos);
+        ((FormularioEnderecoTableModel) jtEnderecos.getModel()).removeResultado();
+        ((FormularioEnderecoTableModel) jtEnderecos.getModel()).mostraResultado(listaEnderecoPessoa);
         onLimpar();
     }
-
+    
     public void carregaCombos() {
         jcbTipoLogradpuro.setDataSet(new TipoLogradouroDao().listarTodos());
+        jcbTipoEndereco.setDataSet(new TipoEnderecoDao().listarTodos());
     }
-
-    public List<Endereco> getEnderecos() {
-        return enderecos;
+    
+    public List<EnderecoPessoa> getListaEnderecoPessoa() {
+        return listaEnderecoPessoa;
     }
-
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
+    
+    public void setListaEnderecoPessoa(List<EnderecoPessoa> listaEnderecoPessoa) {
+        this.listaEnderecoPessoa = listaEnderecoPessoa;
+        populaListaEnderecos();
     }
-
+    
     public JTable getJtEnderecos() {
         return jtEnderecos;
     }
@@ -426,7 +426,7 @@ public class FormularioEndereco extends javax.swing.JPanel {
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbLimpar;
     private javax.swing.JButton jbSalvar;
-    private javax.swing.JComboBox jcbTipoEndereco;
+    private jautopecas.components.JFComboBox jcbTipoEndereco;
     private jautopecas.components.JFComboBox jcbTipoLogradpuro;
     private javax.swing.JLabel jlUf;
     private javax.swing.JTable jtEnderecos;

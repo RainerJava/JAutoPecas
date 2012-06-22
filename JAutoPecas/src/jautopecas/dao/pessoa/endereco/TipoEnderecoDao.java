@@ -1,7 +1,7 @@
-package jautopecas.dao.pessoa;
+package jautopecas.dao.pessoa.endereco;
 
 import jautopecas.dao.AbstractDao;
-import jautopecas.entidades.pessoa.Empresa;
+import jautopecas.entidades.pessoa.endereco.TipoEndereco;
 import java.io.Serializable;
 import javax.persistence.EntityManager;
 
@@ -9,10 +9,10 @@ import javax.persistence.EntityManager;
  *
  * @author JFFiorotto
  */
-public class EmpresaDao extends AbstractDao<Empresa> implements Serializable {
+public class TipoEnderecoDao extends AbstractDao<TipoEndereco> implements Serializable {
 
-    public EmpresaDao() {
-        super(Empresa.class);
+    public TipoEnderecoDao() {
+        super(TipoEndereco.class);
     }
 
     @Override

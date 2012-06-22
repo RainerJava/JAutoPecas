@@ -45,13 +45,13 @@
                                           <Component id="jtfCep" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jcbTipoEndereco" min="-2" pref="192" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
                                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                               <Component id="jtfLogradouro" min="-2" pref="393" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="jcbTipoEndereco" min="-2" pref="212" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -97,8 +97,8 @@
               </Group>
               <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jcbTipoEndereco" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfCep" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbTipoEndereco" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -202,18 +202,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="jcbTipoEndereco">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Comercial"/>
-            <StringItem index="1" value="Residencial"/>
-            <StringItem index="2" value="Faturamento"/>
-            <StringItem index="3" value="Entrega"/>
-          </StringArray>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipo Endere&#xe7;o"/>
@@ -296,6 +284,12 @@
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfCepFocusLost"/>
       </Events>
+    </Component>
+    <Component class="jautopecas.components.JFComboBox" name="jcbTipoEndereco">
+      <Properties>
+        <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioTipoEndereco"/>
+        <Property name="mensagemAjuda" type="java.lang.String" value="Tipo de endere&#xe7;o. EX:. Comercial,Residencial,Faturamento,Etc..."/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -76,7 +76,7 @@ public abstract class AbstractDao<T> {
         }
     }
 
-    public T listar(Object id) {
+    public T load(Object id) {
         return getEntityManager().find(entityClass, id);
     }
 

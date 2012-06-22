@@ -1,8 +1,10 @@
 package jautopecas;
 
 import jautopecas.crud.WindowCrud;
-import jautopecas.dao.menu.ItemMenuDao;
+import jautopecas.dao.pessoa.login.PessoaLoginPermissaoDao;
 import jautopecas.entidades.menu.ItemMenu;
+import jautopecas.entidades.pessoa.login.PessoaLogin;
+import jautopecas.entidades.pessoa.login.PessoaLoginPermissao;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -22,52 +24,57 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     /**
      * Creates new form JAutoPecasMenu
      */
-    private static List<ItemMenu> itensMenu = new ArrayList<>();
+    private PessoaLogin pessoaLogin;
+    private static List<PessoaLoginPermissao> listaPermissaoUsuario = new ArrayList<>();
     private static HashMap<String, WindowCrud> janelas = new HashMap<>();
 
-    public JAutoPecasMenu() {
+    public JAutoPecasMenu(PessoaLogin pessoaLogin) {
+        this.pessoaLogin = pessoaLogin;
         initComponents();
-        criaItensMenu();
+        crialistaPermissaoUsuario();
     }
 
-    private void criaItensMenu() {
-        itensMenu.clear();
-        itensMenu.addAll(new ItemMenuDao().listarTodos());
+    private void crialistaPermissaoUsuario() {
+        listaPermissaoUsuario.clear();
+        listaPermissaoUsuario.addAll(new PessoaLoginPermissaoDao().listaPermissaoUsuario(pessoaLogin.getIdPessoaLogin()));
 
         String idItemMenuPai = null;
         String idItemSubMenu = null;
         JMenu jMenuPrincipal = null;
         JMenu jMenuSubMenu = null;
         JMenuItem jMenuItem;
-        for (int i = 0; i < itensMenu.size(); i++) {
-            if (itensMenu.get(i).getTipoItem().equals(ItemMenu.MENU)) {
+        for (int i = 0; i < listaPermissaoUsuario.size(); i++) {
+            if (listaPermissaoUsuario.get(i).getItemMenu().getTipoItem().equals(ItemMenu.MENU)) {
                 jMenuPrincipal = new JMenu();
-                jMenuPrincipal.setText(itensMenu.get(i).getNome());
-                if (itensMenu.get(i).getCaminhoImagem() != null) {
-                    jMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(itensMenu.get(i).getCaminhoImagem())));
+                jMenuPrincipal.setText(listaPermissaoUsuario.get(i).getItemMenu().getNome());
+                if (listaPermissaoUsuario.get(i).getItemMenu().getCaminhoImagem() != null) {
+                    jMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(listaPermissaoUsuario.get(i).getItemMenu().getCaminhoImagem())));
                 }
+                jMenuPrincipal.setEnabled(listaPermissaoUsuario.get(i).getVisualizar());
                 jMenuBar2.add(jMenuPrincipal);
-                idItemMenuPai = itensMenu.get(i).getIdItemMenu();
-            } else if (itensMenu.get(i).getTipoItem().equals(ItemMenu.SUBMENU)) {
-                if (itensMenu.get(i).getIdItemMenu().startsWith(idItemMenuPai)) {
+                idItemMenuPai = listaPermissaoUsuario.get(i).getItemMenu().getIdItemMenu();
+            } else if (listaPermissaoUsuario.get(i).getItemMenu().getTipoItem().equals(ItemMenu.SUBMENU)) {
+                if (listaPermissaoUsuario.get(i).getItemMenu().getIdItemMenu().startsWith(idItemMenuPai)) {
                     jMenuSubMenu = new JMenu();
-                    jMenuSubMenu.setText(itensMenu.get(i).getNome());
-                    if (itensMenu.get(i).getCaminhoImagem() != null) {
-                        jMenuSubMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource(itensMenu.get(i).getCaminhoImagem())));
+                    jMenuSubMenu.setText(listaPermissaoUsuario.get(i).getItemMenu().getNome());
+                    if (listaPermissaoUsuario.get(i).getItemMenu().getCaminhoImagem() != null) {
+                        jMenuSubMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource(listaPermissaoUsuario.get(i).getItemMenu().getCaminhoImagem())));
                     }
+                    jMenuSubMenu.setEnabled(listaPermissaoUsuario.get(i).getVisualizar());
                     jMenuPrincipal.add(jMenuSubMenu);
-                    idItemSubMenu = itensMenu.get(i).getIdItemMenu();
+                    idItemSubMenu = listaPermissaoUsuario.get(i).getItemMenu().getIdItemMenu();
                 } else {
                     jMenuSubMenu = null;
                 }
-            } else if (itensMenu.get(i).getTipoItem().equals(ItemMenu.JANELA)) {
+            } else if (listaPermissaoUsuario.get(i).getItemMenu().getTipoItem().equals(ItemMenu.JANELA)) {
                 jMenuItem = new JMenuItem();
-                jMenuItem.setText(itensMenu.get(i).getNome());
-                jMenuItem.addActionListener(new JAutoPecasMenuActionListener(itensMenu.get(i)));
-                if (itensMenu.get(i).getCaminhoImagem() != null) {
-                    jMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource(itensMenu.get(i).getCaminhoImagem())));
+                jMenuItem.setText(listaPermissaoUsuario.get(i).getItemMenu().getNome());
+                jMenuItem.addActionListener(new JAutoPecasMenuActionListener(listaPermissaoUsuario.get(i).getItemMenu()));
+                jMenuItem.setEnabled(listaPermissaoUsuario.get(i).getVisualizar());
+                if (listaPermissaoUsuario.get(i).getItemMenu().getCaminhoImagem() != null) {
+                    jMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource(listaPermissaoUsuario.get(i).getItemMenu().getCaminhoImagem())));
                 }
-                if (idItemSubMenu != null && itensMenu.get(i).getIdItemMenu().startsWith(idItemSubMenu)) {
+                if (idItemSubMenu != null && listaPermissaoUsuario.get(i).getItemMenu().getIdItemMenu().startsWith(idItemSubMenu)) {
                     jMenuSubMenu.add(jMenuItem);
                 } else {
                     jMenuPrincipal.add(jMenuItem);
@@ -79,14 +86,14 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     /*
      * Getter's and Setter's
      */
-    public static List<ItemMenu> getItensMenu() {
-        return itensMenu;
+    public static List<PessoaLoginPermissao> getlistaPermissaoUsuario() {
+        return listaPermissaoUsuario;
     }
 
     public static ItemMenu getItemMenu(String classeFormulario) {
         ItemMenu itemMenu = null;
-        for (Iterator<ItemMenu> it = itensMenu.iterator(); it.hasNext();) {
-            itemMenu = it.next();
+        for (Iterator<PessoaLoginPermissao> it = listaPermissaoUsuario.iterator(); it.hasNext();) {
+            itemMenu = it.next().getItemMenu();
             if (itemMenu.getClasseFormulario() != null && itemMenu.getClasseFormulario().equals(classeFormulario)) {
                 break;
             }
