@@ -1,7 +1,7 @@
 package teste;
 
 import jautopecas.entidades.menu.ItemMenu;
-import jautopecas.entidades.pessoa.login.PessoaLoginPermissao;
+import jautopecas.entidades.pessoa.login.LoginPermissaoPessoa;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -88,23 +88,23 @@ public class TreeCellEditor implements TableCellEditor {
     private void teste(DefaultMutableTreeNode treeNode) {
         Object userObject = treeNode.getUserObject();
         if (vColIndex == 2) {
-            ((PessoaLoginPermissao) userObject).setVisualizar(((JCheckBox) component).isSelected());
+            ((LoginPermissaoPessoa) userObject).setVisualizar(((JCheckBox) component).isSelected());
         } else if (vColIndex == 3) {
-            ((PessoaLoginPermissao) userObject).setIncluir(((JCheckBox) component).isSelected());
+            ((LoginPermissaoPessoa) userObject).setIncluir(((JCheckBox) component).isSelected());
         } else if (vColIndex == 4) {
-            ((PessoaLoginPermissao) userObject).setAlterar(((JCheckBox) component).isSelected());
+            ((LoginPermissaoPessoa) userObject).setAlterar(((JCheckBox) component).isSelected());
         } else if (vColIndex == 5) {
-            ((PessoaLoginPermissao) userObject).setExcluir(((JCheckBox) component).isSelected());
+            ((LoginPermissaoPessoa) userObject).setExcluir(((JCheckBox) component).isSelected());
         }
         for (int i = 0; i < treeNode.getChildCount(); i++) {
             if (vColIndex == 2) {
-                ((PessoaLoginPermissao) ((DefaultMutableTreeNode) treeNode.getChildAt(i)).getUserObject()).setVisualizar(((JCheckBox) component).isSelected());
+                ((LoginPermissaoPessoa) ((DefaultMutableTreeNode) treeNode.getChildAt(i)).getUserObject()).setVisualizar(((JCheckBox) component).isSelected());
             } else if (vColIndex == 3) {
-                ((PessoaLoginPermissao) ((DefaultMutableTreeNode) treeNode.getChildAt(i)).getUserObject()).setIncluir(((JCheckBox) component).isSelected());
+                ((LoginPermissaoPessoa) ((DefaultMutableTreeNode) treeNode.getChildAt(i)).getUserObject()).setIncluir(((JCheckBox) component).isSelected());
             } else if (vColIndex == 4) {
-                ((PessoaLoginPermissao) ((DefaultMutableTreeNode) treeNode.getChildAt(i)).getUserObject()).setAlterar(((JCheckBox) component).isSelected());
+                ((LoginPermissaoPessoa) ((DefaultMutableTreeNode) treeNode.getChildAt(i)).getUserObject()).setAlterar(((JCheckBox) component).isSelected());
             } else if (vColIndex == 5) {
-                ((PessoaLoginPermissao) ((DefaultMutableTreeNode) treeNode.getChildAt(i)).getUserObject()).setExcluir(((JCheckBox) component).isSelected());
+                ((LoginPermissaoPessoa) ((DefaultMutableTreeNode) treeNode.getChildAt(i)).getUserObject()).setExcluir(((JCheckBox) component).isSelected());
             }
             if (treeNode.getChildAt(i).getChildCount() > 0) {
                 teste((DefaultMutableTreeNode) treeNode.getChildAt(i));

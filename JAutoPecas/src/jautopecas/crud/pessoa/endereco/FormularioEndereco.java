@@ -18,12 +18,10 @@ import javax.swing.JTable;
  * @author JFFiorotto
  */
 public class FormularioEndereco extends javax.swing.JPanel {
-    
+
     private FormularioEnderecoTableModel tableModel;
     private List<EnderecoPessoa> listaEnderecoPessoa;
     private EnderecoPessoa enderecoPessoa;
-    private int countErrosFormulario;
-    private UtilFormulario utilFormulario = new UtilFormulario();
     private boolean formularioBloqueado;
 
     /**
@@ -31,11 +29,11 @@ public class FormularioEndereco extends javax.swing.JPanel {
      */
     public FormularioEndereco() {
         initComponents();
-        
+
         jtEnderecos.setModel(tableModel == null ? new FormularioEnderecoTableModel() : tableModel);
         jtEnderecos.addMouseListener(
                 new MouseAdapter() {
-                    
+
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (e.getClickCount() == 2) {
@@ -48,7 +46,7 @@ public class FormularioEndereco extends javax.swing.JPanel {
                     }
                 });
     }
-    
+
     private EnderecoPessoa getObjetoFormulario() {
         if (enderecoPessoa == null) {
             enderecoPessoa = new EnderecoPessoa();
@@ -64,7 +62,7 @@ public class FormularioEndereco extends javax.swing.JPanel {
         enderecoPessoa.getEndereco().setTipoEndereco((TipoEndereco) jcbTipoEndereco.getSelectedItem());
         return enderecoPessoa;
     }
-    
+
     private void setObjetoFormulario(EnderecoPessoa objetoFormulario) throws Exception {
         try {
             jtfLogradouro.setText(objetoFormulario.getEndereco().getLogradouro());
@@ -79,59 +77,77 @@ public class FormularioEndereco extends javax.swing.JPanel {
             throw new Exception("Erro ao carregar os dados do formulario", ex);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jtfBairro = new jautopecas.components.JFTextField();
         jlUf = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtEnderecos = new javax.swing.JTable();
+        jtfNumero = new jautopecas.components.JFTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jtfLogradouro = new jautopecas.components.JFTextField();
+        jtfCidade = new jautopecas.components.JFTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jtfUf = new jautopecas.components.JFTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jcbTipoLogradpuro = new jautopecas.components.JFComboBox();
+        jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jtfCep = new jautopecas.components.JFTextField();
+        jLabel2 = new javax.swing.JLabel();
         jbSalvar = new javax.swing.JButton();
         jbLimpar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
-        jtfLogradouro = new jautopecas.components.JFTextField();
-        jtfNumero = new jautopecas.components.JFTextField();
-        jtfUf = new jautopecas.components.JFTextField();
-        jtfCidade = new jautopecas.components.JFTextField();
-        jtfBairro = new jautopecas.components.JFTextField();
-        jcbTipoLogradpuro = new jautopecas.components.JFComboBox();
-        jtfCep = new jautopecas.components.JFTextField();
         jcbTipoEndereco = new jautopecas.components.JFComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtEnderecos = new javax.swing.JTable();
 
-        jLabel1.setText("Tipo Logradouro");
+        setPreferredSize(new java.awt.Dimension(650, 300));
+        setLayout(new java.awt.BorderLayout());
 
-        jLabel2.setText("Logradouro");
-
-        jLabel3.setText("Numero");
-
-        jLabel4.setText("Cep");
-
-        jLabel5.setText("Bairro");
-
-        jLabel6.setText("Cidade");
+        jtfBairro.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioBairro");
+        jtfBairro.setMensagemAjuda("Bairro");
 
         jlUf.setText("Estado");
 
-        jtEnderecos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jtfNumero.setMensagemAjuda("Numero, Caso seja sem numero informar S/N");
+        jtfNumero.setValidador(new ValidadorStringLength(jtfNumero, 1, 10));
 
-            },
-            new String [] {
+        jLabel6.setText("Cidade");
 
-            }
-        ));
-        jtEnderecos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jtEnderecos);
+        jLabel5.setText("Bairro");
+
+        jtfLogradouro.setMensagemAjuda("Logradouro");
+        jtfLogradouro.setValidador(new ValidadorStringLength(jtfLogradouro, 10, 150));
+
+        jtfCidade.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioCidade");
+        jtfCidade.setMensagemAjuda("Cidade");
+
+        jLabel4.setText("Cep");
+
+        jtfUf.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioEstado");
+        jtfUf.setMensagemAjuda("Estado");
+
+        jLabel3.setText("Numero");
+
+        jcbTipoLogradpuro.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioTipoLogradouro");
+        jcbTipoLogradpuro.setMensagemAjuda("Tipo de logradouro. EX:. Rua, Avenida, Viela, Etc...");
+
+        jLabel1.setText("Tipo Logradouro");
 
         jLabel8.setText("Tipo Endereço");
+
+        jtfCep.setMensagemAjuda("Codigo de endereçamento postal");
+        jtfCep.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfCepFocusLost(evt);
+            }
+        });
+
+        jLabel2.setText("Logradouro");
 
         jbSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jautopecas/imagens/icones/iconeConfirmar16.png"))); // NOI18N
         jbSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -154,166 +170,119 @@ public class FormularioEndereco extends javax.swing.JPanel {
             }
         });
 
-        jtfLogradouro.setMensagemAjuda("Logradouro");
-        jtfLogradouro.setValidador(new ValidadorStringLength(jtfLogradouro, 10, 150));
-
-        jtfNumero.setMensagemAjuda("Numero, Caso seja sem numero informar S/N");
-        jtfNumero.setValidador(new ValidadorStringLength(jtfNumero, 1, 10));
-
-        jtfUf.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioEstado");
-        jtfUf.setMensagemAjuda("Estado");
-
-        jtfCidade.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioCidade");
-        jtfCidade.setMensagemAjuda("Cidade");
-
-        jtfBairro.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioBairro");
-        jtfBairro.setMensagemAjuda("Bairro");
-
-        jcbTipoLogradpuro.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioTipoLogradouro");
-        jcbTipoLogradpuro.setMensagemAjuda("Tipo de logradouro. EX:. Rua, Avenida, Viela, Etc...");
-
-        jtfCep.setMensagemAjuda("Codigo de endereçamento postal");
-        jtfCep.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtfCepFocusLost(evt);
-            }
-        });
-
         jcbTipoEndereco.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioTipoEndereco");
         jcbTipoEndereco.setMensagemAjuda("Tipo de endereço. EX:. Comercial,Residencial,Faturamento,Etc...");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(90, 90, 90)
-                                .addComponent(jLabel8))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(122, 122, 122)
-                                        .addComponent(jLabel6))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jtfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jtfCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jcbTipoLogradpuro, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                                            .addComponent(jtfCep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jtfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jcbTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(jLabel2)))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jlUf)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbSalvar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jlUf)
-                                        .addGap(61, 61, 61))
-                                    .addComponent(jtfUf, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                                    .addComponent(jtfNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jbSalvar)
-                        .addGap(6, 6, 6)
-                        .addComponent(jbLimpar)
-                        .addGap(6, 6, 6)
-                        .addComponent(jbExcluir)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jbLimpar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbExcluir))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jcbTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfUf, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jcbTipoLogradpuro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jtfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addGap(88, 96, Short.MAX_VALUE))
+                                            .addComponent(jtfNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE))
+                                            .addComponent(jtfBairro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                        .addContainerGap())))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel8))
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcbTipoLogradpuro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbTipoLogradpuro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlUf)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbExcluir)
                     .addComponent(jbSalvar)
-                    .addComponent(jbLimpar)
-                    .addComponent(jbExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(jbLimpar))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
+
+        add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(2, 110));
+
+        jtEnderecos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jtEnderecos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jtEnderecos);
+
+        add(jScrollPane1, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
-        try {
-            if (utilFormulario.validarFormulario(this, true, countErrosFormulario) <= 0) {
-                if (jtEnderecos.getSelectedRowCount() <= 0) {
-                    if (listaEnderecoPessoa == null) {
-                        listaEnderecoPessoa = new ArrayList<>();
-                    }
-                    listaEnderecoPessoa.add(getObjetoFormulario());
-                } else {
-                    listaEnderecoPessoa.set(jtEnderecos.getSelectedRow(), getObjetoFormulario());
-                }
-                populaListaEnderecos();
-            }
-        } catch (UtilFormularioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jbSalvarActionPerformed
-    
-    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
-        Object[] options = {"Sim", "Não"};
-        if (JOptionPane.showOptionDialog(null, "Deseja Excluir o endereço selecionado?", "Atenção",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
-                null, options, options[0]) == 0) {
-            listaEnderecoPessoa.remove(jtEnderecos.getSelectedRow());
-            populaListaEnderecos();
-        }
-    }//GEN-LAST:event_jbExcluirActionPerformed
-    
-    private void jbLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparActionPerformed
-        onLimpar();
-    }//GEN-LAST:event_jbLimparActionPerformed
-    
     private void jtfCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfCepFocusLost
         try {
             Object[] options = {"Sim", "Não"};
@@ -336,7 +305,39 @@ public class FormularioEndereco extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jtfCepFocusLost
-    
+
+    private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
+        try {
+            if (UtilFormulario.validarFormulario(this) <= 0) {
+                if (jtEnderecos.getSelectedRowCount() <= 0) {
+                    if (listaEnderecoPessoa == null) {
+                        listaEnderecoPessoa = new ArrayList<>();
+                    }
+                    listaEnderecoPessoa.add(getObjetoFormulario());
+                } else {
+                    listaEnderecoPessoa.set(jtEnderecos.getSelectedRow(), getObjetoFormulario());
+                }
+                populaListaEnderecos();
+            }
+        } catch (UtilFormularioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jbSalvarActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        Object[] options = {"Sim", "Não"};
+        if (JOptionPane.showOptionDialog(null, "Deseja Excluir o endereço selecionado?", "Atenção",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, options, options[0]) == 0) {
+            listaEnderecoPessoa.remove(jtEnderecos.getSelectedRow());
+            populaListaEnderecos();
+        }
+    }//GEN-LAST:event_jbExcluirActionPerformed
+
+    private void jbLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparActionPerformed
+        onLimpar();
+    }//GEN-LAST:event_jbLimparActionPerformed
+
     public void onLimpar() {
         enderecoPessoa = null;
         jtfCep.limpaCampo();
@@ -356,7 +357,7 @@ public class FormularioEndereco extends javax.swing.JPanel {
             jbExcluir.setEnabled(false);
         }
     }
-    
+
     public void onBloquear(boolean formularioBloqueado) {
         try {
             this.formularioBloqueado = formularioBloqueado;
@@ -375,9 +376,9 @@ public class FormularioEndereco extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void onVisualizar() throws Exception {
-        
+
         enderecoPessoa = ((FormularioEnderecoTableModel) jtEnderecos.getModel()).buscaProduto(jtEnderecos.getSelectedRow());
         setObjetoFormulario(enderecoPessoa);
         if (formularioBloqueado) {
@@ -390,27 +391,27 @@ public class FormularioEndereco extends javax.swing.JPanel {
             jbExcluir.setEnabled(true);
         }
     }
-    
+
     private void populaListaEnderecos() {
         ((FormularioEnderecoTableModel) jtEnderecos.getModel()).removeResultado();
         ((FormularioEnderecoTableModel) jtEnderecos.getModel()).mostraResultado(listaEnderecoPessoa);
         onLimpar();
     }
-    
+
     public void carregaCombos() {
         jcbTipoLogradpuro.setDataSet(new TipoLogradouroDao().listarTodos());
         jcbTipoEndereco.setDataSet(new TipoEnderecoDao().listarTodos());
     }
-    
+
     public List<EnderecoPessoa> getListaEnderecoPessoa() {
         return listaEnderecoPessoa;
     }
-    
+
     public void setListaEnderecoPessoa(List<EnderecoPessoa> listaEnderecoPessoa) {
         this.listaEnderecoPessoa = listaEnderecoPessoa;
         populaListaEnderecos();
     }
-    
+
     public JTable getJtEnderecos() {
         return jtEnderecos;
     }
@@ -422,6 +423,7 @@ public class FormularioEndereco extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbLimpar;

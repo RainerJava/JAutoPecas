@@ -9,13 +9,13 @@ import javax.persistence.*;
  * @author JFFiorotto
  */
 @Entity
-@Table(name = "CAD_PESSOA_LOGIN_PERMISSAO")
-public class PessoaLoginPermissao implements Serializable {
+@Table(name = "CAD_LOGIN_PERMISSAO_PESSOA")
+public class LoginPermissaoPessoa implements Serializable {
 
     @Id
-    @Column(name = "ID_PESSOA_LOGIN_PERMISSAO")
+    @Column(name = "ID_LOGIN_PERMISSAO_PESSOA")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPessoaLoginPermissao;
+    private Integer idLoginPermissaoPessoa;
     @OneToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_ITEM_MENU")
     private ItemMenu itemMenu;
@@ -25,6 +25,14 @@ public class PessoaLoginPermissao implements Serializable {
     private Boolean excluir;
     @Transient
     private String idItemMenu;
+
+    public Integer getIdLoginPermissaoPessoa() {
+        return idLoginPermissaoPessoa;
+    }
+
+    public void setIdLoginPermissaoPessoa(Integer idLoginPermissaoPessoa) {
+        this.idLoginPermissaoPessoa = idLoginPermissaoPessoa;
+    }
 
     public Boolean getAlterar() {
         return alterar;
@@ -48,14 +56,6 @@ public class PessoaLoginPermissao implements Serializable {
 
     public void setIdItemMenu(String idItemMenu) {
         this.idItemMenu = idItemMenu;
-    }
-
-    public Integer getIdPessoaLoginPermissao() {
-        return idPessoaLoginPermissao;
-    }
-
-    public void setIdPessoaLoginPermissao(Integer idPessoaLoginPermissao) {
-        this.idPessoaLoginPermissao = idPessoaLoginPermissao;
     }
 
     public Boolean getIncluir() {

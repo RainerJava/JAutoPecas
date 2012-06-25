@@ -9,15 +9,16 @@ import javax.persistence.*;
  * @author JFFiorotto
  */
 @Entity
-@Table(name = "CAD_PESSOA_LOGIN")
-public class PessoaLogin implements Serializable {
+@Table(name = "CAD_LOGIN_PESSOA")
+public class LoginPessoa implements Serializable {
 
     @Id
-    @Column(name = "ID_PESSOA_LOGIN")
+    @Column(name = "ID_LOGIN_PESSOA")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPessoaLogin;
-    private String usuario;
+    private Integer idLoginPessoa;
+    private String login;
     private String senha;
+    private String status;
     @OneToOne
     @JoinColumn(name = "ID_PESSOA")
     private Pessoa pessoa;
@@ -25,12 +26,12 @@ public class PessoaLogin implements Serializable {
     /*
      * Getter's and Setter's
      */
-    public Integer getIdPessoaLogin() {
-        return idPessoaLogin;
+    public Integer getIdLoginPessoa() {
+        return idLoginPessoa;
     }
 
-    public void setIdPessoaLogin(Integer idPessoaLogin) {
-        this.idPessoaLogin = idPessoaLogin;
+    public void setIdLoginPessoa(Integer idLoginPessoa) {
+        this.idLoginPessoa = idLoginPessoa;
     }
 
     public Pessoa getPessoa() {
@@ -49,11 +50,19 @@ public class PessoaLogin implements Serializable {
         this.senha = senha;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

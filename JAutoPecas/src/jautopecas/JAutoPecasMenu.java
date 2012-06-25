@@ -1,10 +1,10 @@
 package jautopecas;
 
 import jautopecas.crud.WindowCrud;
-import jautopecas.dao.pessoa.login.PessoaLoginPermissaoDao;
+import jautopecas.dao.pessoa.login.LoginPermissaoPessoaDao;
 import jautopecas.entidades.menu.ItemMenu;
-import jautopecas.entidades.pessoa.login.PessoaLogin;
-import jautopecas.entidades.pessoa.login.PessoaLoginPermissao;
+import jautopecas.entidades.pessoa.login.LoginPermissaoPessoa;
+import jautopecas.entidades.pessoa.login.LoginPessoa;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -24,11 +24,11 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     /**
      * Creates new form JAutoPecasMenu
      */
-    private PessoaLogin pessoaLogin;
-    private static List<PessoaLoginPermissao> listaPermissaoUsuario = new ArrayList<>();
+    private LoginPessoa pessoaLogin;
+    private static List<LoginPermissaoPessoa> listaPermissaoUsuario = new ArrayList<>();
     private static HashMap<String, WindowCrud> janelas = new HashMap<>();
 
-    public JAutoPecasMenu(PessoaLogin pessoaLogin) {
+    public JAutoPecasMenu(LoginPessoa pessoaLogin) {
         this.pessoaLogin = pessoaLogin;
         initComponents();
         crialistaPermissaoUsuario();
@@ -36,7 +36,7 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
 
     private void crialistaPermissaoUsuario() {
         listaPermissaoUsuario.clear();
-        listaPermissaoUsuario.addAll(new PessoaLoginPermissaoDao().listaPermissaoUsuario(pessoaLogin.getIdPessoaLogin()));
+        listaPermissaoUsuario.addAll(new LoginPermissaoPessoaDao().listaPermissaoUsuario(pessoaLogin.getIdLoginPessoa()));
 
         String idItemMenuPai = null;
         String idItemSubMenu = null;
@@ -86,13 +86,13 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     /*
      * Getter's and Setter's
      */
-    public static List<PessoaLoginPermissao> getlistaPermissaoUsuario() {
+    public static List<LoginPermissaoPessoa> getlistaPermissaoUsuario() {
         return listaPermissaoUsuario;
     }
 
     public static ItemMenu getItemMenu(String classeFormulario) {
         ItemMenu itemMenu = null;
-        for (Iterator<PessoaLoginPermissao> it = listaPermissaoUsuario.iterator(); it.hasNext();) {
+        for (Iterator<LoginPermissaoPessoa> it = listaPermissaoUsuario.iterator(); it.hasNext();) {
             itemMenu = it.next().getItemMenu();
             if (itemMenu.getClasseFormulario() != null && itemMenu.getClasseFormulario().equals(classeFormulario)) {
                 break;

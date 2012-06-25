@@ -16,11 +16,11 @@ import javax.swing.JLabel;
  * @author JFFiorotto
  */
 public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario {
-    
+
     public FormularioEmpresa() {
         initComponents();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,7 +44,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         jtfDocumento2 = new jautopecas.components.JFTextField();
         jtfCpf = new jautopecas.components.JFTextField();
 
-        setPreferredSize(new java.awt.Dimension(640, 462));
+        setPreferredSize(new java.awt.Dimension(650, 462));
 
         jtfIdEmpresa.setEditable(false);
         jtfIdEmpresa.setEnabled(false);
@@ -65,12 +65,15 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         jtfNome.setMensagemAjuda("Razão Social da empresa");
         jtfNome.setRequerido(false);
 
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
         formularioEndereco.carregaCombos();
-        jPanel1.add(formularioEndereco);
+        jPanel1.add(formularioEndereco, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.addTab("Endereços", jPanel1);
 
-        jPanel2.add(formularioTelefone);
+        jPanel2.setLayout(new java.awt.BorderLayout());
+        jPanel2.add(formularioTelefone, java.awt.BorderLayout.CENTER);
         formularioTelefone.carregaCombos();
 
         jTabbedPane1.addTab("Telefones", jPanel2);
@@ -115,40 +118,40 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jlIdEmpresa)
-                        .addGap(10, 10, 10)
-                        .addComponent(jlRazaoSocial1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlIdEmpresa)
+                                .addGap(10, 10, 10)
+                                .addComponent(jlRazaoSocial1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(jcbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72)
+                                .addComponent(jlDocumento2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlNome, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(jlApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 10, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jcbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jlDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)
-                        .addComponent(jlDocumento2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfApelido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
-                        .addComponent(jtfDocumento2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jlNome, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jlApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jtfApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfDocumento2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +188,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
 
     private void jcbTipoPessoaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbTipoPessoaPropertyChange
     }//GEN-LAST:event_jcbTipoPessoaPropertyChange
-    
+
     private void jcbTipoPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoPessoaActionPerformed
         if (jcbTipoPessoa.getSelectedItem() == null) {
             jcbTipoPessoa.setSelectedIndex(0);
@@ -228,7 +231,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
     // End of variables declaration//GEN-END:variables
     private Pessoa pessoa;
     private ModeloPessoa modeloPessoa;
-    
+
     @Override
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
         jcbTipoPessoa.setSempreBloqueado(true);
@@ -248,24 +251,24 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         formularioEndereco.setListaEnderecoPessoa(pessoa.getEnderecoPessoa());
         formularioTelefone.setListaTelefonePessoa(pessoa.getTelefonePessoa());
     }
-    
+
     @Override
     public void salvar() throws Exception {
         new PessoaDao().salvar(getObjetoFormulario());
         setObjetoFormulario(pessoa);
     }
-    
+
     @Override
     public void alterar() throws Exception {
         new PessoaDao().alterar(getObjetoFormulario());
         setObjetoFormulario(pessoa);
     }
-    
+
     @Override
     public void excluir() throws Exception {
         new PessoaDao().excluir(pessoa);
     }
-    
+
     @Override
     public Pessoa getObjetoFormulario() throws Exception {
         if (pessoa == null) {
@@ -288,7 +291,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
             pessoa.setDocumento(jtfCnpj.getText());
             pessoa.getAdicionalPessoa().setInscricaoEstadual(jtfDocumento2.getText());
         }
-        
+
         pessoa.setEnderecoPessoa(formularioEndereco.getListaEnderecoPessoa());
         for (EnderecoPessoa enderecoPessoa : pessoa.getEnderecoPessoa()) {
             enderecoPessoa.setPessoa(pessoa);
@@ -299,17 +302,17 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         }
         return pessoa;
     }
-    
+
     @Override
     public JLabel getJlInformacao() {
         return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
     }
-    
+
     @Override
     public List pesquisar(String strPesquisa) throws Exception {
         return new PessoaDao().listarTodos();
     }
-    
+
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
         return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa);
     }

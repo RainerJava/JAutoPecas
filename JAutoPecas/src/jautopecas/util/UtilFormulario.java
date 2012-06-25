@@ -3,18 +3,17 @@ package jautopecas.util;
 import jautopecas.components.DynamicTableModel;
 import jautopecas.components.JFComboBox;
 import jautopecas.components.JFTextField;
-import jautopecas.crud.pessoa.endereco.FormularioEnderecoTableModel;
 import jautopecas.crud.pessoa.endereco.FormularioEndereco;
+import jautopecas.crud.pessoa.endereco.FormularioEnderecoTableModel;
+import jautopecas.crud.pessoa.login.FormularioLogin;
+import jautopecas.crud.pessoa.login.FormularioLoginTableModel;
 import jautopecas.crud.pessoa.telefone.FormularioTelefone;
 import jautopecas.crud.pessoa.telefone.FormularioTelefoneTableModel;
 import jautopecas.exceptions.UtilFormularioException;
 import java.awt.Component;
 import java.awt.Container;
 import java.beans.IntrospectionException;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 /**
  *
@@ -27,12 +26,15 @@ public class UtilFormulario {
      *
      * @param container
      */
-    public void limpaFormulario(Container container) throws UtilFormularioException {
+    public static void limpaFormulario(Container container) throws UtilFormularioException {
         try {
             Component components[] = container.getComponents();
             for (Component component : components) {
                 if (component instanceof JFTextField) {
                     JFTextField jfField = (JFTextField) component;
+                    jfField.limpaCampo();
+                } else if (component instanceof jautopecas.components.JPasswordField) {
+                    jautopecas.components.JPasswordField jfField = (jautopecas.components.JPasswordField) component;
                     jfField.limpaCampo();
                 } else if (component instanceof JTextArea) {
                     JTextArea area = (JTextArea) component;
@@ -58,6 +60,11 @@ public class UtilFormulario {
                     formularioTelefone.onLimpar();
                     ((FormularioTelefoneTableModel) formularioTelefone.getJtTelefones().getModel()).removeResultado();
                     formularioTelefone.setListaTelefonePessoa(null);
+                } else if (component instanceof FormularioLogin) {
+                    FormularioLogin formularioLogin = (FormularioLogin) component;
+                    formularioLogin.onLimpar();
+                    ((FormularioLoginTableModel) formularioLogin.getJtlogins().getModel()).removeResultado();
+                    formularioLogin.setListaPessoaLogin(null);
                 } else if (component instanceof Container) {
                     limpaFormulario((Container) component);
                 }
@@ -67,12 +74,15 @@ public class UtilFormulario {
         }
     }
 
-    public void bloquearFormulario(Boolean formularioBloqueado, Container container) throws UtilFormularioException {
+    public static void bloquearFormulario(Boolean formularioBloqueado, Container container) throws UtilFormularioException {
         try {
             Component components[] = container.getComponents();
             for (Component component : components) {
                 if (component instanceof JFTextField) {
                     JFTextField jfField = (JFTextField) component;
+                    jfField.setEditable(!formularioBloqueado);
+                } else if (component instanceof jautopecas.components.JPasswordField) {
+                    jautopecas.components.JPasswordField jfField = (jautopecas.components.JPasswordField) component;
                     jfField.setEditable(!formularioBloqueado);
                 } else if (component instanceof JTextArea) {
                     JTextArea area = (JTextArea) component;
@@ -88,6 +98,9 @@ public class UtilFormulario {
                 } else if (component instanceof FormularioTelefone) {
                     FormularioTelefone formularioTelefone = (FormularioTelefone) component;
                     formularioTelefone.onBloquear(formularioBloqueado);
+                } else if (component instanceof FormularioLogin) {
+                    FormularioLogin formularioLogin = (FormularioLogin) component;
+                    formularioLogin.onBloquear(formularioBloqueado);
                 } else if (component instanceof Container) {
                     bloquearFormulario(formularioBloqueado, (Container) component);
                 }
@@ -103,10 +116,8 @@ public class UtilFormulario {
      *
      * @param container
      */
-    public int validarFormulario(Container container, boolean recursive, int countErrosFormulario) throws UtilFormularioException {
-        if (recursive) {
-            countErrosFormulario = 0;
-        }
+    public static int validarFormulario(Container container) throws UtilFormularioException {
+        int countErrosFormulario = 0;
         try {
             Component components[] = container.getComponents();
             for (Component component : components) {
@@ -115,28 +126,47 @@ public class UtilFormulario {
                     if (!field.validaCampo()) {
                         countErrosFormulario++;
                     }
+                } else if (component instanceof jautopecas.components.JPasswordField & component.isVisible()) {
+                    jautopecas.components.JPasswordField field = (jautopecas.components.JPasswordField) component;
+                    if (!field.validaCampo()) {
+                        countErrosFormulario++;
+                    }
                 } else if (component instanceof FormularioEndereco) {
                     FormularioEndereco formularioEndereco = (FormularioEndereco) component;
                     if (formularioEndereco.getListaEnderecoPessoa() == null || formularioEndereco.getListaEnderecoPessoa().size() <= 0) {
-                        int countErrosFormularioEndereco = validarFormulario((Container) component, false, countErrosFormulario);
+                        int countErrosFormularioEndereco = validarFormulario((Container) component);
                         countErrosFormulario += countErrosFormularioEndereco;
                         if (countErrosFormularioEndereco == 0) {
                             countErrosFormulario++;
                             JOptionPane.showMessageDialog(null, "Confirme o endereco antes de salvar!", "Atenção!", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            ((JTabbedPane) component.getParent().getParent()).setSelectedIndex(0);
                         }
                     }
                 } else if (component instanceof FormularioTelefone) {
                     FormularioTelefone formularioTelefone = (FormularioTelefone) component;
                     if (formularioTelefone.getListaTelefonePessoa() == null || formularioTelefone.getListaTelefonePessoa().size() <= 0) {
-                        int countErrosFormularioTelefone = validarFormulario((Container) component, false, countErrosFormulario);
+                        int countErrosFormularioTelefone = validarFormulario((Container) component);
                         countErrosFormulario += countErrosFormularioTelefone;
                         if (countErrosFormularioTelefone == 0) {
                             countErrosFormulario++;
                             JOptionPane.showMessageDialog(null, "Confirme o telefone antes de salvar!", "Atenção!", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            ((JTabbedPane) component.getParent().getParent()).setSelectedIndex(1);
                         }
                     }
+                } else if (component instanceof FormularioLogin) {
+                    int countErrosFormularioLogin = validarFormulario((Container) component);
+                    if (countErrosFormularioLogin == 0) {
+                        countErrosFormulario++;
+                        JOptionPane.showMessageDialog(null, "Confirme o login antes de salvar!", "Atenção!", JOptionPane.INFORMATION_MESSAGE);
+                        ((JTabbedPane) component.getParent().getParent()).setSelectedIndex(2);
+                    }
                 } else if (component instanceof Container) {
-                    countErrosFormulario += validarFormulario((Container) component, false, countErrosFormulario);
+                    if (component instanceof JLabel) {
+                        continue;
+                    }
+                    countErrosFormulario += validarFormulario((Container) component);
                 }
             }
         } catch (Exception ex) {

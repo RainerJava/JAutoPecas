@@ -38,9 +38,7 @@ public class WindowCrud extends javax.swing.JFrame {
     private String camposPesquisa;
     private String modoF1F2;
     private JComponent jComponent;
-    private int countErrosFormulario;
     private boolean pesquisando;
-    private UtilFormulario utilFormulario = new UtilFormulario();
 
     /**
      * Creates new form WindowCrud
@@ -299,8 +297,8 @@ public class WindowCrud extends javax.swing.JFrame {
 
     private void jbNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNovoActionPerformed
         try {
-            utilFormulario.limpaFormulario(this);
-            utilFormulario.bloquearFormulario(false, this);
+            UtilFormulario.limpaFormulario(this);
+            UtilFormulario.bloquearFormulario(false, this);
             jtpFormPesquisa.setEnabledAt(0, true);
             jtpFormPesquisa.setEnabledAt(1, false);
             jtpFormPesquisa.setSelectedIndex(0);
@@ -324,7 +322,7 @@ public class WindowCrud extends javax.swing.JFrame {
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
         try {
-            if (utilFormulario.validarFormulario(formulario, true, countErrosFormulario) <= 0) {
+            if (UtilFormulario.validarFormulario(formulario) <= 0) {
 
                 Method m;
                 if (modoOperacao == MODO_ALTERACAO) {
@@ -334,7 +332,7 @@ public class WindowCrud extends javax.swing.JFrame {
                 }
                 m.invoke(formulario);
                 try {
-                    utilFormulario.limpaFormulario(this);
+                    UtilFormulario.limpaFormulario(this);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();
@@ -373,8 +371,8 @@ public class WindowCrud extends javax.swing.JFrame {
 
     private void jbLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparActionPerformed
         try {
-            utilFormulario.limpaFormulario(this);
-            utilFormulario.bloquearFormulario(false, this);
+            UtilFormulario.limpaFormulario(this);
+            UtilFormulario.bloquearFormulario(false, this);
             jtpFormPesquisa.setEnabledAt(0, false);
             jtpFormPesquisa.setEnabledAt(1, true);
             jtpFormPesquisa.setSelectedIndex(1);
@@ -400,7 +398,7 @@ public class WindowCrud extends javax.swing.JFrame {
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
         try {
-            utilFormulario.bloquearFormulario(false, this);
+            UtilFormulario.bloquearFormulario(false, this);
             jtpFormPesquisa.setEnabledAt(0, true);
             jtpFormPesquisa.setEnabledAt(1, false);
             jtpFormPesquisa.setSelectedIndex(0);
@@ -432,7 +430,7 @@ public class WindowCrud extends javax.swing.JFrame {
                 Method m = formulario.getClass().getMethod("excluir");
                 m.invoke(formulario);
 
-                utilFormulario.limpaFormulario(this);
+                UtilFormulario.limpaFormulario(this);
                 jtpFormPesquisa.setEnabledAt(0, false);
                 jtpFormPesquisa.setEnabledAt(1, true);
                 jtpFormPesquisa.setSelectedIndex(1);
@@ -470,8 +468,7 @@ public class WindowCrud extends javax.swing.JFrame {
                                 if (resultadoPesquisa == null) {
                                     resultadoPesquisa = new ArrayList<>();
                                 }
-                                Method m = formulario.getClass().getMethod(metodoPesquisa, new Class[]{String.class, String.class
-                                        });
+                                Method m = formulario.getClass().getMethod(metodoPesquisa, new Class[]{String.class, String.class});
                                 resultadoPesquisa.clear();
 
                                 resultadoPesquisa.addAll(
@@ -568,7 +565,7 @@ public class WindowCrud extends javax.swing.JFrame {
                 jbLimpar.setEnabled(true);
                 jbEditar.setEnabled(true);
                 jbExcluir.setEnabled(true);
-                utilFormulario.bloquearFormulario(true, this);
+                UtilFormulario.bloquearFormulario(true, this);
             } else {
                 jtpFormPesquisa.setEnabledAt(0, false);
                 jtpFormPesquisa.setEnabledAt(1, true);

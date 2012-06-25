@@ -17,8 +17,8 @@
     <class>jautopecas.entidades.pessoa.telefone.Telefone</class>
     <class>jautopecas.entidades.pessoa.telefone.TelefonePessoa</class>
     <class>jautopecas.entidades.pessoa.telefone.TipoTelefone</class>
-    <class>jautopecas.entidades.pessoa.login.PessoaLoginPermissao</class>
-    <class>jautopecas.entidades.pessoa.login.PessoaLogin</class>
+    <class>jautopecas.entidades.pessoa.login.LoginPessoa</class>
+    <class>jautopecas.entidades.pessoa.login.LoginPermissaoPessoa</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dbautopecasnew"/>
       <property name="javax.persistence.jdbc.password" value="line@njo"/>

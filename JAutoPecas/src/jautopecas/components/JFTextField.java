@@ -113,6 +113,7 @@ public class JFTextField extends JFormattedTextField {
     private String classeFormulario;
     private ItemMenu itemMenu;
     private boolean requerido = false;
+    private String camposJFTextField;
     private Border bordaDefault;
     private Color colorDefault;
     private Border bordaErro = BorderFactory.createLineBorder(Color.RED);
@@ -164,7 +165,7 @@ public class JFTextField extends JFormattedTextField {
             if (objeto == null) {
                 return "";
             }
-            String[] campos = itemMenu.getCamposJFTextField().split("\\,");
+            String[] campos = camposJFTextField != null ? camposJFTextField.split("\\,") : itemMenu.getCamposJFTextField().split("\\,");
             for (int i = 0; i < campos.length; i++) {
                 Field field = objeto.getClass().getDeclaredField(campos[i]);
                 field.setAccessible(true);
@@ -227,5 +228,9 @@ public class JFTextField extends JFormattedTextField {
         } else {
             this.setBackground(colorDefault);
         }
+    }
+
+    public void setCamposJFTextField(String camposJFTextField) {
+        this.camposJFTextField = camposJFTextField;
     }
 }

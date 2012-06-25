@@ -23,8 +23,6 @@ public class FormularioTelefone extends javax.swing.JPanel {
     private FormularioTelefoneTableModel tableModel;
     private List<TelefonePessoa> listaTelefonePessoa;
     private TelefonePessoa telefonePessoa;
-    private int countErrosFormulario;
-    private UtilFormulario utilFormulario = new UtilFormulario();
     private boolean formularioBloqueado;
 
     /**
@@ -73,30 +71,37 @@ public class FormularioTelefone extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jlTelefone = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtTelefones = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jcbTipoTelefone = new jautopecas.components.JFComboBox();
         jlTipoTelefone = new javax.swing.JLabel();
+        jlTelefone = new javax.swing.JLabel();
+        jtfTelefone = new jautopecas.components.JFTextField();
         jbSalvar = new javax.swing.JButton();
         jbLimpar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
-        jtfTelefone = new jautopecas.components.JFTextField();
-        jcbTipoTelefone = new jautopecas.components.JFComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtaObservacao = new javax.swing.JTextArea();
+        jlObservacao = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtTelefones = new javax.swing.JTable();
+
+        setPreferredSize(new java.awt.Dimension(650, 300));
+        setLayout(new java.awt.BorderLayout());
+
+        jcbTipoTelefone.setClasseFormulario("jautopecas.crud.pessoa.telefone.FormularioTipoTelefone");
+        jcbTipoTelefone.setMensagemAjuda("Tipo de telefone. EX:. Comercial,Residencial,Etc...");
+
+        jlTipoTelefone.setText("Tipo Telefone");
 
         jlTelefone.setText("Telefone");
 
-        jtTelefones.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jtTelefones.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jtTelefones);
-
-        jlTipoTelefone.setText("Tipo Telefone");
+        try {
+            jtfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jtfTelefone.setMensagemAjuda("Telefone");
+        jtfTelefone.setValidador(new ValidadorStringLength(jtfTelefone, 10, 150));
 
         jbSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jautopecas/imagens/icones/iconeConfirmar16.png"))); // NOI18N
         jbSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -119,69 +124,84 @@ public class FormularioTelefone extends javax.swing.JPanel {
             }
         });
 
-        try {
-            jtfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jtfTelefone.setMensagemAjuda("Telefone");
-        jtfTelefone.setValidador(new ValidadorStringLength(jtfTelefone, 10, 150));
+        jtaObservacao.setColumns(20);
+        jtaObservacao.setRows(5);
+        jScrollPane2.setViewportView(jtaObservacao);
 
-        jcbTipoTelefone.setClasseFormulario("jautopecas.crud.pessoa.telefone.FormularioTipoTelefone");
-        jcbTipoTelefone.setMensagemAjuda("Tipo de telefone. EX:. Comercial,Residencial,Etc...");
+        jlObservacao.setText("Obervação");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jbSalvar)
-                        .addGap(6, 6, 6)
-                        .addComponent(jbLimpar)
-                        .addGap(6, 6, 6)
-                        .addComponent(jbExcluir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlTipoTelefone)
-                            .addComponent(jcbTipoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlTelefone)
-                            .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlTipoTelefone)
-                    .addComponent(jlTelefone))
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbTipoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbSalvar)
-                    .addComponent(jbLimpar)
-                    .addComponent(jbExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbTipoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlTipoTelefone))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlTelefone)
+                                    .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jlObservacao)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbSalvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbLimpar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbExcluir)))
+                        .addGap(0, 328, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlTipoTelefone)
+                    .addComponent(jlTelefone))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbTipoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlObservacao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbSalvar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbLimpar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbExcluir, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+
+        add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(2, 110));
+
+        jtTelefones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jtTelefones.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jtTelefones);
+
+        add(jScrollPane1, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
         try {
-            if (utilFormulario.validarFormulario(this, true, countErrosFormulario) <= 0) {
+            if (UtilFormulario.validarFormulario(this) <= 0) {
                 if (jtTelefones.getSelectedRowCount() <= 0) {
                     if (listaTelefonePessoa == null) {
                         listaTelefonePessoa = new ArrayList<>();
@@ -197,6 +217,10 @@ public class FormularioTelefone extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
 
+    private void jbLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparActionPerformed
+        onLimpar();
+    }//GEN-LAST:event_jbLimparActionPerformed
+
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
         Object[] options = {"Sim", "Não"};
         if (JOptionPane.showOptionDialog(null, "Deseja Excluir o telefone selecionado?", "Atenção",
@@ -206,10 +230,6 @@ public class FormularioTelefone extends javax.swing.JPanel {
             populaListaTelefones();
         }
     }//GEN-LAST:event_jbExcluirActionPerformed
-
-    private void jbLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimparActionPerformed
-        onLimpar();
-    }//GEN-LAST:event_jbLimparActionPerformed
 
     public void onLimpar() {
         telefonePessoa = null;
@@ -277,14 +297,18 @@ public class FormularioTelefone extends javax.swing.JPanel {
         return jtTelefones;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbLimpar;
     private javax.swing.JButton jbSalvar;
     private jautopecas.components.JFComboBox jcbTipoTelefone;
+    private javax.swing.JLabel jlObservacao;
     private javax.swing.JLabel jlTelefone;
     private javax.swing.JLabel jlTipoTelefone;
     private javax.swing.JTable jtTelefones;
+    private javax.swing.JTextArea jtaObservacao;
     private jautopecas.components.JFTextField jtfTelefone;
     // End of variables declaration//GEN-END:variables
 }

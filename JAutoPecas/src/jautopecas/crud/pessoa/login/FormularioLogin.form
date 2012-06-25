@@ -33,34 +33,29 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jcbTipoTelefone" min="-2" pref="159" max="-2" attributes="0"/>
-                                      <Component id="jlTipoTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jlTelefone" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jtfTelefone" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="jlObservacao" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jbSalvar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jbLimpar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jbExcluir" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="0" pref="328" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jbSalvar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jbLimpar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jbExcluir" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jlLogin" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jpfSenha" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
+                              <Component id="jlSenha" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jlConfirmaSenha" min="-2" max="-2" attributes="0"/>
+                              <Component id="jpfConfirmaSenha" min="-2" pref="159" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="jtfLogin" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="308" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -68,23 +63,25 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jlTipoTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jlLogin" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jcbTipoTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jtfLogin" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jlObservacao" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" min="-2" pref="68" max="-2" attributes="0"/>
-                  <EmptySpace pref="9" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jbSalvar" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlConfirmaSenha" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jlSenha" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jpfSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jpfConfirmaSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="57" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jbLimpar" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbSalvar" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jbExcluir" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -93,31 +90,38 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="jautopecas.components.JFComboBox" name="jcbTipoTelefone">
+        <Component class="javax.swing.JLabel" name="jlLogin">
           <Properties>
-            <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.telefone.FormularioTipoTelefone"/>
-            <Property name="mensagemAjuda" type="java.lang.String" value="Tipo de telefone. EX:. Comercial,Residencial,Etc..."/>
+            <Property name="text" type="java.lang.String" value="Login"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jlTipoTelefone">
+        <Component class="jautopecas.components.JFTextField" name="jtfLogin">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tipo Telefone"/>
+            <Property name="mensagemAjuda" type="java.lang.String" value="Numero, Caso seja sem numero informar S/N"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jlTelefone">
+        <Component class="javax.swing.JLabel" name="jlSenha">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Telefone"/>
+            <Property name="text" type="java.lang.String" value="Senha"/>
           </Properties>
         </Component>
-        <Component class="jautopecas.components.JFTextField" name="jtfTelefone">
+        <Component class="jautopecas.components.JPasswordField" name="jpfSenha">
           <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-              <Format format="(##)####-####" subtype="-1" type="5"/>
-            </Property>
-            <Property name="mensagemAjuda" type="java.lang.String" value="Telefone"/>
             <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new ValidadorStringLength(jtfTelefone, 10, 150)" type="code"/>
+              <Connection code="new ValidadorSenha(jpfSenha, jpfConfirmaSenha)" type="code"/>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="jautopecas.components.JPasswordField" name="jpfConfirmaSenha">
+          <Properties>
+            <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new ValidadorSenha(jpfSenha, jpfConfirmaSenha)" type="code"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlConfirmaSenha">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Confirma Senha"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jbSalvar">
@@ -150,26 +154,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirActionPerformed"/>
           </Events>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jtaObservacao">
-              <Properties>
-                <Property name="columns" type="int" value="20"/>
-                <Property name="rows" type="int" value="5"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Component class="javax.swing.JLabel" name="jlObservacao">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Oberva&#xe7;&#xe3;o"/>
-          </Properties>
-        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -189,7 +173,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jtTelefones">
+        <Component class="javax.swing.JTable" name="jtLogins">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="0" rowCount="0"/>

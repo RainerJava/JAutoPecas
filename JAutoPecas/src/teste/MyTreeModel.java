@@ -1,6 +1,6 @@
 package teste;
 
-import jautopecas.entidades.pessoa.login.PessoaLoginPermissao;
+import jautopecas.entidades.pessoa.login.LoginPermissaoPessoa;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.jdesktop.swingx.treetable.AbstractTreeTableModel;
 
@@ -56,7 +56,7 @@ public class MyTreeModel extends AbstractTreeTableModel {
     @Override
     public Object getValueAt(Object arg0, int arg1) {
         if (arg0 instanceof TableRowData) {
-            PessoaLoginPermissao data = (PessoaLoginPermissao) arg0;
+            LoginPermissaoPessoa data = (LoginPermissaoPessoa) arg0;
             if (data != null) {
                 switch (arg1) {
                     case 0:
@@ -77,7 +77,7 @@ public class MyTreeModel extends AbstractTreeTableModel {
 
         if (arg0 instanceof DefaultMutableTreeNode) {
             DefaultMutableTreeNode dataNode = (DefaultMutableTreeNode) arg0;
-            PessoaLoginPermissao data = (PessoaLoginPermissao) dataNode.getUserObject();
+            LoginPermissaoPessoa data = (LoginPermissaoPessoa) dataNode.getUserObject();
             if (data != null) {
                 switch (arg1) {
                     case 0:

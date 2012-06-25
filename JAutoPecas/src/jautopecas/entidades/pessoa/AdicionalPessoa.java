@@ -16,7 +16,7 @@ public class AdicionalPessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAdicionalPessoa;
     @OneToOne
-    @JoinColumn(name = "id_pessoa")
+    @JoinColumn(name = "ID_PESSOA")
     private Pessoa pessoa;
     @Column(name = "INSCRICAO_ESTADUAL")
     private String inscricaoEstadual;

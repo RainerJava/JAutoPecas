@@ -2,10 +2,10 @@ package jautopecas.crud.pessoa.permissao;
 
 import jautopecas.crud.IFormulario;
 import jautopecas.crud.WindowCrud;
-import jautopecas.dao.pessoa.login.PessoaLoginPermissaoDao;
+import jautopecas.dao.pessoa.login.LoginPermissaoPessoaDao;
 import jautopecas.entidades.Grupo;
 import jautopecas.entidades.menu.ItemMenu;
-import jautopecas.entidades.pessoa.login.PessoaLoginPermissao;
+import jautopecas.entidades.pessoa.login.LoginPermissaoPessoa;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -22,7 +22,7 @@ import teste.TreeCellEditor;
 public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IFormulario {
 
     private DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode();
-    List<PessoaLoginPermissao> listaPermissaoUsuario;
+    List<LoginPermissaoPessoa> listaPermissaoUsuario;
 
     /**
      * Creates new form formularioEmpresa
@@ -70,7 +70,7 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addGap(0, 532, Short.MAX_VALUE)))
+                        .addGap(0, 451, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -82,7 +82,7 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -91,10 +91,10 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
         try {
             for (int i = 0; i < listaPermissaoUsuario.size(); i++) {
                 System.out.println(listaPermissaoUsuario.get(i).toString());
-                if (listaPermissaoUsuario.get(i).getIdPessoaLoginPermissao() == null) {
-                    new PessoaLoginPermissaoDao().salvar(((PessoaLoginPermissao) listaPermissaoUsuario.get(i)));
+                if (listaPermissaoUsuario.get(i).getIdLoginPermissaoPessoa() == null) {
+                    new LoginPermissaoPessoaDao().salvar(((LoginPermissaoPessoa) listaPermissaoUsuario.get(i)));
                 } else {
-                    new PessoaLoginPermissaoDao().alterar(((PessoaLoginPermissao) listaPermissaoUsuario.get(i)));
+                    new LoginPermissaoPessoaDao().alterar(((LoginPermissaoPessoa) listaPermissaoUsuario.get(i)));
                 }
             }
         } catch (Exception ex) {
@@ -109,7 +109,7 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
         DefaultMutableTreeNode incomeNode2 = null;
         DefaultMutableTreeNode incomeNode3;
 
-        listaPermissaoUsuario = new PessoaLoginPermissaoDao().listaPermissaoUsuario(1);
+        listaPermissaoUsuario = new LoginPermissaoPessoaDao().listaPermissaoUsuario(1);
         for (int i = 0; i < listaPermissaoUsuario.size(); i++) {
             if (listaPermissaoUsuario.get(i).getItemMenu().getTipoItem().equals(ItemMenu.MENU)) {
                 incomeNode = new DefaultMutableTreeNode(listaPermissaoUsuario.get(i));
@@ -151,7 +151,7 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-    private PessoaLoginPermissao permissaoUsuario;
+    private LoginPermissaoPessoa permissaoUsuario;
 
     @Override
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
@@ -181,6 +181,6 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
 
     @Override
     public List pesquisar(String strPesquisa) throws Exception {
-        return new PessoaLoginPermissaoDao().listarTodos();
+        return new LoginPermissaoPessoaDao().listarTodos();
     }
 }

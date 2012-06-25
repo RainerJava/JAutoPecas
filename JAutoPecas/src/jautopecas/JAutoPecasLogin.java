@@ -1,7 +1,7 @@
 package jautopecas;
 
-import jautopecas.dao.pessoa.login.PessoaLoginDao;
-import jautopecas.entidades.pessoa.login.PessoaLogin;
+import jautopecas.dao.pessoa.login.LoginPessoaDao;
+import jautopecas.entidades.pessoa.login.LoginPessoa;
 import java.awt.Toolkit;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -102,7 +102,7 @@ public class JAutoPecasLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoginActionPerformed
-        PessoaLogin pessoaLogin = new PessoaLoginDao().efetuaLogin(jtfUsuario.getText(), jpfSenha.getText());
+        LoginPessoa pessoaLogin = new LoginPessoaDao().efetuaLogin(jtfUsuario.getText(), jpfSenha.getText());
         if (pessoaLogin != null) {
             JAutoPecasMenu jAutoPecasMenu = new JAutoPecasMenu(pessoaLogin);
             jAutoPecasMenu.setTitle(this.getTitle());

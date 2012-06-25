@@ -1,6 +1,7 @@
 package jautopecas.entidades.pessoa;
 
 import jautopecas.entidades.pessoa.endereco.EnderecoPessoa;
+import jautopecas.entidades.pessoa.login.LoginPessoa;
 import jautopecas.entidades.pessoa.telefone.TelefonePessoa;
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +15,8 @@ import javax.persistence.*;
 @Table(name = "CAD_PESSOA")
 public class Pessoa implements Serializable {
 
+    public static final String TIPO_PESSOA_FISICA = "Fisica";
+    public static final String TIPO_PESSOA_JURIDICA = "Juridica";
     @Id
     @Column(name = "ID_PESSOA")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +33,8 @@ public class Pessoa implements Serializable {
     private List<EnderecoPessoa> enderecoPessoa;
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TelefonePessoa> telefonePessoa;
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LoginPessoa> loginPessoa;
     @Column(name = "TIPO_PESSOA")
     private String tipoPessoa;
 
@@ -106,5 +111,13 @@ public class Pessoa implements Serializable {
 
     public void setTipoPessoa(String tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
+    }
+
+    public List<LoginPessoa> getLoginPessoa() {
+        return loginPessoa;
+    }
+
+    public void setLoginPessoa(List<LoginPessoa> loginPessoa) {
+        this.loginPessoa = loginPessoa;
     }
 }

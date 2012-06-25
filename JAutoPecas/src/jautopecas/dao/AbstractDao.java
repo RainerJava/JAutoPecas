@@ -104,6 +104,10 @@ public abstract class AbstractDao<T> {
     }
 
     public List<T> pesquisaSimples(String camposPesquisa, String strPesquisa) {
+        return pesquisaSimples(camposPesquisa, strPesquisa, null);
+    }
+
+    public List<T> pesquisaSimples(String camposPesquisa, String strPesquisa, String filtroFixo) {
         try {
             StringBuilder strBuilder = new StringBuilder();
             strBuilder.append("SELECT a FROM ").append(entityClass.getSimpleName()).append(" a");
@@ -122,6 +126,9 @@ public abstract class AbstractDao<T> {
                 }
                 strBuilder.delete(strBuilder.length() - 5, strBuilder.length());
                 strBuilder.append(") LIKE :parm").append(i);
+            }
+            if (filtroFixo != null) {
+                strBuilder.append(filtroFixo);
             }
             System.out.println(strBuilder.toString());
             TypedQuery<T> typedQuery = getEntityManager().createQuery(strBuilder.toString(), entityClass);

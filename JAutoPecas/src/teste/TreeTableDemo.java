@@ -17,9 +17,9 @@ package teste;
  * @author sandarenu
  *
  */
-import jautopecas.dao.pessoa.login.PessoaLoginPermissaoDao;
+import jautopecas.dao.pessoa.login.LoginPermissaoPessoaDao;
 import jautopecas.entidades.menu.ItemMenu;
-import jautopecas.entidades.pessoa.login.PessoaLoginPermissao;
+import jautopecas.entidades.pessoa.login.LoginPermissaoPessoa;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
@@ -54,7 +54,7 @@ public class TreeTableDemo {
         DefaultMutableTreeNode incomeNode2 = null;
         DefaultMutableTreeNode incomeNode3;
         
-        List<PessoaLoginPermissao> permissaoUsuario = new PessoaLoginPermissaoDao().listaPermissaoUsuario(1);
+        List<LoginPermissaoPessoa> permissaoUsuario = new LoginPermissaoPessoaDao().listaPermissaoUsuario(1);
         for (int i = 0; i < permissaoUsuario.size(); i++) {
             if (permissaoUsuario.get(i).getItemMenu().getTipoItem().equals(ItemMenu.MENU)) {
                 //incomeNode = new DefaultMutableTreeNode(new TableRowData(permissaoUsuario.get(i).getItemMenu().getIdItemMenu(), permissaoUsuario.get(i).getItemMenu().getNome(), permissaoUsuario.get(i).getVisualizar(), permissaoUsuario.get(i).getIncluir(), permissaoUsuario.get(i).getAlterar(), permissaoUsuario.get(i).getExcluir(), true));
