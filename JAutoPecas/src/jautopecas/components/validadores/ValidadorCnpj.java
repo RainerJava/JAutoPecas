@@ -2,7 +2,7 @@ package jautopecas.components.validadores;
 
 import br.com.caelum.stella.validation.CNPJValidator;
 import br.com.caelum.stella.validation.InvalidStateException;
-import jautopecas.components.JFTextField;
+import jautopecas.components.JTextField;
 
 /**
  *
@@ -11,9 +11,9 @@ import jautopecas.components.JFTextField;
 public class ValidadorCnpj implements Validador {
 
     private boolean valido = true;
-    private JFTextField jfTextField;
+    private JTextField jfTextField;
 
-    public ValidadorCnpj(JFTextField jfTextField) {
+    public ValidadorCnpj(JTextField jfTextField) {
         this.jfTextField = jfTextField;
     }
 

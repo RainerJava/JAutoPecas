@@ -95,7 +95,7 @@
             <Property name="text" type="java.lang.String" value="Login"/>
           </Properties>
         </Component>
-        <Component class="jautopecas.components.JFTextField" name="jtfLogin">
+        <Component class="jautopecas.components.JTextField" name="jtfLogin">
           <Properties>
             <Property name="mensagemAjuda" type="java.lang.String" value="Numero, Caso seja sem numero informar S/N"/>
           </Properties>

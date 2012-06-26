@@ -72,10 +72,10 @@ public class FormularioTelefone extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jcbTipoTelefone = new jautopecas.components.JFComboBox();
+        jcbTipoTelefone = new jautopecas.components.JComboBox();
         jlTipoTelefone = new javax.swing.JLabel();
         jlTelefone = new javax.swing.JLabel();
-        jtfTelefone = new jautopecas.components.JFTextField();
+        jtfTelefone = new jautopecas.components.JTextField();
         jbSalvar = new javax.swing.JButton();
         jbLimpar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
@@ -303,12 +303,12 @@ public class FormularioTelefone extends javax.swing.JPanel {
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbLimpar;
     private javax.swing.JButton jbSalvar;
-    private jautopecas.components.JFComboBox jcbTipoTelefone;
+    private jautopecas.components.JComboBox jcbTipoTelefone;
     private javax.swing.JLabel jlObservacao;
     private javax.swing.JLabel jlTelefone;
     private javax.swing.JLabel jlTipoTelefone;
     private javax.swing.JTable jtTelefones;
     private javax.swing.JTextArea jtaObservacao;
-    private jautopecas.components.JFTextField jtfTelefone;
+    private jautopecas.components.JTextField jtfTelefone;
     // End of variables declaration//GEN-END:variables
 }

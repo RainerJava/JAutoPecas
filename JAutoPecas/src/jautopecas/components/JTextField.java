@@ -10,7 +10,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.Field;
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
@@ -18,9 +21,9 @@ import javax.swing.text.MaskFormatter;
  *
  * @author JFFiorotto
  */
-public class JFTextField extends JFormattedTextField {
+public class JTextField extends JFormattedTextField {
 
-    public JFTextField() {
+    public JTextField() {
         super();
 
         this.addKeyListener(new KeyListener() {
@@ -55,7 +58,7 @@ public class JFTextField extends JFormattedTextField {
                         transferFocus();
                         return;
                     }
-                    JFTextField jfTextField = ((JFTextField) e.getComponent());
+                    JTextField jfTextField = ((JTextField) e.getComponent());
                     if (classeFormulario != null && e.getKeyCode() == KeyEvent.VK_F1) {
                         windowCrud = JAutoPecasMenu.addJanela(itemMenu, "F1", jfTextField);
                         windowCrud.setPesquisa(jfTextField.getText());

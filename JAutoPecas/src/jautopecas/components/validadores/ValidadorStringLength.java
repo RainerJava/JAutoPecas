@@ -1,6 +1,6 @@
 package jautopecas.components.validadores;
 
-import jautopecas.components.JFTextField;
+import jautopecas.components.JTextField;
 
 /**
  *
@@ -9,11 +9,11 @@ import jautopecas.components.JFTextField;
 public class ValidadorStringLength implements Validador {
 
     private boolean valido = true;
-    private JFTextField jfTextField;
+    private JTextField jfTextField;
     private int lengthMinimo;
     private int lengthMaximo;
 
-    public ValidadorStringLength(JFTextField jfTextField, int lengthMinimo, int lengthMaximo) {
+    public ValidadorStringLength(JTextField jfTextField, int lengthMinimo, int lengthMaximo) {
         this.jfTextField = jfTextField;
         this.lengthMinimo = lengthMinimo;
         this.lengthMaximo = lengthMaximo;

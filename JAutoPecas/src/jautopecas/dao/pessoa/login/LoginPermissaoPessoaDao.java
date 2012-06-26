@@ -19,23 +19,23 @@ public class LoginPermissaoPessoaDao extends AbstractDao<LoginPermissaoPessoa> i
         super(LoginPermissaoPessoa.class);
     }
 
-    public List<LoginPermissaoPessoa> listaPermissaoUsuario(Integer idPessoaLogin) {
-        List<LoginPermissaoPessoa> listaPermissaoUsuario = new ArrayList<>();
+    public List<LoginPermissaoPessoa> listaLoginPermissaoPessoa(Integer idPessoaLogin) {
+        List<LoginPermissaoPessoa> listaLoginPermissaoPessoa = new ArrayList<>();
         Query query = getEntityManager().createNativeQuery("SELECT b.id_login_permissao_pessoa,a.id_item_menu,b.visualizar,b.incluir,b.alterar,b.excluir "
                 + "FROM cad_item_menu a LEFT OUTER JOIN cad_login_permissao_pessoa b ON (a.id_item_menu=b.id_item_menu and b.id_login_pessoa = " + idPessoaLogin + ")");
         List<Object[]> list = query.getResultList();
         for (int i = 0; i < list.size(); i++) {
-            LoginPermissaoPessoa permissaoUsuario = new LoginPermissaoPessoa();
-            permissaoUsuario.setIdLoginPermissaoPessoa(((Integer) list.get(i)[0]));
-            permissaoUsuario.setIdItemMenu(((String) list.get(i)[1]));
-            permissaoUsuario.setVisualizar(((Boolean) list.get(i)[2]) == null ? false : ((Boolean) list.get(i)[2]));
-            permissaoUsuario.setIncluir(((Boolean) list.get(i)[3]) == null ? false : ((Boolean) list.get(i)[3]));
-            permissaoUsuario.setAlterar(((Boolean) list.get(i)[4]) == null ? false : ((Boolean) list.get(i)[4]));
-            permissaoUsuario.setExcluir(((Boolean) list.get(i)[5]) == null ? false : ((Boolean) list.get(i)[5]));
-            permissaoUsuario.setItemMenu(new ItemMenuDao().load(list.get(i)[1]));
-            listaPermissaoUsuario.add(permissaoUsuario);
+            LoginPermissaoPessoa loginPermissaoPessoa = new LoginPermissaoPessoa();
+            loginPermissaoPessoa.setIdLoginPermissaoPessoa(((Integer) list.get(i)[0]));
+            loginPermissaoPessoa.setIdItemMenu(((String) list.get(i)[1]));
+            loginPermissaoPessoa.setVisualizar(((Boolean) list.get(i)[2]) == null ? false : ((Boolean) list.get(i)[2]));
+            loginPermissaoPessoa.setIncluir(((Boolean) list.get(i)[3]) == null ? false : ((Boolean) list.get(i)[3]));
+            loginPermissaoPessoa.setAlterar(((Boolean) list.get(i)[4]) == null ? false : ((Boolean) list.get(i)[4]));
+            loginPermissaoPessoa.setExcluir(((Boolean) list.get(i)[5]) == null ? false : ((Boolean) list.get(i)[5]));
+            loginPermissaoPessoa.setItemMenu(new ItemMenuDao().load(list.get(i)[1]));
+            listaLoginPermissaoPessoa.add(loginPermissaoPessoa);
         }
-        return listaPermissaoUsuario;
+        return listaLoginPermissaoPessoa;
     }
 
     @Override

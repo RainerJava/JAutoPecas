@@ -1,6 +1,6 @@
 package jautopecas.components.validadores;
 
-import jautopecas.components.JFTextField;
+import jautopecas.components.JTextField;
 
 /**
  *
@@ -9,9 +9,9 @@ import jautopecas.components.JFTextField;
 public class ValidadorCPF implements Validador {
 
     private boolean valido = true;
-    private JFTextField jfTextField;
+    private JTextField jfTextField;
 
-    public ValidadorCPF(JFTextField jfTextField) {
+    public ValidadorCPF(JTextField jfTextField) {
         this.jfTextField = jfTextField;
     }
 

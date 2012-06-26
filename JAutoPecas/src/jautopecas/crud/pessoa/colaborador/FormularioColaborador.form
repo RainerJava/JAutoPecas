@@ -177,9 +177,9 @@
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jlNomeMae" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jlNomePai" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlNomeMae" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -198,14 +198,14 @@
                 <Property name="text" type="java.lang.String" value="Apelido"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JFTextField" name="jtfApelido">
+            <Component class="jautopecas.components.JTextField" name="jtfApelido">
               <Properties>
                 <Property name="classeFormulario" type="java.lang.String" value=""/>
                 <Property name="mensagemAjuda" type="java.lang.String" value="Nome Fantasia da empresa"/>
                 <Property name="requerido" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JFTextField" name="jtfNome">
+            <Component class="jautopecas.components.JTextField" name="jtfNome">
               <Properties>
                 <Property name="mensagemAjuda" type="java.lang.String" value="Raz&#xe3;o Social da empresa"/>
                 <Property name="requerido" type="boolean" value="false"/>
@@ -216,7 +216,7 @@
                 <Property name="text" type="java.lang.String" value="Nome Completo"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JFTextField" name="jtfIdEmpresa">
+            <Component class="jautopecas.components.JTextField" name="jtfIdEmpresa">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -305,7 +305,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Component class="jautopecas.components.JFComboBox" name="jFComboBox1">
+            <Component class="jautopecas.components.JComboBox" name="jFComboBox1">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
@@ -320,7 +320,7 @@
                 <Property name="text" type="java.lang.String" value="Sexo"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JFTextField" name="jtfNome1">
+            <Component class="jautopecas.components.JTextField" name="jtfNome1">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format subtype="0" type="1"/>
@@ -334,7 +334,7 @@
                 <Property name="text" type="java.lang.String" value="Data Nascimento"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JFComboBox" name="jFComboBox2">
+            <Component class="jautopecas.components.JComboBox" name="jFComboBox2">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
@@ -357,7 +357,7 @@
                 <Property name="text" type="java.lang.String" value="Nacionalidade"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JFTextField" name="jtfNaturalidade">
+            <Component class="jautopecas.components.JTextField" name="jtfNaturalidade">
               <Properties>
                 <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioCidade"/>
                 <Property name="mensagemAjuda" type="java.lang.String" value="Cidade"/>
@@ -371,20 +371,20 @@
                 <Property name="text" type="java.lang.String" value="Naturalidade"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JFTextField" name="jtfNaturalidadeUf">
+            <Component class="jautopecas.components.JTextField" name="jtfNaturalidadeUf">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="enabled" type="boolean" value="false"/>
                 <Property name="mensagemAjuda" type="java.lang.String" value="ID Empresa (Gerado pelo sistema)"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JFTextField" name="jtfNaturalidade1">
+            <Component class="jautopecas.components.JTextField" name="jtfNaturalidade1">
               <Properties>
                 <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioCidade"/>
                 <Property name="mensagemAjuda" type="java.lang.String" value="Cidade"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JFTextField" name="jtfNaturalidadeUf1">
+            <Component class="jautopecas.components.JTextField" name="jtfNaturalidadeUf1">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -394,7 +394,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfNaturalidadeUf1ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="jautopecas.components.JFTextField" name="jtfNomePai">
+            <Component class="jautopecas.components.JTextField" name="jtfNomePai">
               <Properties>
                 <Property name="mensagemAjuda" type="java.lang.String" value="Raz&#xe3;o Social da empresa"/>
                 <Property name="requerido" type="boolean" value="false"/>
@@ -405,7 +405,7 @@
                 <Property name="text" type="java.lang.String" value="Nome Pai"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JFTextField" name="jtfNomeMae">
+            <Component class="jautopecas.components.JTextField" name="jtfNomeMae">
               <Properties>
                 <Property name="mensagemAjuda" type="java.lang.String" value="Raz&#xe3;o Social da empresa"/>
                 <Property name="requerido" type="boolean" value="false"/>
@@ -467,7 +467,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="jautopecas.components.JFTextField" name="jtfRg">
+            <Component class="jautopecas.components.JTextField" name="jtfRg">
               <Properties>
                 <Property name="mensagemAjuda" type="java.lang.String" value="Raz&#xe3;o Social da empresa"/>
                 <Property name="requerido" type="boolean" value="false"/>
@@ -478,7 +478,7 @@
                 <Property name="text" type="java.lang.String" value="RG"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JFTextField" name="jtfCpf">
+            <Component class="jautopecas.components.JTextField" name="jtfCpf">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Format format="###.###.###-##" subtype="-1" type="5"/>

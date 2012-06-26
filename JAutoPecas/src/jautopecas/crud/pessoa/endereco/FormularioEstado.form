@@ -77,7 +77,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="jautopecas.components.JFTextField" name="jtfUf">
+    <Component class="jautopecas.components.JTextField" name="jtfUf">
       <Properties>
         <Property name="mensagemAjuda" type="java.lang.String" value="Sigla do Estado"/>
         <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -95,7 +95,7 @@
         <Property name="text" type="java.lang.String" value="Nome"/>
       </Properties>
     </Component>
-    <Component class="jautopecas.components.JFTextField" name="jtfRegiao">
+    <Component class="jautopecas.components.JTextField" name="jtfRegiao">
       <Properties>
         <Property name="mensagemAjuda" type="java.lang.String" value="Regi&#xe3;o do Estado"/>
         <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -108,7 +108,7 @@
         <Property name="text" type="java.lang.String" value="Regi&#xe3;o"/>
       </Properties>
     </Component>
-    <Component class="jautopecas.components.JFTextField" name="jtfIbge">
+    <Component class="jautopecas.components.JTextField" name="jtfIbge">
       <Properties>
         <Property name="mensagemAjuda" type="java.lang.String" value="Codigo IBGE do Estado"/>
         <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -121,7 +121,7 @@
         <Property name="text" type="java.lang.String" value="Cod. Ibge"/>
       </Properties>
     </Component>
-    <Component class="jautopecas.components.JFTextField" name="jtfNome">
+    <Component class="jautopecas.components.JTextField" name="jtfNome">
       <Properties>
         <Property name="mensagemAjuda" type="java.lang.String" value="Nome completo do Estado"/>
         <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">

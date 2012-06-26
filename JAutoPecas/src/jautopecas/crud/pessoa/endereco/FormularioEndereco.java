@@ -83,25 +83,25 @@ public class FormularioEndereco extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jtfBairro = new jautopecas.components.JFTextField();
+        jtfBairro = new jautopecas.components.JTextField();
         jlUf = new javax.swing.JLabel();
-        jtfNumero = new jautopecas.components.JFTextField();
+        jtfNumero = new jautopecas.components.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jtfLogradouro = new jautopecas.components.JFTextField();
-        jtfCidade = new jautopecas.components.JFTextField();
+        jtfLogradouro = new jautopecas.components.JTextField();
+        jtfCidade = new jautopecas.components.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jtfUf = new jautopecas.components.JFTextField();
+        jtfUf = new jautopecas.components.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jcbTipoLogradpuro = new jautopecas.components.JFComboBox();
+        jcbTipoLogradpuro = new jautopecas.components.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jtfCep = new jautopecas.components.JFTextField();
+        jtfCep = new jautopecas.components.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jbSalvar = new javax.swing.JButton();
         jbLimpar = new javax.swing.JButton();
         jbExcluir = new javax.swing.JButton();
-        jcbTipoEndereco = new jautopecas.components.JFComboBox();
+        jcbTipoEndereco = new jautopecas.components.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtEnderecos = new javax.swing.JTable();
 
@@ -428,15 +428,15 @@ public class FormularioEndereco extends javax.swing.JPanel {
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbLimpar;
     private javax.swing.JButton jbSalvar;
-    private jautopecas.components.JFComboBox jcbTipoEndereco;
-    private jautopecas.components.JFComboBox jcbTipoLogradpuro;
+    private jautopecas.components.JComboBox jcbTipoEndereco;
+    private jautopecas.components.JComboBox jcbTipoLogradpuro;
     private javax.swing.JLabel jlUf;
     private javax.swing.JTable jtEnderecos;
-    private jautopecas.components.JFTextField jtfBairro;
-    private jautopecas.components.JFTextField jtfCep;
-    private jautopecas.components.JFTextField jtfCidade;
-    private jautopecas.components.JFTextField jtfLogradouro;
-    private jautopecas.components.JFTextField jtfNumero;
-    private jautopecas.components.JFTextField jtfUf;
+    private jautopecas.components.JTextField jtfBairro;
+    private jautopecas.components.JTextField jtfCep;
+    private jautopecas.components.JTextField jtfCidade;
+    private jautopecas.components.JTextField jtfLogradouro;
+    private jautopecas.components.JTextField jtfNumero;
+    private jautopecas.components.JTextField jtfUf;
     // End of variables declaration//GEN-END:variables
 }

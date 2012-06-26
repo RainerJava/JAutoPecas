@@ -1,8 +1,8 @@
 package jautopecas.util;
 
 import jautopecas.components.DynamicTableModel;
-import jautopecas.components.JFComboBox;
-import jautopecas.components.JFTextField;
+import jautopecas.components.JComboBox;
+import jautopecas.components.JTextField;
 import jautopecas.crud.pessoa.endereco.FormularioEndereco;
 import jautopecas.crud.pessoa.endereco.FormularioEnderecoTableModel;
 import jautopecas.crud.pessoa.login.FormularioLogin;
@@ -30,25 +30,25 @@ public class UtilFormulario {
         try {
             Component components[] = container.getComponents();
             for (Component component : components) {
-                if (component instanceof JFTextField) {
-                    JFTextField jfField = (JFTextField) component;
-                    jfField.limpaCampo();
+                if (component instanceof JTextField) {
+                    JTextField comp = (JTextField) component;
+                    comp.limpaCampo();
                 } else if (component instanceof jautopecas.components.JPasswordField) {
-                    jautopecas.components.JPasswordField jfField = (jautopecas.components.JPasswordField) component;
-                    jfField.limpaCampo();
+                    jautopecas.components.JPasswordField comp = (jautopecas.components.JPasswordField) component;
+                    comp.limpaCampo();
                 } else if (component instanceof JTextArea) {
-                    JTextArea area = (JTextArea) component;
-                    area.setText("");
+                    JTextArea comp = (JTextArea) component;
+                    comp.setText("");
                 } else if (component instanceof JComboBox) {
-                    JFComboBox comboBox = (JFComboBox) component;
-                    comboBox.setSelectedIndex(-1);
-                    comboBox.setSempreBloqueado(false);
+                    JComboBox comp = (JComboBox) component;
+                    comp.setSelectedIndex(-1);
+                    comp.setSempreBloqueado(false);
                 } else if (component instanceof JTable) {
-                    JTable jtable = ((JTable) component);
-                    jtable.clearSelection();
-                    if (jtable.getModel() instanceof DynamicTableModel) {
-                        ((DynamicTableModel) jtable.getModel()).setData(null);
-                        jtable.revalidate();
+                    JTable comp = ((JTable) component);
+                    comp.clearSelection();
+                    if (comp.getModel() instanceof DynamicTableModel) {
+                        ((DynamicTableModel) comp.getModel()).setData(null);
+                        comp.revalidate();
                     }
                 } else if (component instanceof FormularioEndereco) {
                     FormularioEndereco formularioEndereco = (FormularioEndereco) component;
@@ -78,19 +78,19 @@ public class UtilFormulario {
         try {
             Component components[] = container.getComponents();
             for (Component component : components) {
-                if (component instanceof JFTextField) {
-                    JFTextField jfField = (JFTextField) component;
-                    jfField.setEditable(!formularioBloqueado);
+                if (component instanceof JTextField) {
+                    JTextField comp = (JTextField) component;
+                    comp.setEditable(!formularioBloqueado);
                 } else if (component instanceof jautopecas.components.JPasswordField) {
-                    jautopecas.components.JPasswordField jfField = (jautopecas.components.JPasswordField) component;
-                    jfField.setEditable(!formularioBloqueado);
+                    jautopecas.components.JPasswordField comp = (jautopecas.components.JPasswordField) component;
+                    comp.setEditable(!formularioBloqueado);
                 } else if (component instanceof JTextArea) {
-                    JTextArea area = (JTextArea) component;
-                    area.setEditable(!formularioBloqueado);
+                    JTextArea comp = (JTextArea) component;
+                    comp.setEditable(!formularioBloqueado);
                 } else if (component instanceof JComboBox) {
-                    JFComboBox comboBox = (JFComboBox) component;
-                    if (!comboBox.isSempreBloqueado()) {
-                        comboBox.setEnabled(!formularioBloqueado);
+                    JComboBox comp = (JComboBox) component;
+                    if (!comp.isSempreBloqueado()) {
+                        comp.setEnabled(!formularioBloqueado);
                     }
                 } else if (component instanceof FormularioEndereco) {
                     FormularioEndereco formularioEndereco = (FormularioEndereco) component;
@@ -121,14 +121,14 @@ public class UtilFormulario {
         try {
             Component components[] = container.getComponents();
             for (Component component : components) {
-                if (component instanceof JFTextField & component.isVisible()) {
-                    JFTextField field = (JFTextField) component;
-                    if (!field.validaCampo()) {
+                if (component instanceof JTextField & component.isVisible()) {
+                    JTextField comp = (JTextField) component;
+                    if (!comp.validaCampo()) {
                         countErrosFormulario++;
                     }
                 } else if (component instanceof jautopecas.components.JPasswordField & component.isVisible()) {
-                    jautopecas.components.JPasswordField field = (jautopecas.components.JPasswordField) component;
-                    if (!field.validaCampo()) {
+                    jautopecas.components.JPasswordField comp = (jautopecas.components.JPasswordField) component;
+                    if (!comp.validaCampo()) {
                         countErrosFormulario++;
                     }
                 } else if (component instanceof FormularioEndereco) {

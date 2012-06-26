@@ -93,7 +93,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="jautopecas.components.JFComboBox" name="jcbTipoTelefone">
+        <Component class="jautopecas.components.JComboBox" name="jcbTipoTelefone">
           <Properties>
             <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.telefone.FormularioTipoTelefone"/>
             <Property name="mensagemAjuda" type="java.lang.String" value="Tipo de telefone. EX:. Comercial,Residencial,Etc..."/>
@@ -109,7 +109,7 @@
             <Property name="text" type="java.lang.String" value="Telefone"/>
           </Properties>
         </Component>
-        <Component class="jautopecas.components.JFTextField" name="jtfTelefone">
+        <Component class="jautopecas.components.JTextField" name="jtfTelefone">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="(##)####-####" subtype="-1" type="5"/>

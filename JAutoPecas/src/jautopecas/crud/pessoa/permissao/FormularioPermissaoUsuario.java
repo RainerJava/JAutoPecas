@@ -109,7 +109,7 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
         DefaultMutableTreeNode incomeNode2 = null;
         DefaultMutableTreeNode incomeNode3;
 
-        listaPermissaoUsuario = new LoginPermissaoPessoaDao().listaPermissaoUsuario(1);
+        listaPermissaoUsuario = new LoginPermissaoPessoaDao().listaLoginPermissaoPessoa(1);
         for (int i = 0; i < listaPermissaoUsuario.size(); i++) {
             if (listaPermissaoUsuario.get(i).getItemMenu().getTipoItem().equals(ItemMenu.MENU)) {
                 incomeNode = new DefaultMutableTreeNode(listaPermissaoUsuario.get(i));

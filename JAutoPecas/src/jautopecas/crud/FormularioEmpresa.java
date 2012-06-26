@@ -25,24 +25,24 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtfIdEmpresa = new jautopecas.components.JFTextField();
+        jtfIdEmpresa = new jautopecas.components.JTextField();
         jlIdEmpresa = new javax.swing.JLabel();
         jlNome = new javax.swing.JLabel();
-        jtfApelido = new jautopecas.components.JFTextField();
+        jtfApelido = new jautopecas.components.JTextField();
         jlApelido = new javax.swing.JLabel();
         jlDocumento = new javax.swing.JLabel();
-        jtfNome = new jautopecas.components.JFTextField();
+        jtfNome = new jautopecas.components.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         formularioEndereco = new jautopecas.crud.pessoa.endereco.FormularioEndereco();
         jPanel2 = new javax.swing.JPanel();
         formularioTelefone = new jautopecas.crud.pessoa.telefone.FormularioTelefone();
-        jtfCnpj = new jautopecas.components.JFTextField();
-        jcbTipoPessoa = new jautopecas.components.JFComboBox();
+        jtfCnpj = new jautopecas.components.JTextField();
+        jcbTipoPessoa = new jautopecas.components.JComboBox();
         jlRazaoSocial1 = new javax.swing.JLabel();
         jlDocumento2 = new javax.swing.JLabel();
-        jtfDocumento2 = new jautopecas.components.JFTextField();
-        jtfCpf = new jautopecas.components.JFTextField();
+        jtfDocumento2 = new jautopecas.components.JTextField();
+        jtfCpf = new jautopecas.components.JTextField();
 
         setPreferredSize(new java.awt.Dimension(650, 462));
 
@@ -215,19 +215,19 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private jautopecas.components.JFComboBox jcbTipoPessoa;
+    private jautopecas.components.JComboBox jcbTipoPessoa;
     private javax.swing.JLabel jlApelido;
     private javax.swing.JLabel jlDocumento;
     private javax.swing.JLabel jlDocumento2;
     private javax.swing.JLabel jlIdEmpresa;
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlRazaoSocial1;
-    private jautopecas.components.JFTextField jtfApelido;
-    private jautopecas.components.JFTextField jtfCnpj;
-    private jautopecas.components.JFTextField jtfCpf;
-    private jautopecas.components.JFTextField jtfDocumento2;
-    private jautopecas.components.JFTextField jtfIdEmpresa;
-    private jautopecas.components.JFTextField jtfNome;
+    private jautopecas.components.JTextField jtfApelido;
+    private jautopecas.components.JTextField jtfCnpj;
+    private jautopecas.components.JTextField jtfCpf;
+    private jautopecas.components.JTextField jtfDocumento2;
+    private jautopecas.components.JTextField jtfIdEmpresa;
+    private jautopecas.components.JTextField jtfNome;
     // End of variables declaration//GEN-END:variables
     private Pessoa pessoa;
     private ModeloPessoa modeloPessoa;

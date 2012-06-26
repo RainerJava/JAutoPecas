@@ -31,10 +31,10 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jlApelido = new javax.swing.JLabel();
-        jtfApelido = new jautopecas.components.JFTextField();
-        jtfNome = new jautopecas.components.JFTextField();
+        jtfApelido = new jautopecas.components.JTextField();
+        jtfNome = new jautopecas.components.JTextField();
         jlNome = new javax.swing.JLabel();
-        jtfIdEmpresa = new jautopecas.components.JFTextField();
+        jtfIdEmpresa = new jautopecas.components.JTextField();
         jlIdPessoa = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -43,26 +43,26 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         formularioTelefone = new jautopecas.crud.pessoa.telefone.FormularioTelefone();
         jPanel3 = new javax.swing.JPanel();
         formularioLogin = new jautopecas.crud.pessoa.login.FormularioLogin();
-        jFComboBox1 = new jautopecas.components.JFComboBox();
+        jFComboBox1 = new jautopecas.components.JComboBox();
         jlSexo = new javax.swing.JLabel();
-        jtfNome1 = new jautopecas.components.JFTextField();
+        jtfNome1 = new jautopecas.components.JTextField();
         jlDataNascimento = new javax.swing.JLabel();
-        jFComboBox2 = new jautopecas.components.JFComboBox();
+        jFComboBox2 = new jautopecas.components.JComboBox();
         jlRacaCor = new javax.swing.JLabel();
         jlNacionalidade = new javax.swing.JLabel();
-        jtfNaturalidade = new jautopecas.components.JFTextField();
+        jtfNaturalidade = new jautopecas.components.JTextField();
         jlNaturalidade = new javax.swing.JLabel();
-        jtfNaturalidadeUf = new jautopecas.components.JFTextField();
-        jtfNaturalidade1 = new jautopecas.components.JFTextField();
-        jtfNaturalidadeUf1 = new jautopecas.components.JFTextField();
-        jtfNomePai = new jautopecas.components.JFTextField();
+        jtfNaturalidadeUf = new jautopecas.components.JTextField();
+        jtfNaturalidade1 = new jautopecas.components.JTextField();
+        jtfNaturalidadeUf1 = new jautopecas.components.JTextField();
+        jtfNomePai = new jautopecas.components.JTextField();
         jlNomePai = new javax.swing.JLabel();
-        jtfNomeMae = new jautopecas.components.JFTextField();
+        jtfNomeMae = new jautopecas.components.JTextField();
         jlNomeMae = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jtfRg = new jautopecas.components.JFTextField();
+        jtfRg = new jautopecas.components.JTextField();
         jlRg = new javax.swing.JLabel();
-        jtfCpf = new jautopecas.components.JFTextField();
+        jtfCpf = new jautopecas.components.JTextField();
         jlCpf = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(800, 550));
@@ -255,9 +255,9 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
                         .addComponent(jtfNaturalidadeUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jtfNaturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNomeMae)
-                    .addComponent(jlNomePai))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlNomePai)
+                    .addComponent(jlNomeMae))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfNomePai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,8 +343,8 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
     private jautopecas.crud.pessoa.endereco.FormularioEndereco formularioEndereco;
     private jautopecas.crud.pessoa.login.FormularioLogin formularioLogin;
     private jautopecas.crud.pessoa.telefone.FormularioTelefone formularioTelefone;
-    private jautopecas.components.JFComboBox jFComboBox1;
-    private jautopecas.components.JFComboBox jFComboBox2;
+    private jautopecas.components.JComboBox jFComboBox1;
+    private jautopecas.components.JComboBox jFComboBox2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -364,18 +364,18 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
     private javax.swing.JLabel jlRacaCor;
     private javax.swing.JLabel jlRg;
     private javax.swing.JLabel jlSexo;
-    private jautopecas.components.JFTextField jtfApelido;
-    private jautopecas.components.JFTextField jtfCpf;
-    private jautopecas.components.JFTextField jtfIdEmpresa;
-    private jautopecas.components.JFTextField jtfNaturalidade;
-    private jautopecas.components.JFTextField jtfNaturalidade1;
-    private jautopecas.components.JFTextField jtfNaturalidadeUf;
-    private jautopecas.components.JFTextField jtfNaturalidadeUf1;
-    private jautopecas.components.JFTextField jtfNome;
-    private jautopecas.components.JFTextField jtfNome1;
-    private jautopecas.components.JFTextField jtfNomeMae;
-    private jautopecas.components.JFTextField jtfNomePai;
-    private jautopecas.components.JFTextField jtfRg;
+    private jautopecas.components.JTextField jtfApelido;
+    private jautopecas.components.JTextField jtfCpf;
+    private jautopecas.components.JTextField jtfIdEmpresa;
+    private jautopecas.components.JTextField jtfNaturalidade;
+    private jautopecas.components.JTextField jtfNaturalidade1;
+    private jautopecas.components.JTextField jtfNaturalidadeUf;
+    private jautopecas.components.JTextField jtfNaturalidadeUf1;
+    private jautopecas.components.JTextField jtfNome;
+    private jautopecas.components.JTextField jtfNome1;
+    private jautopecas.components.JTextField jtfNomeMae;
+    private jautopecas.components.JTextField jtfNomePai;
+    private jautopecas.components.JTextField jtfRg;
     // End of variables declaration//GEN-END:variables
     private Pessoa pessoa;
     private ModeloPessoa modeloPessoa;

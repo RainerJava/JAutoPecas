@@ -72,7 +72,7 @@ public class FormularioLogin extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jlLogin = new javax.swing.JLabel();
-        jtfLogin = new jautopecas.components.JFTextField();
+        jtfLogin = new jautopecas.components.JTextField();
         jlSenha = new javax.swing.JLabel();
         jpfSenha = new jautopecas.components.JPasswordField();
         jpfConfirmaSenha = new jautopecas.components.JPasswordField();
@@ -299,6 +299,6 @@ public class FormularioLogin extends javax.swing.JPanel {
     private jautopecas.components.JPasswordField jpfConfirmaSenha;
     private jautopecas.components.JPasswordField jpfSenha;
     private javax.swing.JTable jtLogins;
-    private jautopecas.components.JFTextField jtfLogin;
+    private jautopecas.components.JTextField jtfLogin;
     // End of variables declaration//GEN-END:variables
 }

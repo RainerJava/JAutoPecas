@@ -26,14 +26,14 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtfUf = new jautopecas.components.JFTextField();
+        jtfUf = new jautopecas.components.JTextField();
         jlUf = new javax.swing.JLabel();
         jlNome = new javax.swing.JLabel();
-        jtfRegiao = new jautopecas.components.JFTextField();
+        jtfRegiao = new jautopecas.components.JTextField();
         jlRegiao = new javax.swing.JLabel();
-        jtfIbge = new jautopecas.components.JFTextField();
+        jtfIbge = new jautopecas.components.JTextField();
         jlIbge = new javax.swing.JLabel();
-        jtfNome = new jautopecas.components.JFTextField();
+        jtfNome = new jautopecas.components.JTextField();
 
         setPreferredSize(new java.awt.Dimension(384, 206));
 
@@ -108,10 +108,10 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlRegiao;
     private javax.swing.JLabel jlUf;
-    private jautopecas.components.JFTextField jtfIbge;
-    private jautopecas.components.JFTextField jtfNome;
-    private jautopecas.components.JFTextField jtfRegiao;
-    private jautopecas.components.JFTextField jtfUf;
+    private jautopecas.components.JTextField jtfIbge;
+    private jautopecas.components.JTextField jtfNome;
+    private jautopecas.components.JTextField jtfRegiao;
+    private jautopecas.components.JTextField jtfUf;
     // End of variables declaration//GEN-END:variables
     private Estado estado;
 

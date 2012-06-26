@@ -52,7 +52,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="jautopecas.components.JFTextField" name="jFTextField1">
+    <Component class="jautopecas.components.JTextField" name="jFTextField1">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -61,7 +61,7 @@
         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jFTextField1.setMensagemAjuda(&quot;Codigo do Grupo (Gerado pelo sistema)&quot;);"/>
       </AuxValues>
     </Component>
-    <Component class="jautopecas.components.JFTextField" name="jFTextField2">
+    <Component class="jautopecas.components.JTextField" name="jFTextField2">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jFTextField2.setValidador(new ValidadorStringLength(jFTextField2, 4, 20));&#xd;&#xa;jFTextField2.setMensagemAjuda(&quot;Informe o nome do grupo.&quot;);"/>
       </AuxValues>

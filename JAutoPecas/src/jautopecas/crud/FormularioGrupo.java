@@ -23,8 +23,8 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFTextField1 = new jautopecas.components.JFTextField();
-        jFTextField2 = new jautopecas.components.JFTextField();
+        jFTextField1 = new jautopecas.components.JTextField();
+        jFTextField2 = new jautopecas.components.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -70,8 +70,8 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
         jFTextField2.setMensagemAjuda("Informe o nome do grupo.");
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private jautopecas.components.JFTextField jFTextField1;
-    private jautopecas.components.JFTextField jFTextField2;
+    private jautopecas.components.JTextField jFTextField1;
+    private jautopecas.components.JTextField jFTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

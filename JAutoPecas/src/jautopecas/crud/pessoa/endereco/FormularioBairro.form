@@ -59,7 +59,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="jautopecas.components.JFTextField" name="jtfId">
+    <Component class="jautopecas.components.JTextField" name="jtfId">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="ID (Gerado automaticamente pelo sistema)"/>
@@ -75,7 +75,7 @@
         <Property name="text" type="java.lang.String" value="Nome"/>
       </Properties>
     </Component>
-    <Component class="jautopecas.components.JFTextField" name="jtfNome">
+    <Component class="jautopecas.components.JTextField" name="jtfNome">
       <Properties>
         <Property name="mensagemAjuda" type="java.lang.String" value="Nome completo do Bairro"/>
         <Property name="requerido" type="boolean" value="true"/>

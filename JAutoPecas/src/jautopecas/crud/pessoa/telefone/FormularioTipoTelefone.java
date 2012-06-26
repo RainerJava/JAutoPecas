@@ -25,10 +25,10 @@ public class FormularioTipoTelefone extends javax.swing.JPanel implements IFormu
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtfId = new jautopecas.components.JFTextField();
+        jtfId = new jautopecas.components.JTextField();
         jlId = new javax.swing.JLabel();
         jlNome = new javax.swing.JLabel();
-        jtfNome = new jautopecas.components.JFTextField();
+        jtfNome = new jautopecas.components.JTextField();
 
         setPreferredSize(new java.awt.Dimension(384, 206));
 
@@ -78,8 +78,8 @@ public class FormularioTipoTelefone extends javax.swing.JPanel implements IFormu
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jlId;
     private javax.swing.JLabel jlNome;
-    private jautopecas.components.JFTextField jtfId;
-    private jautopecas.components.JFTextField jtfNome;
+    private jautopecas.components.JTextField jtfId;
+    private jautopecas.components.JTextField jtfNome;
     // End of variables declaration//GEN-END:variables
     private TipoTelefone tipoTelefone;
 

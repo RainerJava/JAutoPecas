@@ -148,7 +148,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="jautopecas.components.JFTextField" name="jtfBairro">
+        <Component class="jautopecas.components.JTextField" name="jtfBairro">
           <Properties>
             <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioBairro"/>
             <Property name="mensagemAjuda" type="java.lang.String" value="Bairro"/>
@@ -159,7 +159,7 @@
             <Property name="text" type="java.lang.String" value="Estado"/>
           </Properties>
         </Component>
-        <Component class="jautopecas.components.JFTextField" name="jtfNumero">
+        <Component class="jautopecas.components.JTextField" name="jtfNumero">
           <Properties>
             <Property name="mensagemAjuda" type="java.lang.String" value="Numero, Caso seja sem numero informar S/N"/>
             <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -177,7 +177,7 @@
             <Property name="text" type="java.lang.String" value="Bairro"/>
           </Properties>
         </Component>
-        <Component class="jautopecas.components.JFTextField" name="jtfLogradouro">
+        <Component class="jautopecas.components.JTextField" name="jtfLogradouro">
           <Properties>
             <Property name="mensagemAjuda" type="java.lang.String" value="Logradouro"/>
             <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -185,7 +185,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="jautopecas.components.JFTextField" name="jtfCidade">
+        <Component class="jautopecas.components.JTextField" name="jtfCidade">
           <Properties>
             <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioCidade"/>
             <Property name="mensagemAjuda" type="java.lang.String" value="Cidade"/>
@@ -196,7 +196,7 @@
             <Property name="text" type="java.lang.String" value="Cep"/>
           </Properties>
         </Component>
-        <Component class="jautopecas.components.JFTextField" name="jtfUf">
+        <Component class="jautopecas.components.JTextField" name="jtfUf">
           <Properties>
             <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioEstado"/>
             <Property name="mensagemAjuda" type="java.lang.String" value="Estado"/>
@@ -207,7 +207,7 @@
             <Property name="text" type="java.lang.String" value="Numero"/>
           </Properties>
         </Component>
-        <Component class="jautopecas.components.JFComboBox" name="jcbTipoLogradpuro">
+        <Component class="jautopecas.components.JComboBox" name="jcbTipoLogradpuro">
           <Properties>
             <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioTipoLogradouro"/>
             <Property name="mensagemAjuda" type="java.lang.String" value="Tipo de logradouro. EX:. Rua, Avenida, Viela, Etc..."/>
@@ -223,7 +223,7 @@
             <Property name="text" type="java.lang.String" value="Tipo Endere&#xe7;o"/>
           </Properties>
         </Component>
-        <Component class="jautopecas.components.JFTextField" name="jtfCep">
+        <Component class="jautopecas.components.JTextField" name="jtfCep">
           <Properties>
             <Property name="mensagemAjuda" type="java.lang.String" value="Codigo de endere&#xe7;amento postal"/>
           </Properties>
@@ -266,7 +266,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbExcluirActionPerformed"/>
           </Events>
         </Component>
-        <Component class="jautopecas.components.JFComboBox" name="jcbTipoEndereco">
+        <Component class="jautopecas.components.JComboBox" name="jcbTipoEndereco">
           <Properties>
             <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioTipoEndereco"/>
             <Property name="mensagemAjuda" type="java.lang.String" value="Tipo de endere&#xe7;o. EX:. Comercial,Residencial,Faturamento,Etc..."/>
