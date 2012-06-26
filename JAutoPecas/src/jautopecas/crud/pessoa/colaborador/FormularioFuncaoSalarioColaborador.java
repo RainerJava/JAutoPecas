@@ -191,7 +191,7 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
     private void setObjetoFormulario(FuncaoSalarioColaborador objetoFormulario) throws Exception {
         try {
             jtfFuncao.setText(objetoFormulario.getFuncao());
-            jtfSalario.setText(objetoFormulario.getSalario().toString());
+            jtfSalario.setText(StringUtils.BigDecimalToString(objetoFormulario.getSalario()));
             jtfDataInicio.setText(StringUtils.dateToString(objetoFormulario.getDataInicio()));
             jtfDataFim.setText(StringUtils.dateToString(objetoFormulario.getDataFim()));
         } catch (Exception ex) {

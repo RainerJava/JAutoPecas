@@ -6,7 +6,7 @@ package jautopecas.util;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
-import java.text.ParseException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,46 +16,31 @@ import java.util.Date;
  */
 public class StringUtils {
 
-    /**
-     * Converte uma String para um objeto Date. Caso a String seja vazia ou
-     * nula, retorna null - para facilitar em casos onde formulários podem ter
-     * campos de datas vazios.
-     *
-     * @param data String no formato dd/MM/yyyy a ser formatada
-     * @return Date Objeto Date ou null caso receba uma String vazia ou nula
-     * @throws Exception Caso a String esteja no formato errado
-     */
     public static Date stringToDate(String data) throws Exception {
         if (data == null || data.equals("")) {
             return null;
         }
-
-        Date date = null;
-        try {
-            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            date = (java.util.Date) formatter.parse(data);
-        } catch (ParseException e) {
-            throw e;
-        }
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = (java.util.Date) formatter.parse(data);
         return date;
     }
 
-    public static String dateToString(Date data) throws Exception {
-        if (data == null) {
+    public static String dateToString(Date d) throws Exception {
+        if (d == null) {
             return "";
         }
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        return formatter.format(data);
+        return formatter.format(d);
     }
 
-    public static BigDecimal stringToBigDecimal(String s) {
-        try {
-            s = s.replace(".", "");
-            s = s.replace(",", ".");
-            return new BigDecimal(s);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
+    public static BigDecimal stringToBigDecimal(String s) throws Exception {
+        s = s.replace(".", "");
+        s = s.replace(",", ".");
+        return new BigDecimal(s);
+    }
+
+    public static String BigDecimalToString(BigDecimal b) throws Exception {
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
+        return formatter.format(b);
     }
 }
