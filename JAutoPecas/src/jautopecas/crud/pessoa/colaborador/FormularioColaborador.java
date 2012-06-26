@@ -64,6 +64,8 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         jlRg = new javax.swing.JLabel();
         jtfCpf = new jautopecas.components.JTextField();
         jlCpf = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        formularioFuncaoSalarioColaborador1 = new jautopecas.crud.pessoa.colaborador.FormularioFuncaoSalarioColaborador();
 
         setPreferredSize(new java.awt.Dimension(800, 550));
 
@@ -316,6 +318,11 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
 
         jTabbedPane2.addTab("Documentação", jPanel5);
 
+        jPanel6.setLayout(new java.awt.BorderLayout());
+        jPanel6.add(formularioFuncaoSalarioColaborador1, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane2.addTab("Função/Salario", jPanel6);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -341,8 +348,10 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
             jtfNaturalidadeUf.setText(((Cidade) jtfNaturalidade.getObjeto()).getUf().getUf());
         }
     }//GEN-LAST:event_jtfNaturalidadeFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private jautopecas.crud.pessoa.endereco.FormularioEndereco formularioEndereco;
+    private jautopecas.crud.pessoa.colaborador.FormularioFuncaoSalarioColaborador formularioFuncaoSalarioColaborador1;
     private jautopecas.crud.pessoa.login.FormularioLogin formularioLogin;
     private jautopecas.crud.pessoa.telefone.FormularioTelefone formularioTelefone;
     private jautopecas.components.JComboBox jFComboBox1;
@@ -352,6 +361,7 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel jlApelido;
