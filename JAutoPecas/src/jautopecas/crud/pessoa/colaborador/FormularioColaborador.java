@@ -1,6 +1,7 @@
 package jautopecas.crud.pessoa.colaborador;
 
 import jautopecas.crud.IFormulario;
+import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.dao.pessoa.ModeloPessoaDao;
 import jautopecas.dao.pessoa.PessoaDao;
@@ -12,7 +13,6 @@ import jautopecas.entidades.pessoa.endereco.EnderecoPessoa;
 import jautopecas.entidades.pessoa.login.LoginPessoa;
 import jautopecas.entidades.pessoa.telefone.TelefonePessoa;
 import java.util.List;
-import javax.swing.JLabel;
 
 /**
  *
@@ -70,17 +70,17 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         jlApelido.setText("Apelido");
 
         jtfApelido.setClasseFormulario("");
-        jtfApelido.setMensagemAjuda("Nome Fantasia da empresa");
+        jtfApelido.setMensagemAjuda("Apelido (Informar Primeiro nome)");
         jtfApelido.setRequerido(false);
 
-        jtfNome.setMensagemAjuda("Razão Social da empresa");
+        jtfNome.setMensagemAjuda("Nome Completo");
         jtfNome.setRequerido(false);
 
         jlNome.setText("Nome Completo");
 
         jtfIdEmpresa.setEditable(false);
         jtfIdEmpresa.setEnabled(false);
-        jtfIdEmpresa.setMensagemAjuda("ID Empresa (Gerado pelo sistema)");
+        jtfIdEmpresa.setMensagemAjuda("ID Colaborador (Gerado pelo sistema)");
 
         jlIdPessoa.setText("ID Colaborador");
 
@@ -104,23 +104,25 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         jTabbedPane1.addTab("Login", jPanel3);
 
         jFComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
+        jFComboBox1.setMensagemAjuda("Sexo (Informar o mesmo que consta no RG)");
 
         jlSexo.setText("Sexo");
 
         jtfNome1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        jtfNome1.setMensagemAjuda("Razão Social da empresa");
+        jtfNome1.setMensagemAjuda("Data de Nascimento");
         jtfNome1.setRequerido(false);
 
         jlDataNascimento.setText("Data Nascimento");
 
         jFComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Branca", "Preta", "Amarela", "Parda", "Indigina" }));
+        jFComboBox2.setMensagemAjuda("Raça/Cor (Informar o mesmo que consta no RG)");
 
         jlRacaCor.setText("Raça/Cor");
 
         jlNacionalidade.setText("Nacionalidade");
 
         jtfNaturalidade.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioCidade");
-        jtfNaturalidade.setMensagemAjuda("Cidade");
+        jtfNaturalidade.setMensagemAjuda("Naturalidade");
         jtfNaturalidade.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jtfNaturalidadeFocusLost(evt);
@@ -134,7 +136,7 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         jtfNaturalidadeUf.setMensagemAjuda("ID Empresa (Gerado pelo sistema)");
 
         jtfNaturalidade1.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioCidade");
-        jtfNaturalidade1.setMensagemAjuda("Cidade");
+        jtfNaturalidade1.setMensagemAjuda("Nacionalidade");
 
         jtfNaturalidadeUf1.setEditable(false);
         jtfNaturalidadeUf1.setEnabled(false);
@@ -145,12 +147,12 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
             }
         });
 
-        jtfNomePai.setMensagemAjuda("Razão Social da empresa");
+        jtfNomePai.setMensagemAjuda("Nome Completo do Pai (Se não tiver deixar em branco)");
         jtfNomePai.setRequerido(false);
 
         jlNomePai.setText("Nome Pai");
 
-        jtfNomeMae.setMensagemAjuda("Razão Social da empresa");
+        jtfNomeMae.setMensagemAjuda("Nome da mãe completo");
         jtfNomeMae.setRequerido(false);
 
         jlNomeMae.setText("Nome Mãe");
@@ -447,8 +449,11 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
     }
 
     @Override
-    public JLabel getJlInformacao() {
-        return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
+    public MensagemRodape getMensagemRodape() {
+        if (getTopLevelAncestor() instanceof WindowCrud) {
+            return ((WindowCrud) getTopLevelAncestor()).getMensagemRodape();
+        }
+        return null;
     }
 
     @Override

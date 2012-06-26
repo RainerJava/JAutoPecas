@@ -1,15 +1,14 @@
 package jautopecas.components;
 
 import jautopecas.components.validadores.Validador;
+import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
-import jautopecas.entidades.menu.ItemMenu;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.border.Border;
 
 /**
@@ -45,14 +44,11 @@ public class JPasswordField extends javax.swing.JPasswordField {
 
             @Override
             public void focusGained(FocusEvent evt) {
-                if (jlInformacao == null) {
-                    jlInformacao = getJlInformacao();
-                }
-                if (jlInformacao != null && isEditable()) {
-                    jlInformacao.setText(mensagemAjuda);
+                if (getMensagemRodape() != null && isEditable()) {
+                    getMensagemRodape().mostraMensagem(mensagemAjuda, MensagemRodape.MENSAGEM_AJUDA);
                     if (validador != null) {
                         if (!validador.isValido()) {
-                            jlInformacao.setText(validador.getMensagemErro());
+                            getMensagemRodape().mostraMensagem(validador.getMensagemErro(), MensagemRodape.MENSAGEM_ERRO);
                         }
                     }
                 }
@@ -60,27 +56,21 @@ public class JPasswordField extends javax.swing.JPasswordField {
 
             @Override
             public void focusLost(FocusEvent evt) {
-                if (jlInformacao == null) {
-                    jlInformacao = getJlInformacao();
-                }
-                if (jlInformacao != null) {
-                    jlInformacao.setText("");
+                if (getMensagemRodape() != null) {
+                    getMensagemRodape().limpaMensagem();
                 }
             }
         });
         bordaDefault = this.getBorder();
-        colorDefault = this.getBackground();
     }
     /*
      * Variaveis Privadas
      */
     private String mensagemAjuda;
-    private JLabel jlInformacao;
+    private MensagemRodape mensagemRodape;
     private Validador validador;
-    private ItemMenu itemMenu;
-    private Border bordaDefault;
-    private Color colorDefault;
-    private Border bordaErro = BorderFactory.createLineBorder(Color.RED);
+    private final Border bordaDefault;
+    private final Border bordaErro = BorderFactory.createLineBorder(Color.RED);
 
     public boolean validaCampo() {
         boolean result = true;
@@ -103,12 +93,17 @@ public class JPasswordField extends javax.swing.JPasswordField {
         }
     }
 
-    private JLabel getJlInformacao() {
-        return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
-    }
     /*
      * Geter's and Seter's
      */
+    public MensagemRodape getMensagemRodape() {
+        if (mensagemRodape == null) {
+            if (getTopLevelAncestor() instanceof WindowCrud) {
+                mensagemRodape = ((WindowCrud) getTopLevelAncestor()).getMensagemRodape();
+            }
+        }
+        return mensagemRodape;
+    }
 
     public void setMensagemAjuda(String mensagemAjuda) {
         this.mensagemAjuda = mensagemAjuda;

@@ -201,13 +201,13 @@
             <Component class="jautopecas.components.JTextField" name="jtfApelido">
               <Properties>
                 <Property name="classeFormulario" type="java.lang.String" value=""/>
-                <Property name="mensagemAjuda" type="java.lang.String" value="Nome Fantasia da empresa"/>
+                <Property name="mensagemAjuda" type="java.lang.String" value="Apelido (Informar Primeiro nome)"/>
                 <Property name="requerido" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="jautopecas.components.JTextField" name="jtfNome">
               <Properties>
-                <Property name="mensagemAjuda" type="java.lang.String" value="Raz&#xe3;o Social da empresa"/>
+                <Property name="mensagemAjuda" type="java.lang.String" value="Nome Completo"/>
                 <Property name="requerido" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -220,7 +220,7 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="enabled" type="boolean" value="false"/>
-                <Property name="mensagemAjuda" type="java.lang.String" value="ID Empresa (Gerado pelo sistema)"/>
+                <Property name="mensagemAjuda" type="java.lang.String" value="ID Colaborador (Gerado pelo sistema)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlIdPessoa">
@@ -313,6 +313,7 @@
                     <StringItem index="1" value="Feminino"/>
                   </StringArray>
                 </Property>
+                <Property name="mensagemAjuda" type="java.lang.String" value="Sexo (Informar o mesmo que consta no RG)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlSexo">
@@ -325,7 +326,7 @@
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format subtype="0" type="1"/>
                 </Property>
-                <Property name="mensagemAjuda" type="java.lang.String" value="Raz&#xe3;o Social da empresa"/>
+                <Property name="mensagemAjuda" type="java.lang.String" value="Data de Nascimento"/>
                 <Property name="requerido" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -345,6 +346,7 @@
                     <StringItem index="4" value="Indigina"/>
                   </StringArray>
                 </Property>
+                <Property name="mensagemAjuda" type="java.lang.String" value="Ra&#xe7;a/Cor (Informar o mesmo que consta no RG)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlRacaCor">
@@ -360,7 +362,7 @@
             <Component class="jautopecas.components.JTextField" name="jtfNaturalidade">
               <Properties>
                 <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioCidade"/>
-                <Property name="mensagemAjuda" type="java.lang.String" value="Cidade"/>
+                <Property name="mensagemAjuda" type="java.lang.String" value="Naturalidade"/>
               </Properties>
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfNaturalidadeFocusLost"/>
@@ -381,7 +383,7 @@
             <Component class="jautopecas.components.JTextField" name="jtfNaturalidade1">
               <Properties>
                 <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioCidade"/>
-                <Property name="mensagemAjuda" type="java.lang.String" value="Cidade"/>
+                <Property name="mensagemAjuda" type="java.lang.String" value="Nacionalidade"/>
               </Properties>
             </Component>
             <Component class="jautopecas.components.JTextField" name="jtfNaturalidadeUf1">
@@ -396,7 +398,7 @@
             </Component>
             <Component class="jautopecas.components.JTextField" name="jtfNomePai">
               <Properties>
-                <Property name="mensagemAjuda" type="java.lang.String" value="Raz&#xe3;o Social da empresa"/>
+                <Property name="mensagemAjuda" type="java.lang.String" value="Nome Completo do Pai (Se n&#xe3;o tiver deixar em branco)"/>
                 <Property name="requerido" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -407,7 +409,7 @@
             </Component>
             <Component class="jautopecas.components.JTextField" name="jtfNomeMae">
               <Properties>
-                <Property name="mensagemAjuda" type="java.lang.String" value="Raz&#xe3;o Social da empresa"/>
+                <Property name="mensagemAjuda" type="java.lang.String" value="Nome da m&#xe3;e completo"/>
                 <Property name="requerido" type="boolean" value="false"/>
               </Properties>
             </Component>

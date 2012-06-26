@@ -1,6 +1,7 @@
 package jautopecas.crud.pessoa.permissao;
 
 import jautopecas.crud.IFormulario;
+import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.dao.pessoa.login.LoginPermissaoPessoaDao;
 import jautopecas.entidades.Grupo;
@@ -175,8 +176,11 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
     }
 
     @Override
-    public JLabel getJlInformacao() {
-        return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
+    public MensagemRodape getMensagemRodape() {
+        if (getTopLevelAncestor() instanceof WindowCrud) {
+            return ((WindowCrud) getTopLevelAncestor()).getMensagemRodape();
+        }
+        return null;
     }
 
     @Override

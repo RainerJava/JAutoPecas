@@ -93,8 +93,7 @@ public class WindowCrud extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpBarraInformacao = new javax.swing.JPanel();
-        jlInformacao = new javax.swing.JLabel();
+        mensagemRodape = new jautopecas.crud.MensagemRodape();
         jpConteudo = new javax.swing.JPanel();
         jtpFormPesquisa = new javax.swing.JTabbedPane();
         jpFormulario = new javax.swing.JPanel();
@@ -116,17 +115,7 @@ public class WindowCrud extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jpBarraInformacao.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jpBarraInformacao.setMinimumSize(new java.awt.Dimension(0, 20));
-        jpBarraInformacao.setPreferredSize(new java.awt.Dimension(20, 20));
-        jpBarraInformacao.setLayout(new java.awt.BorderLayout());
-
-        jlInformacao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jlInformacao.setName("jlInformacao");
-        jpBarraInformacao.add(jlInformacao, java.awt.BorderLayout.CENTER);
-
-        getContentPane().add(jpBarraInformacao, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(mensagemRodape, java.awt.BorderLayout.PAGE_END);
 
         jpConteudo.setLayout(new java.awt.BorderLayout());
 
@@ -267,7 +256,7 @@ public class WindowCrud extends javax.swing.JFrame {
                         @Override
                         public void run() {
                             try {
-                                jlInformacao.setText("Pesquisando...");
+                                mensagemRodape.mostraMensagem("Pesquisando..", MensagemRodape.MENSAGEM_INFORMACAO);
                                 if (resultadoPesquisa == null) {
                                     resultadoPesquisa = new ArrayList<>();
                                 }
@@ -290,10 +279,10 @@ public class WindowCrud extends javax.swing.JFrame {
                                     jtablePesquisa.changeSelection(0, 0, false, false);
                                     jtablePesquisa.requestFocus();
                                     pesquisando = false;
-                                    jlInformacao.setText(resultadoPesquisa.size() + " Registros encontrados!!");
+                                    mensagemRodape.mostraMensagem(resultadoPesquisa.size() + " Registros encontrados!!", MensagemRodape.MENSAGEM_INFORMACAO);
                                 } else {
                                     pesquisando = false;
-                                    jlInformacao.setText("Nenhum registro encontrado!!");
+                                    mensagemRodape.mostraMensagem("Nenhum registro encontrado!!", MensagemRodape.MENSAGEM_ALERTA);
                                 }
                             } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | IntrospectionException ex) {
                                 JOptionPane.showMessageDialog(null, "Erro ao pesquisar", "OOOPSS!", JOptionPane.ERROR_MESSAGE);
@@ -372,7 +361,7 @@ public class WindowCrud extends javax.swing.JFrame {
                 refreshJComponent();
                 modoOperacao = MODO_OBSERVACAO;
             } else {
-                jlInformacao.setText("Os campos em vermelho contem erros, favor corrigi-los!!");
+                mensagemRodape.mostraMensagem("Os campos em vermelho contem erros, favor corrigi-los!!", MensagemRodape.MENSAGEM_ERRO);
             }
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | UtilFormularioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
@@ -471,8 +460,8 @@ public class WindowCrud extends javax.swing.JFrame {
         }
     }
 
-    public JLabel getJlInformacao() {
-        return jlInformacao;
+    public MensagemRodape getMensagemRodape() {
+        return mensagemRodape;
     }
 
     public void setObjetoFormulario(Object objetoFormulario) {
@@ -581,13 +570,12 @@ public class WindowCrud extends javax.swing.JFrame {
     private jautopecas.components.JButton jbLimpar;
     private jautopecas.components.JButton jbNovo;
     private jautopecas.components.JButton jbSalvar;
-    private javax.swing.JLabel jlInformacao;
-    private javax.swing.JPanel jpBarraInformacao;
     private javax.swing.JPanel jpConteudo;
     private javax.swing.JPanel jpFormulario;
     private javax.swing.JPanel jpPesquisa;
     private javax.swing.JTable jtablePesquisa;
     private jautopecas.components.JTextField jtfFiltroPesquisa;
     private javax.swing.JTabbedPane jtpFormPesquisa;
+    private jautopecas.crud.MensagemRodape mensagemRodape;
     // End of variables declaration//GEN-END:variables
 }

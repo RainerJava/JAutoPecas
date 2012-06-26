@@ -1,7 +1,6 @@
 package jautopecas.crud;
 
 import java.util.List;
-import javax.swing.JLabel;
 
 /**
  *
@@ -19,7 +18,7 @@ public interface IFormulario {
 
     public void excluir() throws Exception;
 
-    public JLabel getJlInformacao();
+    public MensagemRodape getMensagemRodape();
 
     public List pesquisar(String strPesquisa) throws Exception;
 }

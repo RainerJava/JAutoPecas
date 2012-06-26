@@ -1,6 +1,7 @@
 package jautopecas.components;
 
 import jautopecas.JAutoPecasMenu;
+import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.entidades.menu.ItemMenu;
 import java.awt.event.FocusAdapter;
@@ -12,7 +13,6 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JLabel;
 
 /**
  *
@@ -62,43 +62,26 @@ public class JComboBox extends javax.swing.JComboBox {
         this.addFocusListener(new FocusAdapter() {
 
             @Override
-            public void focusGained(FocusEvent evt) {
-                if (jlInformacao == null) {
-                    jlInformacao = getJlInformacao();
-                }
-                if (jlInformacao != null && isEnabled()) {
-                    jlInformacao.setText(mensagemAjuda);
+            public void focusGained(FocusEvent evt) {          
+                if (getMensagemRodape() != null && isEnabled()) {
+                    getMensagemRodape().mostraMensagem(mensagemAjuda, MensagemRodape.MENSAGEM_AJUDA);
                 }
             }
 
             @Override
             public void focusLost(FocusEvent evt) {
-                if (jlInformacao == null) {
-                    jlInformacao = getJlInformacao();
-                }
-                if (jlInformacao != null) {
-                    jlInformacao.setText("");
+                if (getMensagemRodape() != null) {
+                    getMensagemRodape().limpaMensagem();
                 }
             }
         });
-    }
-
-    private JLabel getJlInformacao() {
-        return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
     }
     private List<Object> dataSet;
     private String classeFormulario;
     private ItemMenu itemMenu;
     private String mensagemAjuda;
-    private JLabel jlInformacao;
     private boolean sempreBloqueado;
-    /*
-     * Getter's and Setter's
-     */
-
-    public List<Object> getDataSet() {
-        return dataSet;
-    }
+    private MensagemRodape mensagemRodape;
 
     public void refreshDataSet() throws Exception {
         if (dataSet != null && dataSet.size() > 0) {
@@ -111,6 +94,22 @@ public class JComboBox extends javax.swing.JComboBox {
                 throw new Exception("Erro no refresh do JFComboBox");
             }
         }
+    }
+
+    /*
+     * Getter's and Setter's
+     */
+    public MensagemRodape getMensagemRodape() {
+        if (mensagemRodape == null) {
+            if (getTopLevelAncestor() instanceof WindowCrud) {
+                mensagemRodape = ((WindowCrud) getTopLevelAncestor()).getMensagemRodape();
+            }
+        }
+        return mensagemRodape;
+    }
+
+    public List<Object> getDataSet() {
+        return dataSet;
     }
 
     public void setDataSet(List dataSet) {

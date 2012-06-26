@@ -2,6 +2,7 @@ package jautopecas.crud.pessoa.endereco;
 
 import jautopecas.components.validadores.ValidadorStringLength;
 import jautopecas.crud.IFormulario;
+import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.dao.pessoa.endereco.EstadoDao;
 import jautopecas.entidades.pessoa.endereco.Estado;
@@ -152,8 +153,11 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
     }
 
     @Override
-    public JLabel getJlInformacao() {
-        return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
+    public MensagemRodape getMensagemRodape() {
+        if (getTopLevelAncestor() instanceof WindowCrud) {
+            return ((WindowCrud) getTopLevelAncestor()).getMensagemRodape();
+        }
+        return null;
     }
 
     @Override

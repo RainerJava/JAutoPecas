@@ -2,6 +2,7 @@ package jautopecas.crud.pessoa.telefone;
 
 import jautopecas.components.validadores.ValidadorStringLength;
 import jautopecas.crud.IFormulario;
+import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.dao.pessoa.telefone.TipoTelefoneDao;
 import jautopecas.entidades.pessoa.telefone.TipoTelefone;
@@ -115,8 +116,11 @@ public class FormularioTipoTelefone extends javax.swing.JPanel implements IFormu
     }
 
     @Override
-    public JLabel getJlInformacao() {
-        return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
+    public MensagemRodape getMensagemRodape() {
+        if (getTopLevelAncestor() instanceof WindowCrud) {
+            return ((WindowCrud) getTopLevelAncestor()).getMensagemRodape();
+        }
+        return null;
     }
 
     @Override

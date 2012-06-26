@@ -2,6 +2,7 @@ package jautopecas.components;
 
 import jautopecas.JAutoPecasMenu;
 import jautopecas.components.validadores.Validador;
+import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.entidades.menu.ItemMenu;
 import java.awt.Color;
@@ -12,7 +13,6 @@ import java.awt.event.KeyListener;
 import java.lang.reflect.Field;
 import javax.swing.BorderFactory;
 import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
@@ -79,14 +79,11 @@ public class JTextField extends JFormattedTextField {
 
             @Override
             public void focusGained(FocusEvent evt) {
-                if (jlInformacao == null) {
-                    jlInformacao = getJlInformacao();
-                }
-                if (jlInformacao != null && isEditable()) {
-                    jlInformacao.setText(mensagemAjuda);
+                if (getMensagemRodape() != null && isEditable()) {
+                    getMensagemRodape().mostraMensagem(mensagemAjuda, MensagemRodape.MENSAGEM_AJUDA);
                     if (validador != null) {
                         if (!validador.isValido()) {
-                            jlInformacao.setText(validador.getMensagemErro());
+                            getMensagemRodape().mostraMensagem(validador.getMensagemErro(), MensagemRodape.MENSAGEM_ERRO);
                         }
                     }
                 }
@@ -94,11 +91,8 @@ public class JTextField extends JFormattedTextField {
 
             @Override
             public void focusLost(FocusEvent evt) {
-                if (jlInformacao == null) {
-                    jlInformacao = getJlInformacao();
-                }
-                if (jlInformacao != null) {
-                    jlInformacao.setText("");
+                if (getMensagemRodape() != null) {
+                    getMensagemRodape().limpaMensagem();
                 }
             }
         });
@@ -109,7 +103,7 @@ public class JTextField extends JFormattedTextField {
      * Variaveis Privadas
      */
     private String mensagemAjuda;
-    private JLabel jlInformacao;
+    private MensagemRodape mensagemRodape;
     private boolean upperCase = true;
     private Validador validador;
     private Object objeto;
@@ -155,10 +149,6 @@ public class JTextField extends JFormattedTextField {
         }
     }
 
-    private JLabel getJlInformacao() {
-        return ((WindowCrud) getTopLevelAncestor()).getJlInformacao();
-    }
-
     private String getFieldValue() throws Exception {
         String str = "";
         try {
@@ -186,6 +176,15 @@ public class JTextField extends JFormattedTextField {
     /*
      * Geter's and Seter's
      */
+
+    public MensagemRodape getMensagemRodape() {
+        if (mensagemRodape == null) {
+            if (getTopLevelAncestor() instanceof WindowCrud) {
+                mensagemRodape = ((WindowCrud) getTopLevelAncestor()).getMensagemRodape();
+            }
+        }
+        return mensagemRodape;
+    }
 
     public void setMensagemAjuda(String mensagemAjuda) {
         this.mensagemAjuda = mensagemAjuda;
