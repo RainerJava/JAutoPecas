@@ -67,6 +67,7 @@ public class WindowCrud extends javax.swing.JFrame {
                 this.setIconImage(new ImageIcon(getClass().getResource(itemMenu.getCaminhoImagem())).getImage());
             }
             this.setTitle(itemMenu.getNome());
+            this.setResizable(false);
             this.setLocationRelativeTo(null);
 
             verificaLoginPermissaPessoa();

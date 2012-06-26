@@ -221,8 +221,8 @@ public class FormularioLogin extends javax.swing.JPanel {
     public void onLimpar() {
         loginPessoa = null;
         jtfLogin.limpaCampo();
-        jpfSenha.setText("");
-        jpfConfirmaSenha.setText("");
+        jpfSenha.limpaCampo();
+        jpfConfirmaSenha.limpaCampo();
         jtLogins.clearSelection();
         if (formularioBloqueado) {
             jbSalvar.setEnabled(false);

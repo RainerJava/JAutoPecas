@@ -41,7 +41,7 @@ public class UtilFormulario {
                     comp.setText("");
                 } else if (component instanceof JComboBox) {
                     JComboBox comp = (JComboBox) component;
-                    comp.setSelectedIndex(-1);
+                    comp.setSelectedIndex(0);
                     comp.setSempreBloqueado(false);
                 } else if (component instanceof JTable) {
                     JTable comp = ((JTable) component);
