@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jautopecas.util;
 
 import java.math.BigDecimal;
@@ -16,31 +12,47 @@ import java.util.Date;
  */
 public class StringUtils {
 
-    public static Date stringToDate(String data) throws Exception {
-        if (data == null || data.equals("")) {
-            return null;
+    public static Date stringToDate(String data) {
+        try {
+            if (data == null || data.equals("")) {
+                return null;
+            }
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = (java.util.Date) formatter.parse(data);
+            return date;
+        } catch (Exception ex) {
         }
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = (java.util.Date) formatter.parse(data);
-        return date;
+        return null;
     }
 
-    public static String dateToString(Date d) throws Exception {
-        if (d == null) {
-            return "";
+    public static String dateToString(Date d) {
+        try {
+            if (d == null) {
+                return "";
+            }
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            return formatter.format(d);
+        } catch (Exception ex) {
         }
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        return formatter.format(d);
+        return "";
     }
 
-    public static BigDecimal stringToBigDecimal(String s) throws Exception {
-        s = s.replace(".", "");
-        s = s.replace(",", ".");
-        return new BigDecimal(s);
+    public static BigDecimal stringToBigDecimal(String s) {
+        try {
+            s = s.replace(".", "");
+            s = s.replace(",", ".");
+            return new BigDecimal(s);
+        } catch (Exception ex) {
+        }
+        return null;
     }
 
-    public static String BigDecimalToString(BigDecimal b) throws Exception {
-        DecimalFormat formatter = new DecimalFormat("#,##0.00");
-        return formatter.format(b);
+    public static String BigDecimalToString(BigDecimal b) {
+        try {
+            DecimalFormat formatter = new DecimalFormat("#,##0.00");
+            return formatter.format(b);
+        } catch (Exception ex) {
+        }
+        return null;
     }
 }

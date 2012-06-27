@@ -1,16 +1,14 @@
 package jautopecas.crud.pessoa.colaborador;
 
+import jautopecas.components.validadores.ValidadorData;
 import jautopecas.entidades.pessoa.colaborador.FuncaoSalarioColaborador;
 import jautopecas.exceptions.UtilFormularioException;
 import jautopecas.util.StringUtils;
 import jautopecas.util.UtilFormulario;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -58,6 +56,7 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtFuncaoSalarioColaborador = new javax.swing.JTable();
 
+        setPreferredSize(new java.awt.Dimension(400, 300));
         setLayout(new java.awt.BorderLayout());
 
         jlFuncao.setText("Função");
@@ -67,12 +66,14 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtfDataInicio.setValidador(new ValidadorData(jtfDataInicio));
 
         try {
             jtfDataFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtfDataFim.setValidador(new ValidadorData(jtfDataFim));
 
         jtfSalario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
 
@@ -154,9 +155,7 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
-        add(jPanel7, java.awt.BorderLayout.CENTER);
-
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(2, 110));
+        add(jPanel7, java.awt.BorderLayout.NORTH);
 
         jtFuncaoSalarioColaborador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,22 +168,18 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
         jtFuncaoSalarioColaborador.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jtFuncaoSalarioColaborador);
 
-        add(jScrollPane1, java.awt.BorderLayout.SOUTH);
+        add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private FuncaoSalarioColaborador getObjetoFormulario() {
-        try {
-            if (funcaoSalarioColaborador == null) {
-                funcaoSalarioColaborador = new FuncaoSalarioColaborador();
-            }
-            funcaoSalarioColaborador.setFuncao(jtfFuncao.getText());
-            funcaoSalarioColaborador.setSalario(StringUtils.stringToBigDecimal(jtfSalario.getText()));
-
-            funcaoSalarioColaborador.setDataInicio(StringUtils.stringToDate(jtfDataInicio.getText()));
-            funcaoSalarioColaborador.setDataFim(StringUtils.stringToDate(jtfDataFim.getText()));
-        } catch (Exception ex) {
-            Logger.getLogger(FormularioFuncaoSalarioColaborador.class.getName()).log(Level.SEVERE, null, ex);
+        if (funcaoSalarioColaborador == null) {
+            funcaoSalarioColaborador = new FuncaoSalarioColaborador();
         }
+        funcaoSalarioColaborador.setFuncao(jtfFuncao.getText());
+        funcaoSalarioColaborador.setSalario(StringUtils.stringToBigDecimal(jtfSalario.getText()));
+
+        funcaoSalarioColaborador.setDataInicio(StringUtils.stringToDate(jtfDataInicio.getText()));
+        funcaoSalarioColaborador.setDataFim(StringUtils.stringToDate(jtfDataFim.getText()));
         return funcaoSalarioColaborador;
     }
 
