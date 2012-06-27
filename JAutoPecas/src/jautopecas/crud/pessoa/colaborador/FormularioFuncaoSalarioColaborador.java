@@ -1,6 +1,7 @@
 package jautopecas.crud.pessoa.colaborador;
 
 import jautopecas.components.validadores.ValidadorData;
+import jautopecas.entidades.pessoa.colaborador.Funcao;
 import jautopecas.entidades.pessoa.colaborador.FuncaoSalarioColaborador;
 import jautopecas.exceptions.UtilFormularioException;
 import jautopecas.util.StringUtils;
@@ -58,6 +59,8 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(400, 300));
         setLayout(new java.awt.BorderLayout());
+
+        jtfFuncao.setClasseFormulario("jautopecas.crud.pessoa.colaborador.FormularioFuncao");
 
         jlFuncao.setText("Função");
 
@@ -175,7 +178,7 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
         if (funcaoSalarioColaborador == null) {
             funcaoSalarioColaborador = new FuncaoSalarioColaborador();
         }
-        funcaoSalarioColaborador.setFuncao(jtfFuncao.getText());
+        funcaoSalarioColaborador.setFuncao((Funcao) jtfFuncao.getObjeto());
         funcaoSalarioColaborador.setSalario(StringUtils.stringToBigDecimal(jtfSalario.getText()));
 
         funcaoSalarioColaborador.setDataInicio(StringUtils.stringToDate(jtfDataInicio.getText()));
@@ -185,7 +188,7 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
 
     private void setObjetoFormulario(FuncaoSalarioColaborador objetoFormulario) throws Exception {
         try {
-            jtfFuncao.setText(objetoFormulario.getFuncao());
+            jtfFuncao.setObjeto(objetoFormulario.getFuncao());
             jtfSalario.setText(StringUtils.BigDecimalToString(objetoFormulario.getSalario()));
             jtfDataInicio.setText(StringUtils.dateToString(objetoFormulario.getDataInicio()));
             jtfDataFim.setText(StringUtils.dateToString(objetoFormulario.getDataFim()));

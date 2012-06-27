@@ -19,6 +19,9 @@
     <class>jautopecas.entidades.pessoa.telefone.TipoTelefone</class>
     <class>jautopecas.entidades.pessoa.login.LoginPessoa</class>
     <class>jautopecas.entidades.pessoa.login.LoginPermissaoPessoa</class>
+    <class>jautopecas.entidades.pessoa.colaborador.Departamento</class>
+    <class>jautopecas.entidades.pessoa.colaborador.Funcao</class>
+    <class>jautopecas.entidades.pessoa.colaborador.FuncaoSalarioColaborador</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:13306/dbautopecasnew"/>
       <property name="javax.persistence.jdbc.password" value="CALMA"/>

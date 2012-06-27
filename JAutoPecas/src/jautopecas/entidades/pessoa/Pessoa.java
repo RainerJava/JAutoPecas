@@ -1,5 +1,6 @@
 package jautopecas.entidades.pessoa;
 
+import jautopecas.entidades.pessoa.colaborador.FuncaoSalarioColaborador;
 import jautopecas.entidades.pessoa.endereco.EnderecoPessoa;
 import jautopecas.entidades.pessoa.login.LoginPessoa;
 import jautopecas.entidades.pessoa.telefone.TelefonePessoa;
@@ -37,6 +38,10 @@ public class Pessoa implements Serializable {
     private List<LoginPessoa> loginPessoa;
     @Column(name = "TIPO_PESSOA")
     private String tipoPessoa;
+    
+    /*Colaborador*/
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FuncaoSalarioColaborador> funcaoSalarioColaborador;
 
     /*
      * Getter's and Setter's
@@ -119,5 +124,13 @@ public class Pessoa implements Serializable {
 
     public void setLoginPessoa(List<LoginPessoa> loginPessoa) {
         this.loginPessoa = loginPessoa;
+    }
+
+    public List<FuncaoSalarioColaborador> getFuncaoSalarioColaborador() {
+        return funcaoSalarioColaborador;
+    }
+
+    public void setFuncaoSalarioColaborador(List<FuncaoSalarioColaborador> funcaoSalarioColaborador) {
+        this.funcaoSalarioColaborador = funcaoSalarioColaborador;
     }
 }

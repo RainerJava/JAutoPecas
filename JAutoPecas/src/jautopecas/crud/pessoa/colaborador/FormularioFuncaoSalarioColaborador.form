@@ -106,6 +106,9 @@
       </Layout>
       <SubComponents>
         <Component class="jautopecas.components.JTextField" name="jtfFuncao">
+          <Properties>
+            <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.colaborador.FormularioFuncao"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlFuncao">
           <Properties>

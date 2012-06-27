@@ -4,11 +4,11 @@ import jautopecas.crud.IFormulario;
 import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.dao.pessoa.login.LoginPermissaoPessoaDao;
+import jautopecas.dao.pessoa.login.LoginPessoaDao;
 import jautopecas.entidades.Grupo;
 import jautopecas.entidades.menu.ItemMenu;
 import jautopecas.entidades.pessoa.login.LoginPermissaoPessoa;
 import java.util.List;
-import javax.swing.JLabel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.jdesktop.swingx.JXTreeTable;
 import org.jdesktop.swingx.decorator.Highlighter;
@@ -41,7 +41,7 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(260, 108));
+        setPreferredSize(new java.awt.Dimension(540, 450));
 
         jScrollPane1.setViewportView(binTree);
 
@@ -71,7 +71,7 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addGap(0, 451, Short.MAX_VALUE)))
+                        .addGap(0, 400, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -83,7 +83,7 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -93,8 +93,10 @@ public class FormularioPermissaoUsuario extends javax.swing.JPanel implements IF
             for (int i = 0; i < listaPermissaoUsuario.size(); i++) {
                 System.out.println(listaPermissaoUsuario.get(i).toString());
                 if (listaPermissaoUsuario.get(i).getIdLoginPermissaoPessoa() == null) {
+                    listaPermissaoUsuario.get(i).setLogin(new LoginPessoaDao().load(1));
                     new LoginPermissaoPessoaDao().salvar(((LoginPermissaoPessoa) listaPermissaoUsuario.get(i)));
                 } else {
+                    listaPermissaoUsuario.get(i).setLogin(new LoginPessoaDao().load(1));
                     new LoginPermissaoPessoaDao().alterar(((LoginPermissaoPessoa) listaPermissaoUsuario.get(i)));
                 }
             }

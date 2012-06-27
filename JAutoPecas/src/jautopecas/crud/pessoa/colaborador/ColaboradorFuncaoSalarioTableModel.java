@@ -33,7 +33,7 @@ public class ColaboradorFuncaoSalarioTableModel extends AbstractTableModel {
         } else if (columnIndex == 1) {
             return dado.getDataFim();
         } else if (columnIndex == 2) {
-            return dado.getFuncao();
+            return dado.getFuncao().getNome();
         } else {
             return dado.getSalario();
         }

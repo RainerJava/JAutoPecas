@@ -12,9 +12,11 @@ public class ValidadorData implements Validador {
 
     private boolean valido = true;
     private JTextField jfTextField;
+    SimpleDateFormat sdf;
 
     public ValidadorData(JTextField jfTextField) {
         this.jfTextField = jfTextField;
+        sdf = new SimpleDateFormat("dd/MM/yyyy");
     }
 
     @Override
@@ -39,7 +41,6 @@ public class ValidadorData implements Validador {
     }
 
     public boolean validaData() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setLenient(false);
         try {
             sdf.parse(jfTextField.getText());

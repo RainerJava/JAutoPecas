@@ -8,6 +8,7 @@ import jautopecas.dao.pessoa.PessoaDao;
 import jautopecas.entidades.pessoa.AdicionalPessoa;
 import jautopecas.entidades.pessoa.ModeloPessoa;
 import jautopecas.entidades.pessoa.Pessoa;
+import jautopecas.entidades.pessoa.colaborador.FuncaoSalarioColaborador;
 import jautopecas.entidades.pessoa.endereco.Cidade;
 import jautopecas.entidades.pessoa.endereco.EnderecoPessoa;
 import jautopecas.entidades.pessoa.login.LoginPessoa;
@@ -65,7 +66,7 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         jtfCpf = new jautopecas.components.JTextField();
         jlCpf = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        formularioFuncaoSalarioColaborador1 = new jautopecas.crud.pessoa.colaborador.FormularioFuncaoSalarioColaborador();
+        formularioFuncaoSalarioColaborador = new jautopecas.crud.pessoa.colaborador.FormularioFuncaoSalarioColaborador();
 
         setPreferredSize(new java.awt.Dimension(800, 550));
 
@@ -319,7 +320,7 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         jTabbedPane2.addTab("Documentação", jPanel5);
 
         jPanel6.setLayout(new java.awt.BorderLayout());
-        jPanel6.add(formularioFuncaoSalarioColaborador1, java.awt.BorderLayout.CENTER);
+        jPanel6.add(formularioFuncaoSalarioColaborador, java.awt.BorderLayout.CENTER);
 
         jTabbedPane2.addTab("Função/Salario", jPanel6);
 
@@ -348,10 +349,9 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
             jtfNaturalidadeUf.setText(((Cidade) jtfNaturalidade.getObjeto()).getUf().getUf());
         }
     }//GEN-LAST:event_jtfNaturalidadeFocusLost
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private jautopecas.crud.pessoa.endereco.FormularioEndereco formularioEndereco;
-    private jautopecas.crud.pessoa.colaborador.FormularioFuncaoSalarioColaborador formularioFuncaoSalarioColaborador1;
+    private jautopecas.crud.pessoa.colaborador.FormularioFuncaoSalarioColaborador formularioFuncaoSalarioColaborador;
     private jautopecas.crud.pessoa.login.FormularioLogin formularioLogin;
     private jautopecas.crud.pessoa.telefone.FormularioTelefone formularioTelefone;
     private jautopecas.components.JComboBox jFComboBox1;
@@ -453,6 +453,13 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
             pessoa.setLoginPessoa(formularioLogin.getListaLoginPessoa());
             for (LoginPessoa loginPessoa : pessoa.getLoginPessoa()) {
                 loginPessoa.setPessoa(pessoa);
+            }
+        }
+
+        if (formularioFuncaoSalarioColaborador.getListaFuncaoSalarioColaborador() != null && formularioFuncaoSalarioColaborador.getListaFuncaoSalarioColaborador().size() > 0) {
+            pessoa.setFuncaoSalarioColaborador(formularioFuncaoSalarioColaborador.getListaFuncaoSalarioColaborador());
+            for (FuncaoSalarioColaborador funcaoSalarioColaborador : pessoa.getFuncaoSalarioColaborador()) {
+                funcaoSalarioColaborador.setPessoa(pessoa);
             }
         }
         return pessoa;

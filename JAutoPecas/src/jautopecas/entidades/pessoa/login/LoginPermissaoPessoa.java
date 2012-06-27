@@ -23,6 +23,9 @@ public class LoginPermissaoPessoa implements Serializable {
     private Boolean incluir;
     private Boolean alterar;
     private Boolean excluir;
+    @OneToOne
+    @JoinColumn(name = "ID_LOGIN_PESSOA")
+    private LoginPessoa login;
     @Transient
     private String idItemMenu;
 
@@ -80,5 +83,13 @@ public class LoginPermissaoPessoa implements Serializable {
 
     public void setVisualizar(Boolean visualizar) {
         this.visualizar = visualizar;
+    }
+
+    public LoginPessoa getLogin() {
+        return login;
+    }
+
+    public void setLogin(LoginPessoa login) {
+        this.login = login;
     }
 }

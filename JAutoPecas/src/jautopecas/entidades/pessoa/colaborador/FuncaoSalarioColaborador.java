@@ -25,7 +25,9 @@ public class FuncaoSalarioColaborador implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataFim;
     private BigDecimal salario;
-    private String funcao;
+    @OneToOne
+    @JoinColumn(name = "ID_FUNCAO")
+    private Funcao funcao;
     @OneToOne
     @JoinColumn(name = "ID_PESSOA")
     private Pessoa pessoa;
@@ -49,11 +51,11 @@ public class FuncaoSalarioColaborador implements Serializable {
         this.dataInicio = dataInicio;
     }
 
-    public String getFuncao() {
+    public Funcao getFuncao() {
         return funcao;
     }
 
-    public void setFuncao(String funcao) {
+    public void setFuncao(Funcao funcao) {
         this.funcao = funcao;
     }
 
