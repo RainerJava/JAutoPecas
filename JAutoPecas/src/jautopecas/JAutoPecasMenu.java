@@ -1,8 +1,10 @@
 package jautopecas;
 
 import jautopecas.crud.WindowCrud;
+import jautopecas.dao.pessoa.colaborador.FuncaoSalarioColaboradorDao;
 import jautopecas.dao.pessoa.login.LoginPermissaoPessoaDao;
 import jautopecas.entidades.menu.ItemMenu;
+import jautopecas.entidades.pessoa.colaborador.FuncaoSalarioColaborador;
 import jautopecas.entidades.pessoa.login.LoginPermissaoPessoa;
 import jautopecas.entidades.pessoa.login.LoginPessoa;
 import java.awt.Dimension;
@@ -27,17 +29,25 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     private LoginPessoa pessoaLogin;
     private static List<LoginPermissaoPessoa> listaLoginPermissaoPessoa = new ArrayList<>();
     private static HashMap<String, WindowCrud> janelas = new HashMap<>();
-
+    
     public JAutoPecasMenu(LoginPessoa pessoaLogin) {
         this.pessoaLogin = pessoaLogin;
         initComponents();
-        crialistaLoginPermissaoPessoa();
+        criaMenuPrincipal();
+        populaDadosColaborador();
+    }
+    
+    private void populaDadosColaborador() {
+        FuncaoSalarioColaborador funcaoSalarioColaborador = new FuncaoSalarioColaboradorDao().getFuncaoSalarioColaboradorAtual(pessoaLogin.getPessoa().getIdPessoa());
+        jlLogin.setText(pessoaLogin.getLogin());
+        jlFuncao.setText(funcaoSalarioColaborador.getFuncao().getNome());
+        jlDepartamento.setText(funcaoSalarioColaborador.getFuncao().getDepartamento().getNome());
     }
 
-    private void crialistaLoginPermissaoPessoa() {
+    private void criaMenuPrincipal() {
         listaLoginPermissaoPessoa.clear();
         listaLoginPermissaoPessoa.addAll(new LoginPermissaoPessoaDao().listaLoginPermissaoPessoa(pessoaLogin.getIdLoginPessoa()));
-
+        
         String idItemMenuPai = null;
         String idItemSubMenu = null;
         JMenu jMenuPrincipal = null;
@@ -89,7 +99,7 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     public static List<LoginPermissaoPessoa> getlistaLoginPermissaoPessoa() {
         return listaLoginPermissaoPessoa;
     }
-
+    
     public static ItemMenu getItemMenu(String classeFormulario) {
         ItemMenu itemMenu = null;
         for (Iterator<LoginPermissaoPessoa> it = listaLoginPermissaoPessoa.iterator(); it.hasNext();) {
@@ -100,7 +110,7 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
         }
         return itemMenu;
     }
-
+    
     public static LoginPermissaoPessoa getLoginPermissaoPessoa(ItemMenu itemMenu) {
         LoginPermissaoPessoa loginPermissaoPessoa = null;
         for (Iterator<LoginPermissaoPessoa> it = listaLoginPermissaoPessoa.iterator(); it.hasNext();) {
@@ -111,11 +121,11 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
         }
         return loginPermissaoPessoa;
     }
-
+    
     public static WindowCrud addJanela(ItemMenu itemMenu) {
         return addJanela(itemMenu, null, null);
     }
-
+    
     public static WindowCrud addJanela(ItemMenu itemMenu, String modoF1F2, JComponent jComponent) {
         WindowCrud windowCrud;
         if (janelas.containsKey(itemMenu.getIdItemMenu())) {
@@ -132,20 +142,20 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
         }
         return windowCrud;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jpDadosColaborador = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jlLogin = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jlDepartamento = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jlFuncao = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
 
         jLabel1.setText("jLabel1");
@@ -167,32 +177,32 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setPreferredSize(new java.awt.Dimension(400, 25));
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 2));
+        jpDadosColaborador.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpDadosColaborador.setPreferredSize(new java.awt.Dimension(400, 25));
+        jpDadosColaborador.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 2));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel2.setText("Usuario:");
-        jPanel2.add(jLabel2);
+        jLabel2.setText("Login:");
+        jpDadosColaborador.add(jLabel2);
 
-        jLabel3.setText("Jefferson Pires Fiorotto");
-        jPanel2.add(jLabel3);
+        jlLogin.setText("Jefferson Pires Fiorotto");
+        jpDadosColaborador.add(jlLogin);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel4.setText("Departamento:");
-        jPanel2.add(jLabel4);
+        jpDadosColaborador.add(jLabel4);
 
-        jLabel5.setText("T.I");
-        jPanel2.add(jLabel5);
+        jlDepartamento.setText("T.I");
+        jpDadosColaborador.add(jlDepartamento);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel6.setText("Cargo:");
-        jPanel2.add(jLabel6);
+        jLabel6.setText("Função:");
+        jpDadosColaborador.add(jLabel6);
 
-        jLabel7.setText("Desenv. Sistemas");
-        jPanel2.add(jLabel7);
+        jlFuncao.setText("Desenv. Sistemas");
+        jpDadosColaborador.add(jlFuncao);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
+        getContentPane().add(jpDadosColaborador, java.awt.BorderLayout.SOUTH);
         setJMenuBar(jMenuBar2);
 
         pack();
@@ -200,13 +210,13 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jlDepartamento;
+    private javax.swing.JLabel jlFuncao;
+    private javax.swing.JLabel jlLogin;
+    private javax.swing.JPanel jpDadosColaborador;
     // End of variables declaration//GEN-END:variables
 }
