@@ -1,6 +1,9 @@
-package jautopecas.crud;
+package jautopecas.crud.pessoa.fornecedor;
 
 import jautopecas.components.validadores.ValidadorCnpj;
+import jautopecas.crud.IFormulario;
+import jautopecas.crud.MensagemRodape;
+import jautopecas.crud.WindowCrud;
 import jautopecas.dao.pessoa.ModeloPessoaDao;
 import jautopecas.dao.pessoa.PessoaDao;
 import jautopecas.entidades.pessoa.AdicionalPessoa;
@@ -14,9 +17,9 @@ import java.util.List;
  *
  * @author JFFiorotto
  */
-public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario {
+public class FormularioFornecedor extends javax.swing.JPanel implements IFormulario {
 
-    public FormularioEmpresa() {
+    public FormularioFornecedor() {
         initComponents();
     }
 
@@ -25,7 +28,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
     private void initComponents() {
 
         jtfIdEmpresa = new jautopecas.components.JTextField();
-        jlIdEmpresa = new javax.swing.JLabel();
+        jlIdFornecedor = new javax.swing.JLabel();
         jlNome = new javax.swing.JLabel();
         jtfApelido = new jautopecas.components.JTextField();
         jlApelido = new javax.swing.JLabel();
@@ -38,30 +41,32 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         formularioTelefone = new jautopecas.crud.pessoa.telefone.FormularioTelefone();
         jtfCnpj = new jautopecas.components.JTextField();
         jcbTipoPessoa = new jautopecas.components.JComboBox();
-        jlRazaoSocial1 = new javax.swing.JLabel();
+        jlTipoPessoa = new javax.swing.JLabel();
         jlDocumento2 = new javax.swing.JLabel();
         jtfDocumento2 = new jautopecas.components.JTextField();
         jtfCpf = new jautopecas.components.JTextField();
+        jcbTipoLinhaFornecimento = new jautopecas.components.JComboBox();
+        jlTipoLinhaFornecimento = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(800, 550));
 
         jtfIdEmpresa.setEditable(false);
         jtfIdEmpresa.setEnabled(false);
-        jtfIdEmpresa.setMensagemAjuda("ID Empresa (Gerado pelo sistema)");
+        jtfIdEmpresa.setMensagemAjuda("ID Fornecedor (Gerado pelo sistema)");
 
-        jlIdEmpresa.setText("ID Empresa");
+        jlIdFornecedor.setText("ID Fornecedor");
 
         jlNome.setText("Razão Social");
 
         jtfApelido.setClasseFormulario("");
-        jtfApelido.setMensagemAjuda("Nome Fantasia da empresa");
+        jtfApelido.setMensagemAjuda("Nome Fantasia do fornecedor");
         jtfApelido.setRequerido(false);
 
         jlApelido.setText("Nome Fantasia");
 
         jlDocumento.setText("CNPJ");
 
-        jtfNome.setMensagemAjuda("Razão Social da empresa");
+        jtfNome.setMensagemAjuda("Razão Social do fornecedor");
         jtfNome.setRequerido(false);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -82,6 +87,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtfCnpj.setMensagemAjuda("CNPJ do fornecedor");
         jtfCnpj.setValidador(new ValidadorCnpj(jtfCnpj));
 
         jcbTipoPessoa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Juridica", "Fisica" }));
@@ -96,11 +102,10 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
             }
         });
 
-        jlRazaoSocial1.setText("Tipo Pessoa");
+        jlTipoPessoa.setText("Tipo Pessoa");
 
         jlDocumento2.setText("Inscricão Estadual");
 
-        jtfDocumento2.setMensagemAjuda("Razão Social da empresa");
         jtfDocumento2.setRequerido(false);
 
         try {
@@ -108,6 +113,21 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtfCpf.setMensagemAjuda("CPF do fornecedor");
+
+        jcbTipoLinhaFornecimento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Produtos", "Serviços" }));
+        jcbTipoLinhaFornecimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoLinhaFornecimentoActionPerformed(evt);
+            }
+        });
+        jcbTipoLinhaFornecimento.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jcbTipoLinhaFornecimentoPropertyChange(evt);
+            }
+        });
+
+        jlTipoLinhaFornecimento.setText("Tipo Linha Fornecimento");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -119,21 +139,27 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlIdEmpresa)
-                                .addGap(10, 10, 10)
-                                .addComponent(jlRazaoSocial1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(jcbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(72, 72, 72)
                                 .addComponent(jlDocumento2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlNome, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
-                                .addComponent(jlApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jlApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlIdFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jlTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jcbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jcbTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 160, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -156,13 +182,15 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlIdEmpresa)
-                    .addComponent(jlRazaoSocial1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlIdFornecedor)
+                    .addComponent(jlTipoPessoa)
+                    .addComponent(jlTipoLinhaFornecimento))
                 .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlDocumento)
@@ -199,6 +227,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
             jlDocumento2.setText("Inscrição Estadual");
             jtfCpf.setVisible(false);
             jtfCnpj.setVisible(true);
+            jtfDocumento2.setMensagemAjuda("Inscrição estadual do fornecedor");
         } else if (jcbTipoPessoa.getSelectedItem().equals("Fisica")) {
             jlDocumento.setText("CPF");
             jlNome.setText("Nome Completo");
@@ -206,21 +235,33 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
             jlDocumento2.setText("RG");
             jtfCpf.setVisible(true);
             jtfCnpj.setVisible(false);
+            jtfDocumento2.setMensagemAjuda("RG do fornecedor");
         }
     }//GEN-LAST:event_jcbTipoPessoaActionPerformed
+
+    private void jcbTipoLinhaFornecimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoLinhaFornecimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbTipoLinhaFornecimentoActionPerformed
+
+    private void jcbTipoLinhaFornecimentoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbTipoLinhaFornecimentoPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbTipoLinhaFornecimentoPropertyChange
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private jautopecas.crud.pessoa.endereco.FormularioEndereco formularioEndereco;
     private jautopecas.crud.pessoa.telefone.FormularioTelefone formularioTelefone;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private jautopecas.components.JComboBox jcbTipoLinhaFornecimento;
     private jautopecas.components.JComboBox jcbTipoPessoa;
     private javax.swing.JLabel jlApelido;
     private javax.swing.JLabel jlDocumento;
     private javax.swing.JLabel jlDocumento2;
-    private javax.swing.JLabel jlIdEmpresa;
+    private javax.swing.JLabel jlIdFornecedor;
     private javax.swing.JLabel jlNome;
-    private javax.swing.JLabel jlRazaoSocial1;
+    private javax.swing.JLabel jlTipoLinhaFornecimento;
+    private javax.swing.JLabel jlTipoPessoa;
     private jautopecas.components.JTextField jtfApelido;
     private jautopecas.components.JTextField jtfCnpj;
     private jautopecas.components.JTextField jtfCpf;
@@ -275,7 +316,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
             pessoa.setAdicionalPessoa(new AdicionalPessoa());
         }
         if (modeloPessoa == null) {
-            modeloPessoa = new ModeloPessoaDao().load(1);
+            modeloPessoa = new ModeloPessoaDao().load(2);
         }
         pessoa.setIdPessoa(Integer.valueOf(jtfIdEmpresa.getText().length() == 0 ? "0" : jtfIdEmpresa.getText()));
         pessoa.setModeloPessoa(modeloPessoa);
@@ -316,6 +357,6 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
     }
 
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
-        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.idModeloPessoa = 1");
+        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.idModeloPessoa = 2");
     }
 }
