@@ -6,9 +6,8 @@ import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.dao.pessoa.endereco.EstadoDao;
 import jautopecas.entidades.pessoa.endereco.Estado;
+import jautopecas.entidades.pessoa.endereco.Pais;
 import java.util.List;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,6 +34,8 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
         jtfIbge = new jautopecas.components.JTextField();
         jlIbge = new javax.swing.JLabel();
         jtfNome = new jautopecas.components.JTextField();
+        jtfPais = new jautopecas.components.JTextField();
+        jlPais = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(384, 206));
 
@@ -57,6 +58,12 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
 
         jtfNome.setMensagemAjuda("Nome completo do Estado");
         jtfNome.setValidador(new ValidadorStringLength(jtfNome, 5, 50));
+
+        jtfPais.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioPais");
+        jtfPais.setMensagemAjuda("Região do Estado");
+        jtfPais.setValidador(new ValidadorStringLength(jtfRegiao, -1, 100));
+
+        jlPais.setText("Pais");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -82,6 +89,12 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
                 .addComponent(jtfUf, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jtfPais, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlPais, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,28 +114,40 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtfRegiao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfIbge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jtfIbge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlPais)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jlIbge;
     private javax.swing.JLabel jlNome;
+    private javax.swing.JLabel jlPais;
     private javax.swing.JLabel jlRegiao;
     private javax.swing.JLabel jlUf;
     private jautopecas.components.JTextField jtfIbge;
     private jautopecas.components.JTextField jtfNome;
+    private jautopecas.components.JTextField jtfPais;
     private jautopecas.components.JTextField jtfRegiao;
     private jautopecas.components.JTextField jtfUf;
     // End of variables declaration//GEN-END:variables
     private Estado estado;
 
     @Override
-    public void setObjetoFormulario(Object objetoFormulario) {
-        estado = (Estado) objetoFormulario;
-        jtfUf.setText(estado.getUf());
-        jtfNome.setText(estado.getNome());
-        jtfRegiao.setText(estado.getRegiao());
-        jtfIbge.setText(estado.getIbge());
+    public void setObjetoFormulario(Object objetoFormulario) throws Exception {
+        try {
+            estado = (Estado) objetoFormulario;
+            jtfUf.setText(estado.getUf());
+            jtfNome.setText(estado.getNome());
+            jtfRegiao.setText(estado.getRegiao());
+            jtfIbge.setText(estado.getIbge());
+            jtfPais.setObjeto(estado.getPais());
+        } catch (Exception ex) {
+            throw new Exception("Erro ao carregar os dados do formulario", ex);
+        }
     }
 
     @Override
@@ -149,6 +174,7 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
         estado.setNome(jtfNome.getText());
         estado.setRegiao(jtfRegiao.getText());
         estado.setIbge(jtfIbge.getText());
+        estado.setPais((Pais) jtfPais.getObjeto());
         return estado;
     }
 

@@ -17,10 +17,10 @@ public class EnderecoPessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEnderecoPessoa;
     @OneToOne
-    @JoinColumn(name = "id_pessoa")
+    @JoinColumn(name = "ID_PESSOA")
     private Pessoa pessoa;
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_endereco")
+    @JoinColumn(name = "ID_ENDERECO")
     private Endereco endereco;
 
     public Endereco getEndereco() {

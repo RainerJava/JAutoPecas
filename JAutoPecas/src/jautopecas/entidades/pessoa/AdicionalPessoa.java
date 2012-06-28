@@ -1,6 +1,9 @@
 package jautopecas.entidades.pessoa;
 
+import jautopecas.entidades.pessoa.endereco.Cidade;
+import jautopecas.entidades.pessoa.endereco.Pais;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -21,6 +24,19 @@ public class AdicionalPessoa implements Serializable {
     @Column(name = "INSCRICAO_ESTADUAL")
     private String inscricaoEstadual;
     private String rg;
+    private String sexo;
+    @Column(name = "RACA_COR")
+    private String racaCor;
+    @Column(name = "DATA_NASCIMENTO")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataNascimento;
+    @OneToOne
+    @JoinColumn(name = "ID_CIDADE_NATURALIDADE")
+    private Cidade naturalidade;
+    @Column(name = "NOME_PAI")
+    private String nomePai;
+    @Column(name = "NOME_MAE")
+    private String nomeMae;
     /*
      * Getter's and Setter's
      */
@@ -55,5 +71,53 @@ public class AdicionalPessoa implements Serializable {
 
     public void setRg(String rg) {
         this.rg = rg;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Cidade getNaturalidade() {
+        return naturalidade;
+    }
+
+    public void setNaturalidade(Cidade naturalidade) {
+        this.naturalidade = naturalidade;
+    }
+
+    public String getNomeMae() {
+        return nomeMae;
+    }
+
+    public void setNomeMae(String nomeMae) {
+        this.nomeMae = nomeMae;
+    }
+
+    public String getNomePai() {
+        return nomePai;
+    }
+
+    public void setNomePai(String nomePai) {
+        this.nomePai = nomePai;
+    }
+
+    public String getRacaCor() {
+        return racaCor;
+    }
+
+    public void setRacaCor(String racaCor) {
+        this.racaCor = racaCor;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 }

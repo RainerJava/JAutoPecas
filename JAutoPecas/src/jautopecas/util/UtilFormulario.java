@@ -3,6 +3,8 @@ package jautopecas.util;
 import jautopecas.components.DynamicTableModel;
 import jautopecas.components.JComboBox;
 import jautopecas.components.JTextField;
+import jautopecas.crud.pessoa.colaborador.FormularioFuncaoSalarioColaborador;
+import jautopecas.crud.pessoa.colaborador.FormularioFuncaoSalarioColaboradorTableModel;
 import jautopecas.crud.pessoa.endereco.FormularioEndereco;
 import jautopecas.crud.pessoa.endereco.FormularioEnderecoTableModel;
 import jautopecas.crud.pessoa.login.FormularioLogin;
@@ -51,20 +53,25 @@ public class UtilFormulario {
                         comp.revalidate();
                     }
                 } else if (component instanceof FormularioEndereco) {
-                    FormularioEndereco formularioEndereco = (FormularioEndereco) component;
-                    formularioEndereco.onLimpar();
-                    ((FormularioEnderecoTableModel) formularioEndereco.getJtEnderecos().getModel()).removeResultado();
-                    formularioEndereco.setListaEnderecoPessoa(null);
+                    FormularioEndereco formulario = (FormularioEndereco) component;
+                    formulario.onLimpar();
+                    ((FormularioEnderecoTableModel) formulario.getJtEnderecos().getModel()).removeResultado();
+                    formulario.setListaEnderecoPessoa(null);
                 } else if (component instanceof FormularioTelefone) {
-                    FormularioTelefone formularioTelefone = (FormularioTelefone) component;
-                    formularioTelefone.onLimpar();
-                    ((FormularioTelefoneTableModel) formularioTelefone.getJtTelefones().getModel()).removeResultado();
-                    formularioTelefone.setListaTelefonePessoa(null);
+                    FormularioTelefone formulario = (FormularioTelefone) component;
+                    formulario.onLimpar();
+                    ((FormularioTelefoneTableModel) formulario.getJtTelefones().getModel()).removeResultado();
+                    formulario.setListaTelefonePessoa(null);
                 } else if (component instanceof FormularioLogin) {
-                    FormularioLogin formularioLogin = (FormularioLogin) component;
-                    formularioLogin.onLimpar();
-                    ((FormularioLoginTableModel) formularioLogin.getJtlogins().getModel()).removeResultado();
-                    formularioLogin.setListaPessoaLogin(null);
+                    FormularioLogin formulario = (FormularioLogin) component;
+                    formulario.onLimpar();
+                    ((FormularioLoginTableModel) formulario.getJtlogins().getModel()).removeResultado();
+                    formulario.setListaPessoaLogin(null);
+                } else if (component instanceof FormularioFuncaoSalarioColaborador) {
+                    FormularioFuncaoSalarioColaborador formulario = (FormularioFuncaoSalarioColaborador) component;
+                    formulario.onLimpar();
+                    ((FormularioFuncaoSalarioColaboradorTableModel) formulario.getJtFuncaoSalarioColaborador().getModel()).removeResultado();
+                    formulario.setListaFuncaoSalarioColaborador(null);
                 } else if (component instanceof Container) {
                     limpaFormulario((Container) component);
                 }
@@ -93,14 +100,17 @@ public class UtilFormulario {
                         comp.setEnabled(!formularioBloqueado);
                     }
                 } else if (component instanceof FormularioEndereco) {
-                    FormularioEndereco formularioEndereco = (FormularioEndereco) component;
-                    formularioEndereco.onBloquear(formularioBloqueado);
+                    FormularioEndereco formulario = (FormularioEndereco) component;
+                    formulario.onBloquear(formularioBloqueado);
                 } else if (component instanceof FormularioTelefone) {
-                    FormularioTelefone formularioTelefone = (FormularioTelefone) component;
-                    formularioTelefone.onBloquear(formularioBloqueado);
+                    FormularioTelefone formulario = (FormularioTelefone) component;
+                    formulario.onBloquear(formularioBloqueado);
                 } else if (component instanceof FormularioLogin) {
-                    FormularioLogin formularioLogin = (FormularioLogin) component;
-                    formularioLogin.onBloquear(formularioBloqueado);
+                    FormularioLogin formulario = (FormularioLogin) component;
+                    formulario.onBloquear(formularioBloqueado);
+                } else if (component instanceof FormularioFuncaoSalarioColaborador) {
+                    FormularioFuncaoSalarioColaborador formulario = (FormularioFuncaoSalarioColaborador) component;
+                    formulario.onBloquear(formularioBloqueado);
                 } else if (component instanceof Container) {
                     bloquearFormulario(formularioBloqueado, (Container) component);
                 }
@@ -161,6 +171,12 @@ public class UtilFormulario {
                         countErrosFormulario++;
                         JOptionPane.showMessageDialog(null, "Confirme o login antes de salvar!", "Atenção!", JOptionPane.INFORMATION_MESSAGE);
                         ((JTabbedPane) component.getParent().getParent()).setSelectedIndex(2);
+                    }
+                } else if (component instanceof FormularioFuncaoSalarioColaborador) {
+                    int countErrosFormularioFuncaoSalarioColaborador = validarFormulario((Container) component);
+                    if (countErrosFormularioFuncaoSalarioColaborador == 0) {
+                        countErrosFormulario++;
+                        JOptionPane.showMessageDialog(null, "Confirme o Função/Salário antes de salvar!", "Atenção!", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } else if (component instanceof Container) {
                     if (component instanceof JLabel) {

@@ -47,6 +47,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jtfNome" min="-2" pref="280" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jtfPais" min="-2" pref="240" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jlPais" min="-2" pref="240" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -72,6 +80,11 @@
                   <Component id="jtfRegiao" min="-2" max="-2" attributes="0"/>
                   <Component id="jtfIbge" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jlPais" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jtfPais" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -127,6 +140,20 @@
         <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new ValidadorStringLength(jtfNome, 5, 50)" type="code"/>
         </Property>
+      </Properties>
+    </Component>
+    <Component class="jautopecas.components.JTextField" name="jtfPais">
+      <Properties>
+        <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioPais"/>
+        <Property name="mensagemAjuda" type="java.lang.String" value="Regi&#xe3;o do Estado"/>
+        <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new ValidadorStringLength(jtfRegiao, -1, 100)" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlPais">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pais"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -13,6 +13,7 @@ import jautopecas.entidades.pessoa.endereco.Cidade;
 import jautopecas.entidades.pessoa.endereco.EnderecoPessoa;
 import jautopecas.entidades.pessoa.login.LoginPessoa;
 import jautopecas.entidades.pessoa.telefone.TelefonePessoa;
+import jautopecas.util.StringUtils;
 import java.util.List;
 
 /**
@@ -44,22 +45,22 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         formularioTelefone = new jautopecas.crud.pessoa.telefone.FormularioTelefone();
         jPanel3 = new javax.swing.JPanel();
         formularioLogin = new jautopecas.crud.pessoa.login.FormularioLogin();
-        jFComboBox1 = new jautopecas.components.JComboBox();
+        jcbSexo = new jautopecas.components.JComboBox();
         jlSexo = new javax.swing.JLabel();
-        jtfNome1 = new jautopecas.components.JTextField();
+        jtfDataNascimento = new jautopecas.components.JTextField();
         jlDataNascimento = new javax.swing.JLabel();
-        jFComboBox2 = new jautopecas.components.JComboBox();
+        jcbRacaCor = new jautopecas.components.JComboBox();
         jlRacaCor = new javax.swing.JLabel();
         jlNacionalidade = new javax.swing.JLabel();
         jtfNaturalidade = new jautopecas.components.JTextField();
-        jlNaturalidade = new javax.swing.JLabel();
+        jlNaturalidadeCidade = new javax.swing.JLabel();
         jtfNaturalidadeUf = new jautopecas.components.JTextField();
-        jtfNaturalidade1 = new jautopecas.components.JTextField();
-        jtfNaturalidadeUf1 = new jautopecas.components.JTextField();
+        jtfNacionalidade = new jautopecas.components.JTextField();
         jtfNomePai = new jautopecas.components.JTextField();
         jlNomePai = new javax.swing.JLabel();
         jtfNomeMae = new jautopecas.components.JTextField();
         jlNomeMae = new javax.swing.JLabel();
+        jlNaturalidadeUf = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jtfRg = new jautopecas.components.JTextField();
         jlRg = new javax.swing.JLabel();
@@ -106,19 +107,19 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
 
         jTabbedPane1.addTab("Login", jPanel3);
 
-        jFComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
-        jFComboBox1.setMensagemAjuda("Sexo (Informar o mesmo que consta no RG)");
+        jcbSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
+        jcbSexo.setMensagemAjuda("Sexo (Informar o mesmo que consta no RG)");
 
         jlSexo.setText("Sexo");
 
-        jtfNome1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        jtfNome1.setMensagemAjuda("Data de Nascimento");
-        jtfNome1.setRequerido(false);
+        jtfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        jtfDataNascimento.setMensagemAjuda("Data de Nascimento");
+        jtfDataNascimento.setRequerido(false);
 
         jlDataNascimento.setText("Data Nascimento");
 
-        jFComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Branca", "Preta", "Amarela", "Parda", "Indigina" }));
-        jFComboBox2.setMensagemAjuda("Raça/Cor (Informar o mesmo que consta no RG)");
+        jcbRacaCor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Branca", "Preta", "Amarela", "Parda", "Indigina" }));
+        jcbRacaCor.setMensagemAjuda("Raça/Cor (Informar o mesmo que consta no RG)");
 
         jlRacaCor.setText("Raça/Cor");
 
@@ -132,21 +133,18 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
             }
         });
 
-        jlNaturalidade.setText("Naturalidade");
+        jlNaturalidadeCidade.setText("Naturalidade");
 
         jtfNaturalidadeUf.setEditable(false);
         jtfNaturalidadeUf.setEnabled(false);
         jtfNaturalidadeUf.setMensagemAjuda("ID Empresa (Gerado pelo sistema)");
 
-        jtfNaturalidade1.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioCidade");
-        jtfNaturalidade1.setMensagemAjuda("Nacionalidade");
-
-        jtfNaturalidadeUf1.setEditable(false);
-        jtfNaturalidadeUf1.setEnabled(false);
-        jtfNaturalidadeUf1.setMensagemAjuda("ID Empresa (Gerado pelo sistema)");
-        jtfNaturalidadeUf1.addActionListener(new java.awt.event.ActionListener() {
+        jtfNacionalidade.setEditable(false);
+        jtfNacionalidade.setEnabled(false);
+        jtfNacionalidade.setMensagemAjuda("ID Empresa (Gerado pelo sistema)");
+        jtfNacionalidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNaturalidadeUf1ActionPerformed(evt);
+                jtfNacionalidadeActionPerformed(evt);
             }
         });
 
@@ -160,6 +158,8 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
 
         jlNomeMae.setText("Nome Mãe");
 
+        jlNaturalidadeUf.setText("Naturalidade");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -169,11 +169,6 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jtfNomePai, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfNomeMae, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,9 +183,9 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(6, 6, 6)
-                                        .addComponent(jFComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jcbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jFComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jcbRacaCor, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jlNome)
                                     .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -203,26 +198,32 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addComponent(jlDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jlNacionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jtfNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jtfNaturalidade1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jtfNaturalidadeUf1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jlNaturalidadeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtfNaturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jlNomePai))
-                                .addGap(6, 6, 6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfNaturalidadeUf, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlNaturalidadeUf, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jtfNaturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jtfNaturalidadeUf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jlNomeMae)
-                                            .addComponent(jlNaturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))))
+                                        .addComponent(jlNacionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jtfNacionalidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jtfNomePai, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jlNomeMae)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jtfNomeMae, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -236,8 +237,8 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
                 .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbRacaCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNome)
@@ -250,17 +251,17 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlDataNascimento)
                     .addComponent(jlNacionalidade)
-                    .addComponent(jlNaturalidade))
+                    .addComponent(jlNaturalidadeCidade)
+                    .addComponent(jlNaturalidadeUf))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfNaturalidade1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfNaturalidadeUf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfNaturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jtfNaturalidadeUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jtfNaturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfNacionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNomePai)
                     .addComponent(jlNomeMae))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -340,22 +341,20 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfNaturalidadeUf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNaturalidadeUf1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNaturalidadeUf1ActionPerformed
-
     private void jtfNaturalidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNaturalidadeFocusLost
         if (jtfNaturalidade.getObjeto() != null) {
             jtfNaturalidadeUf.setText(((Cidade) jtfNaturalidade.getObjeto()).getUf().getUf());
         }
     }//GEN-LAST:event_jtfNaturalidadeFocusLost
+
+    private void jtfNacionalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNacionalidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNacionalidadeActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private jautopecas.crud.pessoa.endereco.FormularioEndereco formularioEndereco;
     private jautopecas.crud.pessoa.colaborador.FormularioFuncaoSalarioColaborador formularioFuncaoSalarioColaborador;
     private jautopecas.crud.pessoa.login.FormularioLogin formularioLogin;
     private jautopecas.crud.pessoa.telefone.FormularioTelefone formularioTelefone;
-    private jautopecas.components.JComboBox jFComboBox1;
-    private jautopecas.components.JComboBox jFComboBox2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -364,12 +363,15 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
     private javax.swing.JPanel jPanel6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private jautopecas.components.JComboBox jcbRacaCor;
+    private jautopecas.components.JComboBox jcbSexo;
     private javax.swing.JLabel jlApelido;
     private javax.swing.JLabel jlCpf;
     private javax.swing.JLabel jlDataNascimento;
     private javax.swing.JLabel jlIdPessoa;
     private javax.swing.JLabel jlNacionalidade;
-    private javax.swing.JLabel jlNaturalidade;
+    private javax.swing.JLabel jlNaturalidadeCidade;
+    private javax.swing.JLabel jlNaturalidadeUf;
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlNomeMae;
     private javax.swing.JLabel jlNomePai;
@@ -378,13 +380,12 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
     private javax.swing.JLabel jlSexo;
     private jautopecas.components.JTextField jtfApelido;
     private jautopecas.components.JTextField jtfCpf;
+    private jautopecas.components.JTextField jtfDataNascimento;
     private jautopecas.components.JTextField jtfIdEmpresa;
+    private jautopecas.components.JTextField jtfNacionalidade;
     private jautopecas.components.JTextField jtfNaturalidade;
-    private jautopecas.components.JTextField jtfNaturalidade1;
     private jautopecas.components.JTextField jtfNaturalidadeUf;
-    private jautopecas.components.JTextField jtfNaturalidadeUf1;
     private jautopecas.components.JTextField jtfNome;
-    private jautopecas.components.JTextField jtfNome1;
     private jautopecas.components.JTextField jtfNomeMae;
     private jautopecas.components.JTextField jtfNomePai;
     private jautopecas.components.JTextField jtfRg;
@@ -400,10 +401,19 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         jtfRg.setText(pessoa.getAdicionalPessoa().getRg());
         jtfNome.setText(pessoa.getNome());
         jtfApelido.setText(pessoa.getApelido());
+        jcbSexo.setSelectedItem(pessoa.getAdicionalPessoa().getSexo());
+        jcbRacaCor.setSelectedItem(pessoa.getAdicionalPessoa().getRacaCor());
+        jtfDataNascimento.setText(StringUtils.dateToString(pessoa.getAdicionalPessoa().getDataNascimento()));
+        jtfNacionalidade.setText(pessoa.getAdicionalPessoa().getNaturalidade().getUf().getPais().getNome());
+        jtfNaturalidade.setObjeto(pessoa.getAdicionalPessoa().getNaturalidade());
+        jtfNaturalidadeUf.setText(pessoa.getAdicionalPessoa().getNaturalidade().getUf().getNome());
+        jtfNomePai.setText(pessoa.getAdicionalPessoa().getNomePai());
+        jtfNomeMae.setText(pessoa.getAdicionalPessoa().getNomeMae());
 
         formularioEndereco.setListaEnderecoPessoa(pessoa.getEnderecoPessoa());
         formularioTelefone.setListaTelefonePessoa(pessoa.getTelefonePessoa());
         formularioLogin.setListaPessoaLogin(pessoa.getLoginPessoa());
+        formularioFuncaoSalarioColaborador.setListaFuncaoSalarioColaborador(pessoa.getFuncaoSalarioColaborador());
     }
 
     @Override
@@ -439,6 +449,12 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         pessoa.setTipoPessoa(Pessoa.TIPO_PESSOA_FISICA);
         pessoa.setDocumento(jtfCpf.getText());
         pessoa.getAdicionalPessoa().setRg(jtfRg.getText());
+        pessoa.getAdicionalPessoa().setSexo(jcbSexo.getSelectedItem().toString());
+        pessoa.getAdicionalPessoa().setRacaCor(jcbRacaCor.getSelectedItem().toString());
+        pessoa.getAdicionalPessoa().setDataNascimento(StringUtils.stringToDate(jtfDataNascimento.getText()));
+        pessoa.getAdicionalPessoa().setNaturalidade((Cidade) jtfNaturalidade.getObjeto());
+        pessoa.getAdicionalPessoa().setNomePai(jtfNomePai.getText());
+        pessoa.getAdicionalPessoa().setNomeMae(jtfNomeMae.getText());
         pessoa.getAdicionalPessoa().setPessoa(pessoa);
 
         pessoa.setEnderecoPessoa(formularioEndereco.getListaEnderecoPessoa());
@@ -455,7 +471,6 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
                 loginPessoa.setPessoa(pessoa);
             }
         }
-
         if (formularioFuncaoSalarioColaborador.getListaFuncaoSalarioColaborador() != null && formularioFuncaoSalarioColaborador.getListaFuncaoSalarioColaborador().size() > 0) {
             pessoa.setFuncaoSalarioColaborador(formularioFuncaoSalarioColaborador.getListaFuncaoSalarioColaborador());
             for (FuncaoSalarioColaborador funcaoSalarioColaborador : pessoa.getFuncaoSalarioColaborador()) {

@@ -9,7 +9,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author JFFiorotto
  */
-public class ColaboradorFuncaoSalarioTableModel extends AbstractTableModel {
+public class FormularioFuncaoSalarioColaboradorTableModel extends AbstractTableModel {
 
     private String[] colunas = {"Data Inicial", "Data Final", "Função", "Salario"};
     private List<FuncaoSalarioColaborador> dados = new ArrayList<>();

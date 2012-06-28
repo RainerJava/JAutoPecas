@@ -60,12 +60,6 @@
                               <Component id="jTabbedPane1" pref="775" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jtfNomePai" min="-2" pref="386" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jtfNomeMae" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -80,14 +74,14 @@
                                           <Group type="102" attributes="0">
                                               <Component id="jtfIdEmpresa" min="-2" pref="76" max="-2" attributes="0"/>
                                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                              <Component id="jFComboBox1" min="-2" pref="99" max="-2" attributes="0"/>
+                                              <Component id="jcbSexo" min="-2" pref="99" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jFComboBox2" min="-2" pref="91" max="-2" attributes="0"/>
+                                              <Component id="jcbRacaCor" min="-2" pref="91" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="jlNome" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jtfNome" alignment="0" min="-2" pref="386" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Component id="jlApelido" min="-2" max="-2" attributes="0"/>
@@ -100,34 +94,42 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jlDataNascimento" min="-2" pref="99" max="-2" attributes="0"/>
-                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                              <Component id="jlNacionalidade" min="-2" pref="99" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jlNaturalidadeCidade" min="-2" pref="99" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jtfNome1" min="-2" pref="99" max="-2" attributes="0"/>
-                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                              <Component id="jtfNaturalidade1" min="-2" pref="115" max="-2" attributes="0"/>
+                                              <Component id="jtfDataNascimento" min="-2" pref="99" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jtfNaturalidadeUf1" min="-2" pref="160" max="-2" attributes="0"/>
+                                              <Component id="jtfNaturalidade" min="-2" pref="150" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="jlNomePai" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jtfNaturalidadeUf" min="-2" pref="257" max="-2" attributes="0"/>
+                                          <Component id="jlNaturalidadeUf" min="-2" pref="99" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="jtfNaturalidade" min="-2" pref="150" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jtfNaturalidadeUf" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jlNomeMae" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jlNaturalidade" min="-2" pref="99" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="jlNacionalidade" min="-2" pref="99" max="-2" attributes="0"/>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
+                                          <Component id="jtfNacionalidade" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jtfNomePai" min="-2" pref="386" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jlNomeMae" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jtfNomeMae" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -147,15 +149,15 @@
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jtfIdEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbSexo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbRacaCor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jlNome" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jlApelido" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jtfNome" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfApelido" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -164,22 +166,22 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jlDataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jlNacionalidade" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlNaturalidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlNaturalidadeCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlNaturalidadeUf" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jtfNome1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jtfNaturalidade1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jtfNaturalidadeUf1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfDataNascimento" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jtfNaturalidadeUf" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jtfNaturalidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfNaturalidadeUf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfNacionalidade" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jlNomePai" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jlNomeMae" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlNomePai" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlNomeMae" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -305,7 +307,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Component class="jautopecas.components.JComboBox" name="jFComboBox1">
+            <Component class="jautopecas.components.JComboBox" name="jcbSexo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
@@ -321,7 +323,7 @@
                 <Property name="text" type="java.lang.String" value="Sexo"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JTextField" name="jtfNome1">
+            <Component class="jautopecas.components.JTextField" name="jtfDataNascimento">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format subtype="0" type="1"/>
@@ -335,7 +337,7 @@
                 <Property name="text" type="java.lang.String" value="Data Nascimento"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JComboBox" name="jFComboBox2">
+            <Component class="jautopecas.components.JComboBox" name="jcbRacaCor">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
@@ -368,7 +370,7 @@
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfNaturalidadeFocusLost"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlNaturalidade">
+            <Component class="javax.swing.JLabel" name="jlNaturalidadeCidade">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Naturalidade"/>
               </Properties>
@@ -380,20 +382,14 @@
                 <Property name="mensagemAjuda" type="java.lang.String" value="ID Empresa (Gerado pelo sistema)"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JTextField" name="jtfNaturalidade1">
-              <Properties>
-                <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioCidade"/>
-                <Property name="mensagemAjuda" type="java.lang.String" value="Nacionalidade"/>
-              </Properties>
-            </Component>
-            <Component class="jautopecas.components.JTextField" name="jtfNaturalidadeUf1">
+            <Component class="jautopecas.components.JTextField" name="jtfNacionalidade">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="enabled" type="boolean" value="false"/>
                 <Property name="mensagemAjuda" type="java.lang.String" value="ID Empresa (Gerado pelo sistema)"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfNaturalidadeUf1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfNacionalidadeActionPerformed"/>
               </Events>
             </Component>
             <Component class="jautopecas.components.JTextField" name="jtfNomePai">
@@ -416,6 +412,11 @@
             <Component class="javax.swing.JLabel" name="jlNomeMae">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nome M&#xe3;e"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlNaturalidadeUf">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Naturalidade"/>
               </Properties>
             </Component>
           </SubComponents>

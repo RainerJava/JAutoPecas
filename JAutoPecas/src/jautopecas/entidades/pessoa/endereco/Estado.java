@@ -1,10 +1,7 @@
 package jautopecas.entidades.pessoa.endereco;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "CAD_ESTADO")
@@ -20,6 +17,9 @@ public class Estado implements Serializable {
     private String regiao;
     @Column(name = "IBGE")
     private String ibge;
+    @OneToOne
+    @JoinColumn(name = "ID_PAIS")
+    private Pais pais;
 
     /*
      * Getter's and Setter's
@@ -54,5 +54,13 @@ public class Estado implements Serializable {
 
     public void setIbge(String ibge) {
         this.ibge = ibge;
+    }
+
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
     }
 }

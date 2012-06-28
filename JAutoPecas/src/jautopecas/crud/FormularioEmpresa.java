@@ -9,7 +9,6 @@ import jautopecas.entidades.pessoa.Pessoa;
 import jautopecas.entidades.pessoa.endereco.EnderecoPessoa;
 import jautopecas.entidades.pessoa.telefone.TelefonePessoa;
 import java.util.List;
-import javax.swing.JLabel;
 
 /**
  *
@@ -44,7 +43,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         jtfDocumento2 = new jautopecas.components.JTextField();
         jtfCpf = new jautopecas.components.JTextField();
 
-        setPreferredSize(new java.awt.Dimension(650, 462));
+        setPreferredSize(new java.awt.Dimension(800, 550));
 
         jtfIdEmpresa.setEditable(false);
         jtfIdEmpresa.setEnabled(false);
@@ -135,7 +134,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
                                 .addComponent(jlNome, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
                                 .addComponent(jlApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 10, Short.MAX_VALUE))
+                        .addGap(0, 160, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -181,7 +180,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfApelido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -317,6 +316,6 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
     }
 
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
-        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa);
+        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.idModeloPessoa = 1");
     }
 }

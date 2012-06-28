@@ -22,9 +22,10 @@
     <class>jautopecas.entidades.pessoa.colaborador.Departamento</class>
     <class>jautopecas.entidades.pessoa.colaborador.Funcao</class>
     <class>jautopecas.entidades.pessoa.colaborador.FuncaoSalarioColaborador</class>
+    <class>jautopecas.entidades.pessoa.endereco.Pais</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:13306/dbautopecasnew"/>
-      <property name="javax.persistence.jdbc.password" value="CALMA"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/dbautopecasnew"/>
+      <property name="javax.persistence.jdbc.password" value="line@njo"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="eclipselink.logging.level" value="FINE"/>

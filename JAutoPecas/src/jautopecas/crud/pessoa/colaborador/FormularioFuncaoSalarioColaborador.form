@@ -34,21 +34,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jtfDataInicio" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                              <Component id="jlDataInicio" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtfDataFim" min="-2" pref="143" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                  <Component id="jlDataFim" min="-2" pref="59" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                          <Component id="jtfDataInicio" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                          <Component id="jlDataInicio" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -85,15 +73,9 @@
                       <Component id="jtfSalario" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jlDataInicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlDataFim" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jlDataInicio" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jtfDataInicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfDataFim" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jtfDataInicio" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jbSalvar" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -125,16 +107,6 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="jautopecas.components.JTextField" name="jtfDataFim">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-              <Format format="##/##/####" subtype="-1" type="5"/>
-            </Property>
-            <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new ValidadorData(jtfDataFim)" type="code"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="jautopecas.components.JTextField" name="jtfSalario">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
@@ -150,11 +122,6 @@
         <Component class="javax.swing.JLabel" name="jlDataInicio">
           <Properties>
             <Property name="text" type="java.lang.String" value="Data Inicio"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jlDataFim">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Data Fim"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jbSalvar">

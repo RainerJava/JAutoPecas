@@ -22,7 +22,7 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
     public FormularioFuncaoSalarioColaborador() {
         initComponents();
 
-        jtFuncaoSalarioColaborador.setModel(tableModel == null ? new ColaboradorFuncaoSalarioTableModel() : tableModel);
+        jtFuncaoSalarioColaborador.setModel(tableModel == null ? new FormularioFuncaoSalarioColaboradorTableModel() : tableModel);
         jtFuncaoSalarioColaborador.addMouseListener(
                 new MouseAdapter() {
 
@@ -47,11 +47,9 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
         jtfFuncao = new jautopecas.components.JTextField();
         jlFuncao = new javax.swing.JLabel();
         jtfDataInicio = new jautopecas.components.JTextField();
-        jtfDataFim = new jautopecas.components.JTextField();
         jtfSalario = new jautopecas.components.JTextField();
         jlSalario = new javax.swing.JLabel();
         jlDataInicio = new javax.swing.JLabel();
-        jlDataFim = new javax.swing.JLabel();
         jbSalvar = new javax.swing.JButton();
         jbLimpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -71,20 +69,11 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
         }
         jtfDataInicio.setValidador(new ValidadorData(jtfDataInicio));
 
-        try {
-            jtfDataFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jtfDataFim.setValidador(new ValidadorData(jtfDataFim));
-
         jtfSalario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
 
         jlSalario.setText("Salário");
 
         jlDataInicio.setText("Data Inicio");
-
-        jlDataFim.setText("Data Fim");
 
         jbSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jautopecas/imagens/icones/iconeConfirmar16.png"))); // NOI18N
         jbSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,17 +96,9 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jlDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jtfDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,13 +125,9 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
                     .addComponent(jtfFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlDataInicio)
-                    .addComponent(jlDataFim))
+                .addComponent(jlDataInicio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jtfDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbSalvar)
@@ -182,7 +159,6 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
         funcaoSalarioColaborador.setSalario(StringUtils.stringToBigDecimal(jtfSalario.getText()));
 
         funcaoSalarioColaborador.setDataInicio(StringUtils.stringToDate(jtfDataInicio.getText()));
-        funcaoSalarioColaborador.setDataFim(StringUtils.stringToDate(jtfDataFim.getText()));
         return funcaoSalarioColaborador;
     }
 
@@ -191,7 +167,6 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
             jtfFuncao.setObjeto(objetoFormulario.getFuncao());
             jtfSalario.setText(StringUtils.BigDecimalToString(objetoFormulario.getSalario()));
             jtfDataInicio.setText(StringUtils.dateToString(objetoFormulario.getDataInicio()));
-            jtfDataFim.setText(StringUtils.dateToString(objetoFormulario.getDataFim()));
         } catch (Exception ex) {
             throw new Exception("Erro ao carregar os dados do formulario", ex);
         }
@@ -202,7 +177,6 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
         jtfFuncao.limpaCampo();
         jtfSalario.limpaCampo();
         jtfDataInicio.limpaCampo();
-        jtfDataFim.limpaCampo();
         jtFuncaoSalarioColaborador.clearSelection();
         if (formularioBloqueado) {
             jbSalvar.setEnabled(false);
@@ -219,7 +193,6 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
             jtfFuncao.setEditable(!formularioBloqueado);
             jtfSalario.setEditable(!formularioBloqueado);
             jtfDataInicio.setEditable(!formularioBloqueado);
-            jtfDataFim.setEditable(!formularioBloqueado);
             jbSalvar.setEnabled(!formularioBloqueado);
             jbLimpar.setEnabled(!formularioBloqueado);
         } catch (Exception ex) {
@@ -228,21 +201,20 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
     }
 
     private void onVisualizar() throws Exception {
-
-        funcaoSalarioColaborador = ((ColaboradorFuncaoSalarioTableModel) jtFuncaoSalarioColaborador.getModel()).buscaFuncaoSalarioColaborador(jtFuncaoSalarioColaborador.getSelectedRow());
+        funcaoSalarioColaborador = ((FormularioFuncaoSalarioColaboradorTableModel) jtFuncaoSalarioColaborador.getModel()).buscaFuncaoSalarioColaborador(jtFuncaoSalarioColaborador.getSelectedRow());
         setObjetoFormulario(funcaoSalarioColaborador);
         if (formularioBloqueado) {
             jbSalvar.setEnabled(false);
             jbLimpar.setEnabled(true);
         } else {
-            jbSalvar.setEnabled(true);
+            jbSalvar.setEnabled(false);
             jbLimpar.setEnabled(true);
         }
     }
 
     private void populaListaFuncaoSalarioColaborador() {
-        ((ColaboradorFuncaoSalarioTableModel) jtFuncaoSalarioColaborador.getModel()).removeResultado();
-        ((ColaboradorFuncaoSalarioTableModel) jtFuncaoSalarioColaborador.getModel()).mostraResultado(listaFuncaoSalarioColaborador);
+        ((FormularioFuncaoSalarioColaboradorTableModel) jtFuncaoSalarioColaborador.getModel()).removeResultado();
+        ((FormularioFuncaoSalarioColaboradorTableModel) jtFuncaoSalarioColaborador.getModel()).mostraResultado(listaFuncaoSalarioColaborador);
         onLimpar();
     }
 
@@ -255,7 +227,7 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
         return listaFuncaoSalarioColaborador;
     }
 
-    public void setListaEnderecoPessoa(List<FuncaoSalarioColaborador> listaFuncaoSalarioColaborador) {
+    public void setListaFuncaoSalarioColaborador(List<FuncaoSalarioColaborador> listaFuncaoSalarioColaborador) {
         this.listaFuncaoSalarioColaborador = listaFuncaoSalarioColaborador;
         populaListaFuncaoSalarioColaborador();
     }
@@ -287,18 +259,16 @@ public class FormularioFuncaoSalarioColaborador extends javax.swing.JPanel {
     private FuncaoSalarioColaborador funcaoSalarioColaborador;
     private List<FuncaoSalarioColaborador> listaFuncaoSalarioColaborador;
     private boolean formularioBloqueado;
-    private ColaboradorFuncaoSalarioTableModel tableModel;
+    private FormularioFuncaoSalarioColaboradorTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbLimpar;
     private javax.swing.JButton jbSalvar;
-    private javax.swing.JLabel jlDataFim;
     private javax.swing.JLabel jlDataInicio;
     private javax.swing.JLabel jlFuncao;
     private javax.swing.JLabel jlSalario;
     private javax.swing.JTable jtFuncaoSalarioColaborador;
-    private jautopecas.components.JTextField jtfDataFim;
     private jautopecas.components.JTextField jtfDataInicio;
     private jautopecas.components.JTextField jtfFuncao;
     private jautopecas.components.JTextField jtfSalario;
