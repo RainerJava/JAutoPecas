@@ -29,12 +29,12 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     private LoginPessoa pessoaLogin;
     private static List<LoginPermissaoPessoa> listaLoginPermissaoPessoa = new ArrayList<>();
     private static HashMap<String, WindowCrud> janelas = new HashMap<>();
-    
+
     public JAutoPecasMenu(LoginPessoa pessoaLogin) {
         this.pessoaLogin = pessoaLogin;
         initComponents();
     }
-    
+
     public void populaDadosColaborador() {
         FuncaoSalarioColaborador funcaoSalarioColaborador = new FuncaoSalarioColaboradorDao().getFuncaoSalarioColaboradorAtual(pessoaLogin.getPessoa().getIdPessoa());
         jlLogin.setText(pessoaLogin.getLogin());
@@ -45,7 +45,7 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     public void criaMenuPrincipal() {
         listaLoginPermissaoPessoa.clear();
         listaLoginPermissaoPessoa.addAll(new LoginPermissaoPessoaDao().listaLoginPermissaoPessoa(pessoaLogin.getIdLoginPessoa()));
-        
+
         String idItemMenuPai = null;
         String idItemSubMenu = null;
         JMenu jMenuPrincipal = null;
@@ -97,7 +97,7 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     public static List<LoginPermissaoPessoa> getlistaLoginPermissaoPessoa() {
         return listaLoginPermissaoPessoa;
     }
-    
+
     public static ItemMenu getItemMenu(String classeFormulario) {
         ItemMenu itemMenu = null;
         for (Iterator<LoginPermissaoPessoa> it = listaLoginPermissaoPessoa.iterator(); it.hasNext();) {
@@ -108,7 +108,7 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
         }
         return itemMenu;
     }
-    
+
     public static LoginPermissaoPessoa getLoginPermissaoPessoa(ItemMenu itemMenu) {
         LoginPermissaoPessoa loginPermissaoPessoa = null;
         for (Iterator<LoginPermissaoPessoa> it = listaLoginPermissaoPessoa.iterator(); it.hasNext();) {
@@ -119,11 +119,11 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
         }
         return loginPermissaoPessoa;
     }
-    
+
     public static WindowCrud addJanela(ItemMenu itemMenu) {
         return addJanela(itemMenu, null, null);
     }
-    
+
     public static WindowCrud addJanela(ItemMenu itemMenu, String modoF1F2, JComponent jComponent) {
         WindowCrud windowCrud;
         if (janelas.containsKey(itemMenu.getIdItemMenu())) {
@@ -140,7 +140,7 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
         }
         return windowCrud;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
