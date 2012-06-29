@@ -22,7 +22,7 @@ public class LoginPermissaoPessoaDao extends AbstractDao<LoginPermissaoPessoa> i
     public List<LoginPermissaoPessoa> listaLoginPermissaoPessoa(Integer idPessoaLogin) {
         List<LoginPermissaoPessoa> listaLoginPermissaoPessoa = new ArrayList<>();
         Query query = getEntityManager().createNativeQuery("SELECT b.id_login_permissao_pessoa,a.id_item_menu,b.visualizar,b.incluir,b.alterar,b.excluir "
-                + "FROM cad_item_menu a LEFT OUTER JOIN cad_login_permissao_pessoa b ON (a.id_item_menu=b.id_item_menu and b.id_login_pessoa = " + idPessoaLogin + ")");
+                + "FROM cad_item_menu a LEFT OUTER JOIN cad_login_permissao_pessoa b ON (a.id_item_menu=b.id_item_menu and b.id_login_pessoa = " + idPessoaLogin + ") order by a.id_item_menu");
         List<Object[]> list = query.getResultList();
         for (int i = 0; i < list.size(); i++) {
             LoginPermissaoPessoa loginPermissaoPessoa = new LoginPermissaoPessoa();

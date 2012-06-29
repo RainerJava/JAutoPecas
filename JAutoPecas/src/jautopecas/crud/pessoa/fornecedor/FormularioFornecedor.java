@@ -18,11 +18,11 @@ import java.util.List;
  * @author JFFiorotto
  */
 public class FormularioFornecedor extends javax.swing.JPanel implements IFormulario {
-
+    
     public FormularioFornecedor() {
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -215,7 +215,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
 
     private void jcbTipoPessoaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbTipoPessoaPropertyChange
     }//GEN-LAST:event_jcbTipoPessoaPropertyChange
-
+    
     private void jcbTipoPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoPessoaActionPerformed
         if (jcbTipoPessoa.getSelectedItem() == null) {
             jcbTipoPessoa.setSelectedIndex(0);
@@ -238,15 +238,14 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
             jtfDocumento2.setMensagemAjuda("RG do fornecedor");
         }
     }//GEN-LAST:event_jcbTipoPessoaActionPerformed
-
+    
     private void jcbTipoLinhaFornecimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoLinhaFornecimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbTipoLinhaFornecimentoActionPerformed
-
+    
     private void jcbTipoLinhaFornecimentoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbTipoLinhaFornecimentoPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbTipoLinhaFornecimentoPropertyChange
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private jautopecas.crud.pessoa.endereco.FormularioEndereco formularioEndereco;
     private jautopecas.crud.pessoa.telefone.FormularioTelefone formularioTelefone;
@@ -271,7 +270,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
     // End of variables declaration//GEN-END:variables
     private Pessoa pessoa;
     private ModeloPessoa modeloPessoa;
-
+    
     @Override
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
         jcbTipoPessoa.setSempreBloqueado(true);
@@ -288,27 +287,28 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
             jtfCnpj.setText(pessoa.getDocumento());
             jtfDocumento2.setText(pessoa.getAdicionalPessoa().getInscricaoEstadual());
         }
+        jcbTipoLinhaFornecimento.setSelectedItem(pessoa.getAdicionalPessoa().getTipoLinhaFornecimento());
         formularioEndereco.setListaEnderecoPessoa(pessoa.getEnderecoPessoa());
         formularioTelefone.setListaTelefonePessoa(pessoa.getTelefonePessoa());
     }
-
+    
     @Override
     public void salvar() throws Exception {
         new PessoaDao().salvar(getObjetoFormulario());
         setObjetoFormulario(pessoa);
     }
-
+    
     @Override
     public void alterar() throws Exception {
         new PessoaDao().alterar(getObjetoFormulario());
         setObjetoFormulario(pessoa);
     }
-
+    
     @Override
     public void excluir() throws Exception {
         new PessoaDao().excluir(pessoa);
     }
-
+    
     @Override
     public Pessoa getObjetoFormulario() throws Exception {
         if (pessoa == null) {
@@ -331,7 +331,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
             pessoa.setDocumento(jtfCnpj.getText());
             pessoa.getAdicionalPessoa().setInscricaoEstadual(jtfDocumento2.getText());
         }
-
+        pessoa.getAdicionalPessoa().setTipoLinhaFornecimento(jcbTipoLinhaFornecimento.getSelectedItem().toString());
         pessoa.setEnderecoPessoa(formularioEndereco.getListaEnderecoPessoa());
         for (EnderecoPessoa enderecoPessoa : pessoa.getEnderecoPessoa()) {
             enderecoPessoa.setPessoa(pessoa);
@@ -342,7 +342,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
         }
         return pessoa;
     }
-
+    
     @Override
     public MensagemRodape getMensagemRodape() {
         if (getTopLevelAncestor() instanceof WindowCrud) {
@@ -350,12 +350,12 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
         }
         return null;
     }
-
+    
     @Override
     public List pesquisar(String strPesquisa) throws Exception {
         return new PessoaDao().listarTodos();
     }
-
+    
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
         return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.idModeloPessoa = 2");
     }

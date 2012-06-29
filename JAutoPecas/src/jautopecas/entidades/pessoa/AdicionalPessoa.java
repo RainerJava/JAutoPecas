@@ -37,6 +37,8 @@ public class AdicionalPessoa implements Serializable {
     private String nomePai;
     @Column(name = "NOME_MAE")
     private String nomeMae;
+    @Column(name = "TIPO_LINHA_FORNECIMENTO")
+    private String tipoLinhaFornecimento;
     /*
      * Getter's and Setter's
      */
@@ -119,5 +121,13 @@ public class AdicionalPessoa implements Serializable {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+
+    public String getTipoLinhaFornecimento() {
+        return tipoLinhaFornecimento;
+    }
+
+    public void setTipoLinhaFornecimento(String tipoLinhaFornecimento) {
+        this.tipoLinhaFornecimento = tipoLinhaFornecimento;
     }
 }
