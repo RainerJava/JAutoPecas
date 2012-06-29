@@ -17,10 +17,10 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
 
 /**
  *
@@ -35,7 +35,6 @@ public class WindowCrud extends javax.swing.JFrame {
     private static final int MODO_INCULSAO = 1;
     private static final int MODO_ALTERACAO = 2;
     private int modoOperacao;
-    private List<Object[]> resultadoPesquisa = new ArrayList<>();
     private DynamicTableModel tableModel;
     private JPanel formulario;
     private Object objetoFormulario;
@@ -254,45 +253,7 @@ public class WindowCrud extends javax.swing.JFrame {
             try {
                 if (!pesquisando) {
                     pesquisando = true;
-                    Thread worker = new Thread() {
-
-                        @Override
-                        public void run() {
-                            try {
-                                mensagemRodape.mostraMensagem("Pesquisando..", MensagemRodape.MENSAGEM_INFORMACAO);
-                                if (resultadoPesquisa == null) {
-                                    resultadoPesquisa = new ArrayList<>();
-                                }
-                                Method m = formulario.getClass().getMethod(metodoPesquisa, new Class[]{String.class, String.class});
-                                resultadoPesquisa.clear();
-
-                                resultadoPesquisa.addAll(
-                                        (List) m.invoke(formulario, new Object[]{camposPesquisa, jtfFiltroPesquisa.getText()}));
-                                if (tableModel == null) {
-                                    tableModel = new DynamicTableModel(resultadoPesquisa);
-                                    jtablePesquisa.setModel(tableModel);
-                                } else if (!tableModel.isInicializado()) {
-                                    tableModel = null;
-                                    tableModel = new DynamicTableModel(resultadoPesquisa);
-                                    jtablePesquisa.setModel(tableModel);
-                                } else {
-                                    tableModel.setData(resultadoPesquisa);
-                                }
-                                if (resultadoPesquisa.size() > 0) {
-                                    jtablePesquisa.changeSelection(0, 0, false, false);
-                                    jtablePesquisa.requestFocus();
-                                    pesquisando = false;
-                                    mensagemRodape.mostraMensagem(resultadoPesquisa.size() + " Registros encontrados!!", MensagemRodape.MENSAGEM_INFORMACAO);
-                                } else {
-                                    pesquisando = false;
-                                    mensagemRodape.mostraMensagem("Nenhum registro encontrado!!", MensagemRodape.MENSAGEM_ALERTA);
-                                }
-                            } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | IntrospectionException ex) {
-                                JOptionPane.showMessageDialog(null, "Erro ao pesquisar", "OOOPSS!", JOptionPane.ERROR_MESSAGE);
-                            }
-                        }
-                    };
-                    worker.start();
+                    onPesquisar();
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao pesquisar", "OOOPSS!", JOptionPane.ERROR_MESSAGE);
@@ -301,6 +262,49 @@ public class WindowCrud extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jtfFiltroPesquisaKeyPressed
+
+    private void onPesquisar() {
+        SwingWorker<List<Object[]>, Void> worker = new SwingWorker<List<Object[]>, Void>() {
+
+            @Override
+            public List<Object[]> doInBackground() throws InterruptedException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+                Thread.sleep(1);
+                mensagemRodape.mostraMensagem("Pesquisando..", MensagemRodape.MENSAGEM_INFORMACAO);
+                Method m;
+                List<Object[]> lista;
+                m = formulario.getClass().getMethod(metodoPesquisa, new Class[]{String.class, String.class});
+                lista = ((List) m.invoke(formulario, new Object[]{camposPesquisa, jtfFiltroPesquisa.getText()}));
+                return lista;
+            }
+
+            @Override
+            public void done() {
+                List<Object[]> lista = null;
+                try {
+                    lista = get();
+                } catch (InterruptedException | ExecutionException ex) {
+                }
+                try {
+                    tableModel = new DynamicTableModel(lista);
+                } catch (IntrospectionException ex) {
+                    Logger.getLogger(WindowCrud.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jtablePesquisa.setModel(tableModel);
+                //repaint();
+                if (lista.size() > 0) {
+                    jtablePesquisa.changeSelection(0, 0, false, false);
+                    jtablePesquisa.requestFocus();
+                    pesquisando = false;
+                    mensagemRodape.mostraMensagem(lista.size() + " Registros encontrados!!", MensagemRodape.MENSAGEM_INFORMACAO);
+                } else {
+                    pesquisando = false;
+                    mensagemRodape.mostraMensagem("Nenhum registro encontrado!!", MensagemRodape.MENSAGEM_ALERTA);
+                    jtfFiltroPesquisa.requestFocus();
+                }
+            }
+        };
+        worker.execute();
+    }
 
     private void jtablePesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablePesquisaMouseClicked
         if (evt.getClickCount() == 2) {

@@ -33,18 +33,16 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     public JAutoPecasMenu(LoginPessoa pessoaLogin) {
         this.pessoaLogin = pessoaLogin;
         initComponents();
-        criaMenuPrincipal();
-        populaDadosColaborador();
     }
     
-    private void populaDadosColaborador() {
+    public void populaDadosColaborador() {
         FuncaoSalarioColaborador funcaoSalarioColaborador = new FuncaoSalarioColaboradorDao().getFuncaoSalarioColaboradorAtual(pessoaLogin.getPessoa().getIdPessoa());
         jlLogin.setText(pessoaLogin.getLogin());
         jlFuncao.setText(funcaoSalarioColaborador.getFuncao().getNome());
         jlDepartamento.setText(funcaoSalarioColaborador.getFuncao().getDepartamento().getNome());
     }
 
-    private void criaMenuPrincipal() {
+    public void criaMenuPrincipal() {
         listaLoginPermissaoPessoa.clear();
         listaLoginPermissaoPessoa.addAll(new LoginPermissaoPessoaDao().listaLoginPermissaoPessoa(pessoaLogin.getIdLoginPessoa()));
         
