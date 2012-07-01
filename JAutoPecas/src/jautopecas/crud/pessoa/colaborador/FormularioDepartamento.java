@@ -1,6 +1,5 @@
 package jautopecas.crud.pessoa.colaborador;
 
-import jautopecas.components.validadores.ValidadorStringLength;
 import jautopecas.crud.IFormulario;
 import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
@@ -40,9 +39,9 @@ public class FormularioDepartamento extends javax.swing.JPanel implements IFormu
 
         jlNome.setText("Nome");
 
+        jtfNome.setMaximoCaracteres(150);
         jtfNome.setMensagemAjuda("Nome do Departamento");
         jtfNome.setRequerido(true);
-        jtfNome.setValidador(new ValidadorStringLength(jtfNome, 2, 150));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

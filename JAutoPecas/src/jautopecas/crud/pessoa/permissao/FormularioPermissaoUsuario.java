@@ -5,7 +5,7 @@ import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.dao.pessoa.login.LoginPermissaoPessoaDao;
 import jautopecas.dao.pessoa.login.LoginPessoaDao;
-import jautopecas.entidades.Grupo;
+import jautopecas.entidades.produto.Grupo;
 import jautopecas.entidades.menu.ItemMenu;
 import jautopecas.entidades.pessoa.login.LoginPermissaoPessoa;
 import java.util.List;

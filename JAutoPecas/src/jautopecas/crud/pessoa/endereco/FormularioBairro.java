@@ -1,6 +1,5 @@
 package jautopecas.crud.pessoa.endereco;
 
-import jautopecas.components.validadores.ValidadorStringLength;
 import jautopecas.crud.IFormulario;
 import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
@@ -8,7 +7,6 @@ import jautopecas.dao.pessoa.endereco.BairroDao;
 import jautopecas.dao.pessoa.endereco.EstadoDao;
 import jautopecas.entidades.pessoa.endereco.Bairro;
 import java.util.List;
-import javax.swing.JLabel;
 
 /**
  *
@@ -41,9 +39,9 @@ public class FormularioBairro extends javax.swing.JPanel implements IFormulario 
 
         jlNome.setText("Nome");
 
+        jtfNome.setMaximoCaracteres(250);
         jtfNome.setMensagemAjuda("Nome completo do Bairro");
         jtfNome.setRequerido(true);
-        jtfNome.setValidador(new ValidadorStringLength(jtfNome, 4, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

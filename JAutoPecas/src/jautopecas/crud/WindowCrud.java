@@ -442,28 +442,30 @@ public class WindowCrud extends javax.swing.JFrame {
     }//GEN-LAST:event_jbExcluirActionPerformed
 
     private void onVisualizar(int keyCode) {
-        objetoFormulario = ((DynamicTableModel) jtablePesquisa.getModel()).getObjectAtRow(jtablePesquisa.getSelectedRow());
-        try {
-            if ((keyCode == KeyEvent.VK_ENTER || keyCode == 0) && modoF1F2 != null) {
-                if (modoF1F2.equals("F1")) {
-                    if (jComponent instanceof JTextField) {
-                        JTextField jfTextField = (JTextField) jComponent;
-                        jfTextField.setObjeto(objetoFormulario);
-                    } else if (jComponent instanceof JComboBox) {
-                        JComboBox jfComboBox = (JComboBox) jComponent;
-                        jfComboBox.refreshDataSet();
-                        jfComboBox.setSelectedItem(objetoFormulario);
+        if (jtablePesquisa.getModel() instanceof DynamicTableModel) {
+            objetoFormulario = ((DynamicTableModel) jtablePesquisa.getModel()).getObjectAtRow(jtablePesquisa.getSelectedRow());
+            try {
+                if ((keyCode == KeyEvent.VK_ENTER || keyCode == 0) && modoF1F2 != null) {
+                    if (modoF1F2.equals("F1")) {
+                        if (jComponent instanceof JTextField) {
+                            JTextField jfTextField = (JTextField) jComponent;
+                            jfTextField.setObjeto(objetoFormulario);
+                        } else if (jComponent instanceof JComboBox) {
+                            JComboBox jfComboBox = (JComboBox) jComponent;
+                            jfComboBox.refreshDataSet();
+                            jfComboBox.setSelectedItem(objetoFormulario);
+                        }
+                        jComponent.requestFocus();
+                        dispose();
+                    } else {
+                        setObjetoFormulario(objetoFormulario);
                     }
-                    jComponent.requestFocus();
-                    dispose();
                 } else {
                     setObjetoFormulario(objetoFormulario);
                 }
-            } else {
-                setObjetoFormulario(objetoFormulario);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao carregar visualização", "OOOPSS!", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao carregar visualização", "OOOPSS!", JOptionPane.ERROR_MESSAGE);
         }
     }
 

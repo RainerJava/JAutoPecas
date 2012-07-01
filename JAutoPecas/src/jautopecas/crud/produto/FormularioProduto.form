@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[800, 550]"/>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Component id="jTabbedPane2" alignment="0" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <EmptySpace min="0" pref="550" max="32767" attributes="0"/>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Component id="jTabbedPane2" alignment="0" pref="32767" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPane2">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel4">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Dados Basicos">
+                <Property name="tabTitle" type="java.lang.String" value="Dados Basicos"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlIdProduto" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
+                                          <Component id="jtfIdProduto" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                                              <Component id="jlIdProduto10" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jTextField10" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlIdProduto3" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
+                                          <Component id="jTextField3" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlIdProduto11" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
+                                          <Component id="jTextField11" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jTextField16" max="32767" attributes="0"/>
+                                  <Component id="jTextField17" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlIdProduto16" min="-2" pref="168" max="-2" attributes="0"/>
+                                          <Component id="jlIdProduto18" min="-2" pref="216" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="59" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jlIdProduto1" min="-2" pref="168" max="-2" attributes="0"/>
+                                          <Component id="jTextField1" min="-2" pref="244" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jlIdProduto2" min="-2" pref="384" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="jTextField2" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlIdProduto17" min="-2" pref="168" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlIdProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlIdProduto10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlIdProduto18" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jtfIdProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField17" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jlIdProduto3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <Component id="jTextField3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jlIdProduto11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <Component id="jTextField11" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jlIdProduto16" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <Component id="jTextField16" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlIdProduto1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlIdProduto2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="jlIdProduto17" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="253" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="jautopecas.components.JTextField" name="jtfIdProduto">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="mensagemAjuda" type="java.lang.String" value="ID Colaborador (Gerado pelo sistema)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlIdProduto">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ID Produto"/>
+              </Properties>
+            </Component>
+            <Component class="jautopecas.components.JTextField" name="jTextField1">
+              <Properties>
+                <Property name="maximoCaracteres" type="int" value="150"/>
+                <Property name="requerido" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlIdProduto1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Numero Fabricante"/>
+              </Properties>
+            </Component>
+            <Component class="jautopecas.components.JTextField" name="jTextField2">
+              <Properties>
+                <Property name="maximoCaracteres" type="int" value="250"/>
+                <Property name="requerido" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlIdProduto2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlIdProduto10">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fabricante"/>
+              </Properties>
+            </Component>
+            <Component class="jautopecas.components.JTextField" name="jTextField10">
+              <Properties>
+                <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.fabricante.FormularioFabricante"/>
+                <Property name="requerido" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlIdProduto3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Grupo"/>
+              </Properties>
+            </Component>
+            <Component class="jautopecas.components.JTextField" name="jTextField3">
+              <Properties>
+                <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioGrupo"/>
+                <Property name="requerido" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlIdProduto11">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Subgrupo"/>
+              </Properties>
+            </Component>
+            <Component class="jautopecas.components.JTextField" name="jTextField11">
+              <Properties>
+                <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioSubgrupo"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlIdProduto16">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Familia"/>
+              </Properties>
+            </Component>
+            <Component class="jautopecas.components.JTextField" name="jTextField16">
+              <Properties>
+                <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioFamilia"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="jTextArea1">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jlIdProduto17">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Aplica&#xe7;&#xe3;o"/>
+              </Properties>
+            </Component>
+            <Component class="jautopecas.components.JTextField" name="jTextField17">
+              <Properties>
+                <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioMarca"/>
+                <Property name="requerido" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlIdProduto18">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Marca"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel5">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Embalagem">
+                <Property name="tabTitle" type="java.lang.String" value="Embalagem"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPanel1" max="32767" attributes="0"/>
+                          <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jPanel6" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="189" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel1">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Quantidades">
+                      <Font PropertyName="font" name="Tahoma" size="12" style="1"/>
+                      <Color PropertyName="color" blue="ff" green="0" red="0" type="rgb"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextField4" max="32767" attributes="0"/>
+                              <Component id="jlIdProduto4" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextField5" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlIdProduto5" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextField6" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlIdProduto6" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextField7" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlIdProduto7" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="12" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jlIdProduto7" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlIdProduto6" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlIdProduto5" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTextField5" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlIdProduto4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTextField4" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jlIdProduto4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Qtd. Embalagem Compra"/>
+                  </Properties>
+                </Component>
+                <Component class="jautopecas.components.JTextField" name="jTextField4">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                      <Format format="#0.00" subtype="-1" type="0"/>
+                    </Property>
+                    <Property name="requerido" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jlIdProduto5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Qtd. Embalagem Venda"/>
+                  </Properties>
+                </Component>
+                <Component class="jautopecas.components.JTextField" name="jTextField5">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                      <Format format="#0.00" subtype="-1" type="0"/>
+                    </Property>
+                    <Property name="requerido" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jlIdProduto6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Fator Embalagem Compra"/>
+                  </Properties>
+                </Component>
+                <Component class="jautopecas.components.JTextField" name="jTextField6">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                      <Format format="#0.00" subtype="-1" type="0"/>
+                    </Property>
+                    <Property name="requerido" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jlIdProduto7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Fator Embalagem Venda"/>
+                  </Properties>
+                </Component>
+                <Component class="jautopecas.components.JTextField" name="jTextField7">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                      <Format format="#0.00" subtype="-1" type="0"/>
+                    </Property>
+                    <Property name="requerido" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel2">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Pesos">
+                      <Font PropertyName="font" name="Tahoma" size="12" style="1"/>
+                      <Color PropertyName="color" blue="ff" green="0" red="0" type="rgb"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextField8" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlIdProduto8" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextField9" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlIdProduto9" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="12" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlIdProduto9" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTextField9" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlIdProduto8" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTextField8" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jlIdProduto8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Peso Liquido"/>
+                  </Properties>
+                </Component>
+                <Component class="jautopecas.components.JTextField" name="jTextField8">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                      <Format format="#,###.000" subtype="-1" type="0"/>
+                    </Property>
+                    <Property name="requerido" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jlIdProduto9">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Peso Bruto"/>
+                  </Properties>
+                </Component>
+                <Component class="jautopecas.components.JTextField" name="jTextField9">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                      <Format format="#,###.000" subtype="-1" type="0"/>
+                    </Property>
+                    <Property name="requerido" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel3">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Unidades">
+                      <Font PropertyName="font" name="Tahoma" size="12" style="1"/>
+                      <Color PropertyName="color" blue="ff" green="0" red="0" type="rgb"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextField12" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlIdProduto12" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextField13" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlIdProduto13" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="501" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="12" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlIdProduto13" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTextField13" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlIdProduto12" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTextField12" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jlIdProduto12">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Unidade Compra"/>
+                  </Properties>
+                </Component>
+                <Component class="jautopecas.components.JTextField" name="jTextField12">
+                  <Properties>
+                    <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioUnidade"/>
+                    <Property name="requerido" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jlIdProduto13">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Unidade Venda"/>
+                  </Properties>
+                </Component>
+                <Component class="jautopecas.components.JTextField" name="jTextField13">
+                  <Properties>
+                    <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioUnidade"/>
+                    <Property name="requerido" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel6">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Codigos Barra">
+                      <Font PropertyName="font" name="Tahoma" size="12" style="1"/>
+                      <Color PropertyName="color" blue="ff" green="0" red="0" type="rgb"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextField14" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlIdProduto14" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextField15" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlIdProduto15" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="501" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="12" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlIdProduto15" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTextField15" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlIdProduto14" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTextField14" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jlIdProduto14">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Codigo Barra Fabricante"/>
+                  </Properties>
+                </Component>
+                <Component class="jautopecas.components.JTextField" name="jTextField14">
+                  <Properties>
+                    <Property name="requerido" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jlIdProduto15">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Codigo Barra Empresa"/>
+                  </Properties>
+                </Component>
+                <Component class="jautopecas.components.JTextField" name="jTextField15">
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

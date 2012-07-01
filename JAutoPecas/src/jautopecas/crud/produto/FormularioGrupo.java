@@ -1,10 +1,11 @@
-package jautopecas.crud;
+package jautopecas.crud.produto;
 
-import jautopecas.components.validadores.ValidadorStringLength;
-import jautopecas.dao.GrupoDao;
-import jautopecas.entidades.Grupo;
+import jautopecas.crud.IFormulario;
+import jautopecas.crud.MensagemRodape;
+import jautopecas.crud.WindowCrud;
+import jautopecas.dao.produto.GrupoDao;
+import jautopecas.entidades.produto.Grupo;
 import java.util.List;
-import javax.swing.JLabel;
 
 /**
  *
@@ -23,19 +24,24 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFTextField1 = new jautopecas.components.JTextField();
-        jFTextField2 = new jautopecas.components.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jtfIdGrupo = new jautopecas.components.JTextField();
+        jtfNomeGrupo = new jautopecas.components.JTextField();
+        jlIdGrupo = new javax.swing.JLabel();
+        jlNomeGrupo = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(260, 108));
+        setPreferredSize(new java.awt.Dimension(498, 274));
 
-        jFTextField1.setEditable(false);
-        jFTextField1.setEnabled(false);
+        jtfIdGrupo.setEditable(false);
+        jtfIdGrupo.setEnabled(false);
+        jtfIdGrupo.setMensagemAjuda("ID Grupo (Gerado automaticamente pelo sistema)");
 
-        jLabel1.setText("ID Grupo");
+        jtfNomeGrupo.setMaximoCaracteres(45);
+        jtfNomeGrupo.setMensagemAjuda("Nome do grupo");
+        jtfNomeGrupo.setRequerido(true);
 
-        jLabel2.setText("Nome Grupo");
+        jlIdGrupo.setText("ID Grupo");
+
+        jlNomeGrupo.setText("Nome Grupo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -45,43 +51,39 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jFTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jFTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jlIdGrupo)
+                        .addComponent(jlNomeGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jtfIdGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jtfNomeGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jlIdGrupo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfIdGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(jlNomeGrupo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jtfNomeGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(177, Short.MAX_VALUE))
         );
-
-        jFTextField1.setMensagemAjuda("Codigo do Grupo (Gerado pelo sistema)");
-        jFTextField2.setValidador(new ValidadorStringLength(jFTextField2, 4, 20));
-        jFTextField2.setMensagemAjuda("Informe o nome do grupo.");
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private jautopecas.components.JTextField jFTextField1;
-    private jautopecas.components.JTextField jFTextField2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jlIdGrupo;
+    private javax.swing.JLabel jlNomeGrupo;
+    private jautopecas.components.JTextField jtfIdGrupo;
+    private jautopecas.components.JTextField jtfNomeGrupo;
     // End of variables declaration//GEN-END:variables
     private Grupo grupo;
 
     @Override
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
         grupo = (Grupo) objetoFormulario;
-        jFTextField1.setText(String.valueOf(grupo.getIdGrupo()));
-        jFTextField2.setText(grupo.getNome());
+        jtfIdGrupo.setText(String.valueOf(grupo.getIdGrupo()));
+        jtfNomeGrupo.setText(grupo.getNome());
     }
 
     @Override
@@ -104,8 +106,8 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
 
     @Override
     public Grupo getObjetoFormulario() throws Exception {
-        grupo.setIdGrupo(Integer.valueOf(jFTextField1.getText().length() == 0 ? "0" : jFTextField1.getText()));
-        grupo.setNome(jFTextField2.getText());
+        grupo.setIdGrupo(Integer.valueOf(jtfIdGrupo.getText().length() == 0 ? "0" : jtfIdGrupo.getText()));
+        grupo.setNome(jtfNomeGrupo.getText());
         return grupo;
     }
 

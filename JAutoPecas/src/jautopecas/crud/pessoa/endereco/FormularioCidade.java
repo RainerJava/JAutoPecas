@@ -1,6 +1,5 @@
 package jautopecas.crud.pessoa.endereco;
 
-import jautopecas.components.validadores.ValidadorStringLength;
 import jautopecas.crud.IFormulario;
 import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
@@ -9,7 +8,6 @@ import jautopecas.dao.pessoa.endereco.EstadoDao;
 import jautopecas.entidades.pessoa.endereco.Cidade;
 import jautopecas.entidades.pessoa.endereco.Estado;
 import java.util.List;
-import javax.swing.JLabel;
 
 /**
  *
@@ -52,15 +50,15 @@ public class FormularioCidade extends javax.swing.JPanel implements IFormulario 
 
         jlEstado.setText("Estado");
 
+        jtfIbge.setMaximoCaracteres(11);
         jtfIbge.setMensagemAjuda("Codigo IBGE da Cidade");
         jtfIbge.setRequerido(true);
-        jtfIbge.setValidador(new ValidadorStringLength(jtfIbge, 7, 7));
 
         jlIbge.setText("Cod. Ibge");
 
+        jtfNome.setMaximoCaracteres(250);
         jtfNome.setMensagemAjuda("Nome completo da Cidade");
         jtfNome.setRequerido(true);
-        jtfNome.setValidador(new ValidadorStringLength(jtfNome, 4, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

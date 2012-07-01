@@ -1,13 +1,11 @@
 package jautopecas.crud.pessoa.endereco;
 
-import jautopecas.components.validadores.ValidadorStringLength;
 import jautopecas.crud.IFormulario;
 import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.dao.pessoa.endereco.TipoEnderecoDao;
 import jautopecas.entidades.pessoa.endereco.TipoEndereco;
 import java.util.List;
-import javax.swing.JLabel;
 
 /**
  *
@@ -40,9 +38,9 @@ public class FormularioTipoEndereco extends javax.swing.JPanel implements IFormu
 
         jlNome.setText("Nome");
 
+        jtfNome.setMaximoCaracteres(50);
         jtfNome.setMensagemAjuda("Tipo de endereço");
         jtfNome.setRequerido(true);
-        jtfNome.setValidador(new ValidadorStringLength(jtfNome, 4, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

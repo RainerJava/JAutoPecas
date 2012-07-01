@@ -1,6 +1,5 @@
 package jautopecas.crud.pessoa.endereco;
 
-import jautopecas.components.validadores.ValidadorStringLength;
 import jautopecas.crud.IFormulario;
 import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
@@ -39,29 +38,33 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
 
         setPreferredSize(new java.awt.Dimension(384, 206));
 
+        jtfUf.setMaximoCaracteres(2);
         jtfUf.setMensagemAjuda("Sigla do Estado");
-        jtfUf.setValidador(new ValidadorStringLength(jtfUf, 2, 2));
+        jtfUf.setRequerido(true);
 
         jlUf.setText("Sigla Estado");
 
         jlNome.setText("Nome");
 
+        jtfRegiao.setMaximoCaracteres(100);
         jtfRegiao.setMensagemAjuda("Região do Estado");
-        jtfRegiao.setValidador(new ValidadorStringLength(jtfRegiao, -1, 100));
+        jtfRegiao.setRequerido(true);
 
         jlRegiao.setText("Região");
 
+        jtfIbge.setMaximoCaracteres(11);
         jtfIbge.setMensagemAjuda("Codigo IBGE do Estado");
-        jtfIbge.setValidador(new ValidadorStringLength(jtfIbge, 2, 2));
+        jtfIbge.setRequerido(true);
 
         jlIbge.setText("Cod. Ibge");
 
+        jtfNome.setMaximoCaracteres(50);
         jtfNome.setMensagemAjuda("Nome completo do Estado");
-        jtfNome.setValidador(new ValidadorStringLength(jtfNome, 5, 50));
+        jtfNome.setRequerido(true);
 
         jtfPais.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioPais");
         jtfPais.setMensagemAjuda("Região do Estado");
-        jtfPais.setValidador(new ValidadorStringLength(jtfRegiao, -1, 100));
+        jtfPais.setRequerido(true);
 
         jlPais.setText("Pais");
 

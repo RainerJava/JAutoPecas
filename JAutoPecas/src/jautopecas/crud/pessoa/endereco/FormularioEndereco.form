@@ -152,6 +152,7 @@
           <Properties>
             <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioBairro"/>
             <Property name="mensagemAjuda" type="java.lang.String" value="Bairro"/>
+            <Property name="requerido" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlUf">
@@ -162,9 +163,7 @@
         <Component class="jautopecas.components.JTextField" name="jtfNumero">
           <Properties>
             <Property name="mensagemAjuda" type="java.lang.String" value="Numero, Caso seja sem numero informar S/N"/>
-            <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new ValidadorStringLength(jtfNumero, 1, 10)" type="code"/>
-            </Property>
+            <Property name="requerido" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -179,16 +178,16 @@
         </Component>
         <Component class="jautopecas.components.JTextField" name="jtfLogradouro">
           <Properties>
+            <Property name="maximoCaracteres" type="int" value="250"/>
             <Property name="mensagemAjuda" type="java.lang.String" value="Logradouro"/>
-            <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new ValidadorStringLength(jtfLogradouro, 10, 150)" type="code"/>
-            </Property>
+            <Property name="requerido" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="jautopecas.components.JTextField" name="jtfCidade">
           <Properties>
             <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioCidade"/>
             <Property name="mensagemAjuda" type="java.lang.String" value="Cidade"/>
+            <Property name="requerido" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -200,6 +199,7 @@
           <Properties>
             <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioEstado"/>
             <Property name="mensagemAjuda" type="java.lang.String" value="Estado"/>
+            <Property name="requerido" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -225,7 +225,9 @@
         </Component>
         <Component class="jautopecas.components.JTextField" name="jtfCep">
           <Properties>
+            <Property name="maximoCaracteres" type="int" value="8"/>
             <Property name="mensagemAjuda" type="java.lang.String" value="Codigo de endere&#xe7;amento postal"/>
+            <Property name="requerido" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtfCepFocusLost"/>

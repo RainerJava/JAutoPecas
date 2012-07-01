@@ -77,11 +77,9 @@
     </Component>
     <Component class="jautopecas.components.JTextField" name="jtfNome">
       <Properties>
+        <Property name="maximoCaracteres" type="int" value="45"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Tipo de endere&#xe7;o"/>
         <Property name="requerido" type="boolean" value="true"/>
-        <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new ValidadorStringLength(jtfNome, 4, 50)" type="code"/>
-        </Property>
       </Properties>
     </Component>
   </SubComponents>

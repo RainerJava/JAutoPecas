@@ -92,10 +92,9 @@
   <SubComponents>
     <Component class="jautopecas.components.JTextField" name="jtfUf">
       <Properties>
+        <Property name="maximoCaracteres" type="int" value="2"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Sigla do Estado"/>
-        <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new ValidadorStringLength(jtfUf, 2, 2)" type="code"/>
-        </Property>
+        <Property name="requerido" type="boolean" value="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlUf">
@@ -110,10 +109,9 @@
     </Component>
     <Component class="jautopecas.components.JTextField" name="jtfRegiao">
       <Properties>
+        <Property name="maximoCaracteres" type="int" value="100"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Regi&#xe3;o do Estado"/>
-        <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new ValidadorStringLength(jtfRegiao, -1, 100)" type="code"/>
-        </Property>
+        <Property name="requerido" type="boolean" value="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlRegiao">
@@ -123,10 +121,9 @@
     </Component>
     <Component class="jautopecas.components.JTextField" name="jtfIbge">
       <Properties>
+        <Property name="maximoCaracteres" type="int" value="11"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Codigo IBGE do Estado"/>
-        <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new ValidadorStringLength(jtfIbge, 2, 2)" type="code"/>
-        </Property>
+        <Property name="requerido" type="boolean" value="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlIbge">
@@ -136,19 +133,16 @@
     </Component>
     <Component class="jautopecas.components.JTextField" name="jtfNome">
       <Properties>
+        <Property name="maximoCaracteres" type="int" value="50"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Nome completo do Estado"/>
-        <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new ValidadorStringLength(jtfNome, 5, 50)" type="code"/>
-        </Property>
+        <Property name="requerido" type="boolean" value="true"/>
       </Properties>
     </Component>
     <Component class="jautopecas.components.JTextField" name="jtfPais">
       <Properties>
         <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.endereco.FormularioPais"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Regi&#xe3;o do Estado"/>
-        <Property name="validador" type="jautopecas.components.validadores.Validador" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new ValidadorStringLength(jtfRegiao, -1, 100)" type="code"/>
-        </Property>
+        <Property name="requerido" type="boolean" value="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlPais">

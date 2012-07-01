@@ -1,6 +1,5 @@
 package jautopecas.crud.pessoa.fabricante;
 
-import jautopecas.crud.pessoa.fornecedor.*;
 import jautopecas.components.validadores.ValidadorCnpj;
 import jautopecas.crud.IFormulario;
 import jautopecas.crud.MensagemRodape;

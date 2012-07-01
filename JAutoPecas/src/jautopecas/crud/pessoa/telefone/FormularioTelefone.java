@@ -1,6 +1,5 @@
 package jautopecas.crud.pessoa.telefone;
 
-import jautopecas.components.validadores.ValidadorStringLength;
 import jautopecas.dao.pessoa.telefone.TipoTelefoneDao;
 import jautopecas.entidades.pessoa.telefone.Telefone;
 import jautopecas.entidades.pessoa.telefone.TelefonePessoa;
@@ -101,7 +100,7 @@ public class FormularioTelefone extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         jtfTelefone.setMensagemAjuda("Telefone");
-        jtfTelefone.setValidador(new ValidadorStringLength(jtfTelefone, 10, 150));
+        jtfTelefone.setRequerido(true);
 
         jbSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jautopecas/imagens/icones/iconeConfirmar16.png"))); // NOI18N
         jbSalvar.addActionListener(new java.awt.event.ActionListener() {

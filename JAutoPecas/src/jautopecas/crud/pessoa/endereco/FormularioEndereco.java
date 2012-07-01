@@ -1,6 +1,5 @@
 package jautopecas.crud.pessoa.endereco;
 
-import jautopecas.components.validadores.ValidadorStringLength;
 import jautopecas.dao.pessoa.endereco.TipoEnderecoDao;
 import jautopecas.dao.pessoa.endereco.TipoLogradouroDao;
 import jautopecas.entidades.pessoa.endereco.*;
@@ -110,26 +109,30 @@ public class FormularioEndereco extends javax.swing.JPanel {
 
         jtfBairro.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioBairro");
         jtfBairro.setMensagemAjuda("Bairro");
+        jtfBairro.setRequerido(true);
 
         jlUf.setText("Estado");
 
         jtfNumero.setMensagemAjuda("Numero, Caso seja sem numero informar S/N");
-        jtfNumero.setValidador(new ValidadorStringLength(jtfNumero, 1, 10));
+        jtfNumero.setRequerido(true);
 
         jLabel6.setText("Cidade");
 
         jLabel5.setText("Bairro");
 
+        jtfLogradouro.setMaximoCaracteres(250);
         jtfLogradouro.setMensagemAjuda("Logradouro");
-        jtfLogradouro.setValidador(new ValidadorStringLength(jtfLogradouro, 10, 150));
+        jtfLogradouro.setRequerido(true);
 
         jtfCidade.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioCidade");
         jtfCidade.setMensagemAjuda("Cidade");
+        jtfCidade.setRequerido(true);
 
         jLabel4.setText("Cep");
 
         jtfUf.setClasseFormulario("jautopecas.crud.pessoa.endereco.FormularioEstado");
         jtfUf.setMensagemAjuda("Estado");
+        jtfUf.setRequerido(true);
 
         jLabel3.setText("Numero");
 
@@ -140,7 +143,9 @@ public class FormularioEndereco extends javax.swing.JPanel {
 
         jLabel8.setText("Tipo Endereço");
 
+        jtfCep.setMaximoCaracteres(8);
         jtfCep.setMensagemAjuda("Codigo de endereçamento postal");
+        jtfCep.setRequerido(true);
         jtfCep.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jtfCepFocusLost(evt);

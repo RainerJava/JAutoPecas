@@ -13,7 +13,6 @@ import java.awt.event.KeyListener;
 import java.lang.reflect.Field;
 import javax.swing.BorderFactory;
 import javax.swing.JFormattedTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 
@@ -22,34 +21,20 @@ import javax.swing.text.MaskFormatter;
  * @author JFFiorotto
  */
 public class JTextField extends JFormattedTextField {
-
+    
     public JTextField() {
         super();
-
+        setDocument(new PlainDocument(maximoCaracteres, upperCase));
         this.addKeyListener(new KeyListener() {
-
+            
             @Override
             public void keyTyped(final KeyEvent e) {
-                if (upperCase) {
-                    SwingUtilities.invokeLater(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            JTextField campo = (JTextField) e.getSource();
-                            int posicaoCursor = campo.getCaretPosition();
-                            campo.setText(campo.getText().toUpperCase());
-                            if (posicaoCursor != campo.getCaretPosition()) {
-                                campo.setCaretPosition(posicaoCursor);
-                            }
-                        }
-                    });
-                }
             }
-
+            
             @Override
             public void keyReleased(KeyEvent e) {
             }
-
+            
             @Override
             public void keyPressed(KeyEvent e) {
                 WindowCrud windowCrud;
@@ -74,21 +59,19 @@ public class JTextField extends JFormattedTextField {
                 }
             }
         });
-
+        
         this.addFocusListener(new FocusAdapter() {
-
+            
             @Override
             public void focusGained(FocusEvent evt) {
                 if (getMensagemRodape() != null && isEditable()) {
                     getMensagemRodape().mostraMensagem(mensagemAjuda, MensagemRodape.MENSAGEM_AJUDA);
-                    if (validador != null) {
-                        if (!validador.isValido()) {
-                            getMensagemRodape().mostraMensagem(validador.getMensagemErro(), MensagemRodape.MENSAGEM_ERRO);
-                        }
+                    if (!campoValido) {
+                        getMensagemRodape().mostraMensagem(mensagemErro, MensagemRodape.MENSAGEM_ERRO);
                     }
                 }
             }
-
+            
             @Override
             public void focusLost(FocusEvent evt) {
                 if (getMensagemRodape() != null) {
@@ -105,41 +88,58 @@ public class JTextField extends JFormattedTextField {
     private String mensagemAjuda;
     private MensagemRodape mensagemRodape;
     private boolean upperCase = true;
+    private int maximoCaracteres = 99999;
     private Validador validador;
     private Object objeto;
     private String classeFormulario;
     private ItemMenu itemMenu;
     private boolean requerido = false;
+    private boolean campoValido = true;
     private String camposJFTextField;
     private Border bordaDefault;
     private Color colorDefault;
     private Border bordaErro = BorderFactory.createLineBorder(Color.RED);
-
+    private String mensagemErro;
+    
     public boolean validaCampo() {
-        boolean result = true;
-        if (validador != null) {
-            result = validador.validaCampo();
-        }
-        if (classeFormulario != null) {
-            if (objeto == null) {
-                result = false;
+        if (requerido) {
+            campoValido = true;
+            mensagemErro = "";
+            if (getText().length() > 0) {
+                if (validador != null) {
+                    campoValido = validador.validaCampo();
+                    if (!validador.isValido()) {
+                        mensagemErro = validador.getMensagemErro();
+                    }
+                }
+                if (classeFormulario != null) {
+                    if (objeto == null) {
+                        campoValido = false;
+                        mensagemErro = "Este campo não pode ficar vazio.";
+                    }
+                }
+                if (this.getFormatter() instanceof MaskFormatter) {
+                    if (((MaskFormatter) this.getFormatter()).getMask().length() > 0 & !this.isEditValid()) {
+                        campoValido = false;
+                        mensagemErro = "Formato inválido.";
+                    }
+                }
+            } else {
+                campoValido = false;
+                mensagemErro = "Este campo não pode ficar vazio.";
             }
         }
-        if (this.getFormatter() instanceof MaskFormatter) {
-            if (((MaskFormatter) this.getFormatter()).getMask().length() > 0 & !this.isEditValid()) {
-                result = false;
-            }
-        }
-
-        if (result) {
+        
+        if (campoValido) {
             setBorder(bordaDefault);
         } else {
             setBorder(bordaErro);
         }
-        return result;
+        return campoValido;
     }
-
+    
     public void limpaCampo() {
+        mensagemErro = "";
         setText("");
         setValue(null);
         setBorder(bordaDefault);
@@ -147,8 +147,9 @@ public class JTextField extends JFormattedTextField {
         if (validador != null) {
             validador.setValido(true);
         }
+        campoValido = true;
     }
-
+    
     private String getFieldValue() throws Exception {
         String str = "";
         try {
@@ -176,7 +177,7 @@ public class JTextField extends JFormattedTextField {
     /*
      * Geter's and Seter's
      */
-
+    
     public MensagemRodape getMensagemRodape() {
         if (mensagemRodape == null) {
             if (getTopLevelAncestor() instanceof WindowCrud) {
@@ -185,23 +186,24 @@ public class JTextField extends JFormattedTextField {
         }
         return mensagemRodape;
     }
-
+    
     public void setMensagemAjuda(String mensagemAjuda) {
         this.mensagemAjuda = mensagemAjuda;
     }
-
+    
     public void setUpperCase(boolean upperCase) {
         this.upperCase = upperCase;
     }
-
+    
     public void setValidador(Validador validador) {
         this.validador = validador;
+        this.requerido = true;
     }
-
+    
     public Object getObjeto() {
         return objeto;
     }
-
+    
     public void setObjeto(Object objeto) throws Exception {
         this.objeto = objeto;
         if (objeto != null) {
@@ -210,18 +212,18 @@ public class JTextField extends JFormattedTextField {
             this.setText("");
         }
     }
-
+    
     public void setClasseFormulario(String classeFormulario) {
         if (classeFormulario != null && classeFormulario.length() > 0) {
             this.classeFormulario = classeFormulario;
             this.itemMenu = JAutoPecasMenu.getItemMenu(classeFormulario);
         }
     }
-
+    
     public void setRequerido(boolean requerido) {
         this.requerido = requerido;
     }
-
+    
     @Override
     public void setEditable(boolean b) {
         super.setEditable(b);
@@ -231,8 +233,13 @@ public class JTextField extends JFormattedTextField {
             this.setBackground(colorDefault);
         }
     }
-
+    
     public void setCamposJFTextField(String camposJFTextField) {
         this.camposJFTextField = camposJFTextField;
+    }
+    
+    public void setMaximoCaracteres(int maximoCaracteres) {
+        this.maximoCaracteres = maximoCaracteres;
+        ((PlainDocument) getDocument()).setMaximoCaracteres(maximoCaracteres);
     }
 }

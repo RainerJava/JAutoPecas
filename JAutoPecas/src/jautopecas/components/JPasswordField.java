@@ -46,10 +46,8 @@ public class JPasswordField extends javax.swing.JPasswordField {
             public void focusGained(FocusEvent evt) {
                 if (getMensagemRodape() != null && isEditable()) {
                     getMensagemRodape().mostraMensagem(mensagemAjuda, MensagemRodape.MENSAGEM_AJUDA);
-                    if (validador != null) {
-                        if (!validador.isValido()) {
-                            getMensagemRodape().mostraMensagem(validador.getMensagemErro(), MensagemRodape.MENSAGEM_ERRO);
-                        }
+                    if (!campoValido) {
+                        getMensagemRodape().mostraMensagem(mensagemErro, MensagemRodape.MENSAGEM_ERRO);
                     }
                 }
             }
@@ -69,28 +67,43 @@ public class JPasswordField extends javax.swing.JPasswordField {
     private String mensagemAjuda;
     private MensagemRodape mensagemRodape;
     private Validador validador;
-    private final Border bordaDefault;
-    private final Border bordaErro = BorderFactory.createLineBorder(Color.RED);
+    private boolean requerido = false;
+    private boolean campoValido = true;
+    private Border bordaDefault;
+    private Border bordaErro = BorderFactory.createLineBorder(Color.RED);
+    private String mensagemErro;
 
     public boolean validaCampo() {
-        boolean result = true;
-        if (validador != null) {
-            result = validador.validaCampo();
+        if (requerido) {
+            if (getText().length() > 0) {
+                if (validador != null) {
+                    campoValido = validador.validaCampo();
+                    if (!validador.isValido()) {
+                        mensagemErro = validador.getMensagemErro();
+                    }
+                }
+            } else {
+                campoValido = false;
+                mensagemErro = "Este campo não pode ficar vazio.";
+            }
         }
-        if (result) {
+
+        if (campoValido) {
             setBorder(bordaDefault);
         } else {
             setBorder(bordaErro);
         }
-        return result;
+        return campoValido;
     }
 
     public void limpaCampo() {
+        mensagemErro = "";
         setText("");
         setBorder(bordaDefault);
         if (validador != null) {
             validador.setValido(true);
         }
+        campoValido = true;
     }
 
     /*
@@ -111,5 +124,10 @@ public class JPasswordField extends javax.swing.JPasswordField {
 
     public void setValidador(Validador validador) {
         this.validador = validador;
+        this.requerido = true;
+    }
+
+    public void setRequerido(boolean requerido) {
+        this.requerido = requerido;
     }
 }

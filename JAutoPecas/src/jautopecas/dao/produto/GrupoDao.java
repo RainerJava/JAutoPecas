@@ -1,6 +1,7 @@
-package jautopecas.dao;
+package jautopecas.dao.produto;
 
-import jautopecas.entidades.Grupo;
+import jautopecas.dao.AbstractDao;
+import jautopecas.entidades.produto.Grupo;
 import java.io.Serializable;
 import javax.persistence.EntityManager;
 

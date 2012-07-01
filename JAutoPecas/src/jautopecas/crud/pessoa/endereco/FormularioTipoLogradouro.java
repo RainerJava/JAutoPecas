@@ -1,6 +1,5 @@
 package jautopecas.crud.pessoa.endereco;
 
-import jautopecas.components.validadores.ValidadorStringLength;
 import jautopecas.crud.IFormulario;
 import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
@@ -8,7 +7,6 @@ import jautopecas.dao.pessoa.endereco.EstadoDao;
 import jautopecas.dao.pessoa.endereco.TipoLogradouroDao;
 import jautopecas.entidades.pessoa.endereco.TipoLogradouro;
 import java.util.List;
-import javax.swing.JLabel;
 
 /**
  *
@@ -41,9 +39,9 @@ public class FormularioTipoLogradouro extends javax.swing.JPanel implements IFor
 
         jlNome.setText("Nome");
 
+        jtfNome.setMaximoCaracteres(50);
         jtfNome.setMensagemAjuda("Tipo de Logradouro Ex;. Rua,Avenida,Viela, etc...");
         jtfNome.setRequerido(true);
-        jtfNome.setValidador(new ValidadorStringLength(jtfNome, 2, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -1,4 +1,4 @@
-package jautopecas.entidades;
+package jautopecas.entidades.produto;
 
 import jautopecas.components.anotacao.AnotacaoNomeColuna;
 import java.io.Serializable;

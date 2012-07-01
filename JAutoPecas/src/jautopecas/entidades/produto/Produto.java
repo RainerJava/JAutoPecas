@@ -21,21 +21,28 @@ public class Produto implements Serializable {
     @Column(name = "NUMERO_FABRICANTE")
     private String numeroFabricante;
     private String descricao;
-    @Column(name = "CODIGO_BARRA")
-    private String codigoBarra;
+    @Column(name = "CODIGO_BARRA_FABRICANTE")
+    private String codigoBarraFabricante;
+    @Column(name = "CODIGO_BARRA_EMPRESA")
+    private String codigoBarraEmpresa;
     @Column(name = "QTD_EMBALAGEM_COMPRA")
     private BigDecimal qtdEmbalagemCompra;
     @Column(name = "QTD_EMBALAGEM_VENDA")
     private BigDecimal qtdEmbalagemVenda;
     @Column(name = "FATOR_EMBALAGEM_COMPRA")
-    private BigDecimal fator;
+    private BigDecimal fatorEmbalagemCompra;
+    @Column(name = "FATOR_EMBALAGEM_VENDA")
+    private BigDecimal fatorEmbalagemVenda;
     @Column(name = "PESO_LIQUIDO")
     private BigDecimal pesoLiguido;
     @Column(name = "PESO_BRUTO")
     private BigDecimal pesoBruto;
-//    @OneToOne
-//    @JoinColumn(name = "ID_UNIDADE")
-//    private Unidade unidade;
+    @OneToOne
+    @JoinColumn(name = "ID_UNIDADE_COMPRA")
+    private Unidade unidadeCompra;
+    @OneToOne
+    @JoinColumn(name = "ID_UNIDADE_VENDA")
+    private Unidade unidadeVenda;
     @OneToOne
     @JoinColumn(name = "ID_FABRICANTE")
     private Pessoa fabricante;
@@ -43,9 +50,18 @@ public class Produto implements Serializable {
     private String classificacaoFiscal;
     private String aplicacao;
     private String status;
-    //    @OneToOne
-//    @JoinColumn(name = "ID_MARCA")
-//    private Marca marca;
+    @OneToOne
+    @JoinColumn(name = "ID_MARCA")
+    private Marca marca;
+    @OneToOne
+    @JoinColumn(name = "ID_GRUPO")
+    private Grupo grupo;
+    @OneToOne
+    @JoinColumn(name = "ID_SUBGRUPO")
+    private Subgrupo subGrupo;
+    @OneToOne
+    @JoinColumn(name = "ID_FAMILIA")
+    private Familia familia;
     @Column(name = "DATA_CADASTRO")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataCadastro;
@@ -55,7 +71,6 @@ public class Produto implements Serializable {
     @Column(name = "CLASSIFICACAO_ABC")
     private String classificacaoAbc;
 
-    
     public String getAplicacao() {
         return aplicacao;
     }
@@ -80,12 +95,20 @@ public class Produto implements Serializable {
         this.classificacaoFiscal = classificacaoFiscal;
     }
 
-    public String getCodigoBarra() {
-        return codigoBarra;
+    public String getCodigoBarraEmpresa() {
+        return codigoBarraEmpresa;
     }
 
-    public void setCodigoBarra(String codigoBarra) {
-        this.codigoBarra = codigoBarra;
+    public void setCodigoBarraEmpresa(String codigoBarraEmpresa) {
+        this.codigoBarraEmpresa = codigoBarraEmpresa;
+    }
+
+    public String getCodigoBarraFabricante() {
+        return codigoBarraFabricante;
+    }
+
+    public void setCodigoBarraFabricante(String codigoBarraFabricante) {
+        this.codigoBarraFabricante = codigoBarraFabricante;
     }
 
     public Date getDataCadastro() {
@@ -112,12 +135,36 @@ public class Produto implements Serializable {
         this.fabricante = fabricante;
     }
 
-    public BigDecimal getFator() {
-        return fator;
+    public Familia getFamilia() {
+        return familia;
     }
 
-    public void setFator(BigDecimal fator) {
-        this.fator = fator;
+    public void setFamilia(Familia familia) {
+        this.familia = familia;
+    }
+
+    public BigDecimal getFatorEmbalagemCompra() {
+        return fatorEmbalagemCompra;
+    }
+
+    public void setFatorEmbalagemCompra(BigDecimal fatorEmbalagemCompra) {
+        this.fatorEmbalagemCompra = fatorEmbalagemCompra;
+    }
+
+    public BigDecimal getFatorEmbalagemVenda() {
+        return fatorEmbalagemVenda;
+    }
+
+    public void setFatorEmbalagemVenda(BigDecimal fatorEmbalagemVenda) {
+        this.fatorEmbalagemVenda = fatorEmbalagemVenda;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
     public Integer getIdProduto() {
@@ -126,6 +173,14 @@ public class Produto implements Serializable {
 
     public void setIdProduto(Integer idProduto) {
         this.idProduto = idProduto;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
     }
 
     public String getMedida() {
@@ -184,11 +239,35 @@ public class Produto implements Serializable {
         this.status = status;
     }
 
+    public Subgrupo getSubGrupo() {
+        return subGrupo;
+    }
+
+    public void setSubGrupo(Subgrupo subGrupo) {
+        this.subGrupo = subGrupo;
+    }
+
     public String getTipoProduto() {
         return tipoProduto;
     }
 
     public void setTipoProduto(String tipoProduto) {
         this.tipoProduto = tipoProduto;
+    }
+
+    public Unidade getUnidadeCompra() {
+        return unidadeCompra;
+    }
+
+    public void setUnidadeCompra(Unidade unidadeCompra) {
+        this.unidadeCompra = unidadeCompra;
+    }
+
+    public Unidade getUnidadeVenda() {
+        return unidadeVenda;
+    }
+
+    public void setUnidadeVenda(Unidade unidadeVenda) {
+        this.unidadeVenda = unidadeVenda;
     }
 }
