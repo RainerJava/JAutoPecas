@@ -24,14 +24,19 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jlIdSubgrupo" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlNomeSubgrupo" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jtfIdSubgrupo" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jlIdSubgrupo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlNome" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jtfIdSubgrupo" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="385" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jtfNomeSubgrupo" min="-2" pref="240" max="-2" attributes="0"/>
+                  <Component id="jtfNome" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="248" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,9 +48,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jtfIdSubgrupo" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jlNomeSubgrupo" min="-2" max="-2" attributes="0"/>
+              <Component id="jlNome" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jtfNomeSubgrupo" min="-2" max="-2" attributes="0"/>
+              <Component id="jtfNome" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="177" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -59,7 +64,7 @@
         <Property name="mensagemAjuda" type="java.lang.String" value="ID Subgrupo (Gerado automaticamente pelo sistema)"/>
       </Properties>
     </Component>
-    <Component class="jautopecas.components.JTextField" name="jtfNomeSubgrupo">
+    <Component class="jautopecas.components.JTextField" name="jtfNome">
       <Properties>
         <Property name="maximoCaracteres" type="int" value="150"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Nome do subgrupo"/>
@@ -71,9 +76,9 @@
         <Property name="text" type="java.lang.String" value="ID Subgrupo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jlNomeSubgrupo">
+    <Component class="javax.swing.JLabel" name="jlNome">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nome Subgrupo"/>
+        <Property name="text" type="java.lang.String" value="Nome"/>
       </Properties>
     </Component>
   </SubComponents>

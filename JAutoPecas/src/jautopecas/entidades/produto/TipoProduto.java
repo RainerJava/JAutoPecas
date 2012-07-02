@@ -20,8 +20,16 @@ public class TipoProduto implements Serializable {
     @Column(name = "TIPO_PRODUTO")
     @AnotacaoNomeColuna(nome = "Tipo Produto")
     private String tipoProduto;
-    @AnotacaoNomeColuna(nome = "Descrição")
-    private String descricao;
+    @AnotacaoNomeColuna(nome = "Nome")
+    private String nome;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public String getTipoProduto() {
         return tipoProduto;
@@ -29,14 +37,6 @@ public class TipoProduto implements Serializable {
 
     public void setTipoProduto(String tipoProduto) {
         this.tipoProduto = tipoProduto;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class TipoProduto implements Serializable {
         if (!Objects.equals(this.tipoProduto, other.tipoProduto)) {
             return false;
         }
-        if (!Objects.equals(this.descricao, other.descricao)) {
+        if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
         return true;
@@ -59,14 +59,14 @@ public class TipoProduto implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.tipoProduto);
-        hash = 59 * hash + Objects.hashCode(this.descricao);
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.tipoProduto);
+        hash = 61 * hash + Objects.hashCode(this.nome);
         return hash;
     }
 
     @Override
     public String toString() {
-        return tipoProduto + "-" + descricao;
+        return tipoProduto + "-" + nome;
     }
 }

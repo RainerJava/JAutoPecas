@@ -25,9 +25,9 @@ public class FormularioFamilia extends javax.swing.JPanel implements IFormulario
     private void initComponents() {
 
         jtfIdFamilia = new jautopecas.components.JTextField();
-        jtfNomeFamilia = new jautopecas.components.JTextField();
+        jtfNome = new jautopecas.components.JTextField();
         jlIdFamilia = new javax.swing.JLabel();
-        jlNomeFamilia = new javax.swing.JLabel();
+        jlNome = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(498, 274));
 
@@ -35,13 +35,13 @@ public class FormularioFamilia extends javax.swing.JPanel implements IFormulario
         jtfIdFamilia.setEnabled(false);
         jtfIdFamilia.setMensagemAjuda("ID Familia (Gerado automaticamente pelo sistema)");
 
-        jtfNomeFamilia.setMaximoCaracteres(150);
-        jtfNomeFamilia.setMensagemAjuda("Nome da familia");
-        jtfNomeFamilia.setRequerido(true);
+        jtfNome.setMaximoCaracteres(150);
+        jtfNome.setMensagemAjuda("Nome da familia");
+        jtfNome.setRequerido(true);
 
         jlIdFamilia.setText("ID Familia");
 
-        jlNomeFamilia.setText("Nome Familia");
+        jlNome.setText("Nome");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -50,12 +50,15 @@ public class FormularioFamilia extends javax.swing.JPanel implements IFormulario
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jlIdFamilia)
-                        .addComponent(jlNomeFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jtfIdFamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jtfNomeFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(248, Short.MAX_VALUE))
+                    .addComponent(jtfNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jlIdFamilia)
+                                .addComponent(jlNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jtfIdFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 392, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,17 +68,17 @@ public class FormularioFamilia extends javax.swing.JPanel implements IFormulario
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfIdFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlNomeFamilia)
+                .addComponent(jlNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfNomeFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(177, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jlIdFamilia;
-    private javax.swing.JLabel jlNomeFamilia;
+    private javax.swing.JLabel jlNome;
     private jautopecas.components.JTextField jtfIdFamilia;
-    private jautopecas.components.JTextField jtfNomeFamilia;
+    private jautopecas.components.JTextField jtfNome;
     // End of variables declaration//GEN-END:variables
     private Familia familia;
 
@@ -83,7 +86,7 @@ public class FormularioFamilia extends javax.swing.JPanel implements IFormulario
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
         familia = (Familia) objetoFormulario;
         jtfIdFamilia.setText(String.valueOf(familia.getIdFamilia()));
-        jtfNomeFamilia.setText(familia.getNome());
+        jtfNome.setText(familia.getNome());
     }
 
     @Override
@@ -107,7 +110,7 @@ public class FormularioFamilia extends javax.swing.JPanel implements IFormulario
     @Override
     public Familia getObjetoFormulario() throws Exception {
         familia.setIdFamilia(Integer.valueOf(jtfIdFamilia.getText().length() == 0 ? "0" : jtfIdFamilia.getText()));
-        familia.setNome(jtfNomeFamilia.getText());
+        familia.setNome(jtfNome.getText());
         return familia;
     }
 

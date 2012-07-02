@@ -10,27 +10,28 @@ public class TipoEndereco implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name = "TIPO_ENDERECO")
-    private String tipoEndereco;
-    private String descricao;
+    @Column(name = "ID_TIPO_ENDERECO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idTipoEndereco;
+    private String nome;
 
     /*
      * Getter's and Setter's
      */
-    public String getDescricao() {
-        return descricao;
+    public Integer getIdTipoEndereco() {
+        return idTipoEndereco;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setIdTipoEndereco(Integer idTipoEndereco) {
+        this.idTipoEndereco = idTipoEndereco;
     }
 
-    public String getTipoEndereco() {
-        return tipoEndereco;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTipoEndereco(String tipoEndereco) {
-        this.tipoEndereco = tipoEndereco;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Override
@@ -42,10 +43,10 @@ public class TipoEndereco implements Serializable {
             return false;
         }
         final TipoEndereco other = (TipoEndereco) obj;
-        if (!Objects.equals(this.tipoEndereco, other.tipoEndereco)) {
+        if (!Objects.equals(this.idTipoEndereco, other.idTipoEndereco)) {
             return false;
         }
-        if (!Objects.equals(this.descricao, other.descricao)) {
+        if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
         return true;
@@ -54,13 +55,13 @@ public class TipoEndereco implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 89 * hash + Objects.hashCode(this.tipoEndereco);
-        hash = 89 * hash + Objects.hashCode(this.descricao);
+        hash = 53 * hash + Objects.hashCode(this.idTipoEndereco);
+        hash = 53 * hash + Objects.hashCode(this.nome);
         return hash;
     }
 
     @Override
     public String toString() {
-        return tipoEndereco + "-" + descricao;
+        return idTipoEndereco + "-" + nome;
     }
 }

@@ -24,14 +24,19 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jlIdUnidade" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlNomeUnidade" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jtfIdUnidade" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jlIdUnidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlNome" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jtfIdUnidade" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="373" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jtfNomeUnidade" min="-2" pref="240" max="-2" attributes="0"/>
+                  <Component id="jtfNome" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="248" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,9 +48,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jtfIdUnidade" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jlNomeUnidade" min="-2" max="-2" attributes="0"/>
+              <Component id="jlNome" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jtfNomeUnidade" min="-2" max="-2" attributes="0"/>
+              <Component id="jtfNome" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="177" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -59,7 +64,7 @@
         <Property name="mensagemAjuda" type="java.lang.String" value="ID Unidade (Gerado automaticamente pelo sistema)"/>
       </Properties>
     </Component>
-    <Component class="jautopecas.components.JTextField" name="jtfNomeUnidade">
+    <Component class="jautopecas.components.JTextField" name="jtfNome">
       <Properties>
         <Property name="maximoCaracteres" type="int" value="150"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Nome da unidade"/>
@@ -71,9 +76,9 @@
         <Property name="text" type="java.lang.String" value="ID Unidade"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jlNomeUnidade">
+    <Component class="javax.swing.JLabel" name="jlNome">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nome Unidade"/>
+        <Property name="text" type="java.lang.String" value="Nome"/>
       </Properties>
     </Component>
   </SubComponents>

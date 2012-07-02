@@ -24,20 +24,20 @@ public class FormularioTipoProduto extends javax.swing.JPanel implements IFormul
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtfDescricaoTipoProduto = new jautopecas.components.JTextField();
+        jtfNome = new jautopecas.components.JTextField();
         jlTipoProduto = new javax.swing.JLabel();
-        jlDescricaoTipoProduto = new javax.swing.JLabel();
+        jlNome = new javax.swing.JLabel();
         jtfTipoProduto = new jautopecas.components.JTextField();
 
         setPreferredSize(new java.awt.Dimension(498, 274));
 
-        jtfDescricaoTipoProduto.setMaximoCaracteres(50);
-        jtfDescricaoTipoProduto.setMensagemAjuda("Nome Tipo Produto");
-        jtfDescricaoTipoProduto.setRequerido(true);
+        jtfNome.setMaximoCaracteres(50);
+        jtfNome.setMensagemAjuda("Nome Tipo Produto");
+        jtfNome.setRequerido(true);
 
         jlTipoProduto.setText("Tipo Produto");
 
-        jlDescricaoTipoProduto.setText("Descrição Tipo Produto");
+        jlNome.setText("Nome");
 
         jtfTipoProduto.setMaximoCaracteres(2);
         jtfTipoProduto.setMensagemAjuda("Nome Tipo Produto");
@@ -50,12 +50,14 @@ public class FormularioTipoProduto extends javax.swing.JPanel implements IFormul
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlTipoProduto)
-                    .addComponent(jtfDescricaoTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jtfTipoProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlDescricaoTipoProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(248, Short.MAX_VALUE))
+                    .addComponent(jtfNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlTipoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlNome)
+                            .addComponent(jtfTipoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 417, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,16 +67,16 @@ public class FormularioTipoProduto extends javax.swing.JPanel implements IFormul
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlDescricaoTipoProduto)
+                .addComponent(jlNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfDescricaoTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(177, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jlDescricaoTipoProduto;
+    private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlTipoProduto;
-    private jautopecas.components.JTextField jtfDescricaoTipoProduto;
+    private jautopecas.components.JTextField jtfNome;
     private jautopecas.components.JTextField jtfTipoProduto;
     // End of variables declaration//GEN-END:variables
     private TipoProduto tipoProduto;
@@ -84,7 +86,7 @@ public class FormularioTipoProduto extends javax.swing.JPanel implements IFormul
         jtfTipoProduto.setSempreBloqueado(true);
         tipoProduto = (TipoProduto) objetoFormulario;
         jtfTipoProduto.setText(String.valueOf(tipoProduto.getTipoProduto()));
-        jtfDescricaoTipoProduto.setText(tipoProduto.getDescricao());
+        jtfNome.setText(tipoProduto.getNome());
     }
 
     @Override
@@ -110,7 +112,7 @@ public class FormularioTipoProduto extends javax.swing.JPanel implements IFormul
             tipoProduto = new TipoProduto();
         }
         tipoProduto.setTipoProduto(jtfTipoProduto.getText());
-        tipoProduto.setDescricao(jtfDescricaoTipoProduto.getText());
+        tipoProduto.setNome(jtfNome.getText());
         return tipoProduto;
     }
 

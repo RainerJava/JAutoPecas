@@ -25,9 +25,9 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
     private void initComponents() {
 
         jtfIdGrupo = new jautopecas.components.JTextField();
-        jtfNomeGrupo = new jautopecas.components.JTextField();
+        jtfNome = new jautopecas.components.JTextField();
         jlIdGrupo = new javax.swing.JLabel();
-        jlNomeGrupo = new javax.swing.JLabel();
+        jlNome = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(498, 274));
 
@@ -35,13 +35,13 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
         jtfIdGrupo.setEnabled(false);
         jtfIdGrupo.setMensagemAjuda("ID Grupo (Gerado automaticamente pelo sistema)");
 
-        jtfNomeGrupo.setMaximoCaracteres(45);
-        jtfNomeGrupo.setMensagemAjuda("Nome do grupo");
-        jtfNomeGrupo.setRequerido(true);
+        jtfNome.setMaximoCaracteres(45);
+        jtfNome.setMensagemAjuda("Nome do grupo");
+        jtfNome.setRequerido(true);
 
         jlIdGrupo.setText("ID Grupo");
 
-        jlNomeGrupo.setText("Nome Grupo");
+        jlNome.setText("Nome");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -50,12 +50,15 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jlIdGrupo)
-                        .addComponent(jlNomeGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jtfIdGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jtfNomeGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(248, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jlIdGrupo)
+                                .addComponent(jlNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jtfIdGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 386, Short.MAX_VALUE))
+                    .addComponent(jtfNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,17 +68,17 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfIdGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlNomeGrupo)
+                .addComponent(jlNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfNomeGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(177, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jlIdGrupo;
-    private javax.swing.JLabel jlNomeGrupo;
+    private javax.swing.JLabel jlNome;
     private jautopecas.components.JTextField jtfIdGrupo;
-    private jautopecas.components.JTextField jtfNomeGrupo;
+    private jautopecas.components.JTextField jtfNome;
     // End of variables declaration//GEN-END:variables
     private Grupo grupo;
 
@@ -83,7 +86,7 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
         grupo = (Grupo) objetoFormulario;
         jtfIdGrupo.setText(String.valueOf(grupo.getIdGrupo()));
-        jtfNomeGrupo.setText(grupo.getNome());
+        jtfNome.setText(grupo.getNome());
     }
 
     @Override
@@ -107,7 +110,7 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
     @Override
     public Grupo getObjetoFormulario() throws Exception {
         grupo.setIdGrupo(Integer.valueOf(jtfIdGrupo.getText().length() == 0 ? "0" : jtfIdGrupo.getText()));
-        grupo.setNome(jtfNomeGrupo.getText());
+        grupo.setNome(jtfNome.getText());
         return grupo;
     }
 

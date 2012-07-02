@@ -21,14 +21,19 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jlDescricaoTipoEndereco" alignment="0" min="-2" pref="280" max="-2" attributes="0"/>
-                  <Component id="jtfDescricaoTipoEndereco" alignment="0" min="-2" pref="280" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="jtfTipoEndereco" alignment="1" min="-2" pref="93" max="-2" attributes="0"/>
-                      <Component id="jlTipoEndereco" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="jtfNome" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jlNome" alignment="0" min="-2" pref="280" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="jtfIdTipoEndereco" alignment="1" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="jlIdTipoEndereco" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="198" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -39,35 +44,36 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
-              <Component id="jlTipoEndereco" min="-2" max="-2" attributes="0"/>
+              <Component id="jlIdTipoEndereco" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Component id="jtfTipoEndereco" min="-2" max="-2" attributes="0"/>
+              <Component id="jtfIdTipoEndereco" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jlDescricaoTipoEndereco" min="-2" max="-2" attributes="0"/>
+              <Component id="jlNome" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Component id="jtfDescricaoTipoEndereco" min="-2" max="-2" attributes="0"/>
+              <Component id="jtfNome" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="jautopecas.components.JTextField" name="jtfTipoEndereco">
+    <Component class="jautopecas.components.JTextField" name="jtfIdTipoEndereco">
       <Properties>
-        <Property name="mensagemAjuda" type="java.lang.String" value="ID (Gerado automaticamente pelo sistema)"/>
+        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="mensagemAjuda" type="java.lang.String" value="ID Tipo Endere&#xe7;o (Gerado automaticamente pelo sistema)"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jlTipoEndereco">
+    <Component class="javax.swing.JLabel" name="jlIdTipoEndereco">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo Endere&#xe7;o"/>
+        <Property name="text" type="java.lang.String" value="ID Tipo Endere&#xe7;o"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jlDescricaoTipoEndereco">
+    <Component class="javax.swing.JLabel" name="jlNome">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nome"/>
       </Properties>
     </Component>
-    <Component class="jautopecas.components.JTextField" name="jtfDescricaoTipoEndereco">
+    <Component class="jautopecas.components.JTextField" name="jtfNome">
       <Properties>
         <Property name="maximoCaracteres" type="int" value="50"/>
         <Property name="mensagemAjuda" type="java.lang.String" value="Tipo de endere&#xe7;o"/>

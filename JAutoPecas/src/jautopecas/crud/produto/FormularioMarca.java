@@ -25,9 +25,9 @@ public class FormularioMarca extends javax.swing.JPanel implements IFormulario {
     private void initComponents() {
 
         jtfIdMarca = new jautopecas.components.JTextField();
-        jtfNomeMarca = new jautopecas.components.JTextField();
+        jtfNome = new jautopecas.components.JTextField();
         jlIdMarca = new javax.swing.JLabel();
-        jlNomeMarca = new javax.swing.JLabel();
+        jlNome = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(498, 274));
 
@@ -35,13 +35,13 @@ public class FormularioMarca extends javax.swing.JPanel implements IFormulario {
         jtfIdMarca.setEnabled(false);
         jtfIdMarca.setMensagemAjuda("ID Grupo (Gerado automaticamente pelo sistema)");
 
-        jtfNomeMarca.setMaximoCaracteres(150);
-        jtfNomeMarca.setMensagemAjuda("Nome da marca");
-        jtfNomeMarca.setRequerido(true);
+        jtfNome.setMaximoCaracteres(150);
+        jtfNome.setMensagemAjuda("Nome da marca");
+        jtfNome.setRequerido(true);
 
         jlIdMarca.setText("ID Marca");
 
-        jlNomeMarca.setText("Nome Marca");
+        jlNome.setText("Nome");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -50,12 +50,15 @@ public class FormularioMarca extends javax.swing.JPanel implements IFormulario {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jlIdMarca)
-                        .addComponent(jlNomeMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jtfIdMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jtfNomeMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(248, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jlIdMarca)
+                                .addComponent(jlNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jtfIdMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 380, Short.MAX_VALUE))
+                    .addComponent(jtfNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,17 +68,17 @@ public class FormularioMarca extends javax.swing.JPanel implements IFormulario {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfIdMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlNomeMarca)
+                .addComponent(jlNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfNomeMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(177, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jlIdMarca;
-    private javax.swing.JLabel jlNomeMarca;
+    private javax.swing.JLabel jlNome;
     private jautopecas.components.JTextField jtfIdMarca;
-    private jautopecas.components.JTextField jtfNomeMarca;
+    private jautopecas.components.JTextField jtfNome;
     // End of variables declaration//GEN-END:variables
     private Marca marca;
 
@@ -83,7 +86,7 @@ public class FormularioMarca extends javax.swing.JPanel implements IFormulario {
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
         marca = (Marca) objetoFormulario;
         jtfIdMarca.setText(String.valueOf(marca.getIdMarca()));
-        jtfNomeMarca.setText(marca.getNome());
+        jtfNome.setText(marca.getNome());
     }
 
     @Override
@@ -107,7 +110,7 @@ public class FormularioMarca extends javax.swing.JPanel implements IFormulario {
     @Override
     public Marca getObjetoFormulario() throws Exception {
         marca.setIdMarca(Integer.valueOf(jtfIdMarca.getText().length() == 0 ? "0" : jtfIdMarca.getText()));
-        marca.setNome(jtfNomeMarca.getText());
+        marca.setNome(jtfNome.getText());
         return marca;
     }
 
