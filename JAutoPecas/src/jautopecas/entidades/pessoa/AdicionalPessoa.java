@@ -1,7 +1,6 @@
 package jautopecas.entidades.pessoa;
 
 import jautopecas.entidades.pessoa.endereco.Cidade;
-import jautopecas.entidades.pessoa.endereco.Pais;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;

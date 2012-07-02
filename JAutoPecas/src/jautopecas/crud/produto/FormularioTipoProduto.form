@@ -24,53 +24,55 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jlDescricaoTipoEndereco" alignment="0" min="-2" pref="280" max="-2" attributes="0"/>
-                  <Component id="jtfDescricaoTipoEndereco" alignment="0" min="-2" pref="280" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="jtfTipoEndereco" alignment="1" min="-2" pref="93" max="-2" attributes="0"/>
-                      <Component id="jlTipoEndereco" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="jlTipoProduto" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtfDescricaoTipoProduto" min="-2" pref="240" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jtfTipoProduto" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jlDescricaoTipoProduto" alignment="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="248" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
-              <Component id="jlTipoEndereco" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Component id="jtfTipoEndereco" min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jlDescricaoTipoEndereco" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Component id="jtfDescricaoTipoEndereco" min="-2" max="-2" attributes="0"/>
+              <Component id="jlTipoProduto" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jtfTipoProduto" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jlDescricaoTipoProduto" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jtfDescricaoTipoProduto" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="177" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="jautopecas.components.JTextField" name="jtfTipoEndereco">
-      <Properties>
-        <Property name="mensagemAjuda" type="java.lang.String" value="ID (Gerado automaticamente pelo sistema)"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlTipoEndereco">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo Endere&#xe7;o"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jlDescricaoTipoEndereco">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nome"/>
-      </Properties>
-    </Component>
-    <Component class="jautopecas.components.JTextField" name="jtfDescricaoTipoEndereco">
+    <Component class="jautopecas.components.JTextField" name="jtfDescricaoTipoProduto">
       <Properties>
         <Property name="maximoCaracteres" type="int" value="50"/>
-        <Property name="mensagemAjuda" type="java.lang.String" value="Tipo de endere&#xe7;o"/>
+        <Property name="mensagemAjuda" type="java.lang.String" value="Nome Tipo Produto"/>
+        <Property name="requerido" type="boolean" value="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlTipoProduto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tipo Produto"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlDescricaoTipoProduto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o Tipo Produto"/>
+      </Properties>
+    </Component>
+    <Component class="jautopecas.components.JTextField" name="jtfTipoProduto">
+      <Properties>
+        <Property name="maximoCaracteres" type="int" value="2"/>
+        <Property name="mensagemAjuda" type="java.lang.String" value="Nome Tipo Produto"/>
         <Property name="requerido" type="boolean" value="true"/>
       </Properties>
     </Component>

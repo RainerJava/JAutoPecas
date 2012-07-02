@@ -14,7 +14,6 @@ import java.awt.event.WindowEvent;
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.concurrent.ExecutionException;
@@ -299,7 +298,6 @@ public class WindowCrud extends javax.swing.JFrame {
                 } else {
                     pesquisando = false;
                     mensagemRodape.mostraMensagem("Nenhum registro encontrado!!", MensagemRodape.MENSAGEM_ALERTA);
-                    jtfFiltroPesquisa.requestFocus();
                 }
             }
         };

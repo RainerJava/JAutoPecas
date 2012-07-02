@@ -43,8 +43,7 @@ public class UtilFormulario {
                     comp.setText("");
                 } else if (component instanceof JComboBox) {
                     JComboBox comp = (JComboBox) component;
-                    comp.setSelectedIndex(0);
-                    comp.setSempreBloqueado(false);
+                    comp.limpaCampo();
                 } else if (component instanceof JTable) {
                     JTable comp = ((JTable) component);
                     comp.clearSelection();
@@ -87,7 +86,9 @@ public class UtilFormulario {
             for (Component component : components) {
                 if (component instanceof JTextField) {
                     JTextField comp = (JTextField) component;
-                    comp.setEditable(!formularioBloqueado);
+                    if (!comp.isSempreBloqueado()) {
+                        comp.setEditable(!formularioBloqueado);
+                    }
                 } else if (component instanceof jautopecas.components.JPasswordField) {
                     jautopecas.components.JPasswordField comp = (jautopecas.components.JPasswordField) component;
                     comp.setEditable(!formularioBloqueado);

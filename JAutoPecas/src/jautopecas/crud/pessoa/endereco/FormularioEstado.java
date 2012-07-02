@@ -141,16 +141,12 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
 
     @Override
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
-        try {
-            estado = (Estado) objetoFormulario;
-            jtfUf.setText(estado.getUf());
-            jtfNome.setText(estado.getNome());
-            jtfRegiao.setText(estado.getRegiao());
-            jtfIbge.setText(estado.getIbge());
-            jtfPais.setObjeto(estado.getPais());
-        } catch (Exception ex) {
-            throw new Exception("Erro ao carregar os dados do formulario", ex);
-        }
+        estado = (Estado) objetoFormulario;
+        jtfUf.setText(estado.getUf());
+        jtfNome.setText(estado.getNome());
+        jtfRegiao.setText(estado.getRegiao());
+        jtfIbge.setText(estado.getIbge());
+        jtfPais.setObjeto(estado.getPais());
     }
 
     @Override

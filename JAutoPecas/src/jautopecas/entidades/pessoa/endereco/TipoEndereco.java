@@ -10,33 +10,27 @@ public class TipoEndereco implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name = "ID_TIPO_ENDERECO")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idTipoEndereco;
-    private String nome;
+    @Column(name = "TIPO_ENDERECO")
+    private String tipoEndereco;
+    private String descricao;
 
     /*
      * Getter's and Setter's
      */
-    public Integer getIdTipoEndereco() {
-        return idTipoEndereco;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setIdTipoEndereco(Integer idTipoEndereco) {
-        this.idTipoEndereco = idTipoEndereco;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getNome() {
-        return nome;
+    public String getTipoEndereco() {
+        return tipoEndereco;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    @Override
-    public String toString() {
-        return idTipoEndereco + " - " + nome;
+    public void setTipoEndereco(String tipoEndereco) {
+        this.tipoEndereco = tipoEndereco;
     }
 
     @Override
@@ -48,10 +42,10 @@ public class TipoEndereco implements Serializable {
             return false;
         }
         final TipoEndereco other = (TipoEndereco) obj;
-        if (!Objects.equals(this.idTipoEndereco, other.idTipoEndereco)) {
+        if (!Objects.equals(this.tipoEndereco, other.tipoEndereco)) {
             return false;
         }
-        if (!Objects.equals(this.nome, other.nome)) {
+        if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
         return true;
@@ -59,9 +53,14 @@ public class TipoEndereco implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.idTipoEndereco);
-        hash = 59 * hash + Objects.hashCode(this.nome);
+        int hash = 5;
+        hash = 89 * hash + Objects.hashCode(this.tipoEndereco);
+        hash = 89 * hash + Objects.hashCode(this.descricao);
         return hash;
+    }
+
+    @Override
+    public String toString() {
+        return tipoEndereco + "-" + descricao;
     }
 }

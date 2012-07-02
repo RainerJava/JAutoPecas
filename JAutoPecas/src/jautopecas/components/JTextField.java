@@ -100,6 +100,7 @@ public class JTextField extends JFormattedTextField {
     private Color colorDefault;
     private Border bordaErro = BorderFactory.createLineBorder(Color.RED);
     private String mensagemErro;
+    private boolean sempreBloqueado;
     
     public boolean validaCampo() {
         if (requerido) {
@@ -148,6 +149,7 @@ public class JTextField extends JFormattedTextField {
             validador.setValido(true);
         }
         campoValido = true;
+        setSempreBloqueado(false);
     }
     
     private String getFieldValue() throws Exception {
@@ -241,5 +243,16 @@ public class JTextField extends JFormattedTextField {
     public void setMaximoCaracteres(int maximoCaracteres) {
         this.maximoCaracteres = maximoCaracteres;
         ((PlainDocument) getDocument()).setMaximoCaracteres(maximoCaracteres);
+    }
+    
+    public boolean isSempreBloqueado() {
+        return sempreBloqueado;
+    }
+    
+    public void setSempreBloqueado(boolean sempreBloqueado) {
+        this.sempreBloqueado = sempreBloqueado;
+        if (sempreBloqueado) {
+            this.setEditable(false);
+        }
     }
 }

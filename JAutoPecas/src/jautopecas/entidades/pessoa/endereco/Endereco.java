@@ -30,7 +30,7 @@ public class Endereco implements Serializable {
     private String cep;
     private String numero;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "ID_TIPO_ENDERECO", referencedColumnName = "ID_TIPO_ENDERECO")
+    @JoinColumn(name = "TIPO_ENDERECO", referencedColumnName = "TIPO_ENDERECO")
     private TipoEndereco tipoEndereco;
     /*
      * Getter's and Setter's

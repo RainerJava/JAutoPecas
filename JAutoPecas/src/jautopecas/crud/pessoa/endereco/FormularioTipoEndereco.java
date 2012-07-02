@@ -13,9 +13,6 @@ import java.util.List;
  */
 public class FormularioTipoEndereco extends javax.swing.JPanel implements IFormulario {
 
-    /**
-     * Creates new form formularioEmpresa
-     */
     public FormularioTipoEndereco() {
         initComponents();
     }
@@ -24,74 +21,69 @@ public class FormularioTipoEndereco extends javax.swing.JPanel implements IFormu
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtfId = new jautopecas.components.JTextField();
-        jlId = new javax.swing.JLabel();
-        jlNome = new javax.swing.JLabel();
-        jtfNome = new jautopecas.components.JTextField();
+        jtfTipoEndereco = new jautopecas.components.JTextField();
+        jlTipoEndereco = new javax.swing.JLabel();
+        jlDescricaoTipoEndereco = new javax.swing.JLabel();
+        jtfDescricaoTipoEndereco = new jautopecas.components.JTextField();
 
-        setPreferredSize(new java.awt.Dimension(384, 206));
+        setPreferredSize(new java.awt.Dimension(498, 274));
 
-        jtfId.setEnabled(false);
-        jtfId.setMensagemAjuda("ID (Gerado automaticamente pelo sistema)");
+        jtfTipoEndereco.setMensagemAjuda("ID (Gerado automaticamente pelo sistema)");
 
-        jlId.setText("ID");
+        jlTipoEndereco.setText("Tipo Endereço");
 
-        jlNome.setText("Nome");
+        jlDescricaoTipoEndereco.setText("Nome");
 
-        jtfNome.setMaximoCaracteres(50);
-        jtfNome.setMensagemAjuda("Tipo de endereço");
-        jtfNome.setRequerido(true);
+        jtfDescricaoTipoEndereco.setMaximoCaracteres(50);
+        jtfDescricaoTipoEndereco.setMensagemAjuda("Tipo de endereço");
+        jtfDescricaoTipoEndereco.setRequerido(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jlId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(jlNome, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jlDescricaoTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfDescricaoTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jtfTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlTipoEndereco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNome)
-                    .addComponent(jlId))
+                .addComponent(jlTipoEndereco)
                 .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(155, 155, 155))
+                .addComponent(jtfTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlDescricaoTipoEndereco)
+                .addGap(6, 6, 6)
+                .addComponent(jtfDescricaoTipoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jlId;
-    private javax.swing.JLabel jlNome;
-    private jautopecas.components.JTextField jtfId;
-    private jautopecas.components.JTextField jtfNome;
+    private javax.swing.JLabel jlDescricaoTipoEndereco;
+    private javax.swing.JLabel jlTipoEndereco;
+    private jautopecas.components.JTextField jtfDescricaoTipoEndereco;
+    private jautopecas.components.JTextField jtfTipoEndereco;
     // End of variables declaration//GEN-END:variables
     private TipoEndereco tipoEndereco;
 
     @Override
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
+        jtfTipoEndereco.setSempreBloqueado(true);
         tipoEndereco = (TipoEndereco) objetoFormulario;
-        jtfId.setText(tipoEndereco.getIdTipoEndereco().toString());
-        jtfNome.setText(tipoEndereco.getNome());
+        jtfTipoEndereco.setText(tipoEndereco.getTipoEndereco());
+        jtfDescricaoTipoEndereco.setText(tipoEndereco.getDescricao());
     }
 
     @Override
     public void salvar() throws Exception {
-        tipoEndereco = new TipoEndereco();
         new TipoEnderecoDao().salvar(getObjetoFormulario());
         setObjetoFormulario(tipoEndereco);
     }
@@ -109,7 +101,11 @@ public class FormularioTipoEndereco extends javax.swing.JPanel implements IFormu
 
     @Override
     public TipoEndereco getObjetoFormulario() throws Exception {
-        tipoEndereco.setNome(jtfNome.getText());
+        if (tipoEndereco == null) {
+            tipoEndereco = new TipoEndereco();
+        }
+        tipoEndereco.setTipoEndereco(jtfTipoEndereco.getText());
+        tipoEndereco.setDescricao(jtfDescricaoTipoEndereco.getText());
         return tipoEndereco;
     }
 

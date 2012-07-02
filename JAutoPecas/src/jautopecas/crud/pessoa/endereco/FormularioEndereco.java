@@ -49,6 +49,8 @@ public class FormularioEndereco extends javax.swing.JPanel {
     private EnderecoPessoa getObjetoFormulario() {
         if (enderecoPessoa == null) {
             enderecoPessoa = new EnderecoPessoa();
+        }
+        if (enderecoPessoa.getEndereco() == null) {
             enderecoPessoa.setEndereco(new Endereco());
         }
         enderecoPessoa.getEndereco().setUf((Estado) jtfUf.getObjeto());

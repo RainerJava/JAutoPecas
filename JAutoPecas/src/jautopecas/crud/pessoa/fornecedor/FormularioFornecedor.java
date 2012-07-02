@@ -11,18 +11,111 @@ import jautopecas.entidades.pessoa.ModeloPessoa;
 import jautopecas.entidades.pessoa.Pessoa;
 import jautopecas.entidades.pessoa.endereco.EnderecoPessoa;
 import jautopecas.entidades.pessoa.telefone.TelefonePessoa;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.border.BevelBorder;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 /**
  *
  * @author JFFiorotto
  */
 public class FormularioFornecedor extends javax.swing.JPanel implements IFormulario {
-    
+
+    JPopupMenu popup;
+
     public FormularioFornecedor() {
         initComponents();
+        criaPopupMenu();
     }
-    
+
+    private void criaPopupMenu() {
+        popup = new JPopupMenu();
+        ActionListener menuListener = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                if (event.getActionCommand().equals("Copiar Fornecedor")) {
+                    copiaFornecedorParaFabricante();
+                }
+            }
+        };
+        JMenuItem item;
+        popup.add(item = new JMenuItem("Copiar Fornecedor", new ImageIcon("1.gif")));
+        item.setHorizontalTextPosition(JMenuItem.RIGHT);
+        item.addActionListener(menuListener);
+
+        popup.setLabel("Justification");
+        popup.setBorder(new BevelBorder(BevelBorder.RAISED));
+        popup.addPopupMenuListener(new PopupPrintListener());
+        addMouseListener(new MousePopupListener());
+    }
+
+    private void copiaFornecedorParaFabricante() {
+        if (pessoa.getIdPessoa() != 0) {
+            if (pessoa.getTipoPessoa().equals("Fisica")) {
+                JOptionPane.showMessageDialog(this, "Só é possivel gerar fabricante apartir de fornecedor pessoa juridica", "Atenção", JOptionPane.WARNING_MESSAGE);
+            } else {
+                pessoa.setIdPessoa(0);
+                pessoa.setModeloPessoa(new ModeloPessoaDao().load(3));
+                new PessoaDao().salvar(pessoa);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um fornecedor já cadastrado para copiar!!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    class MousePopupListener extends MouseAdapter {
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            checkPopup(e);
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            checkPopup(e);
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            checkPopup(e);
+        }
+
+        private void checkPopup(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                popup.show(getParent(), e.getX(), e.getY());
+            }
+        }
+    }
+
+    // An inner class to show when popup events occur
+    class PopupPrintListener implements PopupMenuListener {
+
+        @Override
+        public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+            System.out.println("Popup menu will be visible!");
+        }
+
+        @Override
+        public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+            System.out.println("Popup menu will be invisible!");
+        }
+
+        @Override
+        public void popupMenuCanceled(PopupMenuEvent e) {
+            System.out.println("Popup menu is hidden!");
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -135,6 +228,21 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfApelido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfDocumento2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,22 +268,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
                                         .addComponent(jcbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jcbTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 160, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfApelido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfDocumento2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -215,7 +308,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
 
     private void jcbTipoPessoaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbTipoPessoaPropertyChange
     }//GEN-LAST:event_jcbTipoPessoaPropertyChange
-    
+
     private void jcbTipoPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoPessoaActionPerformed
         if (jcbTipoPessoa.getSelectedItem() == null) {
             jcbTipoPessoa.setSelectedIndex(0);
@@ -238,11 +331,11 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
             jtfDocumento2.setMensagemAjuda("RG do fornecedor");
         }
     }//GEN-LAST:event_jcbTipoPessoaActionPerformed
-    
+
     private void jcbTipoLinhaFornecimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoLinhaFornecimentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbTipoLinhaFornecimentoActionPerformed
-    
+
     private void jcbTipoLinhaFornecimentoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbTipoLinhaFornecimentoPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbTipoLinhaFornecimentoPropertyChange
@@ -270,7 +363,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
     // End of variables declaration//GEN-END:variables
     private Pessoa pessoa;
     private ModeloPessoa modeloPessoa;
-    
+
     @Override
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
         jcbTipoPessoa.setSempreBloqueado(true);
@@ -291,24 +384,24 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
         formularioEndereco.setListaEnderecoPessoa(pessoa.getEnderecoPessoa());
         formularioTelefone.setListaTelefonePessoa(pessoa.getTelefonePessoa());
     }
-    
+
     @Override
     public void salvar() throws Exception {
         new PessoaDao().salvar(getObjetoFormulario());
         setObjetoFormulario(pessoa);
     }
-    
+
     @Override
     public void alterar() throws Exception {
         new PessoaDao().alterar(getObjetoFormulario());
         setObjetoFormulario(pessoa);
     }
-    
+
     @Override
     public void excluir() throws Exception {
         new PessoaDao().excluir(pessoa);
     }
-    
+
     @Override
     public Pessoa getObjetoFormulario() throws Exception {
         if (pessoa == null) {
@@ -342,7 +435,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
         }
         return pessoa;
     }
-    
+
     @Override
     public MensagemRodape getMensagemRodape() {
         if (getTopLevelAncestor() instanceof WindowCrud) {
@@ -350,12 +443,12 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
         }
         return null;
     }
-    
+
     @Override
     public List pesquisar(String strPesquisa) throws Exception {
         return new PessoaDao().listarTodos();
     }
-    
+
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
         return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.idModeloPessoa = 2");
     }

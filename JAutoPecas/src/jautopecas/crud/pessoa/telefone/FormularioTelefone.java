@@ -50,6 +50,8 @@ public class FormularioTelefone extends javax.swing.JPanel {
     private TelefonePessoa getObjetoFormulario() {
         if (telefonePessoa == null) {
             telefonePessoa = new TelefonePessoa();
+        }
+        if (telefonePessoa.getTelefone() == null) {
             telefonePessoa.setTelefone(new Telefone());
         }
         telefonePessoa.getTelefone().setTelefone(jtfTelefone.getText());

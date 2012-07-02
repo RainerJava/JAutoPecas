@@ -55,72 +55,75 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jlIdProduto" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
                                           <Component id="jtfIdProduto" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                                          <Component id="jlIdProduto" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                              <Component id="jlIdProduto10" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jTextField10" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="jlIdProduto19" min="-2" pref="76" max="-2" attributes="0"/>
+                                          <Component id="jcbTipoProduto" min="-2" pref="159" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jlIdProduto3" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
-                                          <Component id="jTextField3" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jlIdProduto11" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
-                                          <Component id="jTextField11" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jlIdProduto17" min="-2" pref="168" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField16" max="32767" attributes="0"/>
-                                  <Component id="jTextField17" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jlIdProduto16" min="-2" pref="168" max="-2" attributes="0"/>
-                                          <Component id="jlIdProduto18" min="-2" pref="216" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="59" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jlIdProduto1" min="-2" pref="168" max="-2" attributes="0"/>
-                                          <Component id="jTextField1" min="-2" pref="244" max="-2" attributes="0"/>
+                                          <Component id="jtfNumeroFabricante" min="-2" pref="244" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
                                               <Component id="jlIdProduto2" min="-2" pref="384" max="-2" attributes="0"/>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="jTextField2" max="32767" attributes="0"/>
+                                          <Component id="jtfDescricao" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jlIdProduto17" min="-2" pref="168" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jtfFabricante" max="32767" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jlIdProduto3" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
+                                                      <Component id="jtfGrupo" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jlIdProduto11" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
+                                                      <Component id="jtfSubgrupo" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Component id="jlIdProduto10" alignment="0" min="-2" pref="374" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jtfFamilia" max="32767" attributes="0"/>
+                                          <Component id="jtfMarca" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jlIdProduto18" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
+                                                  <Component id="jlIdProduto16" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="0" pref="107" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -135,31 +138,39 @@
                       <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jlIdProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlIdProduto19" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jtfIdProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbTipoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jlIdProduto10" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jlIdProduto18" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jtfIdProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField17" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfFabricante" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfMarca" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="jlIdProduto3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                              <Component id="jTextField3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfGrupo" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="jlIdProduto11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                              <Component id="jTextField11" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfSubgrupo" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="jlIdProduto16" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                              <Component id="jTextField16" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfFamilia" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -169,14 +180,14 @@
                       </Group>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfNumeroFabricante" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jlIdProduto17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="253" max="32767" attributes="0"/>
+                      <EmptySpace pref="206" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -194,7 +205,7 @@
                 <Property name="text" type="java.lang.String" value="ID Produto"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JTextField" name="jTextField1">
+            <Component class="jautopecas.components.JTextField" name="jtfNumeroFabricante">
               <Properties>
                 <Property name="maximoCaracteres" type="int" value="150"/>
                 <Property name="requerido" type="boolean" value="true"/>
@@ -205,7 +216,7 @@
                 <Property name="text" type="java.lang.String" value="Numero Fabricante"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JTextField" name="jTextField2">
+            <Component class="jautopecas.components.JTextField" name="jtfDescricao">
               <Properties>
                 <Property name="maximoCaracteres" type="int" value="250"/>
                 <Property name="requerido" type="boolean" value="true"/>
@@ -221,7 +232,7 @@
                 <Property name="text" type="java.lang.String" value="Fabricante"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JTextField" name="jTextField10">
+            <Component class="jautopecas.components.JTextField" name="jtfFabricante">
               <Properties>
                 <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.fabricante.FormularioFabricante"/>
                 <Property name="requerido" type="boolean" value="true"/>
@@ -232,7 +243,7 @@
                 <Property name="text" type="java.lang.String" value="Grupo"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JTextField" name="jTextField3">
+            <Component class="jautopecas.components.JTextField" name="jtfGrupo">
               <Properties>
                 <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioGrupo"/>
                 <Property name="requerido" type="boolean" value="true"/>
@@ -243,7 +254,7 @@
                 <Property name="text" type="java.lang.String" value="Subgrupo"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JTextField" name="jTextField11">
+            <Component class="jautopecas.components.JTextField" name="jtfSubgrupo">
               <Properties>
                 <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioSubgrupo"/>
               </Properties>
@@ -253,7 +264,7 @@
                 <Property name="text" type="java.lang.String" value="Familia"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JTextField" name="jTextField16">
+            <Component class="jautopecas.components.JTextField" name="jtfFamilia">
               <Properties>
                 <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioFamilia"/>
               </Properties>
@@ -265,7 +276,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextArea1">
+                <Component class="javax.swing.JTextArea" name="jtaAplicacao">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
@@ -278,7 +289,7 @@
                 <Property name="text" type="java.lang.String" value="Aplica&#xe7;&#xe3;o"/>
               </Properties>
             </Component>
-            <Component class="jautopecas.components.JTextField" name="jTextField17">
+            <Component class="jautopecas.components.JTextField" name="jtfMarca">
               <Properties>
                 <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioMarca"/>
                 <Property name="requerido" type="boolean" value="true"/>
@@ -287,6 +298,17 @@
             <Component class="javax.swing.JLabel" name="jlIdProduto18">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Marca"/>
+              </Properties>
+            </Component>
+            <Component class="jautopecas.components.JComboBox" name="jcbTipoProduto">
+              <Properties>
+                <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.pessoa.telefone.FormularioTipoTelefone"/>
+                <Property name="mensagemAjuda" type="java.lang.String" value="Tipo de telefone. EX:. Comercial,Residencial,Etc..."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jlIdProduto19">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tipo Produto"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -350,22 +372,22 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField4" max="32767" attributes="0"/>
+                              <Component id="jtfQtdEmbalagemCompra" max="32767" attributes="0"/>
                               <Component id="jlIdProduto4" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField5" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtfQtdEmbalagemVenda" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlIdProduto5" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField6" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtfFatorEmbalagemCompra" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlIdProduto6" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField7" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtfFatorEmbalagemVenda" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlIdProduto7" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -382,19 +404,19 @@
                                   <Component id="jlIdProduto6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jtfFatorEmbalagemCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jtfFatorEmbalagemVenda" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlIdProduto5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfQtdEmbalagemVenda" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlIdProduto4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfQtdEmbalagemCompra" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -407,7 +429,7 @@
                     <Property name="text" type="java.lang.String" value="Qtd. Embalagem Compra"/>
                   </Properties>
                 </Component>
-                <Component class="jautopecas.components.JTextField" name="jTextField4">
+                <Component class="jautopecas.components.JTextField" name="jtfQtdEmbalagemCompra">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.00" subtype="-1" type="0"/>
@@ -420,7 +442,7 @@
                     <Property name="text" type="java.lang.String" value="Qtd. Embalagem Venda"/>
                   </Properties>
                 </Component>
-                <Component class="jautopecas.components.JTextField" name="jTextField5">
+                <Component class="jautopecas.components.JTextField" name="jtfQtdEmbalagemVenda">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.00" subtype="-1" type="0"/>
@@ -433,7 +455,7 @@
                     <Property name="text" type="java.lang.String" value="Fator Embalagem Compra"/>
                   </Properties>
                 </Component>
-                <Component class="jautopecas.components.JTextField" name="jTextField6">
+                <Component class="jautopecas.components.JTextField" name="jtfFatorEmbalagemCompra">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.00" subtype="-1" type="0"/>
@@ -446,7 +468,7 @@
                     <Property name="text" type="java.lang.String" value="Fator Embalagem Venda"/>
                   </Properties>
                 </Component>
-                <Component class="jautopecas.components.JTextField" name="jTextField7">
+                <Component class="jautopecas.components.JTextField" name="jtfFatorEmbalagemVenda">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#0.00" subtype="-1" type="0"/>
@@ -474,12 +496,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField8" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtfPesoLiquido" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlIdProduto8" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField9" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtfPesoBruto" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlIdProduto9" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -494,12 +516,12 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlIdProduto9" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField9" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfPesoBruto" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlIdProduto8" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField8" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfPesoLiquido" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -512,7 +534,7 @@
                     <Property name="text" type="java.lang.String" value="Peso Liquido"/>
                   </Properties>
                 </Component>
-                <Component class="jautopecas.components.JTextField" name="jTextField8">
+                <Component class="jautopecas.components.JTextField" name="jtfPesoLiquido">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#,###.000" subtype="-1" type="0"/>
@@ -525,7 +547,7 @@
                     <Property name="text" type="java.lang.String" value="Peso Bruto"/>
                   </Properties>
                 </Component>
-                <Component class="jautopecas.components.JTextField" name="jTextField9">
+                <Component class="jautopecas.components.JTextField" name="jtfPesoBruto">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                       <Format format="#,###.000" subtype="-1" type="0"/>
@@ -553,12 +575,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField12" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtfUnidadeCompra" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlIdProduto12" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField13" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtfUnidadeVenda" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlIdProduto13" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="501" max="32767" attributes="0"/>
@@ -573,12 +595,12 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlIdProduto13" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField13" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfUnidadeVenda" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlIdProduto12" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField12" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfUnidadeCompra" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -591,7 +613,7 @@
                     <Property name="text" type="java.lang.String" value="Unidade Compra"/>
                   </Properties>
                 </Component>
-                <Component class="jautopecas.components.JTextField" name="jTextField12">
+                <Component class="jautopecas.components.JTextField" name="jtfUnidadeCompra">
                   <Properties>
                     <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioUnidade"/>
                     <Property name="requerido" type="boolean" value="true"/>
@@ -602,7 +624,7 @@
                     <Property name="text" type="java.lang.String" value="Unidade Venda"/>
                   </Properties>
                 </Component>
-                <Component class="jautopecas.components.JTextField" name="jTextField13">
+                <Component class="jautopecas.components.JTextField" name="jtfUnidadeVenda">
                   <Properties>
                     <Property name="classeFormulario" type="java.lang.String" value="jautopecas.crud.produto.FormularioUnidade"/>
                     <Property name="requerido" type="boolean" value="true"/>
@@ -628,12 +650,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField14" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtfCodigoBarraFabricante" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlIdProduto14" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField15" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtfCodigoBarraEmpresa" alignment="0" max="32767" attributes="0"/>
                               <Component id="jlIdProduto15" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="501" max="32767" attributes="0"/>
@@ -648,12 +670,12 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlIdProduto15" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField15" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfCodigoBarraEmpresa" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlIdProduto14" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField14" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtfCodigoBarraFabricante" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -666,7 +688,7 @@
                     <Property name="text" type="java.lang.String" value="Codigo Barra Fabricante"/>
                   </Properties>
                 </Component>
-                <Component class="jautopecas.components.JTextField" name="jTextField14">
+                <Component class="jautopecas.components.JTextField" name="jtfCodigoBarraFabricante">
                   <Properties>
                     <Property name="requerido" type="boolean" value="true"/>
                   </Properties>
@@ -676,7 +698,7 @@
                     <Property name="text" type="java.lang.String" value="Codigo Barra Empresa"/>
                   </Properties>
                 </Component>
-                <Component class="jautopecas.components.JTextField" name="jTextField15">
+                <Component class="jautopecas.components.JTextField" name="jtfCodigoBarraEmpresa">
                 </Component>
               </SubComponents>
             </Container>

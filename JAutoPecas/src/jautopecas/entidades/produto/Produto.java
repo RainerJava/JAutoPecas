@@ -66,8 +66,9 @@ public class Produto implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataCadastro;
     private String medida;
-    @Column(name = "TIPO_PRODUTO")
-    private String tipoProduto; //<R>-Revenda / <C>-Consumo / <A>-Ativo / <B>-Brinde
+    @OneToOne
+    @JoinColumn(name = "TIPO_PRODUTO")
+    private TipoProduto tipoProduto;
     @Column(name = "CLASSIFICACAO_ABC")
     private String classificacaoAbc;
 
@@ -247,11 +248,11 @@ public class Produto implements Serializable {
         this.subGrupo = subGrupo;
     }
 
-    public String getTipoProduto() {
+    public TipoProduto getTipoProduto() {
         return tipoProduto;
     }
 
-    public void setTipoProduto(String tipoProduto) {
+    public void setTipoProduto(TipoProduto tipoProduto) {
         this.tipoProduto = tipoProduto;
     }
 

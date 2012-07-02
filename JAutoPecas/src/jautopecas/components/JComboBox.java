@@ -62,7 +62,7 @@ public class JComboBox extends javax.swing.JComboBox {
         this.addFocusListener(new FocusAdapter() {
 
             @Override
-            public void focusGained(FocusEvent evt) {          
+            public void focusGained(FocusEvent evt) {
                 if (getMensagemRodape() != null && isEnabled()) {
                     getMensagemRodape().mostraMensagem(mensagemAjuda, MensagemRodape.MENSAGEM_AJUDA);
                 }
@@ -94,6 +94,11 @@ public class JComboBox extends javax.swing.JComboBox {
                 throw new Exception("Erro no refresh do JFComboBox");
             }
         }
+    }
+
+    public void limpaCampo() {
+        setSelectedIndex(0);
+        setSempreBloqueado(false);
     }
 
     /*
