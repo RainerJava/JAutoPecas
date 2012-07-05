@@ -411,7 +411,6 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
         if (modeloPessoa == null) {
             modeloPessoa = new ModeloPessoaDao().load(2);
         }
-        pessoa.setIdPessoa(Integer.valueOf(jtfIdEmpresa.getText().length() == 0 ? "0" : jtfIdEmpresa.getText()));
         pessoa.setModeloPessoa(modeloPessoa);
         pessoa.setApelido(jtfApelido.getText());
         pessoa.setNome(jtfNome.getText());

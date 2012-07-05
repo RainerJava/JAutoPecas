@@ -16,12 +16,12 @@ import java.util.List;
  * @author JFFiorotto
  */
 public class FormularioProduto extends javax.swing.JPanel implements IFormulario {
-    
+
     public FormularioProduto() {
         initComponents();
         carregaCombos();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -537,7 +537,7 @@ public class FormularioProduto extends javax.swing.JPanel implements IFormulario
     private jautopecas.components.JTextField jtfUnidadeVenda;
     // End of variables declaration//GEN-END:variables
     private Produto produto;
-    
+
     @Override
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
         produto = (Produto) objetoFormulario;
@@ -564,31 +564,30 @@ public class FormularioProduto extends javax.swing.JPanel implements IFormulario
         formularioProdutoFornecedor.setProdutoSelecionado(produto);
         formularioProdutoFornecedor.setListaProdutoFornecedor(produto.getProdutoFornecedor());
     }
-    
+
     @Override
     public void salvar() throws Exception {
         new ProdutoDao().salvar(getObjetoFormulario());
         setObjetoFormulario(produto);
     }
-    
+
     @Override
     public void alterar() throws Exception {
         new ProdutoDao().alterar(getObjetoFormulario());
         setObjetoFormulario(produto);
     }
-    
+
     @Override
     public void excluir() throws Exception {
         new ProdutoDao().excluir(produto);
     }
-    
+
     @Override
     public Produto getObjetoFormulario() throws Exception {
         if (produto == null) {
             produto = new Produto();
             produto.setDataCadastro(new Date());
         }
-        produto.setIdProduto(Integer.valueOf(jtfIdProduto.getText().length() == 0 ? "0" : jtfIdProduto.getText()));
         produto.setFabricante((Pessoa) jtfFabricante.getObjeto());
         produto.setMarca((Marca) jtfMarca.getObjeto());
         produto.setGrupo((Grupo) jtfGrupo.getObjeto());
@@ -610,7 +609,7 @@ public class FormularioProduto extends javax.swing.JPanel implements IFormulario
         produto.setTipoProduto((TipoProduto) jcbTipoProduto.getSelectedItem());
         return produto;
     }
-    
+
     @Override
     public MensagemRodape getMensagemRodape() {
         if (getTopLevelAncestor() instanceof WindowCrud) {
@@ -618,16 +617,16 @@ public class FormularioProduto extends javax.swing.JPanel implements IFormulario
         }
         return null;
     }
-    
+
     @Override
     public List pesquisar(String strPesquisa) throws Exception {
         return new ProdutoDao().listarTodos();
     }
-    
+
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
         return new ProdutoDao().pesquisaSimples(strCamposPesqisa, strPesquisa);
     }
-    
+
     private void carregaCombos() {
         jcbTipoProduto.setDataSet(new TipoProdutoDao().listarTodos());
     }

@@ -110,7 +110,6 @@ public class FormularioFuncao extends javax.swing.JPanel implements IFormulario 
 
     @Override
     public void salvar() throws Exception {
-        funcao = new Funcao();
         new FuncaoDao().salvar(getObjetoFormulario());
         setObjetoFormulario(funcao);
     }
@@ -128,6 +127,9 @@ public class FormularioFuncao extends javax.swing.JPanel implements IFormulario 
 
     @Override
     public Funcao getObjetoFormulario() throws Exception {
+        if (funcao == null) {
+            funcao = new Funcao();
+        }
         funcao.setDepartamento((Departamento) jtfDepartamento.getObjeto());
         funcao.setNome(jtfNome.getText());
         return funcao;

@@ -159,7 +159,6 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
 
     @Override
     public void salvar() throws Exception {
-        estado = new Estado();
         new EstadoDao().salvar(getObjetoFormulario());
         setObjetoFormulario(estado);
     }
@@ -177,6 +176,9 @@ public class FormularioEstado extends javax.swing.JPanel implements IFormulario 
 
     @Override
     public Estado getObjetoFormulario() {
+        if (estado == null) {
+            estado = new Estado();
+        }
         estado.setUf(jtfUf.getText());
         estado.setNome(jtfNome.getText());
         estado.setRegiao(jtfRegiao.getText());

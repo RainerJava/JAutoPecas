@@ -442,7 +442,6 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
         if (modeloPessoa == null) {
             modeloPessoa = new ModeloPessoaDao().load(5);
         }
-        pessoa.setIdPessoa(Integer.valueOf(jtfIdEmpresa.getText().length() == 0 ? "0" : jtfIdEmpresa.getText()));
         pessoa.setModeloPessoa(modeloPessoa);
         pessoa.setNome(jtfNome.getText());
         pessoa.setApelido(jtfApelido.getText());

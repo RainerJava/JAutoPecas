@@ -210,7 +210,6 @@ public class FormularioFabricante extends javax.swing.JPanel implements IFormula
         if (modeloPessoa == null) {
             modeloPessoa = new ModeloPessoaDao().load(3);
         }
-        pessoa.setIdPessoa(Integer.valueOf(jtfIdFabricante.getText().length() == 0 ? "0" : jtfIdFabricante.getText()));
         pessoa.setModeloPessoa(modeloPessoa);
         pessoa.setApelido(jtfNomeFantasia.getText());
         pessoa.setNome(jtfRazaoSocial.getText());

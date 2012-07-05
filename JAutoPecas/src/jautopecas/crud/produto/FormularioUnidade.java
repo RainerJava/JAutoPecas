@@ -111,7 +111,6 @@ public class FormularioUnidade extends javax.swing.JPanel implements IFormulario
         if (unidade == null) {
             unidade = new Unidade();
         }
-        unidade.setIdUnidade(Integer.valueOf(jtfIdUnidade.getText().length() == 0 ? "0" : jtfIdUnidade.getText()));
         unidade.setNome(jtfNome.getText());
         return unidade;
     }

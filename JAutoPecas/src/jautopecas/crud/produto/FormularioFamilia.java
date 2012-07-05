@@ -91,7 +91,6 @@ public class FormularioFamilia extends javax.swing.JPanel implements IFormulario
 
     @Override
     public void salvar() throws Exception {
-        familia = new Familia();
         new FamiliaDao().salvar(getObjetoFormulario());
         setObjetoFormulario(familia);
     }
@@ -109,7 +108,9 @@ public class FormularioFamilia extends javax.swing.JPanel implements IFormulario
 
     @Override
     public Familia getObjetoFormulario() throws Exception {
-        familia.setIdFamilia(Integer.valueOf(jtfIdFamilia.getText().length() == 0 ? "0" : jtfIdFamilia.getText()));
+        if (familia == null) {
+            familia = new Familia();
+        }
         familia.setNome(jtfNome.getText());
         return familia;
     }
