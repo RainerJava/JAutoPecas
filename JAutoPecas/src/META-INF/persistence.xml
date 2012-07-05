@@ -29,19 +29,20 @@
         <class>jautopecas.entidades.produto.Subgrupo</class>
         <class>jautopecas.entidades.produto.Unidade</class>
         <class>jautopecas.entidades.produto.TipoProduto</class>
+        <class>jautopecas.entidades.produto.ProdutoFornecedor</class>
         <properties>
-<!--      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://instance19734.db.xeround.com:13144/dbautopecasnew"/>
-      <property name="javax.persistence.jdbc.password" value="123456"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.user" value="jautopecas"/>-->
-<!--      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/dbautopecasnew"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://instance19734.db.xeround.com:13144/dbautopecasnew"/>
+            <property name="javax.persistence.jdbc.password" value="123456"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="jautopecas"/>
+      <!--      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/dbautopecasnew"/>
       <property name="javax.persistence.jdbc.password" value="line@njo"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="root"/>-->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:13306/dbautopecasnew"/>
-            <property name="javax.persistence.jdbc.password" value="CALMA"/>
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="Administrator"/>
+<!--      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:13306/dbautopecasnew"/>
+      <property name="javax.persistence.jdbc.password" value="CALMA"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="Administrator"/>-->
             <property name="eclipselink.logging.level" value="FINE"/>
         </properties>
     </persistence-unit>

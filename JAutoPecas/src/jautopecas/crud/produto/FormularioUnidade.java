@@ -91,7 +91,6 @@ public class FormularioUnidade extends javax.swing.JPanel implements IFormulario
 
     @Override
     public void salvar() throws Exception {
-        unidade = new Unidade();
         new UnidadeDao().salvar(getObjetoFormulario());
         setObjetoFormulario(unidade);
     }
@@ -109,6 +108,9 @@ public class FormularioUnidade extends javax.swing.JPanel implements IFormulario
 
     @Override
     public Unidade getObjetoFormulario() throws Exception {
+        if (unidade == null) {
+            unidade = new Unidade();
+        }
         unidade.setIdUnidade(Integer.valueOf(jtfIdUnidade.getText().length() == 0 ? "0" : jtfIdUnidade.getText()));
         unidade.setNome(jtfNome.getText());
         return unidade;

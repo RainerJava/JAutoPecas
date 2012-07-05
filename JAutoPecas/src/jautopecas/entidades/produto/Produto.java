@@ -4,6 +4,7 @@ import jautopecas.entidades.pessoa.Pessoa;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -71,6 +72,8 @@ public class Produto implements Serializable {
     private TipoProduto tipoProduto;
     @Column(name = "CLASSIFICACAO_ABC")
     private String classificacaoAbc;
+    @OneToMany(mappedBy = "produto", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProdutoFornecedor> produtoFornecedor;
 
     public String getAplicacao() {
         return aplicacao;
@@ -270,5 +273,13 @@ public class Produto implements Serializable {
 
     public void setUnidadeVenda(Unidade unidadeVenda) {
         this.unidadeVenda = unidadeVenda;
+    }
+
+    public List<ProdutoFornecedor> getProdutoFornecedor() {
+        return produtoFornecedor;
+    }
+
+    public void setProdutoFornecedor(List<ProdutoFornecedor> produtoFornecedor) {
+        this.produtoFornecedor = produtoFornecedor;
     }
 }

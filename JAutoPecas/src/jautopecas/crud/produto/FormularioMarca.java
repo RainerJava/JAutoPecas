@@ -91,7 +91,6 @@ public class FormularioMarca extends javax.swing.JPanel implements IFormulario {
 
     @Override
     public void salvar() throws Exception {
-        marca = new Marca();
         new MarcaDao().salvar(getObjetoFormulario());
         setObjetoFormulario(marca);
     }
@@ -109,6 +108,9 @@ public class FormularioMarca extends javax.swing.JPanel implements IFormulario {
 
     @Override
     public Marca getObjetoFormulario() throws Exception {
+        if (marca == null) {
+            marca = new Marca();
+        }
         marca.setIdMarca(Integer.valueOf(jtfIdMarca.getText().length() == 0 ? "0" : jtfIdMarca.getText()));
         marca.setNome(jtfNome.getText());
         return marca;

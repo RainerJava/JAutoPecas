@@ -91,7 +91,6 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
 
     @Override
     public void salvar() throws Exception {
-        grupo = new Grupo();
         new GrupoDao().salvar(getObjetoFormulario());
         setObjetoFormulario(grupo);
     }
@@ -109,6 +108,9 @@ public class FormularioGrupo extends javax.swing.JPanel implements IFormulario {
 
     @Override
     public Grupo getObjetoFormulario() throws Exception {
+        if (grupo == null) {
+            grupo = new Grupo();
+        }
         grupo.setIdGrupo(Integer.valueOf(jtfIdGrupo.getText().length() == 0 ? "0" : jtfIdGrupo.getText()));
         grupo.setNome(jtfNome.getText());
         return grupo;

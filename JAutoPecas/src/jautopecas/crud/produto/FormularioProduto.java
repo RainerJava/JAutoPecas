@@ -16,12 +16,12 @@ import java.util.List;
  * @author JFFiorotto
  */
 public class FormularioProduto extends javax.swing.JPanel implements IFormulario {
-
+    
     public FormularioProduto() {
         initComponents();
         carregaCombos();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -74,6 +74,8 @@ public class FormularioProduto extends javax.swing.JPanel implements IFormulario
         jtfCodigoBarraFabricante = new jautopecas.components.JTextField();
         jlIdProduto15 = new javax.swing.JLabel();
         jtfCodigoBarraEmpresa = new jautopecas.components.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        formularioProdutoFornecedor = new jautopecas.crud.produto.FormularioProdutoFornecedor();
 
         setPreferredSize(new java.awt.Dimension(800, 550));
 
@@ -454,6 +456,19 @@ public class FormularioProduto extends javax.swing.JPanel implements IFormulario
 
         jTabbedPane2.addTab("Embalagem", jPanel5);
 
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(formularioProdutoFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(formularioProdutoFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jTabbedPane2.addTab("Produto X Fornecedor", jPanel7);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -470,12 +485,14 @@ public class FormularioProduto extends javax.swing.JPanel implements IFormulario
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private jautopecas.crud.produto.FormularioProdutoFornecedor formularioProdutoFornecedor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private jautopecas.components.JComboBox jcbTipoProduto;
@@ -520,7 +537,7 @@ public class FormularioProduto extends javax.swing.JPanel implements IFormulario
     private jautopecas.components.JTextField jtfUnidadeVenda;
     // End of variables declaration//GEN-END:variables
     private Produto produto;
-
+    
     @Override
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
         produto = (Produto) objetoFormulario;
@@ -544,25 +561,27 @@ public class FormularioProduto extends javax.swing.JPanel implements IFormulario
         jtfUnidadeCompra.setObjeto(produto.getUnidadeCompra());
         jtfUnidadeVenda.setObjeto(produto.getUnidadeVenda());
         jcbTipoProduto.setSelectedItem(produto.getTipoProduto());
+        formularioProdutoFornecedor.setProdutoSelecionado(produto);
+        formularioProdutoFornecedor.setListaProdutoFornecedor(produto.getProdutoFornecedor());
     }
-
+    
     @Override
     public void salvar() throws Exception {
         new ProdutoDao().salvar(getObjetoFormulario());
         setObjetoFormulario(produto);
     }
-
+    
     @Override
     public void alterar() throws Exception {
         new ProdutoDao().alterar(getObjetoFormulario());
         setObjetoFormulario(produto);
     }
-
+    
     @Override
     public void excluir() throws Exception {
         new ProdutoDao().excluir(produto);
     }
-
+    
     @Override
     public Produto getObjetoFormulario() throws Exception {
         if (produto == null) {
@@ -588,10 +607,10 @@ public class FormularioProduto extends javax.swing.JPanel implements IFormulario
         produto.setCodigoBarraEmpresa(jtfCodigoBarraEmpresa.getText());
         produto.setUnidadeCompra((Unidade) jtfUnidadeCompra.getObjeto());
         produto.setUnidadeVenda((Unidade) jtfUnidadeVenda.getObjeto());
-        produto.setTipoProduto((TipoProduto)jcbTipoProduto.getSelectedItem());
+        produto.setTipoProduto((TipoProduto) jcbTipoProduto.getSelectedItem());
         return produto;
     }
-
+    
     @Override
     public MensagemRodape getMensagemRodape() {
         if (getTopLevelAncestor() instanceof WindowCrud) {
@@ -599,16 +618,16 @@ public class FormularioProduto extends javax.swing.JPanel implements IFormulario
         }
         return null;
     }
-
+    
     @Override
     public List pesquisar(String strPesquisa) throws Exception {
         return new ProdutoDao().listarTodos();
     }
-
+    
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
         return new ProdutoDao().pesquisaSimples(strCamposPesqisa, strPesquisa);
     }
-
+    
     private void carregaCombos() {
         jcbTipoProduto.setDataSet(new TipoProdutoDao().listarTodos());
     }
