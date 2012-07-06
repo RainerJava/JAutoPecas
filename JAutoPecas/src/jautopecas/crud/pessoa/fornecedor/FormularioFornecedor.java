@@ -61,7 +61,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
 
     private void copiaFornecedorParaFabricante() {
         if (pessoa.getIdPessoa() != 0) {
-            if (pessoa.getTipoPessoa().equals("Fisica")) {
+            if (pessoa.getFisicaJuridica().equals("Fisica")) {
                 JOptionPane.showMessageDialog(this, "Só é possivel gerar fabricante apartir de fornecedor pessoa juridica", "Atenção", JOptionPane.WARNING_MESSAGE);
             } else {
                 pessoa.setIdPessoa(0);
@@ -133,7 +133,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
         jPanel2 = new javax.swing.JPanel();
         formularioTelefone = new jautopecas.crud.pessoa.telefone.FormularioTelefone();
         jtfCnpj = new jautopecas.components.JTextField();
-        jcbTipoPessoa = new jautopecas.components.JComboBox();
+        jcbFisicaJuridica = new jautopecas.components.JComboBox();
         jlTipoPessoa = new javax.swing.JLabel();
         jlDocumento2 = new javax.swing.JLabel();
         jtfDocumento2 = new jautopecas.components.JTextField();
@@ -183,15 +183,15 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
         jtfCnpj.setMensagemAjuda("CNPJ do fornecedor");
         jtfCnpj.setValidador(new ValidadorCnpj(jtfCnpj));
 
-        jcbTipoPessoa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Juridica", "Fisica" }));
-        jcbTipoPessoa.addActionListener(new java.awt.event.ActionListener() {
+        jcbFisicaJuridica.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Juridica", "Fisica" }));
+        jcbFisicaJuridica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbTipoPessoaActionPerformed(evt);
+                jcbFisicaJuridicaActionPerformed(evt);
             }
         });
-        jcbTipoPessoa.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        jcbFisicaJuridica.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jcbTipoPessoaPropertyChange(evt);
+                jcbFisicaJuridicaPropertyChange(evt);
             }
         });
 
@@ -265,7 +265,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jlTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jcbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jcbFisicaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jcbTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -282,7 +282,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbFisicaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,14 +306,14 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcbTipoPessoaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbTipoPessoaPropertyChange
-    }//GEN-LAST:event_jcbTipoPessoaPropertyChange
+    private void jcbFisicaJuridicaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbFisicaJuridicaPropertyChange
+    }//GEN-LAST:event_jcbFisicaJuridicaPropertyChange
 
-    private void jcbTipoPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoPessoaActionPerformed
-        if (jcbTipoPessoa.getSelectedItem() == null) {
-            jcbTipoPessoa.setSelectedIndex(0);
+    private void jcbFisicaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbFisicaJuridicaActionPerformed
+        if (jcbFisicaJuridica.getSelectedItem() == null) {
+            jcbFisicaJuridica.setSelectedIndex(0);
         }
-        if (jcbTipoPessoa.getSelectedItem().equals("Juridica")) {
+        if (jcbFisicaJuridica.getSelectedItem().equals("Juridica")) {
             jlDocumento.setText("CNPJ");
             jlNome.setText("Razão Social");
             jlApelido.setText("Nome Fantasia");
@@ -321,7 +321,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
             jtfCpf.setVisible(false);
             jtfCnpj.setVisible(true);
             jtfDocumento2.setMensagemAjuda("Inscrição estadual do fornecedor");
-        } else if (jcbTipoPessoa.getSelectedItem().equals("Fisica")) {
+        } else if (jcbFisicaJuridica.getSelectedItem().equals("Fisica")) {
             jlDocumento.setText("CPF");
             jlNome.setText("Nome Completo");
             jlApelido.setText("Apelido");
@@ -330,7 +330,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
             jtfCnpj.setVisible(false);
             jtfDocumento2.setMensagemAjuda("RG do fornecedor");
         }
-    }//GEN-LAST:event_jcbTipoPessoaActionPerformed
+    }//GEN-LAST:event_jcbFisicaJuridicaActionPerformed
 
     private void jcbTipoLinhaFornecimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoLinhaFornecimentoActionPerformed
         // TODO add your handling code here:
@@ -345,8 +345,8 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private jautopecas.components.JComboBox jcbFisicaJuridica;
     private jautopecas.components.JComboBox jcbTipoLinhaFornecimento;
-    private jautopecas.components.JComboBox jcbTipoPessoa;
     private javax.swing.JLabel jlApelido;
     private javax.swing.JLabel jlDocumento;
     private javax.swing.JLabel jlDocumento2;
@@ -366,17 +366,17 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
 
     @Override
     public void setObjetoFormulario(Object objetoFormulario) throws Exception {
-        jcbTipoPessoa.setSempreBloqueado(true);
+        jcbFisicaJuridica.setSempreBloqueado(true);
         pessoa = (Pessoa) objetoFormulario;
         jtfIdEmpresa.setText(String.valueOf(pessoa.getIdPessoa()));
         jtfCnpj.setText(pessoa.getDocumento());
         jtfNome.setText(pessoa.getNome());
         jtfApelido.setText(pessoa.getApelido());
-        jcbTipoPessoa.setSelectedItem(pessoa.getTipoPessoa());
-        if (jcbTipoPessoa.getSelectedItem().equals("Fisica")) {
+        jcbFisicaJuridica.setSelectedItem(pessoa.getFisicaJuridica());
+        if (jcbFisicaJuridica.getSelectedItem().equals("Fisica")) {
             jtfCpf.setText(pessoa.getDocumento());
             jtfDocumento2.setText(pessoa.getAdicionalPessoa().getRg());
-        } else if (jcbTipoPessoa.getSelectedItem().equals("Juridica")) {
+        } else if (jcbFisicaJuridica.getSelectedItem().equals("Juridica")) {
             jtfCnpj.setText(pessoa.getDocumento());
             jtfDocumento2.setText(pessoa.getAdicionalPessoa().getInscricaoEstadual());
         }
@@ -409,17 +409,17 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
             pessoa.setAdicionalPessoa(new AdicionalPessoa());
         }
         if (modeloPessoa == null) {
-            modeloPessoa = new ModeloPessoaDao().load(2);
+            modeloPessoa = new ModeloPessoaDao().load("FO");
         }
         pessoa.setModeloPessoa(modeloPessoa);
         pessoa.setApelido(jtfApelido.getText());
         pessoa.setNome(jtfNome.getText());
-        pessoa.setTipoPessoa(jcbTipoPessoa.getSelectedItem().toString());
+        pessoa.setFisicaJuridica(jcbFisicaJuridica.getSelectedItem().toString());
         pessoa.getAdicionalPessoa().setPessoa(pessoa);
-        if (jcbTipoPessoa.getSelectedItem().equals("Fisica")) {
+        if (jcbFisicaJuridica.getSelectedItem().equals("Fisica")) {
             pessoa.setDocumento(jtfCpf.getText());
             pessoa.getAdicionalPessoa().setRg(jtfDocumento2.getText());
-        } else if (jcbTipoPessoa.getSelectedItem().equals("Juridica")) {
+        } else if (jcbFisicaJuridica.getSelectedItem().equals("Juridica")) {
             pessoa.setDocumento(jtfCnpj.getText());
             pessoa.getAdicionalPessoa().setInscricaoEstadual(jtfDocumento2.getText());
         }
@@ -449,6 +449,6 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
     }
 
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
-        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.idModeloPessoa = 2");
+        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.modeloPessoa = 'FO'");
     }
 }

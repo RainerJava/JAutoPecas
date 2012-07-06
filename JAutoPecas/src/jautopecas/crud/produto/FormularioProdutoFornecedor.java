@@ -1,15 +1,12 @@
 package jautopecas.crud.produto;
 
-import jautopecas.dao.pessoa.PessoaDao;
 import jautopecas.entidades.pessoa.Pessoa;
 import jautopecas.entidades.produto.Produto;
 import jautopecas.entidades.produto.ProdutoFornecedor;
-import jautopecas.entidades.produto.ProdutoFornecedorCusto;
 import jautopecas.exceptions.UtilFormularioException;
 import jautopecas.util.UtilFormulario;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,12 +20,9 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
 
     private Produto produtoSelecionado;
     private FormularioProdutoFornecedorTableModel tableModel;
-    private FormularioProdutoFornecedorCustoTableModel tableModelFornecedorCusto;
     private List<ProdutoFornecedor> listaProdutoFornecedor;
-    private List<ProdutoFornecedorCusto> listaProdutoFornecedorCusto;
     private ProdutoFornecedor produtoFornecedor;
     private boolean formularioBloqueado;
-    private List<Pessoa> listaEmpresas;
 
     /**
      * Creates new form CadEnderecoGUI
@@ -51,22 +45,6 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
                         }
                     }
                 });
-
-        jtProdutoFornecedoresCusto.setModel(tableModelFornecedorCusto == null ? new FormularioProdutoFornecedorCustoTableModel() : tableModelFornecedorCusto);
-        jtProdutoFornecedoresCusto.addMouseListener(
-                new MouseAdapter() {
-
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if (e.getClickCount() == 2) {
-                            try {
-                                //onVisualizar();
-                            } catch (Exception ex) {
-                                JOptionPane.showMessageDialog(null, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
-                            }
-                        }
-                    }
-                });
     }
 
     private ProdutoFornecedor getObjetoFormulario() {
@@ -76,32 +54,6 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
         produtoFornecedor.setProduto(produtoSelecionado);
         produtoFornecedor.setFornecedor((Pessoa) jtfFornecedor.getObjeto());
         produtoFornecedor.setNumeroFornecedor(jtfNUmeroFornecedor.getText());
-
-        if (listaEmpresas == null) {
-            try {
-                listaEmpresas = new ArrayList<>();
-                listaEmpresas.addAll(new PessoaDao().listaPessoaPorModelo(1));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        listaProdutoFornecedorCusto = new ArrayList();
-        ProdutoFornecedorCusto produtoFornecedorCusto;
-        for (int i = 0; i < listaEmpresas.size(); i++) {
-            produtoFornecedorCusto = new ProdutoFornecedorCusto();
-            produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
-            produtoFornecedorCusto.setEmpresa(listaEmpresas.get(i));
-            produtoFornecedorCusto.setCustoUnitario(BigDecimal.ZERO);
-            produtoFornecedorCusto.setCst("");
-            produtoFornecedorCusto.setPorcentIcms(BigDecimal.ZERO);
-            produtoFornecedorCusto.setPorcentImpostoImportacao(BigDecimal.ZERO);
-            produtoFornecedorCusto.setPorcentIpi(BigDecimal.ZERO);
-            produtoFornecedorCusto.setCustoReposicao(BigDecimal.ZERO);
-
-            listaProdutoFornecedorCusto.add(produtoFornecedorCusto);
-        }
-        produtoFornecedor.setProdutoFornecedorCusto(listaProdutoFornecedorCusto);
         return produtoFornecedor;
     }
 
@@ -129,7 +81,7 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jtfFornecedor = new jautopecas.components.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        formularioProdutoFornecedorCusto1 = new jautopecas.crud.produto.FormularioProdutoFornecedorCusto();
+        formularioProdutoFornecedorCusto = new jautopecas.crud.produto.FormularioProdutoFornecedorCusto();
 
         setPreferredSize(new java.awt.Dimension(795, 522));
         setLayout(new java.awt.GridLayout(1, 2));
@@ -198,15 +150,18 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jbSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbLimpar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbExcluir))
-                            .addComponent(jLabel2)
-                            .addComponent(jtfFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(377, Short.MAX_VALUE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jbSalvar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jbLimpar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jbExcluir))
+                                    .addComponent(jLabel2))
+                                .addGap(0, 214, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +185,7 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
         jpProdutoFornecedor.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         add(jpProdutoFornecedor);
-        add(formularioProdutoFornecedorCusto1);
+        add(formularioProdutoFornecedorCusto);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
@@ -267,6 +222,8 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
 
     public void onLimpar() {
         produtoFornecedor = null;
+        //formularioProdutoFornecedorCusto.onLimpar();
+        formularioProdutoFornecedorCusto.setListaProdutoFornecedorCusto(null);
         jtfFornecedor.limpaCampo();
         jtfNUmeroFornecedor.limpaCampo();
         jtProdutoFornecedores.clearSelection();
@@ -296,7 +253,8 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
 
     private void onVisualizar() throws Exception {
         produtoFornecedor = ((FormularioProdutoFornecedorTableModel) jtProdutoFornecedores.getModel()).buscaProduto(jtProdutoFornecedores.getSelectedRow());
-        listaProdutoFornecedorCusto = produtoFornecedor.getProdutoFornecedorCusto();
+        formularioProdutoFornecedorCusto.setListaProdutoFornecedorCusto(produtoFornecedor.getProdutoFornecedorCusto());
+        formularioProdutoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
         setObjetoFormulario(produtoFornecedor);
         if (formularioBloqueado) {
             jbSalvar.setEnabled(false);
@@ -307,19 +265,12 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
             jbLimpar.setEnabled(true);
             jbExcluir.setEnabled(true);
         }
-        populaListaProdutoFornecedorCusto();
     }
 
     private void populaListaProdutoFornecedor() {
         ((FormularioProdutoFornecedorTableModel) jtProdutoFornecedores.getModel()).removeResultado();
         ((FormularioProdutoFornecedorTableModel) jtProdutoFornecedores.getModel()).mostraResultado(listaProdutoFornecedor);
         onLimpar();
-    }
-
-    private void populaListaProdutoFornecedorCusto() {
-        ((FormularioProdutoFornecedorCustoTableModel) jtProdutoFornecedoresCusto.getModel()).removeResultado();
-        ((FormularioProdutoFornecedorCustoTableModel) jtProdutoFornecedoresCusto.getModel()).mostraResultado(listaProdutoFornecedorCusto);
-        //onLimpar();
     }
 
     public void carregaCombos() {
@@ -344,7 +295,7 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
         this.produtoSelecionado = produtoSelecionado;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private jautopecas.crud.produto.FormularioProdutoFornecedorCusto formularioProdutoFornecedorCusto1;
+    private jautopecas.crud.produto.FormularioProdutoFornecedorCusto formularioProdutoFornecedorCusto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

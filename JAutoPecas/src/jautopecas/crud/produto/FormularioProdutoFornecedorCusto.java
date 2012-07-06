@@ -1,16 +1,25 @@
 package jautopecas.crud.produto;
 
+import jautopecas.JAutoPecasMenu;
 import jautopecas.dao.pessoa.PessoaDao;
+import jautopecas.dao.produto.ClassificacaoFiscalDao;
 import jautopecas.entidades.pessoa.Pessoa;
+import jautopecas.entidades.produto.ClassificacaoFiscal;
+import jautopecas.entidades.produto.Produto;
 import jautopecas.entidades.produto.ProdutoFornecedor;
 import jautopecas.entidades.produto.ProdutoFornecedorCusto;
+import jautopecas.entidades.substituicaoTributaria.SubstituicaoTributariaEntrada;
 import jautopecas.exceptions.UtilFormularioException;
 import jautopecas.util.StringUtils;
 import jautopecas.util.UtilFormulario;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -51,35 +60,101 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
     }
 
     private ProdutoFornecedorCusto getObjetoFormulario() {
+        // produtoFornecedorCusto.setEmpresa(listaEmpresas.get(i));
+        produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
+        produtoFornecedorCusto.setCustoUnitario(StringUtils.stringToBigDecimal(jtfCustoUnitario.getText()));
+        produtoFornecedorCusto.setCst(jcbCst.getSelectedItem().toString());
+        produtoFornecedorCusto.setPorcentIcms(StringUtils.stringToBigDecimal(jtfIcms.getText()));
+        produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
+        produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
+        produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
+        try {
+            calculaCustoNet();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return produtoFornecedorCusto;
+    }
+
+    public void calculaCustoNet() throws Exception {
+        try {
+            //Produto cProd = produtoFornecedorCusto.getProdutoFornecedor().getProduto();
+            BigDecimal CustoFor = produtoFornecedorCusto.getCustoUnitario();
+            BigDecimal Fator = produtoFornecedorCusto.getProdutoFornecedor().getProduto().getFatorEmbalagemCompra();
+            CustoFor = CustoFor.divide(Fator);
+            BigDecimal Pipi = produtoFornecedorCusto.getPorcentIpi().divide(new BigDecimal(100));
+            /*
+             * colocar aqui os calculos de S.T e tirar icms
+             */
+            BigDecimal xTaxaPis = new BigDecimal(9.25);
+            BigDecimal DtaxaPis = BigDecimal.ZERO;
+            BigDecimal FvicmT = BigDecimal.ZERO;
+            BigDecimal DvalorPis = BigDecimal.ZERO;
+            BigDecimal DIpiPis = BigDecimal.ZERO;
+            BigDecimal Dcusto = CustoFor;
+            BigDecimal ValorNet = BigDecimal.ZERO;
+            BigDecimal Picm = produtoFornecedorCusto.getPorcentIcms().divide(new BigDecimal(100));
+            /*
+             * Descontos sobre Descontos
+             */
+            /**
+             * **Implementar Desconto Sobre Desconto***
+             */
+            BigDecimal Fvicm = Dcusto.multiply(Picm);
+            BigDecimal DipiUnit = Dcusto.multiply(Pipi);
+            // BigDecimal Pdesc = 1 - (this.getDouble(Fields.FAR_FDESC) / 100);
+            // Dcusto = getJFLClient().round(Dcusto * Pdesc, 2);
+            BigDecimal BaseST = BigDecimal.ZERO;
+            //CustoFor = getJFLClient().round(CustoFor * Pdesc, 2);
+            if (xTaxaPis != null && xTaxaPis.doubleValue() > 0) {
+                DtaxaPis = produtoFornecedorCusto.getProdutoFornecedor().getProduto().getClassificacaoFiscal().getPercentPis().add(
+                        produtoFornecedorCusto.getProdutoFornecedor().getProduto().getClassificacaoFiscal().getPercentCofins());
+            }
+            DvalorPis = (Dcusto.multiply(DtaxaPis)).divide(new BigDecimal(100));
+            BaseST = Dcusto;
+            Dcusto = Dcusto.subtract(DvalorPis).subtract(DIpiPis).subtract((Fvicm.divide(CustoFor)).multiply(Dcusto));
+            ValorNet = Dcusto;
+            SubstituicaoTributariaEntrada substTribEntrada = new SubstituicaoTributariaEntrada();
+            substTribEntrada.calculaSubstituicaoTributaria(produtoFornecedorCusto, BaseST.doubleValue(), DipiUnit.doubleValue(), produtoFornecedorCusto.getPorcentIcms().doubleValue());
+            FvicmT = substTribEntrada.getIcmsSubstituicao();
+            BigDecimal DcustoBruto = CustoFor.add(DipiUnit).add(FvicmT);
+            BigDecimal NetSt = ValorNet;
+            if (FvicmT.doubleValue() > 0) {
+                produtoFornecedorCusto.setCst(produtoFornecedorCusto.getCst().substring(0, 1) + "10");
+                NetSt = Dcusto.add(Fvicm).add(FvicmT);
+            }
+            produtoFornecedorCusto.setCustoNet(ValorNet);
+            produtoFornecedorCusto.setCustoBruto(DcustoBruto);
+            produtoFornecedorCusto.setCustoNetSt(NetSt);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("Erro ao calcular custo Net");
+        }
+    }
+
+    private void criaProdutoFornecedorCustoEmpresa() throws Exception {
         if (listaEmpresas == null) {
             try {
                 listaEmpresas = new ArrayList<>();
-                listaEmpresas.addAll(new PessoaDao().listaPessoaPorModelo(1));
+                listaEmpresas.addAll(new PessoaDao().listaPessoaPorModelo("EM"));
+                for (int i = 0; i < listaEmpresas.size(); i++) {
+                    produtoFornecedorCusto = new ProdutoFornecedorCusto();
+                    produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
+                    produtoFornecedorCusto.setEmpresa(listaEmpresas.get(i));
+                    produtoFornecedorCusto.setCustoUnitario(StringUtils.stringToBigDecimal(jtfCustoUnitario.getText()));
+                    produtoFornecedorCusto.setCst(jcbCst.getSelectedItem().toString());
+                    produtoFornecedorCusto.setPorcentIcms(StringUtils.stringToBigDecimal(jtfIcms.getText()));
+                    produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
+                    produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
+                    produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
+
+                    listaProdutoFornecedorCusto.add(produtoFornecedorCusto);
+                }
+                produtoFornecedor.setProdutoFornecedorCusto(listaProdutoFornecedorCusto);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                throw new Exception("Erro ao criar custo para empresas");
             }
         }
-        if (listaProdutoFornecedorCusto == null) {
-            listaProdutoFornecedorCusto = new ArrayList();
-        }
-        if (produtoFornecedorCusto == null) {
-            produtoFornecedorCusto = new ProdutoFornecedorCusto();
-        }
-        for (int i = 0; i < listaEmpresas.size(); i++) {
-            produtoFornecedorCusto = new ProdutoFornecedorCusto();
-            produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
-            produtoFornecedorCusto.setEmpresa(listaEmpresas.get(i));
-            produtoFornecedorCusto.setCustoUnitario(StringUtils.stringToBigDecimal(jtfCustoUnitario.getText()));
-            produtoFornecedorCusto.setCst(jcbCst.getSelectedItem().toString());
-            produtoFornecedorCusto.setPorcentIcms(StringUtils.stringToBigDecimal(jtfIcms.getText()));
-            produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
-            produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
-            produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
-
-            listaProdutoFornecedorCusto.add(produtoFornecedorCusto);
-        }
-        produtoFornecedor.setProdutoFornecedorCusto(listaProdutoFornecedorCusto);
-        return produtoFornecedorCusto;
     }
 
     private void setObjetoFormulario(ProdutoFornecedorCusto objetoFormulario) throws Exception {
@@ -102,18 +177,18 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jbSalvar = new javax.swing.JButton();
         jbLimpar = new javax.swing.JButton();
-        jtfIpi = new jautopecas.components.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jtfIcms = new jautopecas.components.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jtfIi = new jautopecas.components.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jtfCustoReposicao = new jautopecas.components.JTextField();
-        jtfCustoUnitario = new jautopecas.components.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jcbCst = new jautopecas.components.JComboBox();
+        jLabel11 = new javax.swing.JLabel();
+        jtfIpi = new jautopecas.components.JTextField();
+        jtfIcms = new jautopecas.components.JTextField();
+        jtfIi = new jautopecas.components.JTextField();
+        jtfCustoReposicao = new jautopecas.components.JTextField();
+        jtfCustoUnitario = new jautopecas.components.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProdutoFornecedores = new javax.swing.JTable();
 
@@ -136,19 +211,19 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setText("IPI");
+        jLabel6.setText("%IPI");
 
-        jLabel7.setText("ICMS");
+        jLabel7.setText("%ICMS");
 
-        jLabel8.setText("II");
-
-        jLabel10.setText("Custo Reposição");
+        jLabel8.setText("%II");
 
         jLabel5.setText("Custo Unitario");
 
         jLabel9.setText("CST");
 
         jcbCst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "000-Prod Nac Tributado", "010-(N)Tributada cobranÃ§a ICMS Substituição", "020-(N) ReduÃ§Ã£o de Base de Calculo", "030-(N)Isenta/N.Tributada cobr. ICMS Subst.", "040-Isenta", "041-Nao Tributada", "050-Nacional (SuspensÃ£o)", "051-Nacional (Diferimento)", "060-(N)ICMS cobrado antecipado Substituição", "070-(N)ReduÃ§Ã£o Base ICMS cobr.Substituição", "090-Outras", "100-Importacao Direta", "110-(N)Tributada cobranÃ§a ICMS Substituição", "200-ImportaÃ§Ã£o Adquirida Mercado Interno", "210-Tritutada Cobranca ST", "260-(ID)ICMS cobrado antecipado Substituição" }));
+
+        jLabel11.setText("Custo Reposição");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -157,72 +232,67 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbCst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jtfIpi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jbSalvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbLimpar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jtfIpi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtfIcms, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtfIi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtfCustoUnitario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfIcms, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfIi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jcbCst, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfCustoUnitario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfCustoReposicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(389, 389, 389))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbLimpar)
-                        .addContainerGap())))
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                                    .addComponent(jtfCustoReposicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 2, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel7)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfIpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfIcms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfIi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfCustoUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfCustoReposicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfIpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfIcms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfIi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfCustoUnitario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtfCustoReposicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcbCst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(89, 89, 89)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbLimpar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbSalvar, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -253,14 +323,14 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
                 if (jtProdutoFornecedores.getSelectedRowCount() <= 0) {
                     if (listaProdutoFornecedorCusto == null) {
                         listaProdutoFornecedorCusto = new ArrayList<>();
+                        criaProdutoFornecedorCustoEmpresa();
                     }
-                    listaProdutoFornecedorCusto.add(getObjetoFormulario());
                 } else {
                     listaProdutoFornecedorCusto.set(jtProdutoFornecedores.getSelectedRow(), getObjetoFormulario());
                 }
                 populaListaProdutoFornecedorCusto();
             }
-        } catch (UtilFormularioException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
@@ -314,7 +384,6 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
             jbSalvar.setEnabled(true);
             jbLimpar.setEnabled(true);
         }
-        populaListaProdutoFornecedorCusto();
     }
 
     private void populaListaProdutoFornecedorCusto() {
@@ -345,7 +414,7 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
         this.produtoFornecedor = produtoFornecedor;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

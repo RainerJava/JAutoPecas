@@ -208,7 +208,7 @@ public class FormularioFabricante extends javax.swing.JPanel implements IFormula
             pessoa.setAdicionalPessoa(new AdicionalPessoa());
         }
         if (modeloPessoa == null) {
-            modeloPessoa = new ModeloPessoaDao().load(3);
+            modeloPessoa = new ModeloPessoaDao().load("FA");
         }
         pessoa.setModeloPessoa(modeloPessoa);
         pessoa.setApelido(jtfNomeFantasia.getText());
@@ -241,6 +241,6 @@ public class FormularioFabricante extends javax.swing.JPanel implements IFormula
     }
 
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
-        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.idModeloPessoa = 3");
+        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.modeloPessoa = 'FA'");
     }
 }

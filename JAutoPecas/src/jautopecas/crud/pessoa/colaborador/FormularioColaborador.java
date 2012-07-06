@@ -440,12 +440,12 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
             pessoa.setAdicionalPessoa(new AdicionalPessoa());
         }
         if (modeloPessoa == null) {
-            modeloPessoa = new ModeloPessoaDao().load(5);
+            modeloPessoa = new ModeloPessoaDao().load("CO");
         }
         pessoa.setModeloPessoa(modeloPessoa);
         pessoa.setNome(jtfNome.getText());
         pessoa.setApelido(jtfApelido.getText());
-        pessoa.setTipoPessoa(Pessoa.TIPO_PESSOA_FISICA);
+        pessoa.setFisicaJuridica(Pessoa.TIPO_PESSOA_FISICA);
         pessoa.setDocumento(jtfCpf.getText());
         pessoa.getAdicionalPessoa().setRg(jtfRg.getText());
         pessoa.getAdicionalPessoa().setSexo(jcbSexo.getSelectedItem().toString());
@@ -493,6 +493,6 @@ public class FormularioColaborador extends javax.swing.JPanel implements IFormul
     }
 
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
-        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.idModeloPessoa = 5");
+        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.modeloPessoa = 'CO'");
     }
 }

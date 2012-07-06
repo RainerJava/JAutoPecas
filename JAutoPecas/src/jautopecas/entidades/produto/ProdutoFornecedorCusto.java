@@ -34,6 +34,12 @@ public class ProdutoFornecedorCusto implements Serializable {
     private BigDecimal porcentImpostoImportacao;
     @Column(name = "CUSTO_REPOSICAO")
     private BigDecimal custoReposicao;
+    @Column(name = "CUSTO_BRUTO")
+    private BigDecimal custoBruto;
+    @Column(name = "CUSTO_NET")
+    private BigDecimal custoNet;
+    @Column(name = "CUSTO_NET_ST")
+    private BigDecimal custoNetSt;
 
     public String getCst() {
         return cst;
@@ -105,5 +111,29 @@ public class ProdutoFornecedorCusto implements Serializable {
 
     public void setProdutoFornecedor(ProdutoFornecedor produtoFornecedor) {
         this.produtoFornecedor = produtoFornecedor;
+    }
+
+    public BigDecimal getCustoBruto() {
+        return custoBruto;
+    }
+
+    public void setCustoBruto(BigDecimal custoBruto) {
+        this.custoBruto = custoBruto;
+    }
+
+    public BigDecimal getCustoNet() {
+        return custoNet;
+    }
+
+    public void setCustoNet(BigDecimal custoNet) {
+        this.custoNet = custoNet;
+    }
+
+    public BigDecimal getCustoNetSt() {
+        return custoNetSt;
+    }
+
+    public void setCustoNetSt(BigDecimal custoNetSt) {
+        this.custoNetSt = custoNetSt;
     }
 }

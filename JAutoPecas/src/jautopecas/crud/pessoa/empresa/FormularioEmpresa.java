@@ -242,7 +242,7 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
         jtfCnpj.setText(pessoa.getDocumento());
         jtfNome.setText(pessoa.getNome());
         jtfApelido.setText(pessoa.getApelido());
-        jcbTipoPessoa.setSelectedItem(pessoa.getTipoPessoa());
+        jcbTipoPessoa.setSelectedItem(pessoa.getFisicaJuridica());
         if (jcbTipoPessoa.getSelectedItem().equals("Fisica")) {
             jtfCpf.setText(pessoa.getDocumento());
             jtfDocumento2.setText(pessoa.getAdicionalPessoa().getRg());
@@ -278,13 +278,12 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
             pessoa.setAdicionalPessoa(new AdicionalPessoa());
         }
         if (modeloPessoa == null) {
-            modeloPessoa = new ModeloPessoaDao().load(1);
+            modeloPessoa = new ModeloPessoaDao().load("EM");
         }
-        pessoa.setIdPessoa(Integer.valueOf(jtfIdEmpresa.getText().length() == 0 ? "0" : jtfIdEmpresa.getText()));
         pessoa.setModeloPessoa(modeloPessoa);
         pessoa.setApelido(jtfApelido.getText());
         pessoa.setNome(jtfNome.getText());
-        pessoa.setTipoPessoa(jcbTipoPessoa.getSelectedItem().toString());
+        pessoa.setFisicaJuridica(jcbTipoPessoa.getSelectedItem().toString());
         pessoa.getAdicionalPessoa().setPessoa(pessoa);
         if (jcbTipoPessoa.getSelectedItem().equals("Fisica")) {
             pessoa.setDocumento(jtfCpf.getText());
@@ -319,6 +318,6 @@ public class FormularioEmpresa extends javax.swing.JPanel implements IFormulario
     }
 
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
-        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.idModeloPessoa = 1");
+        return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.modeloPessoa = 'EM'");
     }
 }

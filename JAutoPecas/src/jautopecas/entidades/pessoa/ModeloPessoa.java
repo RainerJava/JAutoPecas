@@ -1,7 +1,10 @@
 package jautopecas.entidades.pessoa;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
@@ -12,36 +15,23 @@ import javax.persistence.*;
 public class ModeloPessoa implements Serializable {
 
     @Id
-    @Column(name = "ID_MODELO_PESSOA")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idModeloPessoa;
-    private String sigla;
-    private String descricao;
-    /*
-     * Getter's and Setter's
-     */
+    @Column(name = "MODELO_PESSOA")
+    private String modeloPessoa;
+    private String nome;
 
-    public Integer getIdModeloPessoa() {
-        return idModeloPessoa;
+    public String getModeloPessoa() {
+        return modeloPessoa;
     }
 
-    public void setIdModeloPessoa(Integer idModeloPessoa) {
-        this.idModeloPessoa = idModeloPessoa;
+    public void setModeloPessoa(String modeloPessoa) {
+        this.modeloPessoa = modeloPessoa;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getSigla() {
-        return sigla;
-    }
-
-    public void setSigla(String sigla) {
-        this.sigla = sigla;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

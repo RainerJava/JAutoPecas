@@ -26,25 +26,25 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     /**
      * Creates new form JAutoPecasMenu
      */
-    private LoginPessoa pessoaLogin;
+    private static LoginPessoa loginPessoa;
     private static List<LoginPermissaoPessoa> listaLoginPermissaoPessoa = new ArrayList<>();
     private static HashMap<String, WindowCrud> janelas = new HashMap<>();
 
-    public JAutoPecasMenu(LoginPessoa pessoaLogin) {
-        this.pessoaLogin = pessoaLogin;
+    public JAutoPecasMenu(LoginPessoa login) {
+        loginPessoa = login;
         initComponents();
     }
 
     public void populaDadosColaborador() {
-        FuncaoSalarioColaborador funcaoSalarioColaborador = new FuncaoSalarioColaboradorDao().getFuncaoSalarioColaboradorAtual(pessoaLogin.getPessoa().getIdPessoa());
-        jlLogin.setText(pessoaLogin.getLogin());
+        FuncaoSalarioColaborador funcaoSalarioColaborador = new FuncaoSalarioColaboradorDao().getFuncaoSalarioColaboradorAtual(loginPessoa.getPessoa().getIdPessoa());
+        jlLogin.setText(loginPessoa.getLogin());
         jlFuncao.setText(funcaoSalarioColaborador.getFuncao().getNome());
         jlDepartamento.setText(funcaoSalarioColaborador.getFuncao().getDepartamento().getNome());
     }
 
     public void criaMenuPrincipal() {
         listaLoginPermissaoPessoa.clear();
-        listaLoginPermissaoPessoa.addAll(new LoginPermissaoPessoaDao().listaLoginPermissaoPessoa(pessoaLogin.getIdLoginPessoa()));
+        listaLoginPermissaoPessoa.addAll(new LoginPermissaoPessoaDao().listaLoginPermissaoPessoa(loginPessoa.getIdLoginPessoa()));
 
         String idItemMenuPai = null;
         String idItemSubMenu = null;
@@ -139,6 +139,10 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
             janelas.put(itemMenu.getIdItemMenu(), windowCrud);
         }
         return windowCrud;
+    }
+
+    public static LoginPessoa getLoginPessoa() {
+        return loginPessoa;
     }
 
     @SuppressWarnings("unchecked")

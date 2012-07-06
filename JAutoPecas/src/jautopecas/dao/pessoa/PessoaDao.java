@@ -17,11 +17,11 @@ public class PessoaDao extends AbstractDao<Pessoa> implements Serializable {
         super(Pessoa.class);
     }
 
-    public List<Pessoa> listaPessoaPorModelo(Integer modeloPessoa) throws Exception {
+    public List<Pessoa> listaPessoaPorModelo(String modeloPessoa) throws Exception {
         String sql = "SELECT a FROM Pessoa a"
-                + " where a.modeloPessoa.idModeloPessoa = :par1";
+                + " where a.modeloPessoa.modeloPessoa = :modeloPessoa";
         TypedQuery<Pessoa> typedQuery = getEntityManager().createQuery(sql, Pessoa.class);
-        typedQuery.setParameter("par1", modeloPessoa);
+        typedQuery.setParameter("modeloPessoa", modeloPessoa);
         List<Pessoa> lista = typedQuery.getResultList();
         return lista;
     }

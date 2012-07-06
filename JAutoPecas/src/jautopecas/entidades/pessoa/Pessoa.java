@@ -26,7 +26,7 @@ public class Pessoa implements Serializable {
     private String apelido;
     private String documento;
     @OneToOne
-    @JoinColumn(name = "ID_MODELO_PESSOA")
+    @JoinColumn(name = "MODELO_PESSOA")
     private ModeloPessoa modeloPessoa;
     @OneToOne(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private AdicionalPessoa adicionalPessoa;
@@ -36,10 +36,14 @@ public class Pessoa implements Serializable {
     private List<TelefonePessoa> telefonePessoa;
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LoginPessoa> loginPessoa;
-    @Column(name = "TIPO_PESSOA")
-    private String tipoPessoa;
-    
-    /*Colaborador*/
+    @Column(name = "FISICA_JURIDICA")
+    private String fisicaJuridica;
+    @OneToOne
+    @JoinColumn(name = "TIPO_PESSOA")
+    private TipoPessoa tipoPessoa;
+    /*
+     * Colaborador
+     */
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FuncaoSalarioColaborador> funcaoSalarioColaborador;
 
@@ -110,12 +114,12 @@ public class Pessoa implements Serializable {
         this.telefonePessoa = telefonePessoa;
     }
 
-    public String getTipoPessoa() {
-        return tipoPessoa;
+    public String getFisicaJuridica() {
+        return fisicaJuridica;
     }
 
-    public void setTipoPessoa(String tipoPessoa) {
-        this.tipoPessoa = tipoPessoa;
+    public void setFisicaJuridica(String fisicaJuridica) {
+        this.fisicaJuridica = fisicaJuridica;
     }
 
     public List<LoginPessoa> getLoginPessoa() {
@@ -132,5 +136,13 @@ public class Pessoa implements Serializable {
 
     public void setFuncaoSalarioColaborador(List<FuncaoSalarioColaborador> funcaoSalarioColaborador) {
         this.funcaoSalarioColaborador = funcaoSalarioColaborador;
+    }
+
+    public TipoPessoa getTipoPessoa() {
+        return tipoPessoa;
+    }
+
+    public void setTipoPessoa(TipoPessoa tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
     }
 }

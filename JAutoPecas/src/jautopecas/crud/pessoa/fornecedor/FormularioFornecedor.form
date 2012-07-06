@@ -68,7 +68,7 @@
                                       <Component id="jlTipoLinhaFornecimento" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jcbTipoPessoa" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="jcbFisicaJuridica" min="-2" pref="120" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jcbTipoLinhaFornecimento" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
@@ -94,7 +94,7 @@
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jtfIdEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcbTipoPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbFisicaJuridica" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jcbTipoLinhaFornecimento" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
@@ -228,7 +228,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="jautopecas.components.JComboBox" name="jcbTipoPessoa">
+    <Component class="jautopecas.components.JComboBox" name="jcbFisicaJuridica">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
@@ -238,8 +238,8 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbTipoPessoaActionPerformed"/>
-        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jcbTipoPessoaPropertyChange"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbFisicaJuridicaActionPerformed"/>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jcbFisicaJuridicaPropertyChange"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jlTipoPessoa">

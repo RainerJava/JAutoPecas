@@ -31,6 +31,8 @@
     <class>jautopecas.entidades.produto.TipoProduto</class>
     <class>jautopecas.entidades.produto.ProdutoFornecedor</class>
     <class>jautopecas.entidades.produto.ProdutoFornecedorCusto</class>
+    <class>jautopecas.entidades.produto.ClassificacaoFiscal</class>
+    <class>jautopecas.entidades.substituicaoTributaria.SubstituicaoTributariaEntrada</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://instance19734.db.xeround.com:13144/dbautopecasnew"/>
       <property name="javax.persistence.jdbc.password" value="123456"/>

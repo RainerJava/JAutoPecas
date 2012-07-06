@@ -47,8 +47,9 @@ public class Produto implements Serializable {
     @OneToOne
     @JoinColumn(name = "ID_FABRICANTE")
     private Pessoa fabricante;
-    @Column(name = "CLASSIFICACAO_FISCAL")
-    private String classificacaoFiscal;
+    @OneToOne
+    @JoinColumn(name = "CLASSIFICACAO_FISCAL")
+    private ClassificacaoFiscal classificacaoFiscal;
     private String aplicacao;
     private String status;
     @OneToOne
@@ -72,6 +73,7 @@ public class Produto implements Serializable {
     private TipoProduto tipoProduto;
     @Column(name = "CLASSIFICACAO_ABC")
     private String classificacaoAbc;
+    private String cst;
     @OneToMany(mappedBy = "produto", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProdutoFornecedor> produtoFornecedor;
 
@@ -91,11 +93,11 @@ public class Produto implements Serializable {
         this.classificacaoAbc = classificacaoAbc;
     }
 
-    public String getClassificacaoFiscal() {
+    public ClassificacaoFiscal getClassificacaoFiscal() {
         return classificacaoFiscal;
     }
 
-    public void setClassificacaoFiscal(String classificacaoFiscal) {
+    public void setClassificacaoFiscal(ClassificacaoFiscal classificacaoFiscal) {
         this.classificacaoFiscal = classificacaoFiscal;
     }
 
@@ -281,5 +283,13 @@ public class Produto implements Serializable {
 
     public void setProdutoFornecedor(List<ProdutoFornecedor> produtoFornecedor) {
         this.produtoFornecedor = produtoFornecedor;
+    }
+
+    public String getCst() {
+        return cst;
+    }
+
+    public void setCst(String cst) {
+        this.cst = cst;
     }
 }
