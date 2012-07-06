@@ -2,6 +2,7 @@ package jautopecas.entidades.produto;
 
 import jautopecas.entidades.pessoa.Pessoa;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -24,6 +25,16 @@ public class ProdutoFornecedor implements Serializable {
     private Pessoa fornecedor;
     @Column(name = "NUMERO_FORNECEDOR")
     private String numeroFornecedor;
+    @OneToMany(mappedBy = "produtoFornecedor", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProdutoFornecedorCusto> produtoFornecedorCusto;
+
+    public List<ProdutoFornecedorCusto> getProdutoFornecedorCusto() {
+        return produtoFornecedorCusto;
+    }
+
+    public void setProdutoFornecedorCusto(List<ProdutoFornecedorCusto> produtoFornecedorCusto) {
+        this.produtoFornecedorCusto = produtoFornecedorCusto;
+    }
 
     public Pessoa getFornecedor() {
         return fornecedor;

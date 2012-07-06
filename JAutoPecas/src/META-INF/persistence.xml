@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-    <persistence-unit name="JAutoPecasPU" transaction-type="RESOURCE_LOCAL">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>jautopecas.entidades.menu.ItemMenu</class>
-        <class>jautopecas.entidades.pessoa.Pessoa</class>
-        <class>jautopecas.entidades.pessoa.endereco.Bairro</class>
-        <class>jautopecas.entidades.pessoa.endereco.Cidade</class>
-        <class>jautopecas.entidades.pessoa.endereco.Endereco</class>
-        <class>jautopecas.entidades.pessoa.endereco.EnderecoPessoa</class>
-        <class>jautopecas.entidades.pessoa.endereco.Estado</class>
-        <class>jautopecas.entidades.pessoa.endereco.TipoLogradouro</class>
-        <class>jautopecas.entidades.pessoa.endereco.TipoEndereco</class>
-        <class>jautopecas.entidades.pessoa.ModeloPessoa</class>
-        <class>jautopecas.entidades.pessoa.AdicionalPessoa</class>
-        <class>jautopecas.entidades.pessoa.telefone.Telefone</class>
-        <class>jautopecas.entidades.pessoa.telefone.TelefonePessoa</class>
-        <class>jautopecas.entidades.pessoa.telefone.TipoTelefone</class>
-        <class>jautopecas.entidades.pessoa.login.LoginPessoa</class>
-        <class>jautopecas.entidades.pessoa.login.LoginPermissaoPessoa</class>
-        <class>jautopecas.entidades.pessoa.colaborador.Departamento</class>
-        <class>jautopecas.entidades.pessoa.colaborador.Funcao</class>
-        <class>jautopecas.entidades.pessoa.colaborador.FuncaoSalarioColaborador</class>
-        <class>jautopecas.entidades.pessoa.endereco.Pais</class>
-        <class>jautopecas.entidades.produto.Grupo</class>
-        <class>jautopecas.entidades.produto.Familia</class>
-        <class>jautopecas.entidades.produto.Marca</class>
-        <class>jautopecas.entidades.produto.Produto</class>
-        <class>jautopecas.entidades.produto.Subgrupo</class>
-        <class>jautopecas.entidades.produto.Unidade</class>
-        <class>jautopecas.entidades.produto.TipoProduto</class>
-        <class>jautopecas.entidades.produto.ProdutoFornecedor</class>
-        <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://instance19734.db.xeround.com:13144/dbautopecasnew"/>
-            <property name="javax.persistence.jdbc.password" value="123456"/>
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="jautopecas"/>
+  <persistence-unit name="JAutoPecasPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>jautopecas.entidades.menu.ItemMenu</class>
+    <class>jautopecas.entidades.pessoa.Pessoa</class>
+    <class>jautopecas.entidades.pessoa.endereco.Bairro</class>
+    <class>jautopecas.entidades.pessoa.endereco.Cidade</class>
+    <class>jautopecas.entidades.pessoa.endereco.Endereco</class>
+    <class>jautopecas.entidades.pessoa.endereco.EnderecoPessoa</class>
+    <class>jautopecas.entidades.pessoa.endereco.Estado</class>
+    <class>jautopecas.entidades.pessoa.endereco.TipoLogradouro</class>
+    <class>jautopecas.entidades.pessoa.endereco.TipoEndereco</class>
+    <class>jautopecas.entidades.pessoa.ModeloPessoa</class>
+    <class>jautopecas.entidades.pessoa.AdicionalPessoa</class>
+    <class>jautopecas.entidades.pessoa.telefone.Telefone</class>
+    <class>jautopecas.entidades.pessoa.telefone.TelefonePessoa</class>
+    <class>jautopecas.entidades.pessoa.telefone.TipoTelefone</class>
+    <class>jautopecas.entidades.pessoa.login.LoginPessoa</class>
+    <class>jautopecas.entidades.pessoa.login.LoginPermissaoPessoa</class>
+    <class>jautopecas.entidades.pessoa.colaborador.Departamento</class>
+    <class>jautopecas.entidades.pessoa.colaborador.Funcao</class>
+    <class>jautopecas.entidades.pessoa.colaborador.FuncaoSalarioColaborador</class>
+    <class>jautopecas.entidades.pessoa.endereco.Pais</class>
+    <class>jautopecas.entidades.produto.Grupo</class>
+    <class>jautopecas.entidades.produto.Familia</class>
+    <class>jautopecas.entidades.produto.Marca</class>
+    <class>jautopecas.entidades.produto.Produto</class>
+    <class>jautopecas.entidades.produto.Subgrupo</class>
+    <class>jautopecas.entidades.produto.Unidade</class>
+    <class>jautopecas.entidades.produto.TipoProduto</class>
+    <class>jautopecas.entidades.produto.ProdutoFornecedor</class>
+    <class>jautopecas.entidades.produto.ProdutoFornecedorCusto</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://instance19734.db.xeround.com:13144/dbautopecasnew"/>
+      <property name="javax.persistence.jdbc.password" value="123456"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="jautopecas"/>
       <!--      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/dbautopecasnew"/>
       <property name="javax.persistence.jdbc.password" value="line@njo"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="root"/>-->
-<!--      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:13306/dbautopecasnew"/>
+      <!--      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:13306/dbautopecasnew"/>
       <property name="javax.persistence.jdbc.password" value="CALMA"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="Administrator"/>-->
-            <property name="eclipselink.logging.level" value="FINE"/>
-        </properties>
-    </persistence-unit>
+      <property name="eclipselink.logging.level" value="FINE"/>
+    </properties>
+  </persistence-unit>
 </persistence>

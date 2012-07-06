@@ -1,14 +1,15 @@
 package jautopecas.crud.produto;
 
-import jautopecas.crud.pessoa.login.FormularioLoginTableModel;
-import jautopecas.dao.produto.ProdutoFornecedorDao;
+import jautopecas.dao.pessoa.PessoaDao;
 import jautopecas.entidades.pessoa.Pessoa;
 import jautopecas.entidades.produto.Produto;
 import jautopecas.entidades.produto.ProdutoFornecedor;
+import jautopecas.entidades.produto.ProdutoFornecedorCusto;
 import jautopecas.exceptions.UtilFormularioException;
 import jautopecas.util.UtilFormulario;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -22,9 +23,12 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
 
     private Produto produtoSelecionado;
     private FormularioProdutoFornecedorTableModel tableModel;
+    private FormularioProdutoFornecedorCustoTableModel tableModelFornecedorCusto;
     private List<ProdutoFornecedor> listaProdutoFornecedor;
+    private List<ProdutoFornecedorCusto> listaProdutoFornecedorCusto;
     private ProdutoFornecedor produtoFornecedor;
     private boolean formularioBloqueado;
+    private List<Pessoa> listaEmpresas;
 
     /**
      * Creates new form CadEnderecoGUI
@@ -47,6 +51,22 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
                         }
                     }
                 });
+
+        jtProdutoFornecedoresCusto.setModel(tableModelFornecedorCusto == null ? new FormularioProdutoFornecedorCustoTableModel() : tableModelFornecedorCusto);
+        jtProdutoFornecedoresCusto.addMouseListener(
+                new MouseAdapter() {
+
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if (e.getClickCount() == 2) {
+                            try {
+                                //onVisualizar();
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    }
+                });
     }
 
     private ProdutoFornecedor getObjetoFormulario() {
@@ -56,6 +76,32 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
         produtoFornecedor.setProduto(produtoSelecionado);
         produtoFornecedor.setFornecedor((Pessoa) jtfFornecedor.getObjeto());
         produtoFornecedor.setNumeroFornecedor(jtfNUmeroFornecedor.getText());
+
+        if (listaEmpresas == null) {
+            try {
+                listaEmpresas = new ArrayList<>();
+                listaEmpresas.addAll(new PessoaDao().listaPessoaPorModelo(1));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        listaProdutoFornecedorCusto = new ArrayList();
+        ProdutoFornecedorCusto produtoFornecedorCusto;
+        for (int i = 0; i < listaEmpresas.size(); i++) {
+            produtoFornecedorCusto = new ProdutoFornecedorCusto();
+            produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
+            produtoFornecedorCusto.setEmpresa(listaEmpresas.get(i));
+            produtoFornecedorCusto.setCustoUnitario(BigDecimal.ZERO);
+            produtoFornecedorCusto.setCst("");
+            produtoFornecedorCusto.setPorcentIcms(BigDecimal.ZERO);
+            produtoFornecedorCusto.setPorcentImpostoImportacao(BigDecimal.ZERO);
+            produtoFornecedorCusto.setPorcentIpi(BigDecimal.ZERO);
+            produtoFornecedorCusto.setCustoReposicao(BigDecimal.ZERO);
+
+            listaProdutoFornecedorCusto.add(produtoFornecedorCusto);
+        }
+        produtoFornecedor.setProdutoFornecedorCusto(listaProdutoFornecedorCusto);
         return produtoFornecedor;
     }
 
@@ -72,7 +118,7 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+        jpProdutoFornecedor = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProdutoFornecedores = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -83,31 +129,14 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jtfFornecedor = new jautopecas.components.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtLogins1 = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jbSalvar1 = new javax.swing.JButton();
-        jbLimpar1 = new javax.swing.JButton();
-        jTextField4 = new jautopecas.components.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new jautopecas.components.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new jautopecas.components.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new jautopecas.components.JComboBox();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField3 = new jautopecas.components.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField7 = new jautopecas.components.JTextField();
+        formularioProdutoFornecedorCusto1 = new jautopecas.crud.produto.FormularioProdutoFornecedorCusto();
 
         setPreferredSize(new java.awt.Dimension(795, 522));
         setLayout(new java.awt.GridLayout(1, 2));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setPreferredSize(new java.awt.Dimension(0, 0));
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        jpProdutoFornecedor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpProdutoFornecedor.setPreferredSize(new java.awt.Dimension(0, 0));
+        jpProdutoFornecedor.setLayout(new java.awt.BorderLayout());
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(2, 370));
 
@@ -122,7 +151,7 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
         jtProdutoFornecedores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jtProdutoFornecedores);
 
-        jPanel2.add(jScrollPane1, java.awt.BorderLayout.SOUTH);
+        jpProdutoFornecedor.add(jScrollPane1, java.awt.BorderLayout.SOUTH);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(0, 0));
 
@@ -164,23 +193,20 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jbSalvar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbLimpar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbExcluir))
-                                    .addComponent(jLabel2))
-                                .addGap(0, 231, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jtfNUmeroFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbSalvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbLimpar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbExcluir))
+                            .addComponent(jLabel2)
+                            .addComponent(jtfFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(377, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,136 +227,10 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel1, java.awt.BorderLayout.CENTER);
+        jpProdutoFornecedor.add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        add(jPanel2);
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setPreferredSize(new java.awt.Dimension(0, 0));
-        jPanel3.setLayout(new java.awt.BorderLayout());
-
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(2, 370));
-
-        jtLogins1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(jtLogins1);
-
-        jPanel3.add(jScrollPane2, java.awt.BorderLayout.SOUTH);
-
-        jPanel4.setPreferredSize(new java.awt.Dimension(0, 0));
-
-        jbSalvar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jautopecas/imagens/icones/iconeConfirmar16.png"))); // NOI18N
-        jbSalvar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalvar1ActionPerformed(evt);
-            }
-        });
-
-        jbLimpar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jautopecas/imagens/icones/iconeEditar16.png"))); // NOI18N
-        jbLimpar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbLimpar1ActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("IPI");
-
-        jLabel7.setText("ICMS");
-
-        jLabel8.setText("II");
-
-        jLabel9.setText("CST");
-
-        jLabel5.setText("Custo Unitario");
-
-        jLabel10.setText("Custo Reposição");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 126, Short.MAX_VALUE))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jbSalvar1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbLimpar1))
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbLimpar1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbSalvar1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-        );
-
-        jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
-
-        add(jPanel3);
+        add(jpProdutoFornecedor);
+        add(formularioProdutoFornecedorCusto1);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
@@ -365,14 +265,6 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jbExcluirActionPerformed
 
-    private void jbSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbSalvar1ActionPerformed
-
-    private void jbLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbLimpar1ActionPerformed
-
     public void onLimpar() {
         produtoFornecedor = null;
         jtfFornecedor.limpaCampo();
@@ -403,8 +295,8 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
     }
 
     private void onVisualizar() throws Exception {
-
         produtoFornecedor = ((FormularioProdutoFornecedorTableModel) jtProdutoFornecedores.getModel()).buscaProduto(jtProdutoFornecedores.getSelectedRow());
+        listaProdutoFornecedorCusto = produtoFornecedor.getProdutoFornecedorCusto();
         setObjetoFormulario(produtoFornecedor);
         if (formularioBloqueado) {
             jbSalvar.setEnabled(false);
@@ -415,12 +307,19 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
             jbLimpar.setEnabled(true);
             jbExcluir.setEnabled(true);
         }
+        populaListaProdutoFornecedorCusto();
     }
 
     private void populaListaProdutoFornecedor() {
         ((FormularioProdutoFornecedorTableModel) jtProdutoFornecedores.getModel()).removeResultado();
         ((FormularioProdutoFornecedorTableModel) jtProdutoFornecedores.getModel()).mostraResultado(listaProdutoFornecedor);
         onLimpar();
+    }
+
+    private void populaListaProdutoFornecedorCusto() {
+        ((FormularioProdutoFornecedorCustoTableModel) jtProdutoFornecedoresCusto.getModel()).removeResultado();
+        ((FormularioProdutoFornecedorCustoTableModel) jtProdutoFornecedoresCusto.getModel()).mostraResultado(listaProdutoFornecedorCusto);
+        //onLimpar();
     }
 
     public void carregaCombos() {
@@ -445,32 +344,15 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
         this.produtoSelecionado = produtoSelecionado;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private jautopecas.components.JComboBox jComboBox1;
+    private jautopecas.crud.produto.FormularioProdutoFornecedorCusto formularioProdutoFornecedorCusto1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private jautopecas.components.JTextField jTextField3;
-    private jautopecas.components.JTextField jTextField4;
-    private jautopecas.components.JTextField jTextField5;
-    private jautopecas.components.JTextField jTextField6;
-    private jautopecas.components.JTextField jTextField7;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbLimpar;
-    private javax.swing.JButton jbLimpar1;
     private javax.swing.JButton jbSalvar;
-    private javax.swing.JButton jbSalvar1;
-    private javax.swing.JTable jtLogins1;
+    private javax.swing.JPanel jpProdutoFornecedor;
     private javax.swing.JTable jtProdutoFornecedores;
     private jautopecas.components.JTextField jtfFornecedor;
     private jautopecas.components.JTextField jtfNUmeroFornecedor;
