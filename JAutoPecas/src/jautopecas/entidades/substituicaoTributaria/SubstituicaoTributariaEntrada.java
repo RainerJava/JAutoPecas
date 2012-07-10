@@ -6,6 +6,7 @@ import jautopecas.entidades.produto.ClassificacaoFiscal;
 import jautopecas.entidades.produto.ProdutoFornecedorCusto;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -39,45 +40,48 @@ public class SubstituicaoTributariaEntrada implements Serializable {
     @OneToOne
     @JoinColumn(name = "UF_EMISSOR")
     private Estado ufEmissor;
+    @Column(name = "DATA_INICIO")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataInicio;
     @Transient
     private BigDecimal baseSubstituicao;
     @Transient
     private BigDecimal icmsSubstituicao;
 
-    public void calculaSubstituicaoTributaria(ProdutoFornecedorCusto produtoFornecedorCusto, double custoUnitario, double valorIpi,
-            double percentIcms) throws Exception {
+    public void calculaSubstituicaoTributaria(ProdutoFornecedorCusto produtoFornecedorCusto, BigDecimal custoUnitario, BigDecimal valorIpi,
+            BigDecimal percentIcms) throws Exception {
         try {
-            double xBase = 0;
-            double xIpi = 0;
-            double wBaseT = 0;
-            double wIcmT = 0;
-            double xIcm = 0;
-            double xIcmT = 0;
-            double xIcmBasePropria = 0;
+            BigDecimal xBase = BigDecimal.ZERO;
+            BigDecimal xIpi = BigDecimal.ZERO;
+            BigDecimal wBaseT = BigDecimal.ZERO;
+            BigDecimal wIcmT = BigDecimal.ZERO;
+            BigDecimal xIcm = BigDecimal.ZERO;
+            BigDecimal xIcmT = BigDecimal.ZERO;
+            BigDecimal xIcmBasePropria = BigDecimal.ZERO;
             Estado cUF = produtoFornecedorCusto.getEmpresa().getEnderecoPessoa().get(0).getEndereco().getUf();
             Estado cUFE = produtoFornecedorCusto.getProdutoFornecedor().getFornecedor().getEnderecoPessoa().get(0).getEndereco().getUf();
             String xClass = produtoFornecedorCusto.getProdutoFornecedor().getProduto().getClassificacaoFiscal().getClassificacaoFiscal();
-            String xCst = produtoFornecedorCusto.getProdutoFornecedor().getProduto().getCst().substring(0, 3);
+            String xCst = produtoFornecedorCusto.getProdutoFornecedor().getProduto().getCstIcms().getCst().substring(0, 3);
             xIpi = valorIpi;
             xBase = custoUnitario;
-            double xBaseCalculo = xBase;
-            if (produtoFornecedorCusto.getProdutoFornecedor().getFornecedor().getTipoPessoa().getTipoPessoa().equals("C")
-                    || produtoFornecedorCusto.getProdutoFornecedor().getFornecedor().getTipoPessoa().getTipoPessoa().equals("N")) {
-                xBaseCalculo = xBase + xIpi;
+            BigDecimal xBaseCalculo = xBase;
+            if (produtoFornecedorCusto.getProdutoFornecedor().getFornecedor().getTipoPessoa().getTipoPessoa().equals("CO")
+                    || produtoFornecedorCusto.getProdutoFornecedor().getFornecedor().getTipoPessoa().getTipoPessoa().equals("NC")) {
+                xBaseCalculo = xBase.add(xIpi);
             }
-            xIcm = ((xBaseCalculo * percentIcms) / 100);
+            xIcm = (xBaseCalculo.multiply(percentIcms)).divide(new BigDecimal(100));
             SubstituicaoTributariaEntrada substTribEntrada = new SubstituicaoTributariaEntradaDao().getSubstituicaoTributariaEntrada(xClass, cUFE.getUf(), produtoFornecedorCusto.getProdutoFornecedor().getFornecedor().getTipoPessoa().getTipoPessoa(), cUF.getUf(), xCst);
-            double xPicm = substTribEntrada.getPercentIcms().doubleValue();
-            xIcm = xBaseCalculo * xPicm / 100;
-            double wMargem = substTribEntrada.getMargem().doubleValue() / 100;
-            double wBaseCalculoStt = ((custoUnitario + xIpi) * (1 + wMargem));
-            double xCalculoIcmstt = ((wBaseCalculoStt * substTribEntrada.getPercentIcmsInterno().doubleValue()) / 100);
-            xIcmT = xIcmT + xCalculoIcmstt;
-            xIcmBasePropria = xIcmBasePropria + xIcm;
-            wBaseT = wBaseT + wBaseCalculoStt;
-            wIcmT = xIcmT - xIcmBasePropria;
-            setBaseSubstituicao(new BigDecimal(wBaseT));
-            setIcmsSubstituicao(new BigDecimal(wIcmT));
+            BigDecimal xPicm = substTribEntrada.getPercentIcms();
+            xIcm = (xBaseCalculo.multiply(xPicm)).divide(new BigDecimal(100));
+            BigDecimal wMargem = substTribEntrada.getMargem().divide(new BigDecimal(100));
+            BigDecimal wBaseCalculoStt = ((custoUnitario.add(xIpi)).multiply((BigDecimal.ONE.add(wMargem))));
+            BigDecimal xCalculoIcmstt = ((wBaseCalculoStt.multiply(substTribEntrada.getPercentIcmsInterno())).divide(new BigDecimal(100)));
+            xIcmT = xIcmT.add(xCalculoIcmstt);
+            xIcmBasePropria = xIcmBasePropria.add(xIcm);
+            wBaseT = wBaseT.add(wBaseCalculoStt);
+            wIcmT = xIcmT.subtract(xIcmBasePropria);
+            setBaseSubstituicao(wBaseT);
+            setIcmsSubstituicao(wIcmT);
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new Exception("Erro ao calcular substituição tributaria");
@@ -178,5 +182,13 @@ public class SubstituicaoTributariaEntrada implements Serializable {
 
     public void setIcmsSubstituicao(BigDecimal icmsSubstituicao) {
         this.icmsSubstituicao = icmsSubstituicao;
+    }
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 }

@@ -1,11 +1,9 @@
 package jautopecas.entidades.produto;
 
+import jautopecas.entidades.substituicaoTributaria.Cst;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  *
@@ -29,12 +27,15 @@ public class ClassificacaoFiscal implements Serializable {
     private BigDecimal percentPis;
     @Column(name = "PERCENT_COFINS")
     private BigDecimal percentCofins;
-    @Column(name = "CST_IPI")
-    private String cstIpi;
-    @Column(name = "CST_PIS")
-    private String cstPis;
-    @Column(name = "CST_COFINS")
-    private String cstCofins;
+    @OneToOne
+    @JoinColumn(name = "CST_IPI")
+    private Cst cstIpi;
+    @OneToOne
+    @JoinColumn(name = "CST_PIS")
+    private Cst cstPis;
+    @OneToOne
+    @JoinColumn(name = "CST_COFINS")
+    private Cst cstCofins;
 
     public String getClassificacaoFiscal() {
         return classificacaoFiscal;
@@ -44,27 +45,27 @@ public class ClassificacaoFiscal implements Serializable {
         this.classificacaoFiscal = classificacaoFiscal;
     }
 
-    public String getCstCofins() {
+    public Cst getCstCofins() {
         return cstCofins;
     }
 
-    public void setCstCofins(String cstCofins) {
+    public void setCstCofins(Cst cstCofins) {
         this.cstCofins = cstCofins;
     }
 
-    public String getCstIpi() {
+    public Cst getCstIpi() {
         return cstIpi;
     }
 
-    public void setCstIpi(String cstIpi) {
+    public void setCstIpi(Cst cstIpi) {
         this.cstIpi = cstIpi;
     }
 
-    public String getCstPis() {
+    public Cst getCstPis() {
         return cstPis;
     }
 
-    public void setCstPis(String cstPis) {
+    public void setCstPis(Cst cstPis) {
         this.cstPis = cstPis;
     }
 

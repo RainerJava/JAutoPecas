@@ -6,9 +6,11 @@ import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.dao.pessoa.ModeloPessoaDao;
 import jautopecas.dao.pessoa.PessoaDao;
+import jautopecas.dao.pessoa.TipoPessoaDao;
 import jautopecas.entidades.pessoa.AdicionalPessoa;
 import jautopecas.entidades.pessoa.ModeloPessoa;
 import jautopecas.entidades.pessoa.Pessoa;
+import jautopecas.entidades.pessoa.TipoPessoa;
 import jautopecas.entidades.pessoa.endereco.EnderecoPessoa;
 import jautopecas.entidades.pessoa.telefone.TelefonePessoa;
 import java.util.List;
@@ -106,9 +108,11 @@ public class FormularioFabricante extends javax.swing.JPanel implements IFormula
                                 .addComponent(jlRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
                                 .addComponent(jlNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jtfIdFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jlIdFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jtfIdFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlIdFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(287, 287, 287)))
                         .addGap(0, 160, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -216,6 +220,7 @@ public class FormularioFabricante extends javax.swing.JPanel implements IFormula
         pessoa.getAdicionalPessoa().setPessoa(pessoa);
         pessoa.setDocumento(jtfCnpj.getText());
         pessoa.getAdicionalPessoa().setInscricaoEstadual(jtfInscricaoEstadual.getText());
+        pessoa.setTipoPessoa(new TipoPessoaDao().load("FA"));
         pessoa.setEnderecoPessoa(formularioEndereco.getListaEnderecoPessoa());
         for (EnderecoPessoa enderecoPessoa : pessoa.getEnderecoPessoa()) {
             enderecoPessoa.setPessoa(pessoa);

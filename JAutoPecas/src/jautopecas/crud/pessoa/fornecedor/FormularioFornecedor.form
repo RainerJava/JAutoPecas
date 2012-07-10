@@ -63,7 +63,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jlTipoPessoa" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="jlFisicaJuridica" min="-2" pref="120" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jlTipoLinhaFornecimento" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
@@ -73,9 +73,13 @@
                                       <Component id="jcbTipoLinhaFornecimento" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jcbTipoPessoa" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jlTipoPessoa" alignment="0" pref="453" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -85,17 +89,26 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlIdFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlTipoPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlTipoLinhaFornecimento" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jtfIdEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcbFisicaJuridica" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcbTipoLinhaFornecimento" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlIdFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlFisicaJuridica" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jlTipoLinhaFornecimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jtfIdEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbFisicaJuridica" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbTipoLinhaFornecimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jlTipoPessoa" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="jcbTipoPessoa" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -242,9 +255,9 @@
         <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jcbFisicaJuridicaPropertyChange"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jlTipoPessoa">
+    <Component class="javax.swing.JLabel" name="jlFisicaJuridica">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo Pessoa"/>
+        <Property name="text" type="java.lang.String" value="Fisica/Juridica"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlDocumento2">
@@ -283,6 +296,13 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipo Linha Fornecimento"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlTipoPessoa">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tipo Pessoa"/>
+      </Properties>
+    </Component>
+    <Component class="jautopecas.components.JComboBox" name="jcbTipoPessoa">
     </Component>
   </SubComponents>
 </Form>

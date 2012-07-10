@@ -1,25 +1,22 @@
 package jautopecas.crud.produto;
 
-import jautopecas.JAutoPecasMenu;
 import jautopecas.dao.pessoa.PessoaDao;
-import jautopecas.dao.produto.ClassificacaoFiscalDao;
+import jautopecas.dao.substituicaoTributaria.CstDao;
 import jautopecas.entidades.pessoa.Pessoa;
-import jautopecas.entidades.produto.ClassificacaoFiscal;
-import jautopecas.entidades.produto.Produto;
 import jautopecas.entidades.produto.ProdutoFornecedor;
 import jautopecas.entidades.produto.ProdutoFornecedorCusto;
+import jautopecas.entidades.substituicaoTributaria.Cst;
 import jautopecas.entidades.substituicaoTributaria.SubstituicaoTributariaEntrada;
-import jautopecas.exceptions.UtilFormularioException;
 import jautopecas.util.StringUtils;
 import jautopecas.util.UtilFormulario;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -57,13 +54,14 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
                         }
                     }
                 });
+        carregaCombos();
     }
 
     private ProdutoFornecedorCusto getObjetoFormulario() {
         // produtoFornecedorCusto.setEmpresa(listaEmpresas.get(i));
         produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
         produtoFornecedorCusto.setCustoUnitario(StringUtils.stringToBigDecimal(jtfCustoUnitario.getText()));
-        produtoFornecedorCusto.setCst(jcbCst.getSelectedItem().toString());
+        produtoFornecedorCusto.setCstIcms((Cst) jcbCst.getSelectedItem());
         produtoFornecedorCusto.setPorcentIcms(StringUtils.stringToBigDecimal(jtfIcms.getText()));
         produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
         produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
@@ -78,53 +76,49 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
 
     public void calculaCustoNet() throws Exception {
         try {
-            //Produto cProd = produtoFornecedorCusto.getProdutoFornecedor().getProduto();
-            BigDecimal CustoFor = produtoFornecedorCusto.getCustoUnitario();
-            BigDecimal Fator = produtoFornecedorCusto.getProdutoFornecedor().getProduto().getFatorEmbalagemCompra();
-            CustoFor = CustoFor.divide(Fator);
-            BigDecimal Pipi = produtoFornecedorCusto.getPorcentIpi().divide(new BigDecimal(100));
-            /*
-             * colocar aqui os calculos de S.T e tirar icms
-             */
-            BigDecimal xTaxaPis = new BigDecimal(9.25);
-            BigDecimal DtaxaPis = BigDecimal.ZERO;
-            BigDecimal FvicmT = BigDecimal.ZERO;
-            BigDecimal DvalorPis = BigDecimal.ZERO;
+            BigDecimal custoUnitario = produtoFornecedorCusto.getCustoUnitario();
+            BigDecimal fatorEmbalagemCompra = produtoFornecedorCusto.getProdutoFornecedor().getProduto().getFatorEmbalagemCompra();
+            custoUnitario = custoUnitario.divide(fatorEmbalagemCompra);
+            BigDecimal percentIpi = produtoFornecedorCusto.getPorcentIpi().divide(new BigDecimal(100));
+            BigDecimal percentPis = new BigDecimal(9.25);
+            BigDecimal percentPisCofins = BigDecimal.ZERO;
+            BigDecimal valorIcmsTributado = BigDecimal.ZERO;
+            BigDecimal valorPis = BigDecimal.ZERO;
             BigDecimal DIpiPis = BigDecimal.ZERO;
-            BigDecimal Dcusto = CustoFor;
-            BigDecimal ValorNet = BigDecimal.ZERO;
-            BigDecimal Picm = produtoFornecedorCusto.getPorcentIcms().divide(new BigDecimal(100));
+            BigDecimal custoUnitarioCalculado = custoUnitario;
+            BigDecimal custoNetCalculado = BigDecimal.ZERO;
+            BigDecimal percentIcms = produtoFornecedorCusto.getPorcentIcms().divide(new BigDecimal(100));
             /*
              * Descontos sobre Descontos
              */
             /**
              * **Implementar Desconto Sobre Desconto***
              */
-            BigDecimal Fvicm = Dcusto.multiply(Picm);
-            BigDecimal DipiUnit = Dcusto.multiply(Pipi);
+            BigDecimal Fvicm = custoUnitarioCalculado.multiply(percentIcms);
+            BigDecimal DipiUnit = custoUnitarioCalculado.multiply(percentIpi);
             // BigDecimal Pdesc = 1 - (this.getDouble(Fields.FAR_FDESC) / 100);
-            // Dcusto = getJFLClient().round(Dcusto * Pdesc, 2);
+            // custoUnitarioCalculado = getJFLClient().round(custoUnitarioCalculado * Pdesc, 2);
             BigDecimal BaseST = BigDecimal.ZERO;
-            //CustoFor = getJFLClient().round(CustoFor * Pdesc, 2);
-            if (xTaxaPis != null && xTaxaPis.doubleValue() > 0) {
-                DtaxaPis = produtoFornecedorCusto.getProdutoFornecedor().getProduto().getClassificacaoFiscal().getPercentPis().add(
+            //custoUnitario = getJFLClient().round(custoUnitario * Pdesc, 2);
+            if (percentPis != null && percentPis.doubleValue() > 0) {
+                percentPisCofins = produtoFornecedorCusto.getProdutoFornecedor().getProduto().getClassificacaoFiscal().getPercentPis().add(
                         produtoFornecedorCusto.getProdutoFornecedor().getProduto().getClassificacaoFiscal().getPercentCofins());
             }
-            DvalorPis = (Dcusto.multiply(DtaxaPis)).divide(new BigDecimal(100));
-            BaseST = Dcusto;
-            Dcusto = Dcusto.subtract(DvalorPis).subtract(DIpiPis).subtract((Fvicm.divide(CustoFor)).multiply(Dcusto));
-            ValorNet = Dcusto;
+            valorPis = (custoUnitarioCalculado.multiply(percentPisCofins)).divide(new BigDecimal(100));
+            BaseST = custoUnitarioCalculado;
+            custoUnitarioCalculado = custoUnitarioCalculado.subtract(valorPis).subtract(DIpiPis).subtract((Fvicm.divide(custoUnitario)).multiply(custoUnitarioCalculado));
+            custoNetCalculado = custoUnitarioCalculado;
             SubstituicaoTributariaEntrada substTribEntrada = new SubstituicaoTributariaEntrada();
-            substTribEntrada.calculaSubstituicaoTributaria(produtoFornecedorCusto, BaseST.doubleValue(), DipiUnit.doubleValue(), produtoFornecedorCusto.getPorcentIcms().doubleValue());
-            FvicmT = substTribEntrada.getIcmsSubstituicao();
-            BigDecimal DcustoBruto = CustoFor.add(DipiUnit).add(FvicmT);
-            BigDecimal NetSt = ValorNet;
-            if (FvicmT.doubleValue() > 0) {
-                produtoFornecedorCusto.setCst(produtoFornecedorCusto.getCst().substring(0, 1) + "10");
-                NetSt = Dcusto.add(Fvicm).add(FvicmT);
+            substTribEntrada.calculaSubstituicaoTributaria(produtoFornecedorCusto, BaseST, DipiUnit, produtoFornecedorCusto.getPorcentIcms());
+            valorIcmsTributado = substTribEntrada.getIcmsSubstituicao();
+            BigDecimal custoUnitarioCalculadoBruto = custoUnitario.add(DipiUnit).add(valorIcmsTributado);
+            BigDecimal NetSt = custoNetCalculado;
+            if (valorIcmsTributado.doubleValue() > 0) {
+                produtoFornecedorCusto.setCstIcms(new CstDao().load(produtoFornecedorCusto.getCstIcms().getCst().substring(0, 1) + "10"));
+                NetSt = custoUnitarioCalculado.add(Fvicm).add(valorIcmsTributado);
             }
-            produtoFornecedorCusto.setCustoNet(ValorNet);
-            produtoFornecedorCusto.setCustoBruto(DcustoBruto);
+            produtoFornecedorCusto.setCustoNet(custoNetCalculado);
+            produtoFornecedorCusto.setCustoBruto(custoUnitarioCalculadoBruto);
             produtoFornecedorCusto.setCustoNetSt(NetSt);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -133,27 +127,27 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
     }
 
     private void criaProdutoFornecedorCustoEmpresa() throws Exception {
-        if (listaEmpresas == null) {
-            try {
+        try {
+            if (listaEmpresas == null) {
                 listaEmpresas = new ArrayList<>();
                 listaEmpresas.addAll(new PessoaDao().listaPessoaPorModelo("EM"));
-                for (int i = 0; i < listaEmpresas.size(); i++) {
-                    produtoFornecedorCusto = new ProdutoFornecedorCusto();
-                    produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
-                    produtoFornecedorCusto.setEmpresa(listaEmpresas.get(i));
-                    produtoFornecedorCusto.setCustoUnitario(StringUtils.stringToBigDecimal(jtfCustoUnitario.getText()));
-                    produtoFornecedorCusto.setCst(jcbCst.getSelectedItem().toString());
-                    produtoFornecedorCusto.setPorcentIcms(StringUtils.stringToBigDecimal(jtfIcms.getText()));
-                    produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
-                    produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
-                    produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
-
-                    listaProdutoFornecedorCusto.add(produtoFornecedorCusto);
-                }
-                produtoFornecedor.setProdutoFornecedorCusto(listaProdutoFornecedorCusto);
-            } catch (Exception ex) {
-                throw new Exception("Erro ao criar custo para empresas");
             }
+            for (int i = 0; i < listaEmpresas.size(); i++) {
+                produtoFornecedorCusto = new ProdutoFornecedorCusto();
+                produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
+                produtoFornecedorCusto.setEmpresa(listaEmpresas.get(i));
+                produtoFornecedorCusto.setCustoUnitario(StringUtils.stringToBigDecimal(jtfCustoUnitario.getText()));
+                produtoFornecedorCusto.setCstIcms((Cst) jcbCst.getSelectedItem());
+                produtoFornecedorCusto.setPorcentIcms(StringUtils.stringToBigDecimal(jtfIcms.getText()));
+                produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
+                produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
+                produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
+
+                listaProdutoFornecedorCusto.add(produtoFornecedorCusto);
+            }
+            produtoFornecedor.setProdutoFornecedorCusto(listaProdutoFornecedorCusto);
+        } catch (Exception ex) {
+            throw new Exception("Erro ao criar custo para empresas");
         }
     }
 
@@ -164,7 +158,7 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
             jtfIcms.setText(StringUtils.BigDecimalToString(objetoFormulario.getPorcentIcms()));
             jtfIi.setText(StringUtils.BigDecimalToString(objetoFormulario.getPorcentImpostoImportacao()));
             jtfIpi.setText(StringUtils.BigDecimalToString(objetoFormulario.getPorcentIpi()));
-            jcbCst.setSelectedItem(objetoFormulario.getCst());
+            jcbCst.setSelectedItem(objetoFormulario.getCstIcms());
         } catch (Exception ex) {
             throw new Exception("Erro ao carregar os dados do formulario", ex);
         }
@@ -192,6 +186,7 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProdutoFornecedores = new javax.swing.JTable();
 
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setPreferredSize(new java.awt.Dimension(0, 0));
         setLayout(new java.awt.BorderLayout());
 
@@ -221,9 +216,17 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
 
         jLabel9.setText("CST");
 
-        jcbCst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "000-Prod Nac Tributado", "010-(N)Tributada cobranÃ§a ICMS Substituição", "020-(N) ReduÃ§Ã£o de Base de Calculo", "030-(N)Isenta/N.Tributada cobr. ICMS Subst.", "040-Isenta", "041-Nao Tributada", "050-Nacional (SuspensÃ£o)", "051-Nacional (Diferimento)", "060-(N)ICMS cobrado antecipado Substituição", "070-(N)ReduÃ§Ã£o Base ICMS cobr.Substituição", "090-Outras", "100-Importacao Direta", "110-(N)Tributada cobranÃ§a ICMS Substituição", "200-ImportaÃ§Ã£o Adquirida Mercado Interno", "210-Tritutada Cobranca ST", "260-(ID)ICMS cobrado antecipado Substituição" }));
-
         jLabel11.setText("Custo Reposição");
+
+        jtfIpi.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        jtfIcms.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        jtfIi.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        jtfCustoReposicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+
+        jtfCustoUnitario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -262,7 +265,7 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                                     .addComponent(jtfCustoReposicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -274,7 +277,7 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfIpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfIcms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +291,6 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcbCst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,7 +323,7 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
         try {
             if (UtilFormulario.validarFormulario(this) <= 0) {
                 if (jtProdutoFornecedores.getSelectedRowCount() <= 0) {
-                    if (listaProdutoFornecedorCusto == null) {
+                    if (listaProdutoFornecedorCusto == null || listaProdutoFornecedorCusto.isEmpty()) {
                         listaProdutoFornecedorCusto = new ArrayList<>();
                         criaProdutoFornecedorCustoEmpresa();
                     }
@@ -352,7 +354,7 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
             jbSalvar.setEnabled(false);
             jbLimpar.setEnabled(true);
         } else {
-            jbSalvar.setEnabled(true);
+            jbSalvar.setEnabled(false);
             jbLimpar.setEnabled(true);
         }
     }
@@ -365,7 +367,7 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
             jtfIcms.setEditable(!formularioBloqueado);
             jtfIi.setEditable(!formularioBloqueado);
             jtfIpi.setEditable(!formularioBloqueado);
-            jcbCst.setEditable(!formularioBloqueado);
+            jcbCst.setEnabled(!formularioBloqueado);
             jtProdutoFornecedores.clearSelection();
             jbSalvar.setEnabled(!formularioBloqueado);
             jbLimpar.setEnabled(!formularioBloqueado);
@@ -393,8 +395,11 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
     }
 
     public void carregaCombos() {
-//        jcbTipoLogradpuro.setDataSet(new TipoLogradouroDao().listarTodos());
-//        jcbTipoEndereco.setDataSet(new TipoEnderecoDao().listarTodos());
+        try {
+            jcbCst.setDataSet(new CstDao().listarCstIcms());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public List<ProdutoFornecedorCusto> getListaProdutoFornecedorCusto() {
@@ -412,6 +417,10 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
 
     public void setProdutoFornecedor(ProdutoFornecedor produtoFornecedor) {
         this.produtoFornecedor = produtoFornecedor;
+    }
+
+    public JButton getJbSalvar() {
+        return jbSalvar;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel11;

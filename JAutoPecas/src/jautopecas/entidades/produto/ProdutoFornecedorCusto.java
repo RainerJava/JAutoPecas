@@ -1,6 +1,7 @@
 package jautopecas.entidades.produto;
 
 import jautopecas.entidades.pessoa.Pessoa;
+import jautopecas.entidades.substituicaoTributaria.Cst;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.*;
@@ -29,7 +30,9 @@ public class ProdutoFornecedorCusto implements Serializable {
     private BigDecimal porcentIpi;
     @Column(name = "PORCENT_ICMS")
     private BigDecimal porcentIcms;
-    private String cst;
+    @OneToOne
+    @JoinColumn(name = "CST_ICMS")
+    private Cst cstIcms;
     @Column(name = "PORCENT_IMPOSTO_IMPORTACAO")
     private BigDecimal porcentImpostoImportacao;
     @Column(name = "CUSTO_REPOSICAO")
@@ -41,12 +44,12 @@ public class ProdutoFornecedorCusto implements Serializable {
     @Column(name = "CUSTO_NET_ST")
     private BigDecimal custoNetSt;
 
-    public String getCst() {
-        return cst;
+    public Cst getCstIcms() {
+        return cstIcms;
     }
 
-    public void setCst(String cst) {
-        this.cst = cst;
+    public void setCstIcms(Cst cstIcms) {
+        this.cstIcms = cstIcms;
     }
 
     public Pessoa getEmpresa() {

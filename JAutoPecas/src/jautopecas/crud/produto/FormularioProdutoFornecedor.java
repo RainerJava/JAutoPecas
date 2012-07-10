@@ -236,6 +236,7 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
             jbLimpar.setEnabled(true);
             jbExcluir.setEnabled(false);
         }
+        formularioProdutoFornecedorCusto.onLimpar();
     }
 
     public void onBloquear(boolean formularioBloqueado) {
@@ -246,6 +247,7 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
             jbSalvar.setEnabled(!formularioBloqueado);
             jbLimpar.setEnabled(!formularioBloqueado);
             jbExcluir.setEnabled(false);
+            formularioProdutoFornecedorCusto.onBloquear(formularioBloqueado);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
         }
@@ -264,6 +266,11 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
             jbSalvar.setEnabled(true);
             jbLimpar.setEnabled(true);
             jbExcluir.setEnabled(true);
+        }
+        if (formularioProdutoFornecedorCusto.getListaProdutoFornecedorCusto().size() == 0) {
+            formularioProdutoFornecedorCusto.getJbSalvar().setEnabled(true);
+        } else {
+            formularioProdutoFornecedorCusto.getJbSalvar().setEnabled(false);
         }
     }
 

@@ -11,6 +11,8 @@ import jautopecas.crud.pessoa.login.FormularioLogin;
 import jautopecas.crud.pessoa.login.FormularioLoginTableModel;
 import jautopecas.crud.pessoa.telefone.FormularioTelefone;
 import jautopecas.crud.pessoa.telefone.FormularioTelefoneTableModel;
+import jautopecas.crud.produto.FormularioProdutoFornecedor;
+import jautopecas.crud.produto.FormularioProdutoFornecedorTableModel;
 import jautopecas.exceptions.UtilFormularioException;
 import java.awt.Component;
 import java.awt.Container;
@@ -71,6 +73,11 @@ public class UtilFormulario {
                     formulario.onLimpar();
                     ((FormularioFuncaoSalarioColaboradorTableModel) formulario.getJtFuncaoSalarioColaborador().getModel()).removeResultado();
                     formulario.setListaFuncaoSalarioColaborador(null);
+                } else if (component instanceof FormularioProdutoFornecedor) {
+                    FormularioProdutoFornecedor formulario = (FormularioProdutoFornecedor) component;
+                    formulario.onLimpar();
+                    ((FormularioProdutoFornecedorTableModel) formulario.getJtlogins().getModel()).removeResultado();
+                    formulario.setListaProdutoFornecedor(null);
                 } else if (component instanceof Container) {
                     limpaFormulario((Container) component);
                 }
@@ -111,6 +118,9 @@ public class UtilFormulario {
                     formulario.onBloquear(formularioBloqueado);
                 } else if (component instanceof FormularioFuncaoSalarioColaborador) {
                     FormularioFuncaoSalarioColaborador formulario = (FormularioFuncaoSalarioColaborador) component;
+                    formulario.onBloquear(formularioBloqueado);
+                } else if (component instanceof FormularioProdutoFornecedor) {
+                    FormularioProdutoFornecedor formulario = (FormularioProdutoFornecedor) component;
                     formulario.onBloquear(formularioBloqueado);
                 } else if (component instanceof Container) {
                     bloquearFormulario(formularioBloqueado, (Container) component);

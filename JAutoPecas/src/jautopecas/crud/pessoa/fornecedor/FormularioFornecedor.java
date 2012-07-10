@@ -6,9 +6,11 @@ import jautopecas.crud.MensagemRodape;
 import jautopecas.crud.WindowCrud;
 import jautopecas.dao.pessoa.ModeloPessoaDao;
 import jautopecas.dao.pessoa.PessoaDao;
+import jautopecas.dao.pessoa.TipoPessoaDao;
 import jautopecas.entidades.pessoa.AdicionalPessoa;
 import jautopecas.entidades.pessoa.ModeloPessoa;
 import jautopecas.entidades.pessoa.Pessoa;
+import jautopecas.entidades.pessoa.TipoPessoa;
 import jautopecas.entidades.pessoa.endereco.EnderecoPessoa;
 import jautopecas.entidades.pessoa.telefone.TelefonePessoa;
 import java.awt.event.ActionEvent;
@@ -34,6 +36,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
 
     public FormularioFornecedor() {
         initComponents();
+        carregaCombos();
         criaPopupMenu();
     }
 
@@ -65,7 +68,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
                 JOptionPane.showMessageDialog(this, "Só é possivel gerar fabricante apartir de fornecedor pessoa juridica", "Atenção", JOptionPane.WARNING_MESSAGE);
             } else {
                 pessoa.setIdPessoa(0);
-                pessoa.setModeloPessoa(new ModeloPessoaDao().load(3));
+                pessoa.setModeloPessoa(new ModeloPessoaDao().load("FA"));
                 new PessoaDao().salvar(pessoa);
             }
         } else {
@@ -134,12 +137,14 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
         formularioTelefone = new jautopecas.crud.pessoa.telefone.FormularioTelefone();
         jtfCnpj = new jautopecas.components.JTextField();
         jcbFisicaJuridica = new jautopecas.components.JComboBox();
-        jlTipoPessoa = new javax.swing.JLabel();
+        jlFisicaJuridica = new javax.swing.JLabel();
         jlDocumento2 = new javax.swing.JLabel();
         jtfDocumento2 = new jautopecas.components.JTextField();
         jtfCpf = new jautopecas.components.JTextField();
         jcbTipoLinhaFornecimento = new jautopecas.components.JComboBox();
         jlTipoLinhaFornecimento = new javax.swing.JLabel();
+        jlTipoPessoa = new javax.swing.JLabel();
+        jcbTipoPessoa = new jautopecas.components.JComboBox();
 
         setPreferredSize(new java.awt.Dimension(800, 550));
 
@@ -195,7 +200,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
             }
         });
 
-        jlTipoPessoa.setText("Tipo Pessoa");
+        jlFisicaJuridica.setText("Fisica/Juridica");
 
         jlDocumento2.setText("Inscricão Estadual");
 
@@ -221,6 +226,8 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
         });
 
         jlTipoLinhaFornecimento.setText("Tipo Linha Fornecimento");
+
+        jlTipoPessoa.setText("Tipo Pessoa");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -261,29 +268,38 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jlTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jlFisicaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jlTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jcbFisicaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jcbTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(jcbTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbTipoPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlTipoPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlIdFornecedor)
-                    .addComponent(jlTipoPessoa)
-                    .addComponent(jlTipoLinhaFornecimento))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbFisicaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlIdFornecedor)
+                            .addComponent(jlFisicaJuridica)
+                            .addComponent(jlTipoLinhaFornecimento))
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfIdEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbFisicaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbTipoLinhaFornecimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlTipoPessoa)
+                        .addGap(6, 6, 6)
+                        .addComponent(jcbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlDocumento)
@@ -347,9 +363,11 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
     private javax.swing.JTabbedPane jTabbedPane1;
     private jautopecas.components.JComboBox jcbFisicaJuridica;
     private jautopecas.components.JComboBox jcbTipoLinhaFornecimento;
+    private jautopecas.components.JComboBox jcbTipoPessoa;
     private javax.swing.JLabel jlApelido;
     private javax.swing.JLabel jlDocumento;
     private javax.swing.JLabel jlDocumento2;
+    private javax.swing.JLabel jlFisicaJuridica;
     private javax.swing.JLabel jlIdFornecedor;
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlTipoLinhaFornecimento;
@@ -380,6 +398,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
             jtfCnpj.setText(pessoa.getDocumento());
             jtfDocumento2.setText(pessoa.getAdicionalPessoa().getInscricaoEstadual());
         }
+        jcbTipoPessoa.setSelectedItem(pessoa.getTipoPessoa());
         jcbTipoLinhaFornecimento.setSelectedItem(pessoa.getAdicionalPessoa().getTipoLinhaFornecimento());
         formularioEndereco.setListaEnderecoPessoa(pessoa.getEnderecoPessoa());
         formularioTelefone.setListaTelefonePessoa(pessoa.getTelefonePessoa());
@@ -423,6 +442,7 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
             pessoa.setDocumento(jtfCnpj.getText());
             pessoa.getAdicionalPessoa().setInscricaoEstadual(jtfDocumento2.getText());
         }
+        pessoa.setTipoPessoa((TipoPessoa) jcbTipoPessoa.getSelectedItem());
         pessoa.getAdicionalPessoa().setTipoLinhaFornecimento(jcbTipoLinhaFornecimento.getSelectedItem().toString());
         pessoa.setEnderecoPessoa(formularioEndereco.getListaEnderecoPessoa());
         for (EnderecoPessoa enderecoPessoa : pessoa.getEnderecoPessoa()) {
@@ -450,5 +470,9 @@ public class FormularioFornecedor extends javax.swing.JPanel implements IFormula
 
     public List pesquisaSimples(String strCamposPesqisa, String strPesquisa) {
         return new PessoaDao().pesquisaSimples(strCamposPesqisa, strPesquisa, " and a.modeloPessoa.modeloPessoa = 'FO'");
+    }
+
+    public void carregaCombos() {
+        jcbTipoPessoa.setDataSet(new TipoPessoaDao().listarTodos());
     }
 }
