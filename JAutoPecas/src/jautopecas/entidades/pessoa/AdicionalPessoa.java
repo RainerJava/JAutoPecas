@@ -38,6 +38,9 @@ public class AdicionalPessoa implements Serializable {
     private String nomeMae;
     @Column(name = "TIPO_LINHA_FORNECIMENTO")
     private String tipoLinhaFornecimento;
+    @OneToOne
+    @JoinColumn(name = "ID_EMPRESA")
+    private Pessoa empresa;
     /*
      * Getter's and Setter's
      */
@@ -128,5 +131,13 @@ public class AdicionalPessoa implements Serializable {
 
     public void setTipoLinhaFornecimento(String tipoLinhaFornecimento) {
         this.tipoLinhaFornecimento = tipoLinhaFornecimento;
+    }
+
+    public Pessoa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Pessoa empresa) {
+        this.empresa = empresa;
     }
 }

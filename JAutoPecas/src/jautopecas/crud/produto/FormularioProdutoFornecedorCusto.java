@@ -1,5 +1,6 @@
 package jautopecas.crud.produto;
 
+import jautopecas.JAutoPecasMenu;
 import jautopecas.dao.pessoa.PessoaDao;
 import jautopecas.dao.substituicaoTributaria.CstDao;
 import jautopecas.dao.substituicaoTributaria.IcmsDao;
@@ -16,8 +17,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -33,7 +32,6 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
     private List<ProdutoFornecedorCusto> listaProdutoFornecedorCusto;
     private ProdutoFornecedorCusto produtoFornecedorCusto;
     private boolean formularioBloqueado;
-    private List<Pessoa> listaEmpresas;
     private ProdutoFornecedor produtoFornecedor;
 
     /**
@@ -62,6 +60,10 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
 
     private ProdutoFornecedorCusto getObjetoFormulario() {
         try {
+            if (produtoFornecedorCusto == null) {
+                produtoFornecedorCusto = new ProdutoFornecedorCusto();
+                produtoFornecedorCusto.setEmpresa(JAutoPecasMenu.getEmpresaSelecionada());
+            }
             produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
             produtoFornecedorCusto.setCustoUnitario(StringUtils.stringToBigDecimal(jtfCustoUnitario.getText()));
             produtoFornecedorCusto.setCstIcms((Cst) jcbCst.getSelectedItem());
@@ -69,6 +71,7 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
             produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
             produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
             produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
+            
             calculaCustoNet();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -138,112 +141,41 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
         }
     }
 
-//    public int IncluirOrigens(double valorNet, String classificacao) {
-//		int Result = 0;
-//		String cOrigemLogada = getJFLClient().getCorigem();
-//
-//		try {
-//			String OrigemFar = getJFLClient().getJFLTags().getTfar_Origem();
-//			if (OrigemFar.trim().equals("N")) {
-//				return 0;
-//			}
-//			String WhereFo = "IIDFO=" + this.getString("IIDFO");
-//			String cursorFo = "Tfar.IncluirOrigens.Tfo";
-//			int ResultFo = Tfo.getQuery(WhereFo, cursorFo);
-//			if (ResultFo != 0) {
-//				return 99;
-//			}
-//			String WhereClf = "CCF='" + classificacao + "'";
-//			String CursorClf = "Tfar.IncluirOrigens.Tclf";
-//			int ResultClf = Tes.getTclf().getQuery(WhereClf, CursorClf);
-//			if (ResultClf != 0) {
-//				return 99;
-//			}
-//
-//			double vTaxaICMS = getJFLClient().getDouble(
-//					Tes.getOicm().getTaxaEmissor(Tfo.getString("CUF"),
-//							getJFLClient().getTemp().getString("CUF")));
-//			double TaxaPis = (Tes.getTclf().getDouble("FPIS") / 100);
-//			double TaxaCofins = (Tes.getTclf().getDouble("FCOFINS") / 100);
-//			int rCode = getTemp().getLst(
-//					"IORIGEM != " + getJFLClient().Corigem
-//							+ " ORDER BY IORIGEM", "Tfar.IncluirOrigens.Temp");
-//			Tfar newTfar = new Tfar("FAR", getJFLClient());
-//			newTfar.TableToTable(this);
-//			while (getTemp().Next()) {
-//				if (Result == 0) {
-//					double TaxaICMSEmp = getJFLClient().getDouble(
-//							Tes.getOicm().getTaxaEmissor(Tfo.getString("CUF"),
-//									getTemp().getString("CUF")));
-//					if (vTaxaICMS != TaxaICMSEmp) {
-//						TaxaICMSEmp = (TaxaICMSEmp / 100);
-//						double vTaxas = TaxaPis + TaxaCofins + TaxaICMSEmp;
-//						valorNet = valorNet / (1 - vTaxas);
-//						newTfar.set("FVCUSUNIT", getJFLClient().round(valorNet,
-//								6)
-//								+ "");
-//						newTfar.set("FPICM", getJFLClient().round(
-//								TaxaICMSEmp * 100, 2)
-//								+ "");
-//					} else {
-//						newTfar.set("FPICM", this.getString("FPICM") + "");
-//						newTfar.set("FVCUSUNIT", this.getString("FVCUSUNIT")
-//								+ "");
-//					}
-//					newTfar.set("IORIGEM", getTemp().getString("IORIGEM"));
-//					Result += newTfar.getInsert();
-//					if (Result == 0) {
-//						getJFLClient().setCorigem(
-//								getTemp().getString("IORIGEM"));
-//						Result += newTfar.CalculaNet();
-//						if (Result != 0) {
-//							break;
-//						}
-//					}
-//				} else {
-//					break;
-//				}
-//			}
-//			newTfar = null;
-//		} catch (Exception ex) {
-//			Result = 99;
-//		}
-//		getJFLClient().setCorigem(cOrigemLogada);
-//		return Result;
-//	}
-    public void criaProdutoFornecedorCustoEmpresa(BigDecimal valorNet) {
+    public void criaProdutoFornecedorCustoEmpresa(final ProdutoFornecedorCusto produtoFornecedorCustoOriginal) {
         try {
-            BigDecimal TaxaPis = (produtoFornecedor.getProduto().getClassificacaoFiscal().getPercentPis()).divide(new BigDecimal(100));
-            BigDecimal TaxaCofins = (produtoFornecedor.getProduto().getClassificacaoFiscal().getPercentCofins()).divide(new BigDecimal(100));
-            if (listaEmpresas == null) {
-                listaEmpresas = new ArrayList<>();
-                listaEmpresas.addAll(new PessoaDao().listaPessoaPorModelo("EM"));
-            }
-            //For nas empresas.
-            for (Pessoa empresa : listaEmpresas) {
+            double vTaxaICMS = new IcmsDao().getPercentIcmsEmissor(produtoFornecedor.getFornecedor().getEnderecoPessoa().get(0).getEndereco().getUf().getUf(),
+                    JAutoPecasMenu.getEmpresaSelecionada().getEnderecoPessoa().get(0).getEndereco().getUf().getUf()).doubleValue();
+            double TaxaPis = (produtoFornecedor.getProduto().getClassificacaoFiscal().getPercentPis().doubleValue() / 100);
+            double TaxaCofins = (produtoFornecedor.getProduto().getClassificacaoFiscal().getPercentCofins().doubleValue() / 100);
 
-                BigDecimal percentIcms = new IcmsDao().getPercentIcmsEmissor(produtoFornecedor.getFornecedor().getEnderecoPessoa().get(0).getEndereco().getUf().getUf(),
-                        empresa.getEnderecoPessoa().get(0).getEndereco().getUf().getUf());
+            for (Pessoa empresa : JAutoPecasMenu.getListaEmpresas()) {
+                ProdutoFornecedorCusto newTfar = new ProdutoFornecedorCusto();
+                newTfar.setProdutoFornecedor(produtoFornecedorCustoOriginal.getProdutoFornecedor());
+                newTfar.setCustoUnitario(produtoFornecedorCustoOriginal.getCustoUnitario());
+                newTfar.setCstIcms(produtoFornecedorCustoOriginal.getCstIcms());
+                newTfar.setPorcentImpostoImportacao(produtoFornecedorCustoOriginal.getPorcentImpostoImportacao());
+                newTfar.setPorcentIpi(produtoFornecedorCustoOriginal.getPorcentIpi());
 
-                percentIcms = (percentIcms.divide(new BigDecimal(100)));
-                BigDecimal vTaxas = TaxaPis.add(TaxaCofins).add(percentIcms);
-                valorNet = valorNet.divide(new BigDecimal(1).subtract(vTaxas));
-
-                produtoFornecedorCusto = new ProdutoFornecedorCusto();
-                produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
-                produtoFornecedorCusto.setEmpresa(empresa);
-                produtoFornecedorCusto.setCustoUnitario(valorNet);
-                produtoFornecedorCusto.setCstIcms((Cst) jcbCst.getSelectedItem());
-                produtoFornecedorCusto.setPorcentIcms(percentIcms);
-                produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
-                produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
-                produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
-
-                listaProdutoFornecedorCusto.add(produtoFornecedorCusto);
+                double vTaxaICMSEmpresa = new IcmsDao().getPercentIcmsEmissor(produtoFornecedor.getFornecedor().getEnderecoPessoa().get(0).getEndereco().getUf().getUf(),
+                        empresa.getEnderecoPessoa().get(0).getEndereco().getUf().getUf()).doubleValue();
+                if (vTaxaICMS != vTaxaICMSEmpresa) {
+                    vTaxaICMSEmpresa = (vTaxaICMSEmpresa / 100);
+                    double vTaxas = TaxaPis + TaxaCofins + vTaxaICMSEmpresa;
+                    double valorNetCalculado = produtoFornecedorCustoOriginal.getCustoNet().doubleValue() / (1 - vTaxas);
+                    newTfar.setCustoUnitario(new BigDecimal(valorNetCalculado));
+                    newTfar.setPorcentIcms(new BigDecimal(vTaxaICMSEmpresa*100));
+                } else {
+                    newTfar.setCustoUnitario(produtoFornecedorCusto.getCustoUnitario());
+                    newTfar.setPorcentIcms(produtoFornecedorCusto.getPorcentIcms());
+                }
+                newTfar.setEmpresa(empresa);
+                produtoFornecedorCusto = newTfar;
                 calculaCustoNet();
+                listaProdutoFornecedorCusto.add(newTfar);
             }
             produtoFornecedor.setProdutoFornecedorCusto(listaProdutoFornecedorCusto);
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -271,7 +203,6 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
 //            throw new Exception("Erro ao criar custo para empresas");
 //        }
 //    }
-
     private void setObjetoFormulario(ProdutoFornecedorCusto objetoFormulario) throws Exception {
         try {
             jtfCustoReposicao.setText(StringUtils.BigDecimalToString(objetoFormulario.getCustoReposicao()));
@@ -446,7 +377,8 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
                 if (jtProdutoFornecedores.getSelectedRowCount() <= 0) {
                     if (listaProdutoFornecedorCusto == null || listaProdutoFornecedorCusto.isEmpty()) {
                         listaProdutoFornecedorCusto = new ArrayList<>();
-                        //criaProdutoFornecedorCustoEmpresa();
+                        getObjetoFormulario();
+                        criaProdutoFornecedorCustoEmpresa(produtoFornecedorCusto);
                     }
                 } else {
                     listaProdutoFornecedorCusto.set(jtProdutoFornecedores.getSelectedRow(), getObjetoFormulario());

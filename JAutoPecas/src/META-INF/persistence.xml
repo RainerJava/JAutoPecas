@@ -35,6 +35,7 @@
     <class>jautopecas.entidades.substituicaoTributaria.SubstituicaoTributariaEntrada</class>
     <class>jautopecas.entidades.pessoa.TipoPessoa</class>
     <class>jautopecas.entidades.substituicaoTributaria.Cst</class>
+    <class>jautopecas.entidades.substituicaoTributaria.Icms</class>
     <properties>
       <!--      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://instance19734.db.xeround.com:13144/dbautopecasnew"/>
       <property name="javax.persistence.jdbc.password" value="123456"/>

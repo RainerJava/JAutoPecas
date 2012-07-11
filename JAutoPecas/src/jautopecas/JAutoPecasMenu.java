@@ -1,9 +1,11 @@
 package jautopecas;
 
 import jautopecas.crud.WindowCrud;
+import jautopecas.dao.pessoa.PessoaDao;
 import jautopecas.dao.pessoa.colaborador.FuncaoSalarioColaboradorDao;
 import jautopecas.dao.pessoa.login.LoginPermissaoPessoaDao;
 import jautopecas.entidades.menu.ItemMenu;
+import jautopecas.entidades.pessoa.Pessoa;
 import jautopecas.entidades.pessoa.colaborador.FuncaoSalarioColaborador;
 import jautopecas.entidades.pessoa.login.LoginPermissaoPessoa;
 import jautopecas.entidades.pessoa.login.LoginPessoa;
@@ -26,6 +28,8 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     /**
      * Creates new form JAutoPecasMenu
      */
+    private static List<Pessoa> listaEmpresas;
+    private static Pessoa empresaSelecionada;
     private static LoginPessoa loginPessoa;
     private static List<LoginPermissaoPessoa> listaLoginPermissaoPessoa = new ArrayList<>();
     private static HashMap<String, WindowCrud> janelas = new HashMap<>();
@@ -33,6 +37,8 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     public JAutoPecasMenu(LoginPessoa login) {
         loginPessoa = login;
         initComponents();
+        populaCombos();
+        selecionaEmpresaPessoa();
     }
 
     public void populaDadosColaborador() {
@@ -145,12 +151,35 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
         return loginPessoa;
     }
 
+    private void populaCombos() {
+        try {
+            listaEmpresas = new PessoaDao().listaPessoaPorModelo("EM");
+            jcbEmpresa.setDataSet(listaEmpresas);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void selecionaEmpresaPessoa() {
+        empresaSelecionada = loginPessoa.getPessoa().getAdicionalPessoa().getEmpresa();
+        jcbEmpresa.setSelectedItem(empresaSelecionada);
+    }
+
+    public static Pessoa getEmpresaSelecionada() {
+        return empresaSelecionada;
+    }
+
+    public static List<Pessoa> getListaEmpresas() {
+        return listaEmpresas;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jcbEmpresa = new jautopecas.components.JComboBox();
         jpDadosColaborador = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jlLogin = new javax.swing.JLabel();
@@ -170,11 +199,17 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 483, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jcbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(327, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 141, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jcbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -216,6 +251,7 @@ public class JAutoPecasMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
+    private jautopecas.components.JComboBox jcbEmpresa;
     private javax.swing.JLabel jlDepartamento;
     private javax.swing.JLabel jlFuncao;
     private javax.swing.JLabel jlLogin;

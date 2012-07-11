@@ -6,6 +6,7 @@ import jautopecas.entidades.pessoa.login.LoginPessoa;
 import jautopecas.entidades.pessoa.telefone.TelefonePessoa;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
 /**
@@ -144,5 +145,76 @@ public class Pessoa implements Serializable {
 
     public void setTipoPessoa(TipoPessoa tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pessoa other = (Pessoa) obj;
+        if (!Objects.equals(this.idPessoa, other.idPessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.apelido, other.apelido)) {
+            return false;
+        }
+        if (!Objects.equals(this.documento, other.documento)) {
+            return false;
+        }
+        if (!Objects.equals(this.modeloPessoa, other.modeloPessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.adicionalPessoa, other.adicionalPessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.enderecoPessoa, other.enderecoPessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.telefonePessoa, other.telefonePessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.loginPessoa, other.loginPessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.fisicaJuridica, other.fisicaJuridica)) {
+            return false;
+        }
+        if (!Objects.equals(this.tipoPessoa, other.tipoPessoa)) {
+            return false;
+        }
+        if (!Objects.equals(this.funcaoSalarioColaborador, other.funcaoSalarioColaborador)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.idPessoa);
+        hash = 97 * hash + Objects.hashCode(this.nome);
+        hash = 97 * hash + Objects.hashCode(this.apelido);
+        hash = 97 * hash + Objects.hashCode(this.documento);
+        hash = 97 * hash + Objects.hashCode(this.modeloPessoa);
+        hash = 97 * hash + Objects.hashCode(this.adicionalPessoa);
+        hash = 97 * hash + Objects.hashCode(this.enderecoPessoa);
+        hash = 97 * hash + Objects.hashCode(this.telefonePessoa);
+        hash = 97 * hash + Objects.hashCode(this.loginPessoa);
+        hash = 97 * hash + Objects.hashCode(this.fisicaJuridica);
+        hash = 97 * hash + Objects.hashCode(this.tipoPessoa);
+        hash = 97 * hash + Objects.hashCode(this.funcaoSalarioColaborador);
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        return idPessoa + "-" + apelido;
     }
 }
