@@ -267,7 +267,7 @@ public class FormularioProdutoFornecedor extends javax.swing.JPanel {
             jbLimpar.setEnabled(true);
             jbExcluir.setEnabled(true);
         }
-        if (formularioProdutoFornecedorCusto.getListaProdutoFornecedorCusto().size() == 0) {
+        if (formularioProdutoFornecedorCusto.getListaProdutoFornecedorCusto() == null || formularioProdutoFornecedorCusto.getListaProdutoFornecedorCusto().isEmpty()) {
             formularioProdutoFornecedorCusto.getJbSalvar().setEnabled(true);
         } else {
             formularioProdutoFornecedorCusto.getJbSalvar().setEnabled(false);

@@ -29,7 +29,7 @@ public class FormularioProdutoFornecedorCustoTableModel extends AbstractTableMod
 
         ProdutoFornecedorCusto dado = dados.get(rowIndex);
         if (columnIndex == 0) {
-            return dado.getEmpresa().getNome();
+            return dado.getEmpresa().getApelido();
         } else {
             return dado.getCustoUnitario();
         }

@@ -59,6 +59,7 @@ public class CepService {
             estado = new Estado();
             estado.setUf(webServiceCep.getUf());
             estado.setNome(webServiceCep.getUf());
+            estado.setIbge("0");
             estadoDao.salvar(estado);
         }
         

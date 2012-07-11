@@ -83,8 +83,7 @@ public class SubstituicaoTributariaEntrada implements Serializable {
             setBaseSubstituicao(wBaseT);
             setIcmsSubstituicao(wIcmT);
         } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new Exception("Erro ao calcular substituição tributaria");
+            throw ex;
         }
     }
 

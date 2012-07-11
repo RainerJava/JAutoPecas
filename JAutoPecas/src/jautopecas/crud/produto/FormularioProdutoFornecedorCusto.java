@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.NoResultException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -58,18 +59,18 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
     }
 
     private ProdutoFornecedorCusto getObjetoFormulario() {
-        // produtoFornecedorCusto.setEmpresa(listaEmpresas.get(i));
-        produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
-        produtoFornecedorCusto.setCustoUnitario(StringUtils.stringToBigDecimal(jtfCustoUnitario.getText()));
-        produtoFornecedorCusto.setCstIcms((Cst) jcbCst.getSelectedItem());
-        produtoFornecedorCusto.setPorcentIcms(StringUtils.stringToBigDecimal(jtfIcms.getText()));
-        produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
-        produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
-        produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
         try {
+            produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
+            produtoFornecedorCusto.setCustoUnitario(StringUtils.stringToBigDecimal(jtfCustoUnitario.getText()));
+            produtoFornecedorCusto.setCstIcms((Cst) jcbCst.getSelectedItem());
+            produtoFornecedorCusto.setPorcentIcms(StringUtils.stringToBigDecimal(jtfIcms.getText()));
+            produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
+            produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
+            produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
             calculaCustoNet();
         } catch (Exception ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
         }
         return produtoFornecedorCusto;
     }
@@ -108,9 +109,18 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
             BaseST = custoUnitarioCalculado;
             custoUnitarioCalculado = custoUnitarioCalculado.subtract(valorPis).subtract(DIpiPis).subtract((Fvicm.divide(custoUnitario)).multiply(custoUnitarioCalculado));
             custoNetCalculado = custoUnitarioCalculado;
-            SubstituicaoTributariaEntrada substTribEntrada = new SubstituicaoTributariaEntrada();
-            substTribEntrada.calculaSubstituicaoTributaria(produtoFornecedorCusto, BaseST, DipiUnit, produtoFornecedorCusto.getPorcentIcms());
-            valorIcmsTributado = substTribEntrada.getIcmsSubstituicao();
+            try {
+                SubstituicaoTributariaEntrada substTribEntrada = new SubstituicaoTributariaEntrada();
+                substTribEntrada.calculaSubstituicaoTributaria(produtoFornecedorCusto, BaseST, DipiUnit, produtoFornecedorCusto.getPorcentIcms());
+                valorIcmsTributado = substTribEntrada.getIcmsSubstituicao();
+            } catch (Exception ex) {
+                if (ex instanceof NoResultException) {
+                    valorIcmsTributado = BigDecimal.ZERO;
+                } else {
+                    throw new Exception(ex);
+                }
+            }
+
             BigDecimal custoUnitarioCalculadoBruto = custoUnitario.add(DipiUnit).add(valorIcmsTributado);
             BigDecimal NetSt = custoNetCalculado;
             if (valorIcmsTributado.doubleValue() > 0) {
