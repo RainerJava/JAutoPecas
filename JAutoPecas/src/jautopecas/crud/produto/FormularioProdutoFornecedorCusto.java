@@ -1,23 +1,19 @@
 package jautopecas.crud.produto;
 
 import jautopecas.JAutoPecasMenu;
-import jautopecas.dao.pessoa.PessoaDao;
 import jautopecas.dao.substituicaoTributaria.CstDao;
 import jautopecas.dao.substituicaoTributaria.IcmsDao;
 import jautopecas.entidades.pessoa.Pessoa;
 import jautopecas.entidades.produto.ProdutoFornecedor;
 import jautopecas.entidades.produto.ProdutoFornecedorCusto;
 import jautopecas.entidades.substituicaoTributaria.Cst;
-import jautopecas.entidades.substituicaoTributaria.SubstituicaoTributariaEntrada;
 import jautopecas.util.StringUtils;
 import jautopecas.util.UtilFormulario;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.NoResultException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -71,8 +67,7 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
             produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
             produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
             produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
-            
-            calculaCustoNet();
+            produtoFornecedorCusto.calculaCustoNet();
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
@@ -80,68 +75,7 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
         return produtoFornecedorCusto;
     }
 
-    public void calculaCustoNet() throws Exception {
-        try {
-            BigDecimal custoUnitario = produtoFornecedorCusto.getCustoUnitario();
-            BigDecimal fatorEmbalagemCompra = produtoFornecedorCusto.getProdutoFornecedor().getProduto().getFatorEmbalagemCompra();
-            custoUnitario = custoUnitario.divide(fatorEmbalagemCompra);
-            BigDecimal percentIpi = produtoFornecedorCusto.getPorcentIpi().divide(new BigDecimal(100));
-            BigDecimal percentPis = new BigDecimal(9.25);
-            BigDecimal percentPisCofins = BigDecimal.ZERO;
-            BigDecimal valorIcmsTributado = BigDecimal.ZERO;
-            BigDecimal valorPis = BigDecimal.ZERO;
-            BigDecimal DIpiPis = BigDecimal.ZERO;
-            BigDecimal custoUnitarioCalculado = custoUnitario;
-            BigDecimal custoNetCalculado = BigDecimal.ZERO;
-            BigDecimal percentIcms = produtoFornecedorCusto.getPorcentIcms().divide(new BigDecimal(100));
-            /*
-             * Descontos sobre Descontos
-             */
-            /**
-             * **Implementar Desconto Sobre Desconto***
-             */
-            BigDecimal Fvicm = custoUnitarioCalculado.multiply(percentIcms);
-            BigDecimal DipiUnit = custoUnitarioCalculado.multiply(percentIpi);
-            // BigDecimal Pdesc = 1 - (this.getDouble(Fields.FAR_FDESC) / 100);
-            // custoUnitarioCalculado = getJFLClient().round(custoUnitarioCalculado * Pdesc, 2);
-            BigDecimal BaseST = BigDecimal.ZERO;
-            //custoUnitario = getJFLClient().round(custoUnitario * Pdesc, 2);
-            if (percentPis != null && percentPis.doubleValue() > 0) {
-                percentPisCofins = produtoFornecedorCusto.getProdutoFornecedor().getProduto().getClassificacaoFiscal().getPercentPis().add(
-                        produtoFornecedorCusto.getProdutoFornecedor().getProduto().getClassificacaoFiscal().getPercentCofins());
-            }
-            valorPis = (custoUnitarioCalculado.multiply(percentPisCofins)).divide(new BigDecimal(100));
-            BaseST = custoUnitarioCalculado;
-            custoUnitarioCalculado = custoUnitarioCalculado.subtract(valorPis).subtract(DIpiPis).subtract((Fvicm.divide(custoUnitario)).multiply(custoUnitarioCalculado));
-            custoNetCalculado = custoUnitarioCalculado;
-            try {
-                SubstituicaoTributariaEntrada substTribEntrada = new SubstituicaoTributariaEntrada();
-                substTribEntrada.calculaSubstituicaoTributaria(produtoFornecedorCusto, BaseST, DipiUnit, produtoFornecedorCusto.getPorcentIcms());
-                valorIcmsTributado = substTribEntrada.getIcmsSubstituicao();
-            } catch (Exception ex) {
-                if (ex instanceof NoResultException) {
-                    valorIcmsTributado = BigDecimal.ZERO;
-                } else {
-                    throw new Exception(ex);
-                }
-            }
-
-            BigDecimal custoUnitarioCalculadoBruto = custoUnitario.add(DipiUnit).add(valorIcmsTributado);
-            BigDecimal NetSt = custoNetCalculado;
-            if (valorIcmsTributado.doubleValue() > 0) {
-                produtoFornecedorCusto.setCstIcms(new CstDao().load(produtoFornecedorCusto.getCstIcms().getCst().substring(0, 1) + "10"));
-                NetSt = custoUnitarioCalculado.add(Fvicm).add(valorIcmsTributado);
-            }
-            produtoFornecedorCusto.setCustoNet(custoNetCalculado);
-            produtoFornecedorCusto.setCustoBruto(custoUnitarioCalculadoBruto);
-            produtoFornecedorCusto.setCustoNetSt(NetSt);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new Exception("Erro ao calcular custo Net");
-        }
-    }
-
-    public void criaProdutoFornecedorCustoEmpresa(final ProdutoFornecedorCusto produtoFornecedorCustoOriginal) {
+    public void criaProdutoFornecedorCustoEmpresa(final ProdutoFornecedorCusto produtoFornecedorCustoOrigem) {
         try {
             double vTaxaICMS = new IcmsDao().getPercentIcmsEmissor(produtoFornecedor.getFornecedor().getEnderecoPessoa().get(0).getEndereco().getUf().getUf(),
                     JAutoPecasMenu.getEmpresaSelecionada().getEnderecoPessoa().get(0).getEndereco().getUf().getUf()).doubleValue();
@@ -150,27 +84,27 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
 
             for (Pessoa empresa : JAutoPecasMenu.getListaEmpresas()) {
                 ProdutoFornecedorCusto newTfar = new ProdutoFornecedorCusto();
-                newTfar.setProdutoFornecedor(produtoFornecedorCustoOriginal.getProdutoFornecedor());
-                newTfar.setCustoUnitario(produtoFornecedorCustoOriginal.getCustoUnitario());
-                newTfar.setCstIcms(produtoFornecedorCustoOriginal.getCstIcms());
-                newTfar.setPorcentImpostoImportacao(produtoFornecedorCustoOriginal.getPorcentImpostoImportacao());
-                newTfar.setPorcentIpi(produtoFornecedorCustoOriginal.getPorcentIpi());
+                newTfar.setProdutoFornecedor(produtoFornecedorCusto.getProdutoFornecedor());
+                newTfar.setCustoUnitario(produtoFornecedorCusto.getCustoUnitario());
+                newTfar.setCstIcms(produtoFornecedorCusto.getCstIcms());
+                newTfar.setPorcentImpostoImportacao(produtoFornecedorCusto.getPorcentImpostoImportacao());
+                newTfar.setPorcentIpi(produtoFornecedorCusto.getPorcentIpi());
 
                 double vTaxaICMSEmpresa = new IcmsDao().getPercentIcmsEmissor(produtoFornecedor.getFornecedor().getEnderecoPessoa().get(0).getEndereco().getUf().getUf(),
                         empresa.getEnderecoPessoa().get(0).getEndereco().getUf().getUf()).doubleValue();
                 if (vTaxaICMS != vTaxaICMSEmpresa) {
                     vTaxaICMSEmpresa = (vTaxaICMSEmpresa / 100);
                     double vTaxas = TaxaPis + TaxaCofins + vTaxaICMSEmpresa;
-                    double valorNetCalculado = produtoFornecedorCustoOriginal.getCustoNet().doubleValue() / (1 - vTaxas);
+                    double valorNetCalculado = produtoFornecedorCusto.getCustoNet().doubleValue() / (1 - vTaxas);
                     newTfar.setCustoUnitario(new BigDecimal(valorNetCalculado));
-                    newTfar.setPorcentIcms(new BigDecimal(vTaxaICMSEmpresa*100));
+                    newTfar.setPorcentIcms(new BigDecimal(vTaxaICMSEmpresa * 100));
                 } else {
-                    newTfar.setCustoUnitario(produtoFornecedorCusto.getCustoUnitario());
-                    newTfar.setPorcentIcms(produtoFornecedorCusto.getPorcentIcms());
+                    newTfar.setCustoUnitario(produtoFornecedorCustoOrigem.getCustoUnitario());
+                    newTfar.setPorcentIcms(produtoFornecedorCustoOrigem.getPorcentIcms());
                 }
                 newTfar.setEmpresa(empresa);
+                newTfar.calculaCustoNet();
                 produtoFornecedorCusto = newTfar;
-                calculaCustoNet();
                 listaProdutoFornecedorCusto.add(newTfar);
             }
             produtoFornecedor.setProdutoFornecedorCusto(listaProdutoFornecedorCusto);
@@ -179,30 +113,6 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
         }
     }
 
-//    private void criaProdutoFornecedorCustoEmpresa() throws Exception {
-//        try {
-//            if (listaEmpresas == null) {
-//                listaEmpresas = new ArrayList<>();
-//                listaEmpresas.addAll(new PessoaDao().listaPessoaPorModelo("EM"));
-//            }
-//            for (int i = 0; i < listaEmpresas.size(); i++) {
-//                produtoFornecedorCusto = new ProdutoFornecedorCusto();
-//                produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
-//                produtoFornecedorCusto.setEmpresa(listaEmpresas.get(i));
-//                produtoFornecedorCusto.setCustoUnitario(StringUtils.stringToBigDecimal(jtfCustoUnitario.getText()));
-//                produtoFornecedorCusto.setCstIcms((Cst) jcbCst.getSelectedItem());
-//                produtoFornecedorCusto.setPorcentIcms(StringUtils.stringToBigDecimal(jtfIcms.getText()));
-//                produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
-//                produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
-//                produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
-//
-//                listaProdutoFornecedorCusto.add(produtoFornecedorCusto);
-//            }
-//            produtoFornecedor.setProdutoFornecedorCusto(listaProdutoFornecedorCusto);
-//        } catch (Exception ex) {
-//            throw new Exception("Erro ao criar custo para empresas");
-//        }
-//    }
     private void setObjetoFormulario(ProdutoFornecedorCusto objetoFormulario) throws Exception {
         try {
             jtfCustoReposicao.setText(StringUtils.BigDecimalToString(objetoFormulario.getCustoReposicao()));

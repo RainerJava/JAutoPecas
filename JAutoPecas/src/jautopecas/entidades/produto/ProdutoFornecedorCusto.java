@@ -1,7 +1,9 @@
 package jautopecas.entidades.produto;
 
+import jautopecas.dao.substituicaoTributaria.CstDao;
 import jautopecas.entidades.pessoa.Pessoa;
 import jautopecas.entidades.substituicaoTributaria.Cst;
+import jautopecas.entidades.substituicaoTributaria.SubstituicaoTributariaEntrada;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.*;
@@ -42,7 +44,7 @@ public class ProdutoFornecedorCusto implements Serializable {
     @Column(name = "CUSTO_NET")
     private BigDecimal custoNet;
     @Column(name = "CUSTO_NET_ST")
-    private BigDecimal custoNetSt;
+    private BigDecimal custocustoNetSt;
 
     public Cst getCstIcms() {
         return cstIcms;
@@ -132,11 +134,72 @@ public class ProdutoFornecedorCusto implements Serializable {
         this.custoNet = custoNet;
     }
 
-    public BigDecimal getCustoNetSt() {
-        return custoNetSt;
+    public BigDecimal getCustocustoNetSt() {
+        return custocustoNetSt;
     }
 
-    public void setCustoNetSt(BigDecimal custoNetSt) {
-        this.custoNetSt = custoNetSt;
+    public void setCustocustoNetSt(BigDecimal custocustoNetSt) {
+        this.custocustoNetSt = custocustoNetSt;
+    }
+
+    public void calculaCustoNet() throws Exception {
+        try {
+            BigDecimal custoUnitario = getCustoUnitario();
+            BigDecimal fatorEmbalagemCompra = getProdutoFornecedor().getProduto().getFatorEmbalagemCompra();
+            custoUnitario = custoUnitario.divide(fatorEmbalagemCompra);
+            BigDecimal percentIpi = getPorcentIpi().divide(new BigDecimal(100));
+            BigDecimal percentPis = new BigDecimal(9.25);
+            BigDecimal percentPisCofins = BigDecimal.ZERO;
+            BigDecimal valorIcmsTributado = BigDecimal.ZERO;
+            BigDecimal valorPis = BigDecimal.ZERO;
+            BigDecimal DIpiPis = BigDecimal.ZERO;
+            BigDecimal custoUnitarioCalculado = custoUnitario;
+            BigDecimal custoNetCalculado = BigDecimal.ZERO;
+            BigDecimal percentIcms = getPorcentIcms().divide(new BigDecimal(100));
+            /*
+             * Descontos sobre Descontos
+             */
+            /**
+             * **Implementar Desconto Sobre Desconto***
+             */
+            BigDecimal valorIcms = custoUnitarioCalculado.multiply(percentIcms);
+            BigDecimal valorIpi = custoUnitarioCalculado.multiply(percentIpi);
+            // BigDecimal Pdesc = 1 - (this.getDouble(Fields.FAR_FDESC) / 100);
+            // custoUnitarioCalculado = getJFLClient().round(custoUnitarioCalculado * Pdesc, 2);
+            BigDecimal baseSt = BigDecimal.ZERO;
+            //custoUnitario = getJFLClient().round(custoUnitario * Pdesc, 2);
+            if (percentPis != null && percentPis.doubleValue() > 0) {
+                percentPisCofins = getProdutoFornecedor().getProduto().getClassificacaoFiscal().getPercentPis().add(
+                        getProdutoFornecedor().getProduto().getClassificacaoFiscal().getPercentCofins());
+            }
+            valorPis = (custoUnitarioCalculado.multiply(percentPisCofins)).divide(new BigDecimal(100));
+            baseSt = custoUnitarioCalculado;
+            custoUnitarioCalculado = custoUnitarioCalculado.subtract(valorPis).subtract(DIpiPis).subtract((valorIcms.divide(custoUnitario)).multiply(custoUnitarioCalculado));
+            custoNetCalculado = custoUnitarioCalculado;
+            try {
+                SubstituicaoTributariaEntrada substTribEntrada = new SubstituicaoTributariaEntrada();
+                substTribEntrada.calculaSubstituicaoTributaria(this, baseSt, valorIpi, getPorcentIcms());
+                valorIcmsTributado = substTribEntrada.getIcmsSubstituicao();
+            } catch (Exception ex) {
+                if (ex instanceof NoResultException) {
+                    valorIcmsTributado = BigDecimal.ZERO;
+                } else {
+                    throw new Exception(ex);
+                }
+            }
+
+            BigDecimal custoUnitarioCalculadoBruto = custoUnitario.add(valorIpi).add(valorIcmsTributado);
+            BigDecimal custoNetSt = custoNetCalculado;
+            if (valorIcmsTributado.doubleValue() > 0) {
+                setCstIcms(new CstDao().load(getCstIcms().getCst().substring(0, 1) + "10"));
+                custoNetSt = custoUnitarioCalculado.add(valorIcms).add(valorIcmsTributado);
+            }
+            setCustoNet(custoNetCalculado);
+            setCustoBruto(custoUnitarioCalculadoBruto);
+            setCustocustoNetSt(custoNetSt);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("Erro ao calcular custo Net");
+        }
     }
 }
