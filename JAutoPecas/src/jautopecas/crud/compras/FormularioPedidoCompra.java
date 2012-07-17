@@ -60,6 +60,15 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
         jtfFornecedor2 = new jautopecas.components.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jpPesquisa = new javax.swing.JPanel();
+        jpPesquisaProduto = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jTextField11 = new jautopecas.components.JTextField();
+        jspPesquisaProduto = new javax.swing.JScrollPane();
+        jtPesquisaProduto = new javax.swing.JTable();
+        jpItens = new javax.swing.JPanel();
+        jspItens = new javax.swing.JScrollPane();
+        jtItens = new javax.swing.JTable();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -271,16 +280,74 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Capa", jpCapa);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+        jPanel1.setLayout(new java.awt.GridLayout(2, 1));
+
+        jpPesquisa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpPesquisa.setLayout(new java.awt.BorderLayout());
+
+        jpPesquisaProduto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpPesquisaProduto.setPreferredSize(new java.awt.Dimension(791, 60));
+
+        jLabel16.setText("Pesquisa");
+
+        javax.swing.GroupLayout jpPesquisaProdutoLayout = new javax.swing.GroupLayout(jpPesquisaProduto);
+        jpPesquisaProduto.setLayout(jpPesquisaProdutoLayout);
+        jpPesquisaProdutoLayout.setHorizontalGroup(
+            jpPesquisaProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPesquisaProdutoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpPesquisaProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(504, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+        jpPesquisaProdutoLayout.setVerticalGroup(
+            jpPesquisaProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPesquisaProdutoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jpPesquisa.add(jpPesquisaProduto, java.awt.BorderLayout.NORTH);
+
+        jtPesquisaProduto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jspPesquisaProduto.setViewportView(jtPesquisaProduto);
+
+        jpPesquisa.add(jspPesquisaProduto, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jpPesquisa);
+
+        jpItens.setLayout(new java.awt.BorderLayout());
+
+        jtItens.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jspItens.setViewportView(jtItens);
+
+        jpItens.add(jspItens, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jpItens);
 
         jTabbedPane1.addTab("Itens", jPanel1);
 
@@ -297,6 +364,7 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -309,6 +377,7 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
     private javax.swing.JTabbedPane jTabbedPane1;
     private jautopecas.components.JTextField jTextField1;
     private jautopecas.components.JTextField jTextField10;
+    private jautopecas.components.JTextField jTextField11;
     private jautopecas.components.JTextField jTextField2;
     private jautopecas.components.JTextField jTextField3;
     private jautopecas.components.JTextField jTextField4;
@@ -319,6 +388,13 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
     private jautopecas.components.JTextField jTextField9;
     private javax.swing.JPanel jpCabecalho;
     private javax.swing.JPanel jpCapa;
+    private javax.swing.JPanel jpItens;
+    private javax.swing.JPanel jpPesquisa;
+    private javax.swing.JPanel jpPesquisaProduto;
+    private javax.swing.JScrollPane jspItens;
+    private javax.swing.JScrollPane jspPesquisaProduto;
+    private javax.swing.JTable jtItens;
+    private javax.swing.JTable jtPesquisaProduto;
     private jautopecas.components.JTextField jtfFornecedor;
     private jautopecas.components.JTextField jtfFornecedor1;
     private jautopecas.components.JTextField jtfFornecedor2;
