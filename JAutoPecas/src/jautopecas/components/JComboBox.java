@@ -97,7 +97,9 @@ public class JComboBox extends javax.swing.JComboBox {
     }
 
     public void limpaCampo() {
-        setSelectedIndex(0);
+        if (dataSet != null && dataSet.size() > 0) {
+            setSelectedIndex(0);
+        }
         setSempreBloqueado(false);
     }
 

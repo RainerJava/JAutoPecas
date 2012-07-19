@@ -4,17 +4,57 @@
  */
 package jautopecas.crud.compras;
 
+import jautopecas.crud.pessoa.telefone.FormularioTelefoneTableModel;
+import jautopecas.dao.produto.ProdutoDao;
+import jautopecas.entidades.produto.Produto;
+import jautopecas.entidades.produto.ProdutoVo;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jefferson.Fiorotto
  */
 public class FormularioPedidoCompra extends javax.swing.JPanel {
 
+    private TableModelPesquisaProduto tableModel;
+    private ProdutoVo produtoSelecionado;
+
     /**
      * Creates new form FormularioPedidoCompra
      */
     public FormularioPedidoCompra() {
         initComponents();
+
+        jpDadosProduto.setVisible(false);
+        jpPesquisaProduto.setVisible(true);
+        jtPesquisaProduto.setModel(tableModel == null ? new TableModelPesquisaProduto() : tableModel);
+        jtPesquisaProduto.addMouseListener(
+                new MouseAdapter() {
+
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if (e.getClickCount() == 2) {
+                            try {
+                                jpPesquisaProduto.setVisible(false);
+                                jpDadosProduto.setVisible(true);
+                                produtoSelecionado = ((TableModelPesquisaProduto) jtPesquisaProduto.getModel()).buscaProduto(jtPesquisaProduto.getSelectedRow());
+
+                                jtfIdProduto.setText(produtoSelecionado.getProduto().getIdProduto().toString());
+                                jtfNumeroFabricante.setText(produtoSelecionado.getProduto().getNumeroFabricante());
+                                jtfFabricante.setText(produtoSelecionado.getProduto().getFabricante().getNome());
+                                jtfQtd.requestFocus();
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, ex.getMessage(), "OOOPSS!", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    }
+                });
     }
 
     /**
@@ -61,6 +101,22 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jpPesquisa = new javax.swing.JPanel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jpDadosProduto = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jtfIdProduto = new jautopecas.components.JTextField();
+        jtfNumeroFabricante = new jautopecas.components.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jtfFabricante = new jautopecas.components.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jtfQtd = new jautopecas.components.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jtfPreco = new jautopecas.components.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jtfIcms = new jautopecas.components.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jtfIpi = new jautopecas.components.JTextField();
+        jLabel23 = new javax.swing.JLabel();
         jpPesquisaProduto = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jTextField11 = new jautopecas.components.JTextField();
@@ -70,6 +126,7 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
         jspItens = new javax.swing.JScrollPane();
         jtItens = new javax.swing.JTable();
 
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setLayout(new java.awt.BorderLayout());
 
         jpCabecalho.setBackground(new java.awt.Color(204, 255, 204));
@@ -285,10 +342,124 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
         jpPesquisa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpPesquisa.setLayout(new java.awt.BorderLayout());
 
+        jLayeredPane1.setPreferredSize(new java.awt.Dimension(0, 60));
+
+        jpDadosProduto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpDadosProduto.setPreferredSize(new java.awt.Dimension(791, 60));
+        jpDadosProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jpDadosProdutoKeyPressed(evt);
+            }
+        });
+
+        jLabel17.setText("ID");
+
+        jtfIdProduto.setEnabled(false);
+
+        jtfNumeroFabricante.setEnabled(false);
+
+        jLabel18.setText("Numero Fabricante");
+
+        jtfFabricante.setEnabled(false);
+
+        jLabel19.setText("Fabricante");
+
+        jLabel20.setText("Quantidade");
+
+        jLabel21.setText("Preço");
+
+        jLabel22.setText("% ICMS");
+
+        jLabel23.setText("% IPI");
+
+        javax.swing.GroupLayout jpDadosProdutoLayout = new javax.swing.GroupLayout(jpDadosProduto);
+        jpDadosProduto.setLayout(jpDadosProdutoLayout);
+        jpDadosProdutoLayout.setHorizontalGroup(
+            jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpDadosProdutoLayout.createSequentialGroup()
+                .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(jtfIdProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtfNumeroFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpDadosProdutoLayout.createSequentialGroup()
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 44, Short.MAX_VALUE))
+                    .addGroup(jpDadosProdutoLayout.createSequentialGroup()
+                        .addComponent(jtfFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtfQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtfIcms, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtfIpi, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jpDadosProdutoLayout.setVerticalGroup(
+            jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpDadosProdutoLayout.createSequentialGroup()
+                .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpDadosProdutoLayout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfIcms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jpDadosProdutoLayout.createSequentialGroup()
+                                    .addComponent(jLabel20)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtfQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jpDadosProdutoLayout.createSequentialGroup()
+                                    .addComponent(jLabel21)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jpDadosProdutoLayout.createSequentialGroup()
+                            .addComponent(jLabel23)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jtfIpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpDadosProdutoLayout.createSequentialGroup()
+                            .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel18)
+                                .addComponent(jLabel17))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jpDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jtfNumeroFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtfIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDadosProdutoLayout.createSequentialGroup()
+                            .addComponent(jLabel19)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jtfFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 16, Short.MAX_VALUE))
+        );
+
+        jpDadosProduto.setBounds(0, 0, 791, 60);
+        jLayeredPane1.add(jpDadosProduto, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         jpPesquisaProduto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpPesquisaProduto.setPreferredSize(new java.awt.Dimension(791, 60));
 
         jLabel16.setText("Pesquisa");
+
+        jTextField11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField11KeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpPesquisaProdutoLayout = new javax.swing.GroupLayout(jpPesquisaProduto);
         jpPesquisaProduto.setLayout(jpPesquisaProdutoLayout);
@@ -311,7 +482,10 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jpPesquisa.add(jpPesquisaProduto, java.awt.BorderLayout.NORTH);
+        jpPesquisaProduto.setBounds(0, 0, 791, 60);
+        jLayeredPane1.add(jpPesquisaProduto, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jpPesquisa.add(jLayeredPane1, java.awt.BorderLayout.NORTH);
 
         jtPesquisaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -354,6 +528,31 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
         add(jTabbedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextField11KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField11KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            onPesquisar();
+        }
+    }//GEN-LAST:event_jTextField11KeyPressed
+
+    private void jpDadosProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpDadosProdutoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            if (jpDadosProduto.isVisible()) {
+                jpPesquisaProduto.setVisible(false);
+                jpPesquisaProduto.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_jpDadosProdutoKeyPressed
+
+    private void onPesquisar() {
+        List<ProdutoVo> lista;
+        try {
+            lista = new ProdutoDao().pesquisaProduto("");
+            ((TableModelPesquisaProduto) jtPesquisaProduto.getModel()).removeResultado();
+            ((TableModelPesquisaProduto) jtPesquisaProduto.getModel()).mostraResultado(lista);
+        } catch (Exception ex) {
+            Logger.getLogger(FormularioPedidoCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private jautopecas.components.JComboBox jComboBox1;
     private jautopecas.components.JComboBox jComboBox2;
@@ -365,7 +564,14 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -373,6 +579,7 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private jautopecas.components.JTextField jTextField1;
@@ -388,6 +595,7 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
     private jautopecas.components.JTextField jTextField9;
     private javax.swing.JPanel jpCabecalho;
     private javax.swing.JPanel jpCapa;
+    private javax.swing.JPanel jpDadosProduto;
     private javax.swing.JPanel jpItens;
     private javax.swing.JPanel jpPesquisa;
     private javax.swing.JPanel jpPesquisaProduto;
@@ -395,8 +603,15 @@ public class FormularioPedidoCompra extends javax.swing.JPanel {
     private javax.swing.JScrollPane jspPesquisaProduto;
     private javax.swing.JTable jtItens;
     private javax.swing.JTable jtPesquisaProduto;
+    private jautopecas.components.JTextField jtfFabricante;
     private jautopecas.components.JTextField jtfFornecedor;
     private jautopecas.components.JTextField jtfFornecedor1;
     private jautopecas.components.JTextField jtfFornecedor2;
+    private jautopecas.components.JTextField jtfIcms;
+    private jautopecas.components.JTextField jtfIdProduto;
+    private jautopecas.components.JTextField jtfIpi;
+    private jautopecas.components.JTextField jtfNumeroFabricante;
+    private jautopecas.components.JTextField jtfPreco;
+    private jautopecas.components.JTextField jtfQtd;
     // End of variables declaration//GEN-END:variables
 }
