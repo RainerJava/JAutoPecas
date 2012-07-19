@@ -63,9 +63,9 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
             produtoFornecedorCusto.setProdutoFornecedor(produtoFornecedor);
             produtoFornecedorCusto.setCustoUnitario(StringUtils.stringToBigDecimal(jtfCustoUnitario.getText()));
             produtoFornecedorCusto.setCstIcms((Cst) jcbCst.getSelectedItem());
-            produtoFornecedorCusto.setPorcentIcms(StringUtils.stringToBigDecimal(jtfIcms.getText()));
-            produtoFornecedorCusto.setPorcentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
-            produtoFornecedorCusto.setPorcentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
+            produtoFornecedorCusto.setPercentIcms(StringUtils.stringToBigDecimal(jtfIcms.getText()));
+            produtoFornecedorCusto.setPercentImpostoImportacao(StringUtils.stringToBigDecimal(jtfIi.getText()));
+            produtoFornecedorCusto.setPercentIpi(StringUtils.stringToBigDecimal(jtfIpi.getText()));
             produtoFornecedorCusto.setCustoReposicao(StringUtils.stringToBigDecimal(jtfCustoReposicao.getText()));
             produtoFornecedorCusto.calculaCustoNet();
         } catch (Exception ex) {
@@ -87,8 +87,8 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
                 newTfar.setProdutoFornecedor(produtoFornecedorCusto.getProdutoFornecedor());
                 newTfar.setCustoUnitario(produtoFornecedorCusto.getCustoUnitario());
                 newTfar.setCstIcms(produtoFornecedorCusto.getCstIcms());
-                newTfar.setPorcentImpostoImportacao(produtoFornecedorCusto.getPorcentImpostoImportacao());
-                newTfar.setPorcentIpi(produtoFornecedorCusto.getPorcentIpi());
+                newTfar.setPercentImpostoImportacao(produtoFornecedorCusto.getPercentImpostoImportacao());
+                newTfar.setPercentIpi(produtoFornecedorCusto.getPercentIpi());
 
                 double vTaxaICMSEmpresa = new IcmsDao().getPercentIcmsEmissor(produtoFornecedor.getFornecedor().getEnderecoPessoa().get(0).getEndereco().getUf().getUf(),
                         empresa.getEnderecoPessoa().get(0).getEndereco().getUf().getUf()).doubleValue();
@@ -97,10 +97,10 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
                     double vTaxas = TaxaPis + TaxaCofins + vTaxaICMSEmpresa;
                     double valorNetCalculado = produtoFornecedorCusto.getCustoNet().doubleValue() / (1 - vTaxas);
                     newTfar.setCustoUnitario(new BigDecimal(valorNetCalculado));
-                    newTfar.setPorcentIcms(new BigDecimal(vTaxaICMSEmpresa * 100));
+                    newTfar.setPercentIcms(new BigDecimal(vTaxaICMSEmpresa * 100));
                 } else {
                     newTfar.setCustoUnitario(produtoFornecedorCustoOrigem.getCustoUnitario());
-                    newTfar.setPorcentIcms(produtoFornecedorCustoOrigem.getPorcentIcms());
+                    newTfar.setPercentIcms(produtoFornecedorCustoOrigem.getPercentIcms());
                 }
                 newTfar.setEmpresa(empresa);
                 newTfar.calculaCustoNet();
@@ -117,9 +117,9 @@ public class FormularioProdutoFornecedorCusto extends javax.swing.JPanel {
         try {
             jtfCustoReposicao.setText(StringUtils.BigDecimalToString(objetoFormulario.getCustoReposicao()));
             jtfCustoUnitario.setText(StringUtils.BigDecimalToString(objetoFormulario.getCustoUnitario()));
-            jtfIcms.setText(StringUtils.BigDecimalToString(objetoFormulario.getPorcentIcms()));
-            jtfIi.setText(StringUtils.BigDecimalToString(objetoFormulario.getPorcentImpostoImportacao()));
-            jtfIpi.setText(StringUtils.BigDecimalToString(objetoFormulario.getPorcentIpi()));
+            jtfIcms.setText(StringUtils.BigDecimalToString(objetoFormulario.getPercentIcms()));
+            jtfIi.setText(StringUtils.BigDecimalToString(objetoFormulario.getPercentImpostoImportacao()));
+            jtfIpi.setText(StringUtils.BigDecimalToString(objetoFormulario.getPercentIpi()));
             jcbCst.setSelectedItem(objetoFormulario.getCstIcms());
         } catch (Exception ex) {
             throw new Exception("Erro ao carregar os dados do formulario", ex);

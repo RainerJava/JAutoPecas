@@ -28,15 +28,15 @@ public class ProdutoFornecedorCusto implements Serializable {
     private Pessoa empresa;
     @Column(name = "CUSTO_UNITARIO")
     private BigDecimal custoUnitario;
-    @Column(name = "PORCENT_IPI")
-    private BigDecimal porcentIpi;
-    @Column(name = "PORCENT_ICMS")
-    private BigDecimal porcentIcms;
+    @Column(name = "PERCENT_IPI")
+    private BigDecimal percentIpi;
+    @Column(name = "PERCENT_ICMS")
+    private BigDecimal percentIcms;
     @OneToOne
     @JoinColumn(name = "CST_ICMS")
     private Cst cstIcms;
-    @Column(name = "PORCENT_IMPOSTO_IMPORTACAO")
-    private BigDecimal porcentImpostoImportacao;
+    @Column(name = "PERCENT_IMPOSTO_IMPORTACAO")
+    private BigDecimal percentImpostoImportacao;
     @Column(name = "CUSTO_REPOSICAO")
     private BigDecimal custoReposicao;
     @Column(name = "CUSTO_BRUTO")
@@ -86,38 +86,6 @@ public class ProdutoFornecedorCusto implements Serializable {
         this.idProdutoFornecedorCusto = idProdutoFornecedorCusto;
     }
 
-    public BigDecimal getPorcentIcms() {
-        return porcentIcms;
-    }
-
-    public void setPorcentIcms(BigDecimal porcentIcms) {
-        this.porcentIcms = porcentIcms;
-    }
-
-    public BigDecimal getPorcentImpostoImportacao() {
-        return porcentImpostoImportacao;
-    }
-
-    public void setPorcentImpostoImportacao(BigDecimal porcentImpostoImportacao) {
-        this.porcentImpostoImportacao = porcentImpostoImportacao;
-    }
-
-    public BigDecimal getPorcentIpi() {
-        return porcentIpi;
-    }
-
-    public void setPorcentIpi(BigDecimal porcentIpi) {
-        this.porcentIpi = porcentIpi;
-    }
-
-    public ProdutoFornecedor getProdutoFornecedor() {
-        return produtoFornecedor;
-    }
-
-    public void setProdutoFornecedor(ProdutoFornecedor produtoFornecedor) {
-        this.produtoFornecedor = produtoFornecedor;
-    }
-
     public BigDecimal getCustoBruto() {
         return custoBruto;
     }
@@ -142,12 +110,44 @@ public class ProdutoFornecedorCusto implements Serializable {
         this.custocustoNetSt = custocustoNetSt;
     }
 
+    public BigDecimal getPercentIcms() {
+        return percentIcms;
+    }
+
+    public void setPercentIcms(BigDecimal percentIcms) {
+        this.percentIcms = percentIcms;
+    }
+
+    public BigDecimal getPercentImpostoImportacao() {
+        return percentImpostoImportacao;
+    }
+
+    public void setPercentImpostoImportacao(BigDecimal percentImpostoImportacao) {
+        this.percentImpostoImportacao = percentImpostoImportacao;
+    }
+
+    public BigDecimal getPercentIpi() {
+        return percentIpi;
+    }
+
+    public void setPercentIpi(BigDecimal percentIpi) {
+        this.percentIpi = percentIpi;
+    }
+
+    public ProdutoFornecedor getProdutoFornecedor() {
+        return produtoFornecedor;
+    }
+
+    public void setProdutoFornecedor(ProdutoFornecedor produtoFornecedor) {
+        this.produtoFornecedor = produtoFornecedor;
+    }
+
     public void calculaCustoNet() throws Exception {
         try {
             BigDecimal custoUnitario = getCustoUnitario();
             BigDecimal fatorEmbalagemCompra = getProdutoFornecedor().getProduto().getFatorEmbalagemCompra();
             custoUnitario = custoUnitario.divide(fatorEmbalagemCompra);
-            BigDecimal percentIpi = getPorcentIpi().divide(new BigDecimal(100));
+            BigDecimal percentIpi = getPercentIpi().divide(new BigDecimal(100));
             BigDecimal percentPis = new BigDecimal(9.25);
             BigDecimal percentPisCofins = BigDecimal.ZERO;
             BigDecimal valorIcmsTributado = BigDecimal.ZERO;
@@ -155,7 +155,7 @@ public class ProdutoFornecedorCusto implements Serializable {
             BigDecimal DIpiPis = BigDecimal.ZERO;
             BigDecimal custoUnitarioCalculado = custoUnitario;
             BigDecimal custoNetCalculado = BigDecimal.ZERO;
-            BigDecimal percentIcms = getPorcentIcms().divide(new BigDecimal(100));
+            BigDecimal percentIcms = getPercentIcms().divide(new BigDecimal(100));
             /*
              * Descontos sobre Descontos
              */
@@ -178,7 +178,7 @@ public class ProdutoFornecedorCusto implements Serializable {
             custoNetCalculado = custoUnitarioCalculado;
             try {
                 SubstituicaoTributariaEntrada substTribEntrada = new SubstituicaoTributariaEntrada();
-                substTribEntrada.calculaSubstituicaoTributaria(this, baseSt, valorIpi, getPorcentIcms());
+                substTribEntrada.calculaSubstituicaoTributaria(this, baseSt, valorIpi, getPercentIcms());
                 valorIcmsTributado = substTribEntrada.getIcmsSubstituicao();
             } catch (Exception ex) {
                 if (ex instanceof NoResultException) {

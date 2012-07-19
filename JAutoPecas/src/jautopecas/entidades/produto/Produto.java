@@ -1,5 +1,6 @@
 package jautopecas.entidades.produto;
 
+import jautopecas.dao.produto.ProdutoFornecedorCustoDao;
 import jautopecas.entidades.pessoa.Pessoa;
 import jautopecas.entidades.substituicaoTributaria.Cst;
 import java.io.Serializable;
@@ -79,6 +80,8 @@ public class Produto implements Serializable {
     private Cst cstIcms;
     @OneToMany(mappedBy = "produto", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProdutoFornecedor> produtoFornecedor;
+    @Transient
+    private ProdutoFornecedorCusto custoFornecedor;
 
     public String getAplicacao() {
         return aplicacao;
@@ -294,5 +297,13 @@ public class Produto implements Serializable {
 
     public void setCstIcms(Cst cstIcms) {
         this.cstIcms = cstIcms;
+    }
+
+    public ProdutoFornecedorCusto getCustoFornecedor() {
+        return custoFornecedor;
+    }
+
+    public void setCustoFornecedor(ProdutoFornecedorCusto custoFornecedor) {
+        this.custoFornecedor = custoFornecedor;
     }
 }

@@ -1,7 +1,7 @@
-package jautopecas.dao.produto;
+package jautopecas.dao.compras;
 
 import jautopecas.dao.AbstractDao;
-import jautopecas.entidades.produto.Produto;
+import jautopecas.entidades.compras.PedidoCompraItem;
 import java.io.Serializable;
 import javax.persistence.EntityManager;
 
@@ -9,10 +9,10 @@ import javax.persistence.EntityManager;
  *
  * @author JFFiorotto
  */
-public class ProdutoDao extends AbstractDao<Produto> implements Serializable {
+public class PedidoCompraItemDao extends AbstractDao<PedidoCompraItem> implements Serializable {
 
-    public ProdutoDao() {
-        super(Produto.class);
+    public PedidoCompraItemDao() {
+        super(PedidoCompraItem.class);
     }
 
     @Override
