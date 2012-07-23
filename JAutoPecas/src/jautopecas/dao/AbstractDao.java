@@ -1,10 +1,15 @@
 package jautopecas.dao;
 
+import jautopecas.entidades.pessoa.endereco.Cidade;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -141,5 +146,16 @@ public abstract class AbstractDao<T> {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public T loadByName(String coluna, String pesquisa) {
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<T> root = cq.from(entityClass);
+        cq.select(root);
+        Predicate pNome = cb.like(root.<String>get(coluna), pesquisa);
+        Predicate pAnd = cb.and(pNome);
+        cq.where(pAnd);
+        return (T) getEntityManager().createQuery(cq).getSingleResult();
     }
 }
