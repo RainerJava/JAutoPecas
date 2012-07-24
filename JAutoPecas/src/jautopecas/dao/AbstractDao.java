@@ -148,7 +148,7 @@ public abstract class AbstractDao<T> {
         return null;
     }
 
-    public T loadByName(String coluna, String pesquisa) {
+    public T loadByColun(String coluna, String pesquisa) {
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<T> root = cq.from(entityClass);

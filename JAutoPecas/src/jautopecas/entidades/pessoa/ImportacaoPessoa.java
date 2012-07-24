@@ -23,7 +23,7 @@ import javax.persistence.NoResultException;
 public class ImportacaoPessoa {
 
     public void leCsvCadastroFabricante() {
-       StringBuffer sbErros = new StringBuffer();
+        StringBuilder sbErros = new StringBuilder();
 //SELECT IIDFO AS ID_FABRICANTE,CNOME AS RAZAO_SOCIAL,CFANTASIA AS NOME_FANTASIA,CCGC AS CNPJ,CIEST AS INSC_ESTADUAL,
 //'' AS TIPO_LOGRADOURO,CEND AS LOGRADOURO,CCOMPL AS COMPLEMENTO,'BRASIL' AS PAIS,CUF AS UF,CCIDADE AS CIDADE,CBAIRRO AS BAIRRO,CCEP AS CEP,CNUM AS NUMERO,
 //CDDDTEL AS DDD_TELEFONE,CTEL AS TELEFONE
@@ -33,7 +33,7 @@ public class ImportacaoPessoa {
             String linha;
             while ((linha = in.readLine()) != null) {
                 String conteudo[] = linha.split(";");
-                if(conteudo[0].equals("ID_FABRICANTE")){
+                if (conteudo[0].equals("ID_FABRICANTE")) {
                     continue;
                 }
                 Pessoa pessoa = new Pessoa();
@@ -55,37 +55,41 @@ public class ImportacaoPessoa {
                 List<EnderecoPessoa> listaEnderecoPessoa = new ArrayList<>();
                 EnderecoPessoa enderecoPessoa = new EnderecoPessoa();
                 Endereco endereco = new Endereco();
-                try{
-                   endereco.setTipoLogradouro(new TipoLogradouroDao().loadByName("nome", conteudo[5])); 
-                }catch(NoResultException ex) {
+                try {
+                    endereco.setTipoLogradouro(new TipoLogradouroDao().loadByColun("nome", conteudo[5]));
+                } catch (NoResultException ex) {
                     sbErros.append("Tipo de logradouro não encontrado para o fornecedor ").append(pessoa.getNome());
                 }
-                
+
                 endereco.setLogradouro(conteudo[6]);
                 //endereco.setComplemento(conteudo[7]);
                 //endereco.setPais(conteudo[8]);
-                try{
-                  endereco.setUf(new EstadoDao().load(conteudo[9]));
-                }catch(NoResultException ex) {
+                try {
+                    endereco.setUf(new EstadoDao().load(conteudo[9]));
+                } catch (NoResultException ex) {
                     sbErros.append("Estado não encontrado para o fornecedor ").append(pessoa.getNome());
                 }
-                try{
-                  endereco.setCidade(new CidadeDao().loadByName("nome", conteudo[10]));
-                }catch(NoResultException ex) {
-                    sbErros.append("Cidade não encontrado para o fornecedor ").append(pessoa.getNome());
+                try {
+                    endereco.setCidade(new CidadeDao().getCidadePorNome(conteudo[10],endereco.getUf().getUf()));
+                } catch (Exception ex) {
+                    if(ex instanceof NoResultException){
+                        sbErros.append("Cidade não encontrado para o fornecedor ").append(pessoa.getNome());
+                    }
                 }
-                try{
-                  endereco.setBairro(new BairroDao().loadByName("nome", conteudo[11]));
-                }catch(NoResultException ex) {
+                try {
+                    endereco.setBairro(new BairroDao().loadByColun("nome", conteudo[11]));
+                } catch (NoResultException ex) {
                     sbErros.append("Bairro não encontrado para o fornecedor ").append(pessoa.getNome());
                 }
-                          
+
                 endereco.setCep(conteudo[12]);
                 endereco.setNumero(conteudo[13]);
-                endereco.setTipoEndereco(new TipoEnderecoDao().loadByName("nome", "COMERCIAL"));
+                endereco.setTipoEndereco(new TipoEnderecoDao().loadByColun("nome", "COMERCIAL"));
                 enderecoPessoa.setEndereco(endereco);
                 enderecoPessoa.setPessoa(pessoa);
-                listaEnderecoPessoa.add(enderecoPessoa);
+                if (endereco.getUf() != null && endereco.getCidade() != null && endereco.getBairro() != null) {
+                    listaEnderecoPessoa.add(enderecoPessoa);
+                }
                 pessoa.setEnderecoPessoa(listaEnderecoPessoa);
                 /*
                  * Telefone
@@ -95,11 +99,15 @@ public class ImportacaoPessoa {
                 Telefone telefone = new Telefone();
                 String dddTelefone = conteudo[14];
                 String numTelefone = conteudo[15];
-                String telefoneFormatado = "(" + dddTelefone + ")" + numTelefone.substring(0, 4) + "-" + numTelefone.substring(4);
+                if (!dddTelefone.equals("0") && !numTelefone.equals("0")) {
+                    String telefoneFormatado = "(" + dddTelefone + ")" + numTelefone.substring(0, 4) + "-" + numTelefone.substring(4);
+                    telefone.setTelefone(telefoneFormatado);
+                    telefone.setTipoTelefone(new TipoTelefoneDao().loadByColun("nome", "COMERCIAL"));
+                    telefonePessoa.setTelefone(telefone);
+                    telefonePessoa.setPessoa(pessoa);
+                    listaTelefonePessoa.add(telefonePessoa);
+                }
 
-                telefone.setTelefone(telefoneFormatado);
-                telefone.setTipoTelefone(new TipoTelefoneDao().loadByName("nome", "COMERCIAL"));
-                listaTelefonePessoa.add(telefonePessoa);
                 pessoa.setTelefonePessoa(listaTelefonePessoa);
 
                 new PessoaDao().salvar(pessoa);

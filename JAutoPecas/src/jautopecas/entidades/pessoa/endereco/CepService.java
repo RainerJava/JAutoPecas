@@ -34,7 +34,7 @@ public class CepService {
         return endereco;
     }
     
-    private static Endereco cepToEndereco(Webservicecep webServiceCep) {
+    private static Endereco cepToEndereco(Webservicecep webServiceCep) throws Exception {
         Endereco endereco = new Endereco();
         Bairro bairro;
         BairroDao bairroDao = new BairroDao();
@@ -63,7 +63,7 @@ public class CepService {
             estadoDao.salvar(estado);
         }
         
-        cidade = cidadeDao.getCidadePorNome(webServiceCep.getCidade());
+        cidade = cidadeDao.getCidadePorNome(webServiceCep.getCidade(), estado.getUf());
         if (cidade == null) {
             cidade = new Cidade();
             cidade.setNome(webServiceCep.getCidade());

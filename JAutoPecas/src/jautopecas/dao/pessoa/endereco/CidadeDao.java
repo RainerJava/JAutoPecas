@@ -3,12 +3,8 @@ package jautopecas.dao.pessoa.endereco;
 import jautopecas.dao.AbstractDao;
 import jautopecas.entidades.pessoa.endereco.Cidade;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -20,21 +16,14 @@ public class CidadeDao extends AbstractDao<Cidade> implements Serializable {
         super(Cidade.class);
     }
 
-    public Cidade getCidadePorNome(String nome) {
-        List<Cidade> lista;
-        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery();
-        Root<Cidade> root = cq.from(Cidade.class);
-        cq.select(root);
-        Predicate pNome = cb.like(root.<String>get("nome"), nome);
-        Predicate pAnd = cb.and(pNome);
-        cq.where(pAnd);
-        lista = getEntityManager().createQuery(cq).getResultList();
-        if (lista.size() > 0) {
-            return (Cidade) lista.get(0);
-        } else {
-            return null;
-        }
+    public Cidade getCidadePorNome(String nome, String uf) throws Exception {
+        String sql = "SELECT a FROM Cidade a"
+                + " where a.nome = :nome"
+                + " and a.uf.uf = :uf ";
+        TypedQuery<Cidade> typedQuery = getEntityManager().createQuery(sql, Cidade.class);
+        typedQuery.setParameter("nome", nome);
+        typedQuery.setParameter("uf", uf);
+        return typedQuery.getSingleResult();
     }
 
     @Override
